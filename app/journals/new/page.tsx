@@ -19,6 +19,7 @@ const NewJournalPage = () => {
   const router = useRouter()
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
+
   const {
     register,
     control,
@@ -28,6 +29,17 @@ const NewJournalPage = () => {
     resolver: zodResolver(createJournalSchema),
   })
 
+  const onSubmit = handleSubmit(async data => {
+    try {
+      setSubmitting(true)
+      await axios.post('/api/journals', data)
+      router.push('/')
+    } catch (error) {
+      setSubmitting(false)
+      setError('Unexpected error')
+    }
+  })
+
   return (
     <div className="max-w-xl">
       {error && (
@@ -35,19 +47,7 @@ const NewJournalPage = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form
-        className=" space-y-3"
-        onSubmit={handleSubmit(async data => {
-          try {
-            setSubmitting(true)
-            await axios.post('/api/journals', data)
-            router.push('/')
-          } catch (error) {
-            setSubmitting(false)
-            setError('Unexpected error')
-          }
-        })}
-      >
+      <form className=" space-y-3" onSubmit={onSubmit}>
         <Heading>New Journal</Heading>
         <TextField.Root placeholder="Topic" {...register('topic')} />
         <ErrorMessage>{errors.topic?.message}</ErrorMessage>

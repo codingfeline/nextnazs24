@@ -5,6 +5,8 @@ import { GiSittingDog } from 'react-icons/gi'
 const AppHeader = () => {
   const links = [
     { label: 'home', url: '/' },
+    { label: 'Journals', url: '/journals' },
+    { label: 'New Journal', url: '/journals/new' },
     { label: 'others', url: '/others' },
     { label: 'contact', url: '/contact' },
   ]
