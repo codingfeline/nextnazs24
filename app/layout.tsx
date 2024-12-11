@@ -48,7 +48,7 @@ export default function RootLayout({
       <body className={`${dosis.className} antialiased flex flex-col `}>
         <Theme accentColor="violet" className="mb-auto flex flex-col ">
           <AppHeader />
-          <main className="grow bg-blue-200 flex p-5">
+          <main className="grow flex p-5">
             <Container>{children}</Container>
           </main>
           <AppFooter />
