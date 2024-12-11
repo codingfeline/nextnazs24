@@ -1,10 +1,13 @@
+import prisma from '@/prisma/client'
 import parse from 'html-react-parser'
+import moment from 'moment'
 import { GiChiliPepper } from 'react-icons/gi'
 import reactStringReplace from 'react-string-replace'
 
-export default function Home() {
+export default async function Home() {
   const dataToParse = '<span>**</span>'
   // const chilli = '<GiChiliPepper />'
+  const journals = await prisma.journals.findMany()
 
   const replacement = reactStringReplace(dataToParse, '*', (match, i) => (
     <GiChiliPepper key={i} />
@@ -18,6 +21,18 @@ export default function Home() {
       {/* {parse(chilli)} */}
       {replacement}
       <span></span>
+      {journals.length}
+      {journals.map(j => {
+        const formattedDate = j.date.getFullYear() + ' -- ' + j.date.toTimeString()
+        return (
+          <div className="bg-gray-50 w-3/4 p-2 m-2 rounded-md" key={j.id}>
+            {parse(j.comment)}
+            <p>{j.date.toISOString()}</p>
+            {/* <p>{formattedDate}</p> */}
+            {moment(j.date).format('DD MMM YYYY - HH:MM ')}
+          </div>
+        )
+      })}
     </div>
   )
 }
