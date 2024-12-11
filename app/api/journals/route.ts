@@ -1,11 +1,6 @@
+import { createJournalSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from 'zod';
-
-const createJournalSchema = z.object({
-  topic: z.string().min(5, 'Topic is required'),
-  comment: z.string().min(5, 'Comment is required.')
-})
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
