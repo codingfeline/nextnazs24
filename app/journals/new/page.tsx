@@ -1,6 +1,7 @@
 'use client'
 
 import ErrorMessage from '@/app/components/ErrorMessage'
+import Spinner from '@/app/components/Spinner'
 import { createJournalSchema } from '@/app/validationSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Callout, Heading, TextField } from '@radix-ui/themes'
@@ -17,6 +18,7 @@ type JournalForm = z.infer<typeof createJournalSchema>
 const NewJournalPage = () => {
   const router = useRouter()
   const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
   const {
     register,
     control,
@@ -37,9 +39,11 @@ const NewJournalPage = () => {
         className=" space-y-3"
         onSubmit={handleSubmit(async data => {
           try {
+            setSubmitting(true)
             await axios.post('/api/journals', data)
             router.push('/')
           } catch (error) {
+            setSubmitting(false)
             setError('Unexpected error')
           }
         })}
@@ -54,7 +58,7 @@ const NewJournalPage = () => {
         />
         <ErrorMessage>{errors.comment?.message}</ErrorMessage>
 
-        <Button>Submit Story</Button>
+        <Button disabled={submitting}>Submit Story {submitting && <Spinner />}</Button>
       </form>
     </div>
   )
