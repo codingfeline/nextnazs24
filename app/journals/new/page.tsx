@@ -1,8 +1,9 @@
 'use client'
 
+import ErrorMessage from '@/app/components/ErrorMessage'
 import { createJournalSchema } from '@/app/validationSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Callout, Heading, Text, TextField } from '@radix-ui/themes'
+import { Button, Callout, Heading, TextField } from '@radix-ui/themes'
 import axios from 'axios'
 import 'easymde/dist/easymde.min.css'
 import { useRouter } from 'next/navigation'
@@ -45,17 +46,14 @@ const NewJournalPage = () => {
       >
         <Heading>New Journal</Heading>
         <TextField.Root placeholder="Topic" {...register('topic')} />
-        {errors.topic && <Text color="red">{errors.topic.message}</Text>}
+        <ErrorMessage>{errors.topic?.message}</ErrorMessage>
         <Controller
           name="comment"
           control={control}
           render={({ field }) => <SimpleMDE placeholder="Comment" {...field} />}
         />
-        {errors.comment && (
-          <Text as="p" color="red">
-            {errors.comment.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.comment?.message}</ErrorMessage>
+
         <Button>Submit Story</Button>
       </form>
     </div>
