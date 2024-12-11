@@ -17,5 +17,5 @@ model Journals {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   topic   String
   comment String
-  date    DateTime
+  date    DateTime @default(now())
 }
