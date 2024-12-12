@@ -1,17 +1,14 @@
-import prisma from '@/prisma/client'
-import { Heading, Table } from '@radix-ui/themes'
-import delay from 'delay'
-import parse from 'html-react-parser'
+import { Table } from '@radix-ui/themes'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import JournalActions from './journalActions'
 
-const JournalsPage = async () => {
-  const journals = await prisma.journals.findMany()
-  await delay(2000)
+const Loading = () => {
+  const journals = [1, 2, 3, 4, 5]
 
   return (
-    <div className="w-full">
+    <div>
       <JournalActions />
-      <Heading></Heading>
       <Table.Root variant="surface" className="w-2/3 bg-red-50">
         <Table.Header>
           <Table.Row>
@@ -27,13 +24,15 @@ const JournalsPage = async () => {
         <Table.Body>
           {journals.map(j => {
             return (
-              <Table.Row key={j.id} className="w-full">
-                <Table.Cell className="w-full">{j.topic}</Table.Cell>
-                <Table.Cell className="hidden md:table-cell">
-                  {parse(j.comment)}
+              <Table.Row key={j} className="w-full">
+                <Table.Cell className="w-full">
+                  <Skeleton />
                 </Table.Cell>
                 <Table.Cell className="hidden md:table-cell">
-                  {j.date.toDateString()}
+                  <Skeleton />
+                </Table.Cell>
+                <Table.Cell className="hidden md:table-cell">
+                  <Skeleton />
                 </Table.Cell>
               </Table.Row>
             )
@@ -44,4 +43,4 @@ const JournalsPage = async () => {
   )
 }
 
-export default JournalsPage
+export default Loading
