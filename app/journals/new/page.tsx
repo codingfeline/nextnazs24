@@ -1,69 +1,7 @@
-'use client'
-
-import ErrorMessage from '@/app/components/ErrorMessage'
-import Spinner from '@/app/components/Spinner'
-import { createJournalSchema } from '@/app/validationSchemas'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Callout, Heading, TextField } from '@radix-ui/themes'
-import axios from 'axios'
-import 'easymde/dist/easymde.min.css'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { z } from 'zod'
-
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
-
-type JournalForm = z.infer<typeof createJournalSchema>
+import JournalForm from '../_components/JournalForm'
 
 const NewJournalPage = () => {
-  const router = useRouter()
-  const [error, setError] = useState('')
-  const [submitting, setSubmitting] = useState(false)
-
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<JournalForm>({
-    resolver: zodResolver(createJournalSchema),
-  })
-
-  const onSubmit = handleSubmit(async data => {
-    try {
-      setSubmitting(true)
-      await axios.post('/api/journals', data)
-      router.push('/')
-    } catch (error) {
-      setSubmitting(false)
-      setError('Unexpected error')
-    }
-  })
-
-  return (
-    <div className="max-w-xl">
-      {error && (
-        <Callout.Root color="red" mb="2">
-          <Callout.Text>{error}</Callout.Text>
-        </Callout.Root>
-      )}
-      <form className=" space-y-3" onSubmit={onSubmit}>
-        <Heading>New Journal</Heading>
-        <TextField.Root placeholder="Topic" {...register('topic')} />
-        <ErrorMessage>{errors.topic?.message}</ErrorMessage>
-        <Controller
-          name="comment"
-          control={control}
-          render={({ field }) => <SimpleMDE placeholder="Comment" {...field} />}
-        />
-        <ErrorMessage>{errors.comment?.message}</ErrorMessage>
-
-        <Button disabled={submitting}>Submit Story {submitting && <Spinner />}</Button>
-      </form>
-    </div>
-  )
+  return <JournalForm />
 }
 
 export default NewJournalPage
