@@ -1,7 +1,8 @@
 import prisma from '@/prisma/client'
-import { Card, Heading } from '@radix-ui/themes'
+import { Box, Grid } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
-import ReactMarkDown from 'react-markdown'
+import EditJournalButton from './EditJournalButton'
+import JournalDetails from './JournalDetails'
 
 interface Props {
   params: Promise<{ id: string }> // * making this a Promise to await below (await params)
@@ -15,15 +16,14 @@ const IssueDetailPage = async ({ params }: Props) => {
   if (!journal) notFound()
 
   return (
-    <div className="max-w-xl ">
-      <Heading>{journal.topic}</Heading>
-      <Card className="prose max-w-xl" mt="4">
-        <ReactMarkDown>{journal.comment}</ReactMarkDown>
-      </Card>
-      <div className="flex justify-end p-1">
-        <p>{journal.date.toDateString()}</p>
-      </div>
-    </div>
+    <Grid columns={{ initial: '1', md: '2' }}>
+      <Box>
+        <JournalDetails journal={journal} />
+      </Box>
+      <Box>
+        <EditJournalButton journalId={journal.id} />
+      </Box>
+    </Grid>
   )
 }
 
