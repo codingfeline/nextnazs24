@@ -1,7 +1,7 @@
 import { Container, Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
-import { Agdasima, Dancing_Script, Dosis } from 'next/font/google'
+import { Dosis } from 'next/font/google'
 import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
 import './globals.css'
@@ -13,12 +13,12 @@ import './theme-config.css'
 //   weight: '100 900',
 // })
 
-const dancing = Dancing_Script({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-dancing',
-  display: 'swap',
-})
+// const dancing = Dancing_Script({
+//   subsets: ['latin'],
+//   weight: ['400', '700'],
+//   variable: '--font-dancing',
+//   display: 'swap',
+// })
 const dosis = Dosis({
   subsets: ['latin'],
   weight: ['400', '700'],
@@ -26,11 +26,11 @@ const dosis = Dosis({
   display: 'swap',
 })
 
-const agdasima = Agdasima({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-agdasima',
-})
+// const agdasima = Agdasima({
+//   subsets: ['latin'],
+//   weight: ['400', '700'],
+//   variable: '--font-agdasima',
+// })
 
 export const metadata: Metadata = {
   title: 'NextNazs',

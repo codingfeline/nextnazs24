@@ -23,7 +23,7 @@ export default async function Home() {
       <span></span>
       {journals.length}
       {journals.map(j => {
-        const formattedDate = j.date.getFullYear() + ' -- ' + j.date.toTimeString()
+        // const formattedDate = j.date.getFullYear() + ' -- ' + j.date.toTimeString()
         return (
           <div className="bg-gray-50 w-3/4 p-2 m-2 rounded-md" key={j.id}>
             <div>{j.topic}</div>

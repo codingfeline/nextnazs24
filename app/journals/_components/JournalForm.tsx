@@ -35,9 +35,11 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
   const onSubmit = handleSubmit(async data => {
     try {
       setSubmitting(true)
-      await axios.post(`/api/journals/`, data)
-      router.push('/')
+      if (journal) await axios.patch('/api/journals/' + journal.id, data)
+      else await axios.post('/api/journals/', data)
+      router.push('/journals')
     } catch (error) {
+      console.log(error)
       setSubmitting(false)
       setError('Unexpected error')
     }
@@ -66,7 +68,9 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
         />
         <ErrorMessage>{errors.comment?.message}</ErrorMessage>
 
-        <Button disabled={submitting}>Submit Story {submitting && <Spinner />}</Button>
+        <Button disabled={submitting}>
+          {journal ? 'Update Journal' : 'Add Journal'} {submitting && <Spinner />}
+        </Button>
       </form>
     </div>
   )

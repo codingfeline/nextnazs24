@@ -1,5 +1,5 @@
 import { Container } from '@radix-ui/themes'
-import Link from './Link'
+import Link from 'next/link'
 
 const AppFooter = () => {
   const year = new Date().getFullYear().toString()
@@ -7,9 +7,9 @@ const AppFooter = () => {
     <footer className=" bg-red-200 py-6 px-4">
       <Container>
         <div className="flex justify-between">
-          <div>
-            <Link href="/"> {year} website </Link>
-          </div>
+          {/* <div> */}
+          <Link href="/"> {year} website </Link>
+          {/* </div> */}
           <div>Terms and conditions</div>
         </div>
       </Container>

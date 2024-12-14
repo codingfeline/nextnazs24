@@ -3,7 +3,7 @@ import prisma from "@/prisma/client"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function PATCH(request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const body = await request.json()
   const validation = JournalSchema.safeParse(body)
@@ -12,7 +12,8 @@ export async function PATCH(request: NextRequest,
     return NextResponse.json(validation.error.format(), { status: 400 })
 
   const journal = await prisma.journals.findUnique({
-    where: { id: params.id }
+    // const id = await (params).id
+    where: { id: (await (params)).id }
   })
 
   if (!journal)
