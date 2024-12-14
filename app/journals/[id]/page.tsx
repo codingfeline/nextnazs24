@@ -1,5 +1,5 @@
 import prisma from '@/prisma/client'
-import { Card } from '@radix-ui/themes'
+import { Card, Heading } from '@radix-ui/themes'
 import { notFound } from 'next/navigation'
 import ReactMarkDown from 'react-markdown'
 
@@ -15,12 +15,14 @@ const IssueDetailPage = async ({ params }: Props) => {
   if (!journal) notFound()
 
   return (
-    <div>
-      <p>{journal.topic}</p>
-      <Card className="prose" mt="4">
+    <div className="max-w-xl ">
+      <Heading>{journal.topic}</Heading>
+      <Card className="prose max-w-xl" mt="4">
         <ReactMarkDown>{journal.comment}</ReactMarkDown>
       </Card>
-      <p>{journal.date.toDateString()}</p>
+      <div className="flex justify-end p-1">
+        <p>{journal.date.toDateString()}</p>
+      </div>
     </div>
   )
 }
