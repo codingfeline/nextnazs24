@@ -1,14 +1,11 @@
 'use client'
 
-import { Button } from '@radix-ui/themes'
-import Link from 'next/link'
+import MyButton from '../components/Button'
 
 const JournalActions = () => {
   return (
     <div className="mb-2">
-      <Button asChild>
-        <Link href="/journals/new">New Journal</Link>
-      </Button>
+      <MyButton url="/journals/new" label="New Journal"></MyButton>
     </div>
   )
 }
