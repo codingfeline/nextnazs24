@@ -1,0 +1,30 @@
+import { JournalSchema } from "@/app/validationSchemas"
+import prisma from "@/prisma/client"
+import { NextRequest, NextResponse } from "next/server"
+
+export async function PATCH(request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const body = await request.json()
+  const validation = JournalSchema.safeParse(body)
+
+  if (!validation.success)
+    return NextResponse.json(validation.error.format(), { status: 400 })
+
+  const journal = await prisma.journals.findUnique({
+    where: { id: params.id }
+  })
+
+  if (!journal)
+    return NextResponse.json({ error: 'Invalid issue' }, { status: 404 })
+
+  const updatedJournal = await prisma.journals.update({
+    where: { id: journal.id },
+    data: {
+      topic: body.topic,
+      comment: body.comment
+    }
+  })
+
+  return NextResponse.json(updatedJournal)
+}

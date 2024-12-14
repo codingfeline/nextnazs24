@@ -2,7 +2,7 @@
 
 import ErrorMessage from '@/app/components/ErrorMessage'
 import Spinner from '@/app/components/Spinner'
-import { createJournalSchema } from '@/app/validationSchemas'
+import { JournalSchema } from '@/app/validationSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Journals } from '@prisma/client'
 import { Button, Callout, Heading, TextField } from '@radix-ui/themes'
@@ -16,7 +16,7 @@ import { z } from 'zod'
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
 
-type JournalFormData = z.infer<typeof createJournalSchema>
+type JournalFormData = z.infer<typeof JournalSchema>
 
 const JournalForm = ({ journal }: { journal?: Journals }) => {
   const router = useRouter()
@@ -29,13 +29,13 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<JournalFormData>({
-    resolver: zodResolver(createJournalSchema),
+    resolver: zodResolver(JournalSchema),
   })
 
   const onSubmit = handleSubmit(async data => {
     try {
       setSubmitting(true)
-      await axios.post('/api/journals', data)
+      await axios.post(`/api/journals/`, data)
       router.push('/')
     } catch (error) {
       setSubmitting(false)

@@ -1,10 +1,10 @@
-import { createJournalSchema } from "@/app/validationSchemas";
+import { JournalSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
-  const validation = createJournalSchema.safeParse(body)
+  const validation = JournalSchema.safeParse(body)
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 })
 
