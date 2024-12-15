@@ -2,17 +2,15 @@ import prisma from '@/prisma/client'
 import { Container } from '@radix-ui/themes'
 // import parse from 'html-react-parser'
 import moment from 'moment'
-import { GiChiliPepper } from 'react-icons/gi'
-import reactStringReplace from 'react-string-replace'
 
 export default async function Home() {
-  const dataToParse = '<span>**</span>'
+  // const dataToParse = '<span>**</span>'
   // const chilli = '<GiChiliPepper />'
   const journals = await prisma.journals.findMany()
 
-  const replacement = reactStringReplace(dataToParse, '*', (match, i) => (
-    <GiChiliPepper key={i} />
-  ))
+  // const replacement = reactStringReplace(dataToParse, '*', (match, i) => (
+  //   <GiChiliPepper key={i} />
+  // ))
 
   return (
     <div className="flex flex-col p-1 pb-20 bg-gray-200 justify-around items-center m-1 max-w-3xl  ">
