@@ -1,4 +1,4 @@
-import { Container, Theme } from '@radix-ui/themes'
+import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import { Dosis } from 'next/font/google'
@@ -49,7 +49,8 @@ export default function RootLayout({
         <Theme accentColor="violet" className="mb-auto flex flex-col ">
           <AppHeader />
           <main className="grow flex p-5">
-            <Container>{children}</Container>
+            {children}
+            {/* <Container>{children}</Container> */}
           </main>
           <AppFooter />
         </Theme>

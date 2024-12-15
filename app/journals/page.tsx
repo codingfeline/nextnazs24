@@ -11,7 +11,7 @@ const JournalsPage = async () => {
   return (
     <div className="w-full">
       <JournalActions />
-      <Table.Root variant="surface" className="w-2/3 bg-red-50">
+      <Table.Root variant="surface" className=" bg-red-50">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell className="hidden md:table-cell">
@@ -26,13 +26,17 @@ const JournalsPage = async () => {
         <Table.Body>
           {journals.map(j => {
             return (
-              <Table.Row key={j.id} className="w-full">
-                <Table.Cell className="w-full">
+              <Table.Row key={j.id}>
+                <Table.Cell className="">
                   <Link href={`/journals/${j.id}`}>{j.topic}</Link>
                 </Table.Cell>
-                <Table.Cell className="hidden md:table-cell">{j.comment}</Table.Cell>
-                <Table.Cell className="hidden md:table-cell">
+                <Table.Cell className="hidden md:table-cell w-2/3">
+                  {j.comment}
+                </Table.Cell>
+                <Table.Cell className="hidden md:table-cell md:w-[150px]">
                   {j.date.toDateString()}
+                  <br /> {j.date.getHours()}
+                  {j.date.getMinutes()} hrs
                 </Table.Cell>
               </Table.Row>
             )
@@ -42,5 +46,7 @@ const JournalsPage = async () => {
     </div>
   )
 }
+
+export const dynamic = 'force-dynamic'
 
 export default JournalsPage

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "set PORT=2024 && set browser=NONE&& next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "set PORT=2024 && next start",
     "lint": "next lint"
   },
   "dependencies": {
