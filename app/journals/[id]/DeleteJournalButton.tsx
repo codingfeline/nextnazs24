@@ -1,5 +1,6 @@
 'use client'
 
+import { Spinner } from '@/app/components'
 import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -8,12 +9,15 @@ import { useState } from 'react'
 const DeleteJournalButton = ({ journalId }: { journalId: string }) => {
   const router = useRouter()
   const [error, setError] = useState(false)
+  const [isDeleting, setDeleting] = useState(false)
   const deleteJournal = async () => {
     try {
+      setDeleting(true)
       await axios.delete('/api/journals/' + journalId)
       router.push('/journals')
     } catch (error) {
       setError(true)
+      setDeleting(false)
     }
   }
 
@@ -21,7 +25,10 @@ const DeleteJournalButton = ({ journalId }: { journalId: string }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red">Delete Journal</Button>
+          <Button color="red" disabled={isDeleting}>
+            Delete Journal
+            {isDeleting && <Spinner />}
+          </Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
           <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
