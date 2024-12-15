@@ -9,7 +9,7 @@ const JournalsPage = async () => {
   // await delay(2000)
 
   return (
-    <div className="w-full">
+    <div className="max-w-2xl">
       <JournalActions />
       <Table.Root variant="surface" className=" bg-red-50">
         <Table.Header>

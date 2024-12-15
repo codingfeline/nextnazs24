@@ -1,4 +1,4 @@
-import { Theme } from '@radix-ui/themes'
+import { Container, Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import { Dosis } from 'next/font/google'
@@ -45,11 +45,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon-32x32.png" sizes="any" />
-      <body className={`${dosis.className} antialiased flex flex-col `}>
+      <body className={`${dosis.className} antialiased  `}>
         <Theme accentColor="violet" className="mb-auto flex flex-col ">
           <AppHeader />
           <main className="grow flex p-5">
-            {children}
+            <Container>{children}</Container>
             {/* <Container>{children}</Container> */}
           </main>
           <AppFooter />

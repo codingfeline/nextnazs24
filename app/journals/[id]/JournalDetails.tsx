@@ -6,7 +6,7 @@ const JournalDetails = ({ journal }: { journal: Journals }) => {
   return (
     <>
       <Heading>{journal.topic}</Heading>
-      <Card className="prose " mt="4">
+      <Card className="prose w-full" mt="4">
         <ReactMarkDown>{journal.comment}</ReactMarkDown>
       </Card>
       <div className="flex justify-end p-1">
