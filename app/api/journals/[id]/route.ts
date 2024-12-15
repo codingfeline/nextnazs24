@@ -29,3 +29,20 @@ export async function PATCH(request: NextRequest,
 
   return NextResponse.json(updatedJournal)
 }
+
+export async function DELETE(request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const journal = await prisma.journals.findUnique({
+    where: { id: (await params).id }
+  })
+
+  if (!journal)
+    return NextResponse.json({ error: 'Invalid journal' }, { status: 404 })
+
+  await prisma.journals.delete({
+    where: { id: journal.id }
+  })
+
+  return NextResponse.json({})
+}
