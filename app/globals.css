@@ -32,3 +32,10 @@ span {
 .flexc_center {
   @apply flex flex-col justify-center items-center;
 }
+
+code {
+  white-space: pre-wrap !important;
+}
+.prose {
+  @apply whitespace-pre-wrap;
+}

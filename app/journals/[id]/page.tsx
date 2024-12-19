@@ -10,6 +10,8 @@ interface Props {
 }
 
 const IssueDetailPage = async ({ params }: Props) => {
+  if ((await params).id.length !== 24) notFound()
+
   const journal = await prisma.journals.findUnique({
     where: { id: (await params).id }, // * await to prevent error at the bottom
   })

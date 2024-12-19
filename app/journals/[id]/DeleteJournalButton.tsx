@@ -16,6 +16,7 @@ const DeleteJournalButton = ({ journalId }: { journalId: string }) => {
       await axios.delete('/api/journals/' + journalId)
       router.push('/journals')
     } catch (error) {
+      console.log(error)
       setError(true)
       setDeleting(false)
     }

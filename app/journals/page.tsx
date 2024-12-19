@@ -9,7 +9,7 @@ const JournalsPage = async () => {
   // await delay(2000)
 
   return (
-    <div className="max-w-2xl">
+    <div className="">
       <JournalActions />
       <Table.Root variant="surface" className=" bg-red-50">
         <Table.Header>
@@ -30,7 +30,7 @@ const JournalsPage = async () => {
                 <Table.Cell className="">
                   <Link href={`/journals/${j.id}`}>{j.topic}</Link>
                 </Table.Cell>
-                <Table.Cell className="hidden md:table-cell w-2/3">
+                <Table.Cell className="hidden md:table-cell w-full">
                   {j.comment}
                 </Table.Cell>
                 <Table.Cell className="hidden md:table-cell md:w-[150px]">
