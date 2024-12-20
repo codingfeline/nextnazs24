@@ -1,8 +1,13 @@
+'use client'
+
 import { Container, Flex } from '@radix-ui/themes'
+import classnames from 'classnames'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { GiSittingDog } from 'react-icons/gi'
 
 const AppHeader = () => {
+  const currentPath = usePathname()
   const links = [
     { label: 'home', url: '/' },
     { label: 'Journals', url: '/journals' },
@@ -22,7 +27,18 @@ const AppHeader = () => {
               <GiSittingDog size="24px" />
             </Link>
             {links.map(link => (
-              <Link className="  " href={link.url} key={link.url}>
+              <Link
+                // className={`${
+                //   link.url === currentPath ? 'text-zinc-900' : 'text-zinc-500'
+                // }`}
+                className={classnames({
+                  'text-zinc-900': link.url === currentPath,
+                  'text-zinc-500': link.url !== currentPath,
+                  'hover:text-zinc-800 transition-colors': true,
+                })}
+                href={link.url}
+                key={link.url}
+              >
                 {link.label}
               </Link>
             ))}
