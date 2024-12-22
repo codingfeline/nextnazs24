@@ -2,6 +2,7 @@ import { Container, Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import { Dosis } from 'next/font/google'
+import AuthProvider from './auth/Provider'
 import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
 import './globals.css'
@@ -46,14 +47,16 @@ export default function RootLayout({
     <html lang="en">
       <link rel="icon" href="/favicon-32x32.png" sizes="any" />
       <body className={`${dosis.className} antialiased  `}>
-        <Theme accentColor="violet" className="mb-auto flex flex-col ">
-          <AppHeader />
-          <main className="grow flex p-5">
-            <Container>{children}</Container>
-            {/* <Container>{children}</Container> */}
-          </main>
-          <AppFooter />
-        </Theme>
+        <AuthProvider>
+          <Theme accentColor="violet" className="mb-auto flex flex-col ">
+            <AppHeader />
+            <main className="grow flex p-5">
+              <Container>{children}</Container>
+              {/* <Container>{children}</Container> */}
+            </main>
+            <AppFooter />
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   )
