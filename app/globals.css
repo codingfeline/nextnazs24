@@ -37,5 +37,5 @@ code {
   white-space: pre-wrap !important;
 }
 .prose {
-  @apply whitespace-pre-wrap;
+  /* @apply whitespace-pre-wrap; */
 }

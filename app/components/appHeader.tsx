@@ -2,12 +2,16 @@
 
 import { Container, Flex } from '@radix-ui/themes'
 import classnames from 'classnames'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { GiSittingDog } from 'react-icons/gi'
 
 const AppHeader = () => {
   const currentPath = usePathname()
+  const { status, data: session } = useSession()
+  // const status = true
+
   const links = [
     { label: 'home', url: '/' },
     { label: 'Journals', url: '/journals' },
@@ -44,9 +48,13 @@ const AppHeader = () => {
             ))}
           </Flex>
           <Flex justify="between" gapX="3">
-            <Link className="" href="#">
-              SignIn
-            </Link>
+            {status === 'unauthenticated' ? (
+              <Link className="" href="/api/auth/signin">
+                SignIn
+              </Link>
+            ) : (
+              <Link href="/api/auth/signout">SignOut [{session?.user?.name}]</Link>
+            )}
             <Link className="" href="#">
               Another
             </Link>
