@@ -10,7 +10,7 @@ const JournalDetails = ({ journal }: { journal: Journals }) => {
         <ReactMarkDown>{journal.comment}</ReactMarkDown>
       </Card>
       <div className="flex justify-end p-1">
-        <p>{journal.date.toDateString()}</p>
+        <p>{journal.date.toLocaleString()}</p>
       </div>
     </>
   )
