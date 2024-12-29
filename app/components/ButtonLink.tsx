@@ -18,7 +18,7 @@ const ButtonWithComponent = async ({ href, Icon, children, full }: Prop) => {
   return (
     <Link href={href}>
       <Button className={`my-1 cursor-pointer mr-1 ${full}`}>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           {Icon && <Icon />} {children}
         </div>
       </Button>
