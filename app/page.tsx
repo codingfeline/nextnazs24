@@ -3,8 +3,6 @@ import { Container } from '@radix-ui/themes'
 import FilterJournals from './journals/_components/filterJournals'
 // import parse from 'html-react-parser'
 // import { redirect } from 'next/navigation'
-import logo from '@/public/NazsNet.png'
-import Image from 'next/image'
 
 export default async function Home() {
   // const dataToParse = '<span>**</span>'
@@ -25,12 +23,7 @@ export default async function Home() {
       <Container>
         {/* {JSON.stringify(topics)} */}
         <FilterJournals topics={topics} />
-        <Image
-          alt="logo"
-          src={logo}
-          className="absolute bottom-[100] right-[20]"
-          width="100"
-        />
+        {/* <Image alt="logo" src={logo} className="" width="100" /> */}
       </Container>
     </div>
   )
