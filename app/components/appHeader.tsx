@@ -9,7 +9,7 @@ import { FaLaptopCode } from 'react-icons/fa6'
 
 const AppHeader = () => {
   return (
-    <nav className="borber-b  px-5  bg-[#AAC3F7] justify-between py-3">
+    <nav className="borber-b  px-5  bg-gray-200 justify-between py-3">
       <Container>
         <Flex justify="between">
           <Flex justify="between" gapX="3">
