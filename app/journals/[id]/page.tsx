@@ -1,10 +1,11 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { Pencil } from '@/app/components'
+import ButtonWithComponent from '@/app/components/ButtonLink'
 import prisma from '@/prisma/client'
 import { Box, Flex, Grid } from '@radix-ui/themes'
 import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 import DeleteJournalButton from './DeleteJournalButton'
-import EditJournalButton from './EditJournalButton'
 import JournalDetails from './JournalDetails'
 
 interface Props {
@@ -30,7 +31,10 @@ const IssueDetailPage = async ({ params }: Props) => {
       {session && (
         <Box>
           <Flex direction="column" gap="2">
-            <EditJournalButton journalId={journal.id} />
+            <ButtonWithComponent full Icon={Pencil} href={`/journals/${journal.id}/edit`}>
+              Edit Journal
+            </ButtonWithComponent>
+            {/* <EditJournalButton journalId={journal.id} /> */}
             <DeleteJournalButton journalId={journal.id} />
           </Flex>
         </Box>
