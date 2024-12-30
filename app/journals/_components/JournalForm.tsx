@@ -45,31 +45,39 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
   })
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       {error && (
         <Callout.Root color="red" mb="2">
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form className=" space-y-3" onSubmit={onSubmit}>
-        <Heading>New Journal</Heading>
+      <form className=" space-y-3 mt-3">
+        {/* <form className=" space-y-3" onSubmit={onSubmit}> */}
+        <Heading className="text-gray-100">{journal ? 'Edit' : 'New'} Journal</Heading>
         <TextField.Root
           defaultValue={journal?.topic}
           placeholder="Topic"
           {...register('topic')}
         />
         <ErrorMessage>{errors.topic?.message}</ErrorMessage>
-        <Controller
-          name="comment"
-          control={control}
-          defaultValue={journal?.comment}
-          render={({ field }) => <SimpleMDE placeholder="Comment" {...field} />}
-        />
-        <ErrorMessage>{errors.comment?.message}</ErrorMessage>
+        <div className="bg-gray-50">
+          <Controller
+            name="comment"
+            control={control}
+            defaultValue={journal?.comment}
+            render={({ field }) => <SimpleMDE placeholder="Comment" {...field} />}
+          />
+          <ErrorMessage>{errors.comment?.message}</ErrorMessage>
+        </div>
 
-        <Button disabled={submitting}>
-          {journal ? 'Update Journal' : 'Add Journal'} {submitting && <Spinner />}
+        <Button disabled={submitting} onClick={onSubmit}>
+          <a href="#">
+            {journal ? 'Update Journal' : 'Add Journal'} {submitting && <Spinner />}
+          </a>
         </Button>
+        {/* <Button disabled={submitting}>
+          {journal ? 'Update Journal' : 'Add Journal'} {submitting && <Spinner />}
+        </Button> */}
       </form>
     </div>
   )

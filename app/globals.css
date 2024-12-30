@@ -21,10 +21,6 @@ body {
   /* font-family: var(--font-inter); */
 }
 
-span {
-  @apply text-red-400;
-}
-
 .flex_center {
   @apply flex justify-center items-center;
 }
@@ -38,4 +34,8 @@ code {
 }
 .prose {
   /* @apply whitespace-pre-wrap; */
+}
+.bg_home {
+  background: url('/galaxy.jpg');
+  @apply bg-left-top bg-cover bg-fixed;
 }

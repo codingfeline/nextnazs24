@@ -50,7 +50,7 @@ export default function RootLayout({
         <AuthProvider>
           <Theme accentColor="green" className="mb-auto flex flex-col ">
             <AppHeader />
-            <main className="grow  p-5">
+            <main className="grow bg_home bg-gray-200">
               <Container>{children}</Container>
               {/* <Container>{children}</Container> */}
             </main>

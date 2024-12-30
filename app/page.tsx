@@ -1,7 +1,6 @@
 import prisma from '@/prisma/client'
 import { Container } from '@radix-ui/themes'
 // import parse from 'html-react-parser'
-import moment from 'moment'
 
 export default async function Home() {
   // const dataToParse = '<span>**</span>'
@@ -13,9 +12,8 @@ export default async function Home() {
   // ))
 
   return (
-    <div className="flex flex-col p-1 pb-20 bg-gray-200 justify-around items-center m-1 max-w-3xl  ">
+    <div className="flex flex-col  justify-around items-center  max-w-3xl text-white  ">
       <Container>
-        <h1>home</h1>
         {/* {parse(dataToParse)} */}
         {/* lorem500 <br /> */}
         {/* {parse(chilli)} */}
@@ -25,12 +23,10 @@ export default async function Home() {
         {journals.map(j => {
           // const formattedDate = j.date.getFullYear() + ' -- ' + j.date.toTimeString()
           return (
-            <div className="bg-gray-50  p-2 m-2 rounded-md" key={j.id}>
-              <div>{j.topic}</div>
-              {j.comment}
+            <div className="rounded-md" key={j.id}>
+              {/* <div>{j.topic}</div>
               <p>{j.date.toISOString()}</p>
-              {/* <p>{formattedDate}</p> */}
-              {moment(j.date).format('DD MMM YYYY - HH:MM ')}
+              {moment(j.date).format('DD MMM YYYY - HH:MM ')} */}
             </div>
           )
         })}
