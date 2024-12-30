@@ -36,6 +36,6 @@ code {
   /* @apply whitespace-pre-wrap; */
 }
 .bg_home {
-  background: url('/galaxy.jpg');
-  @apply bg-left-top bg-cover bg-fixed;
+  background: url('/galaxy2.webp');
+  @apply bg-center bg-cover bg-fixed;
 }

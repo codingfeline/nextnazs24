@@ -1,69 +1,98 @@
 'use client'
 
-import { Container, Flex } from '@radix-ui/themes'
+import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes'
 import classnames from 'classnames'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { GiSittingDog } from 'react-icons/gi'
+import { FaLaptopCode } from 'react-icons/fa6'
 
 const AppHeader = () => {
-  const currentPath = usePathname()
+  return (
+    <nav className="borber-b  px-5  bg-[#AAC3F7] justify-between py-3">
+      <Container>
+        <Flex justify="between">
+          <Flex justify="between" gapX="3">
+            <Link href="/">
+              <FaLaptopCode size="24px" />
+            </Link>
+            <NavLinks />
+          </Flex>
+          <AuthStatus />
+        </Flex>
+      </Container>
+    </nav>
+  )
+}
+
+const NavLinks = () => {
   const { status, data: session } = useSession()
-  // const status = true
+  const currentPath = usePathname()
+
+  const colourLink = (link: string) =>
+    classnames({
+      'text-zinc-900': link === currentPath,
+      'text-zinc-500': link !== currentPath,
+      'hover:text-zinc-800 transition-colors': true,
+    })
 
   const links = [
     { label: 'home', url: '/' },
     { label: 'Journals', url: '/journals' },
-    // { label: 'New Journal', url: '/journals/new' },
-    // { label: 'others', url: '/others' },
-    // { label: 'contact', url: '/contact' },
   ]
 
   return (
-    <nav className="borber-b mb-5 px-5  bg-gray-50 justify-between py-3">
-      <Container>
-        {/* <nav className="flex w-full  bg-gray-200 justify-between h-[40px]"> */}
-        {/* <div className="flex justify-between items-center bg-red-50 space-x-6 "> */}
-        <Flex justify="between">
-          <Flex align="center" gap="3">
-            <Link href="/">
-              <GiSittingDog size="24px" />
-            </Link>
-            {links.map(link => (
-              <Link
-                // className={`${
-                //   link.url === currentPath ? 'text-zinc-900' : 'text-zinc-500'
-                // }`}
-                className={classnames({
-                  'text-zinc-900': link.url === currentPath,
-                  'text-zinc-500': link.url !== currentPath,
-                  'hover:text-zinc-800 transition-colors': true,
-                })}
-                href={link.url}
-                key={link.url}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </Flex>
-          <Flex justify="between" gapX="3">
-            {status === 'unauthenticated' ? (
-              <Link className="" href="/api/auth/signin">
-                SignIn
-              </Link>
-            ) : (
-              <Link href="/api/auth/signout">SignOut [{session?.user?.name}]</Link>
-            )}
-            <Link className="" href="#">
-              Another
-            </Link>
-          </Flex>
-        </Flex>
-      </Container>
-      {/* <div className="flex justify-between items-center bg-red-50 w-1/4 ">
-      </div> */}
-    </nav>
+    <Flex align="center" gap="3">
+      {links.map(link => (
+        <Link className={colourLink(link.url)} href={link.url} key={link.url}>
+          {link.label}
+        </Link>
+      ))}
+      {/* {status === 'authenticated' && session.user!.email! === 'post@nazs.net' && (
+        <Link href="/Enquiries" className={colourLink('/Enquiries')}>
+          Enquiries
+        </Link>
+      )} */}
+    </Flex>
+  )
+}
+
+const AuthStatus = () => {
+  const { status, data: session } = useSession()
+
+  if (status === 'loading') return null
+
+  if (status === 'unauthenticated')
+    return (
+      <Link className="" href="/api/auth/signin">
+        SignIn
+      </Link>
+    )
+
+  return (
+    <Box>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Avatar
+            src={session!.user!.image!}
+            fallback="?"
+            size="2"
+            radius="full"
+            className="cursor-pointer"
+          />
+          {/* <p>test</p> */}
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>
+            <Text size="2">{session!.user!.email!}</Text>
+            {/* <p>fdff</p> */}
+          </DropdownMenu.Label>
+          <DropdownMenu.Item>
+            <Link href="/api/auth/signout">Sign Out</Link>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </Box>
   )
 }
 
