@@ -19,7 +19,7 @@ export default async function Home() {
   // ))
 
   return (
-    <div className="flex flex-col  justify-around items-center  max-w-3xl text-white  ">
+    <div className="flex  items-center  w-full   ">
       <Container>
         {/* {JSON.stringify(topics)} */}
         <FilterJournals topics={topics} />
