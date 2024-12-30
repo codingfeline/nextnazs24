@@ -26,7 +26,6 @@ const AppHeader = () => {
 }
 
 const NavLinks = () => {
-  const { status, data: session } = useSession()
   const currentPath = usePathname()
 
   const colourLink = (link: string) =>
