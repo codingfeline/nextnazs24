@@ -8,7 +8,7 @@ interface Prop {
   href: string
   Icon?: ComponentType<IconProps>
   children: ReactNode
-  full?: string
+  full?: boolean
 }
 
 const ButtonWithComponent = async ({ href, Icon, children, full }: Prop) => {
@@ -17,7 +17,7 @@ const ButtonWithComponent = async ({ href, Icon, children, full }: Prop) => {
 
   return (
     <Link href={href}>
-      <Button className={`my-1 cursor-pointer mr-1 ${full}`}>
+      <Button className={`my-1 cursor-pointer mr-1 ${full} ? 'w-full' :''`}>
         <div className="flex items-center gap-2">
           {Icon && <Icon />} {children}
         </div>
