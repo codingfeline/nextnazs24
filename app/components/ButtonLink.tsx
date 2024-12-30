@@ -16,13 +16,15 @@ const ButtonWithComponent = async ({ href, Icon, children, full }: Prop) => {
   if (!session) return null
 
   return (
-    <Link href={href}>
-      <Button className={`my-1 cursor-pointer mr-1 ${full} ? 'w-full' :''`}>
-        <div className="flex items-center gap-2">
-          {Icon && <Icon />} {children}
-        </div>
-      </Button>
-    </Link>
+    <div>
+      <Link href={href}>
+        <Button className={`my-1 cursor-pointer mr-1 ${full} ? 'w-full' :''`}>
+          <div className="flex items-center gap-2">
+            {Icon && <Icon />} {children}
+          </div>
+        </Button>
+      </Link>
+    </div>
   )
 }
 
