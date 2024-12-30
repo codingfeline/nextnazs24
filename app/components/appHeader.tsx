@@ -61,12 +61,12 @@ const AuthStatus = () => {
 
   if (status === 'loading') return null
 
-  if (status === 'unauthenticated')
-    return (
-      <Link className="" href="/api/auth/signin">
-        SignIn
-      </Link>
-    )
+  if (status === 'unauthenticated') return null
+  // return (
+  //   <Link className="" href="/api/auth/signin">
+  //     SignIn
+  //   </Link>
+  // )
 
   return (
     <Box>
