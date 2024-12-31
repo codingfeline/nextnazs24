@@ -1,7 +1,7 @@
 export { default } from 'next-auth/middleware'
 
 export const config = {
-  matcher: ['/journals/new']
+  // matcher: ['/journals/new']
 }
 
 // *: zero or more
