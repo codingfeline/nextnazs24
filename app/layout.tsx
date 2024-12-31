@@ -48,7 +48,7 @@ export default function RootLayout({
       <link rel="icon" href="/favicon-32x32.png" sizes="any" />
       <body className={`${dosis.className} antialiased  `}>
         <AuthProvider>
-          <Theme accentColor="green" className="mb-auto flex flex-col ">
+          <Theme accentColor="blue" className="mb-auto flex flex-col ">
             <AppHeader />
             <main className="grow bg_home bg-gray-200">
               <Container>{children}</Container>
