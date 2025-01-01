@@ -28,8 +28,9 @@ const IssueDetailPage = async ({ params }: Props) => {
       <Box className="md:col-span-4">
         <JournalDetails journal={journal} />
       </Box>
+      {/* {!session && ( */}
       {session && session.user!.email === 'post@nazs.net' && (
-        <Box>
+        <Box mt="3">
           <Flex direction="column" gap="2">
             <ButtonWithComponent full Icon={Pencil} href={`/journals/${journal.id}/edit`}>
               Edit Journal
