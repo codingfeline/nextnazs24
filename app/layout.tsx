@@ -45,9 +45,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={dancing.className}>
+    <html lang="en">
       <link rel="icon" href="/favicon-32x32.png" sizes="any" />
-      <body className={` antialiased  `}>
+      <body className={dancing.className}>
         <QueryClientProvider>
           <AuthProvider>
             <Theme accentColor="blue" className="mb-auto flex flex-col ">
