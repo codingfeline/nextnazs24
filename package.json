@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "set PORT=2024 && set browser=NONE&& next dev --turbopack",
+    "dev": "set PORT=2025 && set browser=NONE&& next dev --turbopack",
     "build": "next build",
     "start": "set PORT=2024 && next start",
     "lint": "next lint"

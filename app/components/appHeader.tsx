@@ -12,7 +12,7 @@ const AppHeader = () => {
     <nav className="borber-b  px-5  bg-gray-200 justify-between py-3">
       <Container>
         <Flex justify="between">
-          <Flex justify="between" gapX="3">
+          <Flex justify="between" gapX="3" align='center'>
             <Link href="/">
               <FaLaptopCode size="24px" />
             </Link>
