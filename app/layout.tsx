@@ -6,6 +6,7 @@ import AuthProvider from './auth/Provider'
 import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
 import './globals.css'
+import QueryClientProvider from './QueryClientProvider'
 import './theme-config.css'
 
 // const geistSans = localFont({
@@ -47,16 +48,18 @@ export default function RootLayout({
     <html lang="en">
       <link rel="icon" href="/favicon-32x32.png" sizes="any" />
       <body className={`${dosis.className} antialiased  `}>
-        <AuthProvider>
-          <Theme accentColor="blue" className="mb-auto flex flex-col ">
-            <AppHeader />
-            <main className="grow bg_home bg-gray-200">
-              <Container>{children}</Container>
-              {/* <Container>{children}</Container> */}
-            </main>
-            <AppFooter />
-          </Theme>
-        </AuthProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <Theme accentColor="blue" className="mb-auto flex flex-col ">
+              <AppHeader />
+              <main className="grow bg_home bg-gray-200">
+                <Container>{children}</Container>
+                {/* <Container>{children}</Container> */}
+              </main>
+              <AppFooter />
+            </Theme>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   )
