@@ -10,8 +10,10 @@ const JournalsPage = async () => {
   // await delay(2000)
 
   return (
-    <div className=" mt-1 h-">
-      <ButtonWithComponent href="/journals/new">New Journal2</ButtonWithComponent>
+    <div className=" ">
+      <ButtonWithComponent margin="mb-2" href="/journals/new">
+        New Journal
+      </ButtonWithComponent>
 
       {journals.map(j => {
         return (
