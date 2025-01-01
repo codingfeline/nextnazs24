@@ -1,7 +1,7 @@
 import { Container, Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
-import { Dancing_Script, Dosis } from 'next/font/google'
+import { Dancing_Script } from 'next/font/google'
 import AuthProvider from './auth/Provider'
 import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
@@ -21,12 +21,12 @@ const dancing = Dancing_Script({
   variable: '--font-dancing',
   display: 'swap',
 })
-const dosis = Dosis({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-dosis',
-  display: 'swap',
-})
+// const dosis = Dosis({
+//   subsets: ['latin'],
+//   weight: ['400', '700'],
+//   variable: '--font-dosis',
+//   display: 'swap',
+// })
 
 // const agdasima = Agdasima({
 //   subsets: ['latin'],
