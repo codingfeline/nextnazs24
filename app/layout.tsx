@@ -2,9 +2,10 @@ import { Container, Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import AuthProvider from './auth/Provider'
 import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
+import ClientProviders from './components/ClientProviders'
+import CookiesBanner from './components/CookiesBanner'
 import './globals.css'
 import QueryClientProvider from './QueryClientProvider'
 import './theme-config.css'
@@ -49,7 +50,7 @@ export default function RootLayout({
       <link rel="icon" href="/favicon-32x32.png" sizes="any" />
       <body className={geistSans.className}>
         <QueryClientProvider>
-          <AuthProvider>
+          <ClientProviders>
             <Theme accentColor="blue" className="mb-auto flex flex-col ">
               <AppHeader />
               <main className="grow bg_home bg-gray-200">
@@ -57,8 +58,9 @@ export default function RootLayout({
                 {/* <Container>{children}</Container> */}
               </main>
               <AppFooter />
+              <CookiesBanner />
             </Theme>
-          </AuthProvider>
+          </ClientProviders>
         </QueryClientProvider>
       </body>
     </html>
