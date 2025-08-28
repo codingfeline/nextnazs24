@@ -10,7 +10,7 @@ const AppFooter = () => {
           {/* <div> */}
           <Link href="/"> {year} Nazsnet </Link>
           {/* </div> */}
-          <div>Terms and conditions</div>
+          {/* <div>Terms and conditions</div> */}
         </div>
       </Container>
     </footer>
