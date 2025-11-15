@@ -1,6 +1,6 @@
-const CookiePolicy = () => {
+const CookiesPolicy = () => {
   return (
-    <>
+    <div className="bg-gray-400 p-5">
       <h1>Cookies Policy</h1>
 
       <p>
@@ -119,8 +119,8 @@ const CookiePolicy = () => {
       <p>
         <strong>Last Updated:</strong> <em>[Insert Date]</em>
       </p>
-    </>
+    </div>
   )
 }
 
-export default CookiePolicy
+export default CookiesPolicy

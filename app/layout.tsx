@@ -6,6 +6,7 @@ import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
 import ClientProviders from './components/ClientProviders'
 import CookiesBanner from './components/CookiesBanner'
+import CookiesAccepted from './CookiesPolicy/cookiesAccepted'
 import './globals.css'
 import QueryClientProvider from './QueryClientProvider'
 import './theme-config.css'
@@ -59,6 +60,7 @@ export default function RootLayout({
               </main>
               <AppFooter />
               <CookiesBanner />
+              <CookiesAccepted />
             </Theme>
           </ClientProviders>
         </QueryClientProvider>

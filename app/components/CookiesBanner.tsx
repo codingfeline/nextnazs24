@@ -1,6 +1,6 @@
 'use client'
 
-import { useCookieConsent } from '@/app/CookiePolicy/CookieConsentContext'
+import { useCookieConsent } from '@/app/CookiesPolicy/CookieConsentContext'
 
 const CookiesBanner = () => {
   const { accepted, setAccepted } = useCookieConsent()
@@ -11,7 +11,7 @@ const CookiesBanner = () => {
     <div className="fixed bottom-0 w-full bg-gray-900 text-white px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 z-50">
       <p className="text-sm">
         We use cookies to improve your experience. By using our site, you agree to our{' '}
-        <a href="/cookies-policy" className="underline text-blue-400 hover:text-blue-300">
+        <a href="/CookiesPolicy" className="underline text-blue-400 hover:text-blue-300">
           Cookies Policy
         </a>
         .

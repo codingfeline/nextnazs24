@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 
 type ConsentState = {
   accepted: boolean
@@ -17,9 +17,7 @@ export const useCookieConsent = (): ConsentState => {
   return context
 }
 
-export const CookieConsentProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const CookieConsentProvider = ({ children }: { children: ReactNode }) => {
   const [accepted, setAcceptedState] = useState(false)
 
   useEffect(() => {
