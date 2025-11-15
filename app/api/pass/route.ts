@@ -18,7 +18,9 @@ export async function GET(request: NextRequest) {
   }
 
   let password = ''
-  const randStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()<>"
+  const randStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+  // const numbers = "0123456789"
+  // const symbols = "!@#$%^&*()<>"
 
   for (let i = 0; i < passLength; i++) {
     // console.log(i)
