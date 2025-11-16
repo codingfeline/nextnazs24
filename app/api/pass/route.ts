@@ -13,6 +13,14 @@ export async function GET(request: NextRequest) {
     }
   }
 
+  const CHARS = {
+    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    lowercase: 'abcdefghijklmnopqrstuvwxyz',
+    allcases: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+    numbers: '0123456789',
+    symbols: '!@#$%^&*()_+[]{}|;:,.<>/?',
+  };
+
   if (passLength === null || passLength < 1) {
     passLength = 10
   }
