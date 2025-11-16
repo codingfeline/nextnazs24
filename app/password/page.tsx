@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import useSwr from 'swr'
+import { Copy } from '../components'
 
 interface CheckState {
   numbers: boolean
@@ -12,17 +12,17 @@ interface CheckState {
   copied: boolean
 }
 
-const fetcher = (url: string) => fetch(url).then(res => res.text())
+// const fetcher = (url: string) => fetch(url).then(res => res.text())
 
-const useFetch = (url: string) => {
-  const { data, error } = useSwr(url, fetcher)
+// const useFetch = (url: string) => {
+//   const { data, error } = useSwr(url, fetcher)
 
-  return {
-    data,
-    loading: !error && !data,
-    error: error,
-  }
-}
+//   return {
+//     data,
+//     loading: !error && !data,
+//     error: error,
+//   }
+// }
 
 const Password = () => {
   const [checks, setChecks] = useState<CheckState>({
@@ -35,7 +35,7 @@ const Password = () => {
   })
   const [password, setPassword] = useState('')
 
-  const { data, loading, error } = useFetch('/api/pass')
+  // const { data, loading, error } = useFetch('/api/pass')
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -83,8 +83,8 @@ const Password = () => {
       alert('Failed to copy. Please copy the password manually.')
     }
   }
-  if (loading) return <div>Loading...</div>
-  if (error) return <div className="bg-white">Error occurred: {error.message}</div>
+  // if (loading) return <div>Loading...</div>
+  // if (error) return <div className="bg-white">Error occurred: {error.message}</div>
 
   return (
     <div className="bg-white flex flex-col justify-center items-center rounded-md p-6 m-4">
@@ -134,8 +134,9 @@ const Password = () => {
           </label>
         </div>
         {password && (
-          <div>
+          <div className="flex gap-5">
             <p className="font-mono text-xl tracking-widest">{password}</p>
+            <Copy size={25} onClick={handleCopy} />
           </div>
         )}
         <button
@@ -144,6 +145,7 @@ const Password = () => {
         >
           Generate
         </button>
+        <div className={`mt-3 text-white ${checks.copied && 'text-black'}`}>Copied</div>
       </form>
     </div>
   )
