@@ -103,11 +103,11 @@ const Password = () => {
   // if (error) return <div className="bg-white">Error occurred: {error.message}</div>
 
   return (
-    <div className="bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-6 m-4">
+    <div className="bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-4 m-4">
       <h1>Password Generator</h1>
       {/* <p className="bg-white ">{data}</p> */}
       <form id="password" className="flex flex-col">
-        <div className="bg-[#d7eef8] border border-[#999898] m-2 p-6 rounded-xl">
+        <div className="bg-[#d7eef8] border border-[#999898] mb-2 p-5 rounded-xl">
           <label htmlFor="lowercase">
             <input
               type="checkbox"
@@ -153,7 +153,7 @@ const Password = () => {
             <input
               type="range"
               min="10"
-              max="30"
+              max="25"
               onChange={handleLength}
               value={checks.length}
             />{' '}
@@ -167,33 +167,42 @@ const Password = () => {
           Generate
         </button>
 
-        <div className="flex  gap-5 mt-4 mb-4  h-[70px] justify-center">
-          <div className="font-['Consolas'] text-xl tracking-widest">
-            {password && (
-              <div className="flex gap-8">
+        {/* <div className="  h-[] justify-center"> */}
+        <div
+          className={`mt-2 flex justify-between rounded-md ${
+            !noChecks && 'bg-[#f3f3f3]'
+          }`}
+        >
+          {password && (
+            <>
+              <p className="font-['Consolas'] text-lg pl-2 w-[200px] flex flex-col justify-center ">
                 {password}
+              </p>
+              <div className="bg-[white] p-1 flex flex-col items-center rounded-r-md">
                 <Copy
                   size={25}
                   onClick={handleCopy}
                   fill={`${checks.copied ? 'green' : '#666'}`}
                   className="cursor-pointer"
+                  title="Copy password"
                 />{' '}
-                <span className={`${checks.copied ? 'text-[green]' : 'text-[#cecdcd]'}`}>
+                <span className={`${checks.copied ? 'text-[green]' : 'text-[#fff]'}`}>
                   ✓
                 </span>
               </div>
-            )}
-            {noChecks && (
-              <p
-                className={`text-sm mt-3 ${
-                  noChecks ? 'text-[#a10325]' : 'text-[#cecdcd]'
-                }`}
-              >
-                Please make your selection
-              </p>
-            )}
-          </div>
+            </>
+          )}
+          {noChecks && (
+            <p
+              className={`text-sm mt-1 text-center w-full ${
+                noChecks ? 'text-[#a10325] ' : 'text-[#cecdcd]'
+              }`}
+            >
+              Please make your selection
+            </p>
+          )}
         </div>
+        {/* </div> */}
       </form>
     </div>
   )
