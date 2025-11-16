@@ -1,6 +1,6 @@
 // middleware.ts
-import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
 export function middleware(req: NextRequest) {
   const url = new URL(req.url)
@@ -22,7 +22,7 @@ export function middleware(req: NextRequest) {
 
 // Apply to all routes or restrict to API routes
 export const config = {
-  matcher: ['/api/:path*'],
+  matcher: ['/api/auth/:path*'],
 }
 
 // *: zero or more
