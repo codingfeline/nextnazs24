@@ -106,8 +106,8 @@ const Password = () => {
     <div className="bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-6 m-4">
       <h1>Password Generator</h1>
       {/* <p className="bg-white ">{data}</p> */}
-      <form id="password" className="">
-        <div className="bg-#86192b border border-[#999898] m-2 p-6 rounded-xl">
+      <form id="password" className="flex flex-col">
+        <div className="bg-[#d7eef8] border border-[#999898] m-2 p-6 rounded-xl">
           <label htmlFor="lowercase">
             <input
               type="checkbox"
@@ -176,6 +176,7 @@ const Password = () => {
                   size={25}
                   onClick={handleCopy}
                   fill={`${checks.copied ? 'green' : '#666'}`}
+                  className="cursor-pointer"
                 />{' '}
                 <span className={`${checks.copied ? 'text-[green]' : 'text-[#cecdcd]'}`}>
                   ✓

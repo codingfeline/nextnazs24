@@ -41,7 +41,7 @@ code {
 }
 
 #password {
-  --color: #89f0bd;
+  --color: #0f7743;
   user-select: none;
   label,
   input {
@@ -68,8 +68,8 @@ code {
     }
 
     input[type='checkbox']:checked {
-      /* border: 1px solid var(--color); */
-      background-color: #35885e;
+      border: 1px solid var(--color);
+      background-color: #a1d3eb;
       text-align: center;
       color: var(--color);
     }
