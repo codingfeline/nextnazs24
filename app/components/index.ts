@@ -5,3 +5,5 @@ export { default as Spinner } from './Spinner';
 
 export { GiSittingDog as Dog } from 'react-icons/gi';
 export { PiNotePencil as Pencil } from "react-icons/pi";
+export { VscCopy as Copy } from 'react-icons/vsc';
+
