@@ -2,7 +2,7 @@ import useSwr from 'swr'
 
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
-const useFetch = url => {
+const useFetch = (url: string) => {
   const { data, error } = useSwr(url, fetcher)
 
   return {
