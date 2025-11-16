@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   }
 
   let password = ''
-  const randStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+  const randStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_!@#$%^&*()<>;:,."
   // const numbers = "0123456789"
   // const symbols = "!@#$%^&*()<>"
 
