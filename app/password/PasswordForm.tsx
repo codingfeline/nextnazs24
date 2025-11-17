@@ -1,26 +1,34 @@
 import { Copy } from '../components'
 
-interface Booleans {
-  [key: string]: boolean
-}
 interface CheckState {
   lowercase?: boolean
   uppercase?: boolean
   numbers?: boolean
   symbols?: boolean
-  length: number
+  length: string
   copied?: boolean
 }
+type HandleInput = (e: React.ChangeEvent<HTMLInputElement>) => void
 
-interface handles {
-  [key: string]: () => void
+interface Props {
+  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+  handleChecks: HandleInput
+  handleLength: HandleInput
+  handleCopy: () => void
+  noChecks: boolean
+  password: string
+  checks: CheckState
 }
 
-const PasswordForm = (
-  { checks }: { checks: CheckState },
-  { handleChecks, handleClick, handleLength, handleCopy }: handles,
-  { noChecks, password }: Booleans
-) => {
+const PasswordForm = ({
+  noChecks,
+  checks,
+  password,
+  handleChecks,
+  handleClick,
+  handleCopy,
+  handleLength,
+}: Props) => {
   return (
     <form id="password" className="flex flex-col">
       <div className="bg-[#d7eef8] border border-[#999898] mb-2 p-5 rounded-xl">
@@ -45,7 +53,13 @@ const PasswordForm = (
           Uppercase
         </label>
         <label htmlFor="numbers">
-          <input type="checkbox" id="numbers" name="numbers" onChange={handleChecks} />{' '}
+          <input
+            type="checkbox"
+            id="numbers"
+            name="numbers"
+            checked={checks.numbers}
+            onChange={handleChecks}
+          />{' '}
           Numbers
         </label>
         <label htmlFor="symbols">
@@ -77,7 +91,6 @@ const PasswordForm = (
         Generate
       </button>
 
-      {/* <div className="  h-[] justify-center"> */}
       <div
         className={`mt-2 flex justify-between rounded-md ${!noChecks && 'bg-[#f3f3f3]'}`}
       >
@@ -106,7 +119,7 @@ const PasswordForm = (
               noChecks ? 'text-[#a10325] ' : 'text-[#cecdcd]'
             }`}
           >
-            Please make your selection
+            Please select at least one option
           </p>
         )}
       </div>
