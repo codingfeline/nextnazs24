@@ -129,13 +129,7 @@ const Password = () => {
             Uppercase
           </label>
           <label htmlFor="numbers">
-            <input
-              type="checkbox"
-              id="numbers"
-              name="numbers"
-              checked={checks.numbers}
-              onChange={handleChecks}
-            />{' '}
+            <input type="checkbox" id="numbers" name="numbers" onChange={handleChecks} />{' '}
             Numbers
           </label>
           <label htmlFor="symbols">
