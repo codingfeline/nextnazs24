@@ -1,24 +1,5 @@
 import { Copy } from '../components'
-
-interface CheckState {
-  lowercase?: boolean
-  uppercase?: boolean
-  numbers?: boolean
-  symbols?: boolean
-  length: string
-  copied?: boolean
-}
-type HandleInput = (e: React.ChangeEvent<HTMLInputElement>) => void
-
-interface Props {
-  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void
-  handleChecks: HandleInput
-  handleLength: HandleInput
-  handleCopy: () => void
-  noChecks: boolean
-  password: string
-  checks: CheckState
-}
+import { Props } from './interface'
 
 const PasswordForm = ({
   noChecks,
