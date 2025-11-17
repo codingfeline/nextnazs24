@@ -2,15 +2,7 @@
 
 import { useState } from 'react'
 import PasswordForm from './PasswordForm'
-
-interface CheckState {
-  numbers: boolean
-  symbols: boolean
-  lowercase: boolean
-  uppercase: boolean
-  length: string
-  copied: boolean
-}
+import { CheckState } from './interface'
 
 // const fetcher = (url: string) => fetch(url).then(res => res.text())
 
@@ -77,7 +69,7 @@ const Password = () => {
     // setPassword('')
     const { name, checked } = e.target
     setChecks(prev => ({ ...prev, [name]: checked }))
-    // generatePassword()
+    console.log(checks)
   }
 
   const handleCopy = async () => {
@@ -99,6 +91,13 @@ const Password = () => {
   const handleLength = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecks(prev => ({ ...prev, length: e.target.value }))
   }
+
+  const handlers = {
+    handleChecks,
+    handleClick,
+    handleCopy,
+    handleLength,
+  }
   // if (loading) return <div>Loading...</div>
   // if (error) return <div className="bg-white">Error occurred: {error.message}</div>
 
@@ -108,12 +107,13 @@ const Password = () => {
       {/* <p className="bg-white ">{data}</p> */}
       <PasswordForm
         checks={checks}
-        handleClick={handleClick}
-        handleChecks={handleChecks}
-        handleLength={handleLength}
-        handleCopy={handleCopy}
+        handlers={handlers}
         noChecks={noChecks}
         password={password}
+        // handleClick={handleClick}
+        // handleChecks={handleChecks}
+        // handleLength={handleLength}
+        // handleCopy={handleCopy}
       />
     </div>
   )

@@ -1,15 +1,8 @@
 import { Copy } from '../components'
-import { Props } from './interface'
+import { Props } from './Props'
+const PasswordForm = ({ noChecks, checks, password, handlers }: Props) => {
+  const { handleChecks, handleClick, handleCopy, handleLength } = handlers
 
-const PasswordForm = ({
-  noChecks,
-  checks,
-  password,
-  handleChecks,
-  handleClick,
-  handleCopy,
-  handleLength,
-}: Props) => {
   return (
     <form id="password" className="flex flex-col">
       <div className="bg-[#d7eef8] border border-[#999898] mb-2 p-5 rounded-xl">

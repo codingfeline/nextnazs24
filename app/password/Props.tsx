@@ -1,6 +1,5 @@
-// import { HandleInput, CheckState } from './CheckState'
-
-export interface CheckState {
+// import { Props } from './interface'
+interface CheckState {
   lowercase?: boolean
   uppercase?: boolean
   numbers?: boolean
@@ -8,16 +7,16 @@ export interface CheckState {
   length: string
   copied?: boolean
 }
-export type HandleInput = (e: React.ChangeEvent<HTMLInputElement>) => void
-
-export interface Props {
+type HandleInput = (e: React.ChangeEvent<HTMLInputElement>) => void
+interface Handlers {
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void
   handleChecks: HandleInput
   handleLength: HandleInput
   handleCopy: () => void
+}
+export interface Props {
+  handlers: Handlers
   noChecks: boolean
   password: string
   checks: CheckState
 }
-
-
