@@ -24,9 +24,11 @@ const Password = () => {
     lowercase: true,
     uppercase: false,
     copied: false,
+    password: '',
+    noChecks: false,
   })
-  const [password, setPassword] = useState('')
-  const [noChecks, setNoChecks] = useState(false)
+  // const [password, setPassword] = useState('')
+  // const [noChecks, setNoChecks] = useState(false)
 
   // const { data, loading, error } = useFetch('/api/pass')
 
@@ -51,21 +53,21 @@ const Password = () => {
       const n = Math.floor(Math.random() * characters.length)
       pass += characters[n]
     }
-    setPassword(pass)
+    setChecks(prev => ({ ...prev, password: pass }))
   }
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (!checks.lowercase && !checks.uppercase && !checks.numbers && !checks.symbols) {
-      setNoChecks(true)
-      setPassword('')
+      setChecks(prev => ({ ...prev, noChecks: true }))
+      setChecks(prev => ({ ...prev, password: '' }))
       return
     }
     generatePassword()
   }
 
   const handleChecks = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNoChecks(false)
+    setChecks(prev => ({ ...prev, noChecks: false }))
     // setPassword('')
     const { name, checked } = e.target
     setChecks(prev => ({ ...prev, [name]: checked }))
@@ -73,10 +75,10 @@ const Password = () => {
   }
 
   const handleCopy = async () => {
-    if (!password) return
+    if (!checks.password) return
 
     try {
-      await navigator.clipboard.writeText(password)
+      await navigator.clipboard.writeText(checks.password)
       setChecks(prev => ({ ...prev, copied: true }))
 
       setTimeout(() => {
@@ -105,16 +107,7 @@ const Password = () => {
     <div className="bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-4 m-4">
       <h1>Password Generator</h1>
       {/* <p className="bg-white ">{data}</p> */}
-      <PasswordForm
-        checks={checks}
-        handlers={handlers}
-        noChecks={noChecks}
-        password={password}
-        // handleClick={handleClick}
-        // handleChecks={handleChecks}
-        // handleLength={handleLength}
-        // handleCopy={handleCopy}
-      />
+      <PasswordForm checks={checks} handlers={handlers} />
     </div>
   )
 }

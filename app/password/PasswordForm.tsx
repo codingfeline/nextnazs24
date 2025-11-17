@@ -1,6 +1,6 @@
 import { Copy } from '../components'
 import { Props } from './Props'
-const PasswordForm = ({ noChecks, checks, password, handlers }: Props) => {
+const PasswordForm = ({ checks, handlers }: Props) => {
   const { handleChecks, handleClick, handleCopy, handleLength } = handlers
 
   return (
@@ -66,12 +66,14 @@ const PasswordForm = ({ noChecks, checks, password, handlers }: Props) => {
       </button>
 
       <div
-        className={`mt-2 flex justify-between rounded-md ${!noChecks && 'bg-[#f3f3f3]'}`}
+        className={`mt-2 flex justify-between rounded-md ${
+          !checks.noChecks && 'bg-[#f3f3f3]'
+        }`}
       >
-        {password && (
+        {checks.password && (
           <>
             <p className="font-['Consolas'] text-lg pl-2 w-[200px] flex flex-col justify-center ">
-              {password}
+              {checks.password}
             </p>
             <div className="bg-[white] p-1 flex flex-col items-center rounded-r-md">
               <Copy
@@ -87,10 +89,10 @@ const PasswordForm = ({ noChecks, checks, password, handlers }: Props) => {
             </div>
           </>
         )}
-        {noChecks && (
+        {checks.noChecks && (
           <p
             className={`text-sm mt-1 text-center w-full ${
-              noChecks ? 'text-[#a10325] ' : 'text-[#cecdcd]'
+              checks.noChecks ? 'text-[#a10325] ' : 'text-[#cecdcd]'
             }`}
           >
             Please select at least one option

@@ -7,6 +7,8 @@ export interface CheckState {
   symbols?: boolean
   length: string
   copied?: boolean
+  noChecks?: boolean
+  password: string
 }
 export type HandleInput = (e: React.ChangeEvent<HTMLInputElement>) => void
 
@@ -19,5 +21,3 @@ export interface Props {
   password: string
   checks: CheckState
 }
-
-

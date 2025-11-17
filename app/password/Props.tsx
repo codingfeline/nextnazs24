@@ -6,6 +6,8 @@ interface CheckState {
   symbols?: boolean
   length: string
   copied?: boolean
+  noChecks?: boolean
+  password: string
 }
 type HandleInput = (e: React.ChangeEvent<HTMLInputElement>) => void
 interface Handlers {
@@ -16,7 +18,5 @@ interface Handlers {
 }
 export interface Props {
   handlers: Handlers
-  noChecks: boolean
-  password: string
   checks: CheckState
 }
