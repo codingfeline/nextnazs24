@@ -104,10 +104,11 @@ const Password = () => {
   // if (error) return <div className="bg-white">Error occurred: {error.message}</div>
 
   return (
-    <div className="bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-4 m-4">
-      <h1>Password Generator</h1>
+    <div className="bg-[#cecdc] flex flex-col justify-center items-center rounded-md m-2">
+      {/* <h1>Password Generator</h1> */}
       {/* <p className="bg-white ">{data}</p> */}
       <PasswordForm checks={checks} handlers={handlers} />
+      <div>History</div>
     </div>
   )
 }
