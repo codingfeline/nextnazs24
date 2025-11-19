@@ -4,6 +4,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
   const { handleChecks, handleClick, handleCopy, handleLength } = handlers
 
   return (
+<<<<<<< HEAD
     <>
       <form id="password" className="flex flex-col bg-[#cecdcd] p-3 m-1 rounded-md">
         <legend className="text-lg text-center">Password Generator</legend>
@@ -66,6 +67,69 @@ const PasswordForm = ({ checks, handlers }: Props) => {
         >
           Generate
         </button>
+=======
+    <form id="password" className="flex flex-col">
+      <div className="bg-[#d7eef8] border border-[#999898] mb-2 p-5 rounded-xl">
+        <legend className="text-xl text-center">Password Generator</legend>
+        <label htmlFor="lowercase">
+          <input
+            type="checkbox"
+            id="lowercase"
+            name="lowercase"
+            checked={checks.lowercase}
+            onChange={handleChecks}
+          />
+          Lowercase
+        </label>
+        <label htmlFor="uppercase">
+          <input
+            type="checkbox"
+            id="uppercase"
+            name="uppercase"
+            checked={checks.uppercase}
+            onChange={handleChecks}
+          />{' '}
+          Uppercase
+        </label>
+        <label htmlFor="numbers">
+          <input
+            type="checkbox"
+            id="numbers"
+            name="numbers"
+            checked={checks.numbers}
+            onChange={handleChecks}
+          />{' '}
+          Numbers
+        </label>
+        <label htmlFor="symbols">
+          <input
+            type="checkbox"
+            id="symbols"
+            name="symbols"
+            checked={checks.symbols}
+            onChange={handleChecks}
+          />{' '}
+          Symbols
+        </label>
+        <label htmlFor="">
+          Length
+          <input
+            type="range"
+            min="10"
+            max="25"
+            onChange={handleLength}
+            value={checks.length}
+          />{' '}
+          {checks.length}
+        </label>
+      </div>
+      <button
+        onClick={handleClick}
+        className="bg-[#a1d3eb] p-2 rounded-md border-[#1a6368] border hover:bg-[#c0e2f1]"
+      >
+        Generate
+      </button>
+>>>>>>> d904979cd9955ca76750cd8cef58fb87a8c48656
 
         <div
           className={`mt-2 flex justify-between rounded-md ${
