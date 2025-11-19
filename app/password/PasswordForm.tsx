@@ -6,6 +6,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
   return (
     <form id="password" className="flex flex-col">
       <div className="bg-[#d7eef8] border border-[#999898] mb-2 p-5 rounded-xl">
+        <legend className="text-xl text-center">Password Generator</legend>
         <label htmlFor="lowercase">
           <input
             type="checkbox"

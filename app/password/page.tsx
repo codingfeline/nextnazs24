@@ -27,10 +27,15 @@ const Password = () => {
     password: '',
     noChecks: false,
   })
-  // const [password, setPassword] = useState('')
-  // const [noChecks, setNoChecks] = useState(false)
+  const [history, setHistory] = useState([] as string[])
 
   // const { data, loading, error } = useFetch('/api/pass')
+  const addAndTrim = (newItem: string) => {
+    const newArr = [newItem, ...history]
+    const trimmedArr = newArr.slice(0, 10)
+
+    setHistory(trimmedArr)
+  }
 
   const generatePassword = () => {
     const CHARS = {
@@ -53,6 +58,8 @@ const Password = () => {
       const n = Math.floor(Math.random() * characters.length)
       pass += characters[n]
     }
+
+    addAndTrim(pass)
     setChecks(prev => ({ ...prev, password: pass }))
   }
 
@@ -105,9 +112,23 @@ const Password = () => {
 
   return (
     <div className="bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-4 m-4">
-      <h1>Password Generator</h1>
       {/* <p className="bg-white ">{data}</p> */}
       <PasswordForm checks={checks} handlers={handlers} />
+
+      <div className="mt-3 bg-[#e1f6f7] p-2 rounded-md  ">
+        <p>History</p>
+        {history &&
+          // <ol className="list-decimal list-inside marker:text-gray-600">
+          history.map((item, index) => (
+            <div
+              key={index}
+              className="p-1 pl-5 pr-5 flex justify-between gap-5 items-center border-b hover:bg-gray-200 rounded-md cursor-pointer"
+            >
+              {index + 1} {item} <span>✓</span>
+            </div>
+          ))}
+        {/* </ol> */}
+      </div>
     </div>
   )
 }
