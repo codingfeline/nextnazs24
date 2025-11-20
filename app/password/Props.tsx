@@ -14,7 +14,6 @@ interface Handlers {
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void
   handleChecks: HandleInput
   handleLength: HandleInput
-  handleCopy: () => void
 }
 export interface Props {
   handlers: Handlers

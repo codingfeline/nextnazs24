@@ -1,7 +1,7 @@
-import { Copy } from '../components'
+// import { Copy } from '../components'
 import { Props } from './Props'
 const PasswordForm = ({ checks, handlers }: Props) => {
-  const { handleChecks, handleClick, handleCopy, handleLength } = handlers
+  const { handleChecks, handleClick, handleLength } = handlers
 
   return (
     <form id="password" className="flex flex-col">
@@ -77,7 +77,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
               {checks.password}
             </p>
             <div className="bg-[white] p-1 flex flex-col items-center rounded-r-md">
-              <Copy
+              {/* <Copy
                 size={25}
                 onClick={handleCopy}
                 fill={`${checks.copied ? 'green' : '#666'}`}
@@ -86,7 +86,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
               />{' '}
               <span className={`${checks.copied ? 'text-[green]' : 'text-[#fff]'}`}>
                 ✓
-              </span>
+              </span> */}
             </div>
           </>
         )}
