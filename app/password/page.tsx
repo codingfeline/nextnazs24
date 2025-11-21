@@ -111,31 +111,37 @@ const Password = () => {
   // if (error) return <div className="bg-white">Error occurred: {error.message}</div>
 
   return (
-    <div className="bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-4 m-4">
+    <div
+      className={`bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-4 m-4`}
+    >
       {/* <p className="bg-white ">{data}</p> */}
       <PasswordForm checks={checks} handlers={handlers} />
 
-      <div className="mt-3 bg-[#e1f6f7] p-2 rounded-md  ">
-        <p>
-          History{' '}
-          <span className={`${checks.copied ? 'text-[black]' : 'text-[#e1f6f7]'}`}>
-            ✓
-          </span>
-        </p>
-        {history &&
-          // <ol className="list-decimal list-inside marker:text-gray-600">
-          history.map((item, index) => (
-            <div
-              key={index}
-              className="p-1 pl-5 pr-5 flex justify-between gap-5 items-center border-b hover:bg-gray-200 rounded-md cursor-pointer"
-              onClick={() => handleCopy(item)}
-            >
-              {index + 1} {item}
-              <span className={` text-green-500 font-bold`}>✓</span>
-            </div>
-          ))}
-        {/* </ol> */}
-      </div>
+      {history.length > 0 && (
+        <div className={`mt-3 bg-[#e1f6f7]  rounded-md`}>
+          {history.length > 1 && (
+            <p className={`bg-[#cafcfa] p-2 pl-5 rounded-t-md`}>
+              History
+              <span className={`${checks.copied ? 'text-[black]' : 'text-[#e1f6f7]'}`}>
+                ✓
+              </span>
+            </p>
+          )}
+
+          <ol className="list-decimal list-inside marker:text-gray-600">
+            {history.map((item, index) => (
+              <div
+                key={index}
+                className="p-1 pl-5 pr-5 flex justify-between gap-5 items-center border-b hover:bg-gray-200 rounded-md cursor-pointer font-['Mono']"
+                onClick={() => handleCopy(item)}
+              >
+                {index + 1} {item}
+                <span className={` text-green-500 font-bold`}>✓</span>
+              </div>
+            ))}
+          </ol>
+        </div>
+      )}
     </div>
   )
 }

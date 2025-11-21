@@ -1,4 +1,3 @@
-import { Copy } from '../components'
 import { Props } from './Props'
 const PasswordForm = ({ checks, handlers }: Props) => {
   const { handleChecks, handleClick, handleLength } = handlers
@@ -66,7 +65,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
         Generate
       </button>
 
-      <div
+      {/* <div
         className={`mt-2 flex justify-between rounded-md ${
           !checks.noChecks && 'bg-[#f3f3f3]'
         }`}
@@ -98,7 +97,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
             Please select at least one option
           </p>
         )}
-      </div>
+      </div> */}
       {/* </div> */}
     </form>
   )
