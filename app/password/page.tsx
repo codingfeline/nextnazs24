@@ -123,7 +123,7 @@ const Password = () => {
       <PasswordForm checks={checks} handlers={handlers} />
 
       {history.length > 0 && (
-        <div className={`mt-3 bg-[#e1f6f7]  rounded-md w-[310px]  select-none`}>
+        <div className={`mt-3 bg-[#e1f6f7]  rounded-md w-[335px]  select-none`}>
           {history.length > 1 && (
             <p
               className={`bg-[#cafcfa] p-2 pl-5 rounded-t-md flex justify-between items-center`}
@@ -141,15 +141,22 @@ const Password = () => {
                 <span
                   className={`${
                     history.length > 1 ? ' text-[#8d8da1] ' : 'text-[#e1f6f7]'
-                  }`}
+                  } w-[39px]`}
                 >
                   {index + 1}
                 </span>
-                {item}
+                <span
+                  className={`${
+                    showSpan.includes(index) ? 'bg-[#d8d8d8]' : 'bg-[#e1f6f7]'
+                  } transition delay-150`}
+                >
+                  {item}
+                </span>
+
                 <span
                   className={`${
                     showSpan.includes(index) ? 'text-[green] ' : 'text-[#a3acad]'
-                  }   cursor-pointer`}
+                  }   cursor-pointer transition delay-150`}
                 >
                   <Copy onClick={() => handleCopy(item, index)} title="Click to copy" />
                   {/* ✓ */}
