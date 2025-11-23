@@ -81,3 +81,29 @@ code {
     }
   }
 }
+
+.h-content-area {
+  height: calc(100vh - 120px);
+}
+
+.contact {
+  @apply bg-[#bbdce9] p-5 rounded-md select-none;
+
+  label {
+    @apply flex flex-col;
+    input,
+    textarea {
+      @apply outline-none border border-[gray] focus:border-[#089ea8] focus:border p-2 rounded-md font-[Consolas];
+    }
+    input {
+      /* @apply; */
+    }
+  }
+
+  .actions {
+    @apply flex gap-3 justify-center mt-2;
+    button {
+      @apply bg-[#8dc0cf] rounded-md p-2 hover:bg-[#7eaece] border border-[#7eaece] hover:border hover:border-[#5e8ead];
+    }
+  }
+}
