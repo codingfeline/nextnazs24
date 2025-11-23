@@ -116,17 +116,15 @@ const Password = () => {
   // if (error) return <div className="bg-white">Error occurred: {error.message}</div>
 
   return (
-    <div
-      className={`bg-[#cecdcd] flex flex-col justify-center items-center rounded-md p-4 m-4`}
-    >
+    <div className={` flex flex-col justify-center items-center rounded-md p-4 m-4`}>
       {/* <p className="bg-white ">{data}</p> */}
       <PasswordForm checks={checks} handlers={handlers} />
 
       {history.length > 0 && (
-        <div className={`mt-3 bg-[#e1f6f7]  rounded-md w-[335px]  select-none`}>
+        <div className={`mt-3 bg-[#e1f6f7]  rounded-md w-[305px]  select-none`}>
           {history.length > 1 && (
             <p
-              className={`bg-[#cafcfa] p-2 pl-5 rounded-t-md flex justify-between items-center`}
+              className={`bg-[#cafcfa] p-2 pl-5 rounded-t-md  justify-between items-center hidden`}
             >
               History
             </p>
@@ -141,14 +139,16 @@ const Password = () => {
                 <span
                   className={`${
                     history.length > 1 ? ' text-[#8d8da1] ' : 'text-[#e1f6f7]'
-                  } w-[39px]`}
+                  } w-[35px] flex justify-start items-start flex-col`}
                 >
                   {index + 1}
                 </span>
                 <span
                   className={`${
-                    showSpan.includes(index) ? 'bg-[#d8d8d8]' : 'bg-[#e1f6f7]'
-                  } transition delay-150`}
+                    showSpan.includes(index)
+                      ? 'text-[black] mix-blend-darken'
+                      : 'text-[#3b3b3b]'
+                  } transition delay-150 w-[210px]`}
                 >
                   {item}
                 </span>
