@@ -51,7 +51,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
           <input
             type="range"
             min="10"
-            max="25"
+            max="20"
             onChange={handleLength}
             value={checks.length}
           />{' '}
