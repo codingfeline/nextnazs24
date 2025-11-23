@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Copy } from '../components'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
 
@@ -27,7 +28,9 @@ const Password = () => {
     password: '',
     noChecks: false,
   })
+  // const copiedRef = useRef()
   const [history, setHistory] = useState([] as string[])
+  const [showSpan, setShowSpan] = useState([] as number[])
 
   // const { data, loading, error } = useFetch('/api/pass')
   const addAndTrim = (newItem: string) => {
@@ -81,16 +84,18 @@ const Password = () => {
     console.log(checks)
   }
 
-  const handleCopy = async (p: string) => {
+  const handleCopy = async (p: string, i: number) => {
     if (!p) return
 
     try {
       await navigator.clipboard.writeText(p)
       setChecks(prev => ({ ...prev, copied: true }))
+      setShowSpan(prev => [...prev, i])
 
       setTimeout(() => {
         setChecks(prev => ({ ...prev, copied: false }))
-      }, 3000)
+        setShowSpan([])
+      }, 500)
     } catch (err) {
       console.log('Failed to copy text: ', err)
       alert('Failed to copy. Please copy the password manually.')
@@ -118,13 +123,12 @@ const Password = () => {
       <PasswordForm checks={checks} handlers={handlers} />
 
       {history.length > 0 && (
-        <div className={`mt-3 bg-[#e1f6f7]  rounded-md`}>
+        <div className={`mt-3 bg-[#e1f6f7]  rounded-md w-[310px]  select-none`}>
           {history.length > 1 && (
-            <p className={`bg-[#cafcfa] p-2 pl-5 rounded-t-md`}>
+            <p
+              className={`bg-[#cafcfa] p-2 pl-5 rounded-t-md flex justify-between items-center`}
+            >
               History
-              <span className={`${checks.copied ? 'text-[black]' : 'text-[#e1f6f7]'}`}>
-                ✓
-              </span>
             </p>
           )}
 
@@ -132,11 +136,24 @@ const Password = () => {
             {history.map((item, index) => (
               <div
                 key={index}
-                className="p-1 pl-5 pr-5 flex justify-between gap-5 items-center border-b hover:bg-gray-200 rounded-md cursor-pointer font-['Mono']"
-                onClick={() => handleCopy(item)}
+                className="p-1 pl-5 pr-5 flex  gap-5 items-center border-b rounded-md font-['Consolas'] justify-around hover:text[red]"
               >
-                {index + 1} {item}
-                <span className={` text-green-500 font-bold`}>✓</span>
+                <span
+                  className={`${
+                    history.length > 1 ? ' text-[#8d8da1] ' : 'text-[#e1f6f7]'
+                  }`}
+                >
+                  {index + 1}
+                </span>
+                {item}
+                <span
+                  className={`${
+                    showSpan.includes(index) ? 'text-[green] ' : 'text-[#a3acad]'
+                  }   cursor-pointer`}
+                >
+                  <Copy onClick={() => handleCopy(item, index)} title="Click to copy" />
+                  {/* ✓ */}
+                </span>
               </div>
             ))}
           </ol>
