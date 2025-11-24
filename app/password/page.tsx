@@ -145,9 +145,7 @@ const Password = () => {
                 </span>
                 <span
                   className={`${
-                    showSpan.includes(index)
-                      ? 'text-[black] mix-blend-darken'
-                      : 'text-[#3b3b3b]'
+                    showSpan.includes(index) ? 'text-[orange] ' : 'text-[#3b3b3b]'
                   } transition delay-150 w-[210px]`}
                 >
                   {item}
