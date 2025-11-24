@@ -8,7 +8,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
     <motion.form
       id="password"
       className="flex flex-col"
-      initial={{ x: -100 }}
+      initial={{ x: 40 }}
       animate={{ x: 0 }}
     >
       <div className="bg-[#d7eef8] border border-[#999898] mb-2 p-5 rounded-xl">

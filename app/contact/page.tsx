@@ -1,7 +1,10 @@
+'use client'
+import { motion } from 'framer-motion'
+
 function Contact() {
   return (
     <div className="h-content-area flex items-center justify-center">
-      <form className="contact">
+      <motion.form className="contact " initial={{ y: -50 }} animate={{ y: 0 }}>
         <legend className="pt-3 pb-3 text-2xl text-[#3c6886]">Contact</legend>
         <label htmlFor="">
           Name
@@ -19,7 +22,7 @@ function Contact() {
           <button>Submit</button>
           <button>Clear</button>
         </div>
-      </form>
+      </motion.form>
     </div>
   )
 }

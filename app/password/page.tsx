@@ -81,7 +81,6 @@ const Password = () => {
     // setPassword('')
     const { name, checked } = e.target
     setChecks(prev => ({ ...prev, [name]: checked }))
-    console.log(checks)
   }
 
   const handleCopy = async (p: string, i: number) => {
