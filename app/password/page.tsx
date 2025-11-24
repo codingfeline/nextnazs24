@@ -134,7 +134,7 @@ const Password = () => {
             {history.map((item, index) => (
               <div
                 key={index}
-                className="p-1 pl-5 pr-5 flex  gap-5 items-center border-b rounded-md font-['Consolas'] justify-around hover:text[red]"
+                className="p-1 pl-5 pr-5 flex  gap-5 items-center border-b rounded-md roboto-mono justify-around hover:text[red]"
               >
                 <span
                   className={`${
