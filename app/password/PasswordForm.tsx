@@ -1,9 +1,16 @@
+import { motion } from 'framer-motion'
 import { Props } from './Props'
+
 const PasswordForm = ({ checks, handlers }: Props) => {
   const { handleChecks, handleClick, handleLength } = handlers
 
   return (
-    <form id="password" className="flex flex-col">
+    <motion.form
+      id="password"
+      className="flex flex-col"
+      initial={{ x: -100 }}
+      animate={{ x: 0 }}
+    >
       <div className="bg-[#d7eef8] border border-[#999898] mb-2 p-5 rounded-xl">
         <legend className="text-xl text-center">Password Generator</legend>
         <label htmlFor="lowercase">
@@ -99,7 +106,7 @@ const PasswordForm = ({ checks, handlers }: Props) => {
         )}
       </div> */}
       {/* </div> */}
-    </form>
+    </motion.form>
   )
 }
 
