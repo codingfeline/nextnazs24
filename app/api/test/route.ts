@@ -1,3 +1,4 @@
+import os from 'os'
 
 export async function GET() {
 
@@ -25,7 +26,10 @@ export async function GET() {
   //   password += randStr[n]
   // }
 
-  return new Response('test' + '\n', {
+  const totalMemory = os.totalmem()
+  console.log('testing', totalMemory, os.uptime() / 60 / 60)
+
+  return new Response(`total memory ${totalMemory}` + '\n', {
     status: 200,
     headers: {
       'Content-Type': 'text/plain'
