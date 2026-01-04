@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import JournalFormSkeleton from './loading'
 
-const JournalForm = dynamic(() => import('@/app/(journals)/_components/JournalForm'), {
+const JournalForm = dynamic(() => import('@/app/journals/_components/JournalForm'), {
   ssr: false,
   loading: () => <JournalFormSkeleton />,
 })
