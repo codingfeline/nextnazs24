@@ -1,6 +1,6 @@
+import FilterJournals from '@/app/(journals-group)/journals/_components/filterJournals'
 import prisma from '@/prisma/client'
 import { Container } from '@radix-ui/themes'
-import FilterJournals from '../journals/_components/filterJournals'
 // import parse from 'html-react-parser'
 import { redirect } from 'next/navigation'
 
