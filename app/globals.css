@@ -51,7 +51,7 @@ code {
   @apply bg_cover;
 }
 .bg_journals {
-  background: url('/galaxy3.webp');
+  background: url('/galaxy4.webp');
   @apply bg_cover;
 }
 .bg_password {
@@ -59,7 +59,7 @@ code {
   @apply bg_cover;
 }
 .bg_contact {
-  background: url('/galaxy4.webp');
+  background: url('/galaxy.webp');
   @apply bg_cover;
 }
 
