@@ -1,11 +1,11 @@
 import prisma from '@/prisma/client'
 import { Container } from '@radix-ui/themes'
-import FilterJournals from './journals/_components/filterJournals'
+import FilterJournals from '../journals/_components/filterJournals'
 // import parse from 'html-react-parser'
-import { redirect } from 'next/navigation'
+// import { redirect } from 'next/navigation'
 
 export default async function Home() {
-  redirect('https://google.com')
+  // redirect('https://google.com')
   // const dataToParse = '<span>**</span>'
   // const chilli = '<GiChiliPepper />'
   const journals = await prisma.journals.findMany()
