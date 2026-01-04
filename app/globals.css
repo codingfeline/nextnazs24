@@ -43,9 +43,24 @@ code {
 .prose {
   /* @apply whitespace-pre-wrap; */
 }
+.bg_cover {
+  @apply bg-center bg-cover bg-fixed;
+}
 .bg_home {
   background: url('/galaxy2.webp');
-  @apply bg-center bg-cover bg-fixed;
+  @apply bg_cover;
+}
+.bg_journals {
+  background: url('/galaxy3.webp');
+  @apply bg_cover;
+}
+.bg_password {
+  background: url('/galaxy.webp');
+  @apply bg_cover;
+}
+.bg_contact {
+  background: url('/galaxy4.webp');
+  @apply bg_cover;
 }
 
 #password {
