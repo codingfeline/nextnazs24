@@ -7,3 +7,11 @@ export { GiSittingDog as Dog } from 'react-icons/gi';
 export { PiNotePencil as Pencil } from "react-icons/pi";
 export { VscCopy as Copy } from 'react-icons/vsc';
 
+export const dateOptions = {
+  day: 'numeric',
+  weekday: 'short',
+  month: 'short',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric', hour12: true
+} as const
