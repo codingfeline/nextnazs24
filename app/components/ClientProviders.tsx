@@ -1,7 +1,7 @@
 'use client'
 
+import { CookieConsentProvider } from '@/app/(CookiesPolicy-group)/CookiesPolicy/CookieConsentContext'
 import AuthProvider from '@/app/auth/Provider'
-import { CookieConsentProvider } from '@/app/CookiesPolicy/CookieConsentContext'
 
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
   return (

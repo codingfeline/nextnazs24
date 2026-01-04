@@ -2,9 +2,9 @@ import prisma from '@/prisma/client'
 import { Box, Flex, Text } from '@radix-ui/themes'
 // import parse from 'html-react-parser'
 
+import { dateOptions } from '@/app/components'
+import ButtonWithComponent from '@/app/components/ButtonLink'
 import NextLink from 'next/link'
-import { dateOptions } from '../components'
-import ButtonWithComponent from '../components/ButtonLink'
 
 const JournalsPage = async () => {
   const journals = await prisma.journals.findMany()

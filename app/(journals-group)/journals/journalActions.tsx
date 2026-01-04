@@ -1,7 +1,7 @@
 'use client'
 
+import MyButton from '@/app/components/Button'
 import { useSession } from 'next-auth/react'
-import MyButton from '../components/Button'
 
 const JournalActions = () => {
   const { data: session } = useSession()

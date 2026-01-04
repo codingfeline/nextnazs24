@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Copy } from '../components'
+import { Copy } from '../../components'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
 

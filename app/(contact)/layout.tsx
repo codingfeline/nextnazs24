@@ -2,11 +2,11 @@ import { Container, Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import CookiesAccepted from '../(CookiesPolicy-group)/CookiesPolicy/cookiesAccepted'
 import AppFooter from '../components/appFooter'
 import AppHeader from '../components/appHeader'
 import ClientProviders from '../components/ClientProviders'
 import CookiesBanner from '../components/CookiesBanner'
-import CookiesAccepted from '../CookiesPolicy/cookiesAccepted'
 import '../globals.css'
 import QueryClientProvider from '../QueryClientProvider'
 import '../theme-config.css'
@@ -54,7 +54,7 @@ export default function RootLayout({
           <ClientProviders>
             <Theme accentColor="blue" className="mb-auto flex flex-col ">
               <AppHeader />
-              <main className="grow bg-gray-800 bg_journals">
+              <main className="grow bg_contact bg-gray-800">
                 <Container>{children}</Container>
                 {/* <Container>{children}</Container> */}
               </main>

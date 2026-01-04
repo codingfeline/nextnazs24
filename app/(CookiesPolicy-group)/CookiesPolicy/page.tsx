@@ -1,6 +1,6 @@
 const CookiesPolicy = () => {
   return (
-    <div className="bg-gray-400 p-5">
+    <div className="bg-gray-400 p-5 m-3">
       <h1>Cookies Policy</h1>
 
       <p>
