@@ -1,18 +1,18 @@
+import CookiesAccepted from '@/app/(CookiesPolicy-group)/CookiesPolicy/cookiesAccepted'
+import AppFooter from '@/app/components/appFooter'
+import AppHeader from '@/app/components/appHeader'
+import ClientProviders from '@/app/components/ClientProviders'
+import CookiesBanner from '@/app/components/CookiesBanner'
+import '@/app/globals.css'
+import QueryClientProvider from '@/app/QueryClientProvider'
+import '@/app/theme-config.css'
 import { Container, Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import CookiesAccepted from '../(CookiesPolicy-group)/CookiesPolicy/cookiesAccepted'
-import AppFooter from '../components/appFooter'
-import AppHeader from '../components/appHeader'
-import ClientProviders from '../components/ClientProviders'
-import CookiesBanner from '../components/CookiesBanner'
-import '../globals.css'
-import QueryClientProvider from '../QueryClientProvider'
-import '../theme-config.css'
 
 const geistSans = localFont({
-  src: '../fonts/GeistVF.woff',
+  src: '../../fonts/GeistVF.woff',
   variable: '--font-geist-sans',
   weight: '100 900',
 })
