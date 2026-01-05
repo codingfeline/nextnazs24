@@ -106,8 +106,11 @@ code {
 }
 
 .h-content-area {
-  @media (min-height: 420px) {
-    min-height: (100vh - 155px);
+  @media (min-height: 600px) {
+    /* color: red; */
+  }
+  @media (min-height: 901px) {
+    min-height: calc(100vh - 130px);
   }
 }
 
