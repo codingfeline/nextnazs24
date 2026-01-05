@@ -106,7 +106,9 @@ code {
 }
 
 .h-content-area {
-  min-height: calc(100vh - 155px);
+  @media (min-height: 420px) {
+    min-height: (100vh - 155px);
+  }
 }
 
 .contact {
