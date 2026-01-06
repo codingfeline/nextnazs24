@@ -31,6 +31,7 @@ const Password = () => {
   // const copiedRef = useRef()
   const [history, setHistory] = useState([] as string[])
   const [showSpan, setShowSpan] = useState([] as number[])
+  const [count, setCount] = useState(1)
 
   // const { data, loading, error } = useFetch('/api/pass')
   const addAndTrim = (newItem: string) => {
@@ -61,9 +62,14 @@ const Password = () => {
       const n = Math.floor(Math.random() * characters.length)
       pass += characters[n]
     }
-
-    addAndTrim(pass)
-    setChecks(prev => ({ ...prev, password: pass }))
+    // #a6cfe3 #e3c1f5 #c1f5d9
+    const colour = count % 2 === 0 ? '#e3c1f5' : '#c1f5d9'
+    addAndTrim(pass + colour)
+    setChecks(prev => ({
+      ...prev,
+      password: pass + colour,
+    }))
+    setCount(prev => prev + 1)
   }
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -130,36 +136,39 @@ const Password = () => {
           )}
 
           <ol className="list-decimal list-inside marker:text-gray-600">
-            {history.map((item, index) => (
-              <div
-                key={index}
-                className="p-1 pl-5 pr-5 flex  gap-5 items-center border-b rounded-md roboto-mono justify-around hover:text[red]"
-              >
-                <span
-                  className={`${
-                    history.length > 1 ? ' text-[#8d8da1] ' : 'text-[#e1f6f7]'
-                  } w-[35px] flex justify-start items-start flex-col`}
+            {history.map((item, index) => {
+              const bgCol = item.slice(-7)
+              return (
+                <div
+                  key={index}
+                  className={`p-1 flex gap- items-center border-b rounded-md roboto-mono justify-around hover:text[red] bg-[${bgCol}] `}
                 >
-                  {index + 1}
-                </span>
-                <span
-                  className={`${
-                    showSpan.includes(index) ? 'text-[orange] ' : 'text-[#3b3b3b]'
-                  } transition delay-150 w-[210px]`}
-                >
-                  {item}
-                </span>
+                  <span
+                    className={`${
+                      history.length > 1 ? ' text-[#8d8da1] ' : 'text-[#e1f6f7]'
+                    } w-[35px] flex justify-start items-start flex-col`}
+                  >
+                    {index + 1}
+                  </span>
+                  <span
+                    className={`${
+                      showSpan.includes(index) ? 'text-[orange] ' : 'text-[#3b3b3b]'
+                    } transition delay-150 w-[210px] `}
+                  >
+                    {item.slice(0, -7)}
+                  </span>
 
-                <span
-                  className={`${
-                    showSpan.includes(index) ? 'text-[green] ' : 'text-[#a3acad]'
-                  }   cursor-pointer transition delay-150`}
-                >
-                  <Copy onClick={() => handleCopy(item, index)} title="Click to copy" />
-                  {/* ✓ */}
-                </span>
-              </div>
-            ))}
+                  <span
+                    className={`${
+                      showSpan.includes(index) ? 'text-[green] ' : 'text-[#a3acad]'
+                    }   cursor-pointer transition delay-150`}
+                  >
+                    <Copy onClick={() => handleCopy(item, index)} title="Click to copy" />
+                    {/* ✓ */}
+                  </span>
+                </div>
+              )
+            })}
           </ol>
         </div>
       )}
