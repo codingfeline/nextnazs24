@@ -135,7 +135,7 @@ const Password = () => {
             </p>
           )}
 
-          <ol className="list-decimal list-inside marker:text-gray-600 rounded-md border bg-blue-200 border-blue-300">
+          <ol className="list-decimal list-inside marker:text-gray-600 rounded-md border p-1 bg-blue-200 border-blue-300">
             {history.map((item, index) => {
               const bgCol = item.slice(-7)
               return (
