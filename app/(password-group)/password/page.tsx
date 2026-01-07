@@ -63,7 +63,7 @@ const Password = () => {
       pass += characters[n]
     }
     // #a6cfe3 #e3c1f5 #c1f5d9
-    const colour = count % 2 === 0 ? '#e3c1f5' : '#c1f5d9'
+    const colour = count % 2 === 0 ? '#bbd3f0' : '#bbe3f0'
     addAndTrim(pass + colour)
     setChecks(prev => ({
       ...prev,
@@ -135,13 +135,14 @@ const Password = () => {
             </p>
           )}
 
-          <ol className="list-decimal list-inside marker:text-gray-600">
+          <ol className="list-decimal list-inside marker:text-gray-600 rounded-md border bg-blue-200 border-blue-300">
             {history.map((item, index) => {
               const bgCol = item.slice(-7)
               return (
                 <div
                   key={index}
-                  className={`p-1 flex gap- items-center border-b rounded-md roboto-mono justify-around hover:text[red] bg-[${bgCol}] `}
+                  className={`p-1 flex gap- items-center border-b  roboto-mono justify-around hover:text[red]`}
+                  style={{ backgroundColor: bgCol }}
                 >
                   <span
                     className={`${
