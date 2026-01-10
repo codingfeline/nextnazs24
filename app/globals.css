@@ -63,7 +63,7 @@ code {
   @apply bg_cover;
 }
 .bg_nazsnet {
-  background: url('/nazsnet.png');
+  background: url('/nazsnet.webp');
   @apply bg_cover;
 }
 .bg_cookie {
