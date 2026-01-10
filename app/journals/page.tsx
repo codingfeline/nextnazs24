@@ -24,10 +24,10 @@ const JournalsPage = async () => {
                     key={j.id}
                     className=" mb-1 bg-slate-200 p-1 rounded cursor-pointer hover:bg-blue-200"
                   >
-                    <Flex justify="between">
-                      <span>{j.topic}</span>
+                    <Flex className="justify-between flex-col md:flex-row">
+                      <span className="pl-2">{j.topic}</span>
                       {/* <Link href={`/journals/${j.id}`}>{j.topic}</Link> */}
-                      <Text className="text-gray-500">
+                      <Text className="text-gray-500 pr-2 roboto-mono text-sm flex justify-end">
                         {j.date.toLocaleString('en-gb', dateOptions)}
                       </Text>
                     </Flex>

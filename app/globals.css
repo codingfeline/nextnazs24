@@ -116,20 +116,15 @@ code {
   }
 }
 .footer {
-  @media (min-height: 600px) {
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
+  @media (min-height: 200px) {
+    padding: 0.7rem;
   }
   @media (min-height: 801px) {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    /* background: red; */
-    /* margin: 1.5rem; */
+    padding: 1.5rem;
   }
 }
 .h-content-area {
   @media (min-height: 600px) {
-    /* color: red; */
   }
   @media (min-height: 801px) {
     min-height: calc(100vh - 120px);
