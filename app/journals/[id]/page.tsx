@@ -2,7 +2,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Pencil } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import prisma from '@/prisma/client'
-import { Box, Flex, Grid } from '@radix-ui/themes'
+import { Box, Container, Flex } from '@radix-ui/themes'
 import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 import DeleteJournalButton from './DeleteJournalButton'
@@ -25,7 +25,8 @@ const IssueDetailPage = async ({ params }: Props) => {
 
   return (
     <main className="grow bg_journals">
-      <Grid columns={{ initial: '1', sm: '5' }} gap="5">
+      <Container>
+        {/* <Grid columns={{ initial: '1', sm: '5' }} gap="5"> */}
         <Box className="md:col-span-4">
           <JournalDetails journal={journal} />
         </Box>
@@ -45,7 +46,8 @@ const IssueDetailPage = async ({ params }: Props) => {
             </Flex>
           </Box>
         )}
-      </Grid>
+        {/* </Grid> */}
+      </Container>
     </main>
   )
 }

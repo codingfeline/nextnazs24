@@ -45,7 +45,7 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
   })
 
   return (
-    <Container>
+    <Container p={'2'}>
       {error && (
         <Callout.Root color="red" mb="2">
           <Callout.Text>{error}</Callout.Text>
