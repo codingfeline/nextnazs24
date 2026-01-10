@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 function Contact() {
   return (
-    <div className="h-content-area flex items-center justify-center m-4">
+    <main className="grow bg_contact bg-gray-200 flex items-center justify-center p-4">
       <motion.form className="contact " initial={{ y: -50 }} animate={{ y: 0 }}>
         <legend className="pt-3 pb-3 text-2xl text-[#3c6886]">Contact</legend>
         <label htmlFor="">
@@ -23,7 +23,9 @@ function Contact() {
           <button>Clear</button>
         </div>
       </motion.form>
-    </div>
+    </main>
+    // <div className="h-content-area flex items-center justify-center m-4">
+    // </div>
   )
 }
 

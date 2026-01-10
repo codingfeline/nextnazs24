@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Copy } from '../../components'
+import { Copy } from '../components'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
 
@@ -121,59 +121,64 @@ const Password = () => {
   // if (error) return <div className="bg-white">Error occurred: {error.message}</div>
 
   return (
-    <div className={` flex flex-col justify-center items-center rounded-md p-4 m-4`}>
-      {/* <p className="bg-white ">{data}</p> */}
-      <PasswordForm checks={checks} handlers={handlers} />
+    <main className="bg_password grow">
+      <div className={` flex flex-col justify-center items-center rounded-md p-4 m-4`}>
+        {/* <p className="bg-white ">{data}</p> */}
+        <PasswordForm checks={checks} handlers={handlers} />
 
-      {history.length > 0 && (
-        <div className={`mt-3 bg-[#e1f6f7]  rounded-md w-[305px]  select-none`}>
-          {history.length > 1 && (
-            <p
-              className={`bg-[#cafcfa] p-2 pl-5 rounded-t-md  justify-between items-center hidden`}
-            >
-              History
-            </p>
-          )}
+        {history.length > 0 && (
+          <div className={`mt-3 bg-[#e1f6f7]  rounded-md w-[305px]  select-none`}>
+            {history.length > 1 && (
+              <p
+                className={`bg-[#cafcfa] p-2 pl-5 rounded-t-md  justify-between items-center hidden`}
+              >
+                History
+              </p>
+            )}
 
-          <ol className="list-decimal list-inside marker:text-gray-600 rounded-md border pb-2 pt-2 bg-[#a1d3eb] border-blue-300">
-            {history.map((item, index) => {
-              const bgCol = item.slice(-7)
-              return (
-                <div
-                  key={index}
-                  className={`p-1 flex gap- items-center border-b  roboto-mono justify-around hover:text[red]`}
-                  style={{ backgroundColor: bgCol }}
-                >
-                  <span
-                    className={`${
-                      history.length > 1 ? ' text-[#8d8da1] ' : 'text-[#e1f6f7]'
-                    } w-[35px] flex justify-start items-start flex-col`}
+            <ol className="list-decimal list-inside marker:text-gray-600 rounded-md border pb-2 pt-2 bg-[#a1d3eb] border-blue-300">
+              {history.map((item, index) => {
+                const bgCol = item.slice(-7)
+                return (
+                  <div
+                    key={index}
+                    className={`p-1 flex gap- items-center border-b  roboto-mono justify-around hover:text[red]`}
+                    style={{ backgroundColor: bgCol }}
                   >
-                    {index + 1}
-                  </span>
-                  <span
-                    className={`${
-                      showSpan.includes(index) ? 'text-[orange] ' : 'text-[#3b3b3b]'
-                    } transition delay-150 w-[210px] `}
-                  >
-                    {item.slice(0, -7)}
-                  </span>
+                    <span
+                      className={`${
+                        history.length > 1 ? ' text-[#8d8da1] ' : 'text-[#e1f6f7]'
+                      } w-[35px] flex justify-start items-start flex-col`}
+                    >
+                      {index + 1}
+                    </span>
+                    <span
+                      className={`${
+                        showSpan.includes(index) ? 'text-[orange] ' : 'text-[#3b3b3b]'
+                      } transition delay-150 w-[210px] `}
+                    >
+                      {item.slice(0, -7)}
+                    </span>
 
-                  <span
-                    className={`${
-                      showSpan.includes(index) ? 'text-[green] ' : 'text-[#a3acad]'
-                    }   cursor-pointer transition delay-150`}
-                  >
-                    <Copy onClick={() => handleCopy(item, index)} title="Click to copy" />
-                    {/* ✓ */}
-                  </span>
-                </div>
-              )
-            })}
-          </ol>
-        </div>
-      )}
-    </div>
+                    <span
+                      className={`${
+                        showSpan.includes(index) ? 'text-[green] ' : 'text-[#a3acad]'
+                      }   cursor-pointer transition delay-150`}
+                    >
+                      <Copy
+                        onClick={() => handleCopy(item, index)}
+                        title="Click to copy"
+                      />
+                      {/* ✓ */}
+                    </span>
+                  </div>
+                )
+              })}
+            </ol>
+          </div>
+        )}
+      </div>
+    </main>
   )
 }
 

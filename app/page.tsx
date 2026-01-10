@@ -1,11 +1,10 @@
-import FilterJournals from '@/app/(journals-group)/journals/_components/filterJournals'
+import FilterJournals from '@/app/journals/_components/filterJournals'
 import prisma from '@/prisma/client'
-import { Container } from '@radix-ui/themes'
 // import parse from 'html-react-parser'
-import { redirect } from 'next/navigation'
+// import { redirect } from 'next/navigation'
 
 export default async function Home() {
-  redirect('https://google.com')
+  // redirect('https://google.com')
   // const dataToParse = '<span>**</span>'
   // const chilli = '<GiChiliPepper />'
   const journals = await prisma.journals.findMany()
@@ -20,13 +19,13 @@ export default async function Home() {
   // ))
 
   return (
-    <div className="flex  items-center  w-full   ">
-      <Container>
-        {/* {JSON.stringify(topics)} */}
-        <FilterJournals topics={topics} />
-        {/* <Image alt="logo" src={logo} className="" width="100" /> */}
-      </Container>
-    </div>
+    <main className="grow bg_home bg-gray-200">
+      <FilterJournals topics={topics} />
+    </main>
+    // <div className="flex  items-center  w-full   ">
+    //   <Container>
+    //   </Container>
+    // </div>
   )
 }
 export const dynamic = 'force-dynamic'

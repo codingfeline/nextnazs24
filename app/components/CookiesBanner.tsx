@@ -1,6 +1,6 @@
 'use client'
 
-import { useCookieConsent } from '@/app/(CookiesPolicy-group)/CookiesPolicy/CookieConsentContext'
+import { useCookieConsent } from '@/app/CookiesPolicy/CookieConsentContext'
 
 const CookiesBanner = () => {
   const { accepted, setAccepted } = useCookieConsent()

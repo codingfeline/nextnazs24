@@ -24,23 +24,29 @@ const IssueDetailPage = async ({ params }: Props) => {
   if (!journal) notFound()
 
   return (
-    <Grid columns={{ initial: '1', sm: '5' }} gap="5">
-      <Box className="md:col-span-4">
-        <JournalDetails journal={journal} />
-      </Box>
-      {/* {!session && ( */}
-      {session && session.user!.email === 'post@nazs.net' && (
-        <Box mt="3">
-          <Flex direction="column" gap="2">
-            <ButtonWithComponent full Icon={Pencil} href={`/journals/${journal.id}/edit`}>
-              Edit Journal
-            </ButtonWithComponent>
-            {/* <EditJournalButton journalId={journal.id} /> */}
-            <DeleteJournalButton journalId={journal.id} />
-          </Flex>
+    <main className="grow bg_journals">
+      <Grid columns={{ initial: '1', sm: '5' }} gap="5">
+        <Box className="md:col-span-4">
+          <JournalDetails journal={journal} />
         </Box>
-      )}
-    </Grid>
+        {/* {!session && ( */}
+        {session && session.user!.email === 'post@nazs.net' && (
+          <Box mt="3">
+            <Flex direction="column" gap="2">
+              <ButtonWithComponent
+                full
+                Icon={Pencil}
+                href={`/journals/${journal.id}/edit`}
+              >
+                Edit Journal
+              </ButtonWithComponent>
+              {/* <EditJournalButton journalId={journal.id} /> */}
+              <DeleteJournalButton journalId={journal.id} />
+            </Flex>
+          </Box>
+        )}
+      </Grid>
+    </main>
   )
 }
 

@@ -59,8 +59,15 @@ code {
   @apply bg_cover;
 }
 .bg_contact {
-  background: url('/galaxy.webp');
+  background: url('/galaxy4.webp');
   @apply bg_cover;
+}
+.bg_cookie {
+  background: url('/galaxy4.webp');
+  @apply bg_cover;
+  p {
+    @apply mb-5;
+  }
 }
 
 #password {
@@ -109,8 +116,8 @@ code {
   @media (min-height: 600px) {
     /* color: red; */
   }
-  @media (min-height: 901px) {
-    min-height: calc(100vh - 160px);
+  @media (min-height: 801px) {
+    min-height: calc(100vh - 120px);
   }
 }
 
