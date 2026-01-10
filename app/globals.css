@@ -110,7 +110,7 @@ code {
     /* color: red; */
   }
   @media (min-height: 901px) {
-    min-height: calc(100vh - 130px);
+    min-height: calc(100vh - 160px);
   }
 }
 
