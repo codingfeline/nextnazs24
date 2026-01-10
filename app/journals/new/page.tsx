@@ -13,7 +13,7 @@ const JournalForm = dynamic(() => import('@/app/journals/_components/JournalForm
 const NewJournalPage = () => {
   const { data: session } = useSession()
   const router = useRouter()
-  // if (!session) router.push('/')
+  if (!session) router.push('/')
 
   return (
     <main className="grow bg_journals">
