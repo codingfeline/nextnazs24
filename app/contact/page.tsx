@@ -1,6 +1,5 @@
 'use client'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 
 function Contact() {
   return (
@@ -23,7 +22,6 @@ function Contact() {
           <button>Submit</button>
           <button>Clear</button>
         </div>
-        <Image src="/nazsnet.webp" alt="logo" width={'128'} height={'128'} />
       </motion.form>
     </main>
     // <div className="h-content-area flex items-center justify-center m-4">

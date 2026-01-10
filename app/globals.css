@@ -62,8 +62,8 @@ code {
   background: url('/galaxy4.webp');
   @apply bg_cover;
 }
-.bg_nazsnet {
-  background: url('/nazsnet.webp');
+.bg_logo {
+  background: url('/logo.webp');
   @apply bg_cover;
 }
 .bg_cookie {
