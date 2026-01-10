@@ -15,7 +15,11 @@ const NewJournalPage = () => {
   const router = useRouter()
   if (!session) router.push('/')
 
-  return <JournalForm />
+  return (
+    <main className="grow bg_journals">
+      <JournalForm />
+    </main>
+  )
 }
 
 export default NewJournalPage
