@@ -5,7 +5,7 @@ import Spinner from '@/app/components/Spinner'
 import { JournalSchema } from '@/app/validationSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Journals } from '@prisma/client'
-import { Button, Callout, Heading, TextField } from '@radix-ui/themes'
+import { Button, Callout, Container, Heading, TextField } from '@radix-ui/themes'
 import axios from 'axios'
 import 'easymde/dist/easymde.min.css'
 import { useRouter } from 'next/navigation'
@@ -45,7 +45,7 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
   })
 
   return (
-    <div className="w-full">
+    <Container>
       {error && (
         <Callout.Root color="red" mb="2">
           <Callout.Text>{error}</Callout.Text>
@@ -77,9 +77,9 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
         </Button>
         {/* <Button disabled={submitting}>
           {journal ? 'Update Journal' : 'Add Journal'} {submitting && <Spinner />}
-        </Button> */}
+          </Button> */}
       </form>
-    </div>
+    </Container>
   )
 }
 

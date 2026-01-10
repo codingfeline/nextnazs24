@@ -20,7 +20,11 @@ const EditJournal = async ({ params }: Props) => {
 
   if (!journal) notFound()
 
-  return <JournalForm journal={journal} />
+  return (
+    <main className="grow bg_journals">
+      <JournalForm journal={journal} />
+    </main>
+  )
 }
 
 export default EditJournal
