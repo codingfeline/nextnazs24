@@ -45,7 +45,7 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
   })
 
   return (
-    <div className="w-full ">
+    <div className="w-full grow bg_journals">
       {error && (
         <Callout.Root color="red" mb="2">
           <Callout.Text>{error}</Callout.Text>
