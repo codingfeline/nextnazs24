@@ -2,12 +2,11 @@ import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import AnalyticsConsent from './components/AnalyticsConsent'
 import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
 import BottomLogo from './components/bottomLogo'
 import ClientProviders from './components/ClientProviders'
-import CookiesBanner from './components/CookiesBanner'
-import CookiesAccepted from './CookiesPolicy/cookiesAccepted'
 import './globals.css'
 import QueryClientProvider from './QueryClientProvider'
 import './theme-config.css'
@@ -58,11 +57,10 @@ export default function RootLayout({
               {children}
               <BottomLogo />
               <AppFooter />
-              <CookiesBanner />
-              <CookiesAccepted />
             </Theme>
           </ClientProviders>
         </QueryClientProvider>
+        <AnalyticsConsent />
       </body>
     </html>
   )
