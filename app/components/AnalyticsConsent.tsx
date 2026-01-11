@@ -1,10 +1,9 @@
-// app/components/AnalyticsConsent.tsx
 'use client'
 
 import Script from 'next/script'
 import { useEffect, useState } from 'react'
 
-const GA_MEASUREMENT_ID = 'G-VXMNGDLCJV' // <-- replace with your GA4 ID
+const GA_MEASUREMENT_ID = 'G-VXMNGDLCJV'
 
 type Consent = 'accepted' | 'rejected' | null
 
@@ -13,29 +12,43 @@ export default function AnalyticsConsent() {
   const [showBanner, setShowBanner] = useState(false)
 
   useEffect(() => {
-    const storedConsent = localStorage.getItem('analytics_consent') as Consent
-    if (storedConsent) {
-      setConsent(storedConsent)
-    } else {
-      setShowBanner(true)
-    }
+    const stored = localStorage.getItem('analytics_consent') as Consent
+    setConsent(stored)
+    if (!stored) setShowBanner(true)
+
+    const openHandler = () => setShowBanner(true)
+    window.addEventListener('open-cookie-consent', openHandler)
+
+    return () => window.removeEventListener('open-cookie-consent', openHandler)
   }, [])
 
   const acceptAnalytics = () => {
     localStorage.setItem('analytics_consent', 'accepted')
     setConsent('accepted')
     setShowBanner(false)
+
+    window.gtag?.('consent', 'update', {
+      analytics_storage: 'granted',
+    })
   }
 
   const rejectAnalytics = () => {
     localStorage.setItem('analytics_consent', 'rejected')
     setConsent('rejected')
     setShowBanner(false)
+
+    // Disable analytics immediately
+    window.gtag?.('consent', 'update', {
+      analytics_storage: 'denied',
+    })
+
+    // Stop future hits
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any)[`ga-disable-${GA_MEASUREMENT_ID}`] = true
   }
 
   return (
     <>
-      {/* Load Google Analytics ONLY if accepted */}
       {consent === 'accepted' && (
         <>
           <Script
@@ -47,19 +60,16 @@ export default function AnalyticsConsent() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${GA_MEASUREMENT_ID}', {
-                anonymize_ip: true
-              });
+              gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
             `}
           </Script>
         </>
       )}
 
-      {/* Consent Banner */}
       {showBanner && (
         <div style={styles.banner}>
           <p style={styles.text}>
-            We use cookies to analyze traffic and improve your experience.
+            We use analytics cookies to improve the site. You can change this anytime.
           </p>
           <div style={styles.buttons}>
             <button onClick={acceptAnalytics} style={styles.accept}>
@@ -84,32 +94,10 @@ const styles: Record<string, React.CSSProperties> = {
     background: '#111',
     color: '#fff',
     padding: '1rem',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     zIndex: 1000,
-    flexWrap: 'wrap',
   },
-  text: {
-    margin: 0,
-    fontSize: '0.9rem',
-  },
-  buttons: {
-    display: 'flex',
-    gap: '0.5rem',
-  },
-  accept: {
-    background: '#4ade80',
-    color: '#000',
-    border: 'none',
-    padding: '0.5rem 1rem',
-    cursor: 'pointer',
-  },
-  reject: {
-    background: '#ef4444',
-    color: '#fff',
-    border: 'none',
-    padding: '0.5rem 1rem',
-    cursor: 'pointer',
-  },
+  text: { marginBottom: '0.5rem' },
+  buttons: { display: 'flex', gap: '0.5rem' },
+  accept: { background: '#4ade80', padding: '0.5rem 1rem' },
+  reject: { background: '#ef4444', padding: '0.5rem 1rem' },
 }
