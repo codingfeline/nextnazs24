@@ -1,9 +1,10 @@
 'use client'
 import { motion } from 'framer-motion'
+import FiveParagraphs from '../components/fiveParagraphs'
 
 function Contact() {
   return (
-    <main className="grow bg_contact bg-gray-200 flex items-center justify-center p-4">
+    <main className="grow bg_contact bg-gray-200 flex items-center justify-center p-4 flex-col">
       <motion.form className="contact " initial={{ y: -50 }} animate={{ y: 0 }}>
         <legend className="pt-3 pb-3 text-2xl text-[#3c6886]">Contact</legend>
         <label htmlFor="">
@@ -23,6 +24,8 @@ function Contact() {
           <button>Clear</button>
         </div>
       </motion.form>
+      {/* <Paginate /> */}
+      <FiveParagraphs />
     </main>
     // <div className="h-content-area flex items-center justify-center m-4">
     // </div>

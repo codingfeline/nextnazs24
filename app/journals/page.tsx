@@ -1,21 +1,42 @@
 import prisma from '@/prisma/client'
-import { Box, Container, Text } from '@radix-ui/themes'
+import { Box, Container, Table, Text } from '@radix-ui/themes'
 // import parse from 'html-react-parser'
 
 import { dateOptions } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
+// import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
 
 const JournalsPage = async () => {
   const journals = await prisma.journals.findMany()
   // await delay(2000)
+  // const columns: { label: string; value: keyof Journals }[] = [
+  //   {
+  //     label: 'Topic',
+  //     value: 'topic',
+  //   },
+  //   { label: 'Date', value: 'date' },
+  // ]
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('dev')
+  }
 
   return (
     <main className="grow bg_journals">
       <Container>
         <div className="p-4">
           <ButtonWithComponent href="/journals/new">New Journal</ButtonWithComponent>
-
+          <Table.Root variant="surface">
+            <Table.Header>
+              <Table.Row>
+                <Table.ColumnHeaderCell>Topic</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="float-right">
+                  Date
+                </Table.ColumnHeaderCell>
+              </Table.Row>
+            </Table.Header>
+          </Table.Root>
           <Box mt="1">
             {journals.map(j => {
               return (
