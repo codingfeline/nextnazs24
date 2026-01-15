@@ -1,6 +1,7 @@
 import { Container } from '@radix-ui/themes'
 import Link from 'next/link'
-import ManageCookiesButton from './ManageCookiesButton'
+// import ManageCookiesButton from './ManageCookiesButton'
+import CookieConsentManager from './CookieConsentManager'
 
 const AppFooter = () => {
   const year = new Date().getFullYear().toString()
@@ -12,7 +13,8 @@ const AppFooter = () => {
           <Link href="/"> {year} Nazsnet </Link>
           {/* </div> */}
           {/* <div>Terms and conditions</div> */}
-          <ManageCookiesButton />
+          {/* <ManageCookiesButton /> */}
+          <CookieConsentManager />
         </div>
       </Container>
     </footer>

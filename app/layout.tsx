@@ -3,7 +3,6 @@ import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import AnalyticsConsent from './components/AnalyticsConsent'
 import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
 import BottomLogo from './components/bottomLogo'
@@ -57,7 +56,7 @@ export default function RootLayout({
               <Theme accentColor="blue" className="mb-auto flex flex-col ">
                 <AppHeader />
                 {children}
-                <AnalyticsConsent />
+                {/* <AnalyticsConsent /> */}
                 <BottomLogo />
                 <AppFooter />
               </Theme>
