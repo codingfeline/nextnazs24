@@ -71,3 +71,16 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verification_tokens")
 }
+
+// prisma/schema.prisma
+// prisma/schema.prisma
+model CookieConsent {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String?
+  analytics     Boolean
+  externalMedia Boolean
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+}

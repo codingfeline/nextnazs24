@@ -1,3 +1,4 @@
+import { CookieConsentProvider } from '@/providers/CookieConsentProvider'
 import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
@@ -52,15 +53,17 @@ export default function RootLayout({
       <body className={geistSans.className}>
         <QueryClientProvider>
           <ClientProviders>
-            <Theme accentColor="blue" className="mb-auto flex flex-col ">
-              <AppHeader />
-              {children}
-              <BottomLogo />
-              <AppFooter />
-            </Theme>
+            <CookieConsentProvider>
+              <Theme accentColor="blue" className="mb-auto flex flex-col ">
+                <AppHeader />
+                {children}
+                <AnalyticsConsent />
+                <BottomLogo />
+                <AppFooter />
+              </Theme>
+            </CookieConsentProvider>
           </ClientProviders>
         </QueryClientProvider>
-        <AnalyticsConsent />
       </body>
     </html>
   )

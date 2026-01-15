@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Copy } from '../components'
+import GoogleMapWithConsent from '../components/GoogleMapWithConsent'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
 
@@ -178,6 +179,7 @@ const Password = () => {
           </div>
         )}
       </div>
+      <GoogleMapWithConsent />
     </main>
   )
 }
