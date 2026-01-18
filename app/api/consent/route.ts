@@ -3,11 +3,35 @@ import prisma from '@/prisma/client';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-  const { userId, analytics, externalMedia } = await req.json();
+  const { anonymousId, userId, analytics, externalMedia } = await req.json();
 
+  if (!anonymousId && !userId) {
+    return NextResponse.json({ error: 'Missing identifier' }, { status: 400 });
+  }
+
+  // Anonymous consent
+  if (anonymousId) {
+    const existing = await prisma.cookieConsent.findUnique({
+      where: { anonymousId },
+    });
+
+    if (existing) {
+      await prisma.cookieConsent.update({
+        where: { id: existing.id },
+        data: { analytics, externalMedia },
+      });
+    } else {
+      await prisma.cookieConsent.create({
+        data: { anonymousId, analytics, externalMedia },
+      });
+    }
+  }
+
+  // Logged-in consent
   if (userId) {
     const existing = await prisma.cookieConsent.findFirst({
       where: { userId },
+      orderBy: { createdAt: 'desc' },
     });
 
     if (existing) {
@@ -20,11 +44,6 @@ export async function POST(req: Request) {
         data: { userId, analytics, externalMedia },
       });
     }
-  } else {
-    // Anonymous users → always create a new record
-    await prisma.cookieConsent.create({
-      data: { analytics, externalMedia },
-    });
   }
 
   return NextResponse.json({ ok: true });

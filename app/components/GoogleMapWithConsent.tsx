@@ -3,25 +3,31 @@
 
 import { useCookieConsent } from '@/providers/CookieConsentProvider'
 
-export default function GoogleMapWithConsent() {
-  const { consent, updateConsent } = useCookieConsent()
+export default function GoogleMapWithConsent({ src }: { src: string }) {
+  const { consent } = useCookieConsent()
 
   if (!consent.externalMedia) {
     return (
-      <div style={{ textAlign: 'center', padding: '2rem' }}>
-        <p>Google Maps is disabled. Loading it may transfer personal data to Google.</p>
-        <button onClick={() => updateConsent({ externalMedia: true })}>Load map</button>
+      <div
+        style={{
+          background: '#f3f4f6',
+          padding: '2rem',
+          textAlign: 'center',
+          borderRadius: 8,
+        }}
+      >
+        <p>This map is disabled because you have not accepted external media.</p>
       </div>
     )
   }
 
   return (
     <iframe
-      src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL"
+      src={src}
       width="100%"
-      height="450"
-      loading="lazy"
+      height="400"
       style={{ border: 0 }}
+      loading="lazy"
       referrerPolicy="no-referrer-when-downgrade"
       allowFullScreen
     />

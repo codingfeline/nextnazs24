@@ -1,38 +1,23 @@
+// components/CookieConsentManager.tsx
 'use client'
+
 import { useCookieConsent } from '@/providers/CookieConsentProvider'
 import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const GA_ID = 'G-VXMNGDLCJV'
 
 export default function CookieConsentManager() {
-  const { consent, updateConsent } = useCookieConsent()
+  const { consent, updateConsent, hasDecided } = useCookieConsent()
   const [showModal, setShowModal] = useState(false)
-  const [firstVisit, setFirstVisit] = useState(false)
 
-  // Detect first visit
-  useEffect(() => {
-    const stored = localStorage.getItem('cookie_consent')
-    if (!stored) setFirstVisit(true)
-  }, [])
+  const acceptAll = () => updateConsent({ analytics: true, externalMedia: true })
 
-  const acceptAll = () => {
-    updateConsent({ analytics: true, externalMedia: true })
-    setShowModal(false)
-    setFirstVisit(false)
-  }
-
-  const rejectAll = () => {
-    updateConsent({ analytics: false, externalMedia: false })
-    setShowModal(false)
-    setFirstVisit(false)
-  }
-
-  const toggleModal = () => setShowModal(!showModal)
+  const rejectAll = () => updateConsent({ analytics: false, externalMedia: false })
 
   return (
     <>
-      {/* --- Analytics --- */}
+      {/* --- Google Analytics --- */}
       {consent.analytics && (
         <>
           <Script
@@ -51,31 +36,37 @@ export default function CookieConsentManager() {
       )}
 
       {/* --- Initial Banner --- */}
-      {firstVisit && (
-        <div style={bannerStyles.container}>
-          <p>We use Google Analytics and external media. Do you accept?</p>
-          <div style={bannerStyles.buttons}>
-            <button onClick={acceptAll} style={bannerStyles.accept}>
-              Accept
+      {!hasDecided && (
+        <div style={banner.container}>
+          <p>
+            We use cookies for analytics and to embed external content such as Google
+            Maps.
+          </p>
+          <div style={banner.buttons}>
+            <button onClick={acceptAll} style={banner.accept}>
+              Accept all
             </button>
-            <button onClick={rejectAll} style={bannerStyles.reject}>
-              Reject
+            <button onClick={rejectAll} style={banner.reject}>
+              Reject optional
+            </button>
+            <button onClick={() => setShowModal(true)} style={banner.settings}>
+              Settings
             </button>
           </div>
         </div>
       )}
 
-      {/* --- Manage Cookies Button --- */}
-      {!firstVisit && (
-        <button onClick={toggleModal} style={{ textDecoration: 'underline' }}>
-          Manage cookies
+      {/* --- Manage Cookies Button (footer / settings) --- */}
+      {hasDecided && (
+        <button onClick={() => setShowModal(true)} style={manageBtn}>
+          Cookie settings
         </button>
       )}
 
       {/* --- Modal --- */}
       {showModal && (
-        <div style={styles.overlay}>
-          <div style={styles.modal}>
+        <div style={modal.overlay}>
+          <div style={modal.box}>
             <h2>Cookie Preferences</h2>
 
             <label>
@@ -97,17 +88,14 @@ export default function CookieConsentManager() {
                 checked={consent.externalMedia}
                 onChange={e => updateConsent({ externalMedia: e.target.checked })}
               />
-              External media (Google Maps)
+              External media (Google Maps, YouTube)
             </label>
 
-            <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
-              <button
-                onClick={() => updateConsent({ analytics: false, externalMedia: false })}
-                style={styles.revoke}
-              >
+            <div style={modal.actions}>
+              <button onClick={rejectAll} style={modal.revoke}>
                 Revoke all optional cookies
               </button>
-              <button onClick={toggleModal} style={styles.close}>
+              <button onClick={() => setShowModal(false)} style={modal.close}>
                 Close
               </button>
             </div>
@@ -118,7 +106,7 @@ export default function CookieConsentManager() {
   )
 }
 
-const bannerStyles = {
+const banner = {
   container: {
     position: 'fixed' as const,
     bottom: 0,
@@ -128,12 +116,12 @@ const bannerStyles = {
     padding: '1rem',
     textAlign: 'center' as const,
     boxShadow: '0 -2px 10px rgba(0,0,0,0.1)',
-    zIndex: 1001,
+    zIndex: 1000,
   },
   buttons: {
     display: 'flex',
     justifyContent: 'center',
-    gap: '1rem',
+    gap: '0.5rem',
     marginTop: '0.5rem',
   },
   accept: {
@@ -144,25 +132,49 @@ const bannerStyles = {
   },
   reject: {
     background: '#ef4444',
+    color: '#fff',
+    padding: '0.5rem 1rem',
+    border: 'none',
+    cursor: 'pointer',
+  },
+  settings: {
+    background: '#e5e7eb',
     padding: '0.5rem 1rem',
     border: 'none',
     cursor: 'pointer',
   },
 }
 
-const styles = {
+const manageBtn = {
+  position: 'fixed' as const,
+  bottom: 16,
+  right: 16,
+  background: '#e5e7eb',
+  padding: '0.5rem 0.75rem',
+  borderRadius: 6,
+  border: 'none',
+  cursor: 'pointer',
+  zIndex: 999,
+}
+
+const modal = {
   overlay: {
     position: 'fixed' as const,
     inset: 0,
     background: 'rgba(0,0,0,0.4)',
-    zIndex: 1000,
+    zIndex: 1001,
   },
-  modal: {
+  box: {
     background: '#fff',
     padding: '2rem',
-    maxWidth: 400,
+    maxWidth: 420,
     margin: '10% auto',
     borderRadius: 8,
+  },
+  actions: {
+    display: 'flex',
+    gap: '0.5rem',
+    marginTop: '1rem',
   },
   revoke: {
     background: '#ef4444',

@@ -179,7 +179,7 @@ const Password = () => {
           </div>
         )}
       </div>
-      <GoogleMapWithConsent />
+      <GoogleMapWithConsent src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL" />
     </main>
   )
 }

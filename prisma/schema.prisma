@@ -73,10 +73,10 @@ model VerificationToken {
 }
 
 // prisma/schema.prisma
-// prisma/schema.prisma
 model CookieConsent {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   userId        String?
+  anonymousId   String?  @unique
   analytics     Boolean
   externalMedia Boolean
   createdAt     DateTime @default(now())
