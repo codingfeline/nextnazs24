@@ -2,21 +2,26 @@ import prisma from '@/prisma/client'
 import { Box, Container, Table, Text } from '@radix-ui/themes'
 // import parse from 'html-react-parser'
 
-import { dateOptions } from '@/app/components'
+import { ArrowUp, dateOptions } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
-// import { Journals } from '@prisma/client'
+import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
 
-const JournalsPage = async () => {
+interface JournalQuery {
+  orderBy?: keyof Journals
+  date: 'asc' | 'desc'
+}
+
+const JournalsPage = async ({ searchParams }: { searchParams: JournalQuery }) => {
   const journals = await prisma.journals.findMany()
   // await delay(2000)
-  // const columns: { label: string; value: keyof Journals }[] = [
-  //   {
-  //     label: 'Topic',
-  //     value: 'topic',
-  //   },
-  //   { label: 'Date', value: 'date' },
-  // ]
+  const columns: { label: string; value: keyof Journals; className?: string }[] = [
+    {
+      label: 'Topic',
+      value: 'topic',
+    },
+    { label: 'Created', value: 'date', className: 'hidden md:float-right md:table-cell' },
+  ]
 
   if (process.env.NODE_ENV === 'development') {
     console.log('dev')
@@ -30,10 +35,23 @@ const JournalsPage = async () => {
           <Table.Root variant="surface">
             <Table.Header>
               <Table.Row>
-                <Table.ColumnHeaderCell>Topic</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="float-right">
+                {columns.map(col => (
+                  <Table.ColumnHeaderCell key={col.value} className={col.className}>
+                    {/* <NextLink href={`/journals?orderBy=${col.value}`}> */}
+                    <NextLink
+                      href={{
+                        query: { ...searchParams, orderBy: col.value },
+                      }}
+                    >
+                      {col.label}
+                    </NextLink>
+                    {col.value === searchParams.orderBy && <ArrowUp className="inline" />}
+                  </Table.ColumnHeaderCell>
+                ))}
+                {/* <Table.ColumnHeaderCell>Topic</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="hidden md:float-right md:table-cell">
                   Date
-                </Table.ColumnHeaderCell>
+                </Table.ColumnHeaderCell> */}
               </Table.Row>
             </Table.Header>
           </Table.Root>
