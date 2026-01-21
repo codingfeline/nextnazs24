@@ -16,7 +16,7 @@ const JournalsPage = async ({
 }: {
   searchParams: Promise<JournalQuery>
 }) => {
-  const resolvedSearchParams = await searchParams
+  const params = await searchParams
   const columns: { label: string; value: keyof Journals; className?: string }[] = [
     {
       label: 'Topic',
@@ -25,15 +25,21 @@ const JournalsPage = async ({
     { label: 'Created', value: 'date', className: 'hidden md:float-right md:table-cell' },
   ]
 
-  const selectedOrder = resolvedSearchParams.orderBy
-  const isValidColumn =
-    selectedOrder && columns.map(col => col.value).includes(selectedOrder)
-  const orderBy = isValidColumn
-    ? { [selectedOrder]: resolvedSearchParams.date || 'asc' }
-    : undefined
+  const { orderBy: col, date } = await searchParams
+
   const journals = await prisma.journals.findMany({
-    orderBy,
+    orderBy: columns.some(c => c.value === col)
+      ? { [col as string]: date || 'asc' }
+      : { date: 'desc' as const },
   })
+
+  // const selectedOrder = params.orderBy
+  // const isValidColumn =
+  //   selectedOrder && columns.map(col => col.value).includes(selectedOrder)
+  // const orderBy = isValidColumn ? { [selectedOrder]: params.date || 'asc' } : undefined
+  // const journals = await prisma.journals.findMany({
+  //   orderBy,
+  // })
 
   if (process.env.NODE_ENV === 'development') {
     console.log('dev')
@@ -52,12 +58,12 @@ const JournalsPage = async ({
                     {/* <NextLink href={`/journals?orderBy=${col.value}`}> */}
                     <NextLink
                       href={{
-                        query: { ...resolvedSearchParams, orderBy: col.value },
+                        query: { ...params, orderBy: col.value },
                       }}
                     >
                       {col.label}
                     </NextLink>
-                    {col.value === resolvedSearchParams.orderBy && (
+                    {col.value === params.orderBy && (
                       <ArrowUp className="inline pl-[3px] text-lg" />
                     )}
                   </Table.ColumnHeaderCell>
