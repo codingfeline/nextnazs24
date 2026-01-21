@@ -1,6 +1,5 @@
 import prisma from '@/prisma/client'
 import { Box, Container, Table, Text } from '@radix-ui/themes'
-// import parse from 'html-react-parser'
 
 import { ArrowUp, dateOptions } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
@@ -12,9 +11,12 @@ interface JournalQuery {
   date: 'asc' | 'desc'
 }
 
-const JournalsPage = async ({ searchParams }: { searchParams: JournalQuery }) => {
-  const journals = await prisma.journals.findMany()
-  // await delay(2000)
+const JournalsPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<JournalQuery>
+}) => {
+  const resolvedSearchParams = await searchParams
   const columns: { label: string; value: keyof Journals; className?: string }[] = [
     {
       label: 'Topic',
@@ -22,6 +24,16 @@ const JournalsPage = async ({ searchParams }: { searchParams: JournalQuery }) =>
     },
     { label: 'Created', value: 'date', className: 'hidden md:float-right md:table-cell' },
   ]
+
+  const selectedOrder = resolvedSearchParams.orderBy
+  const isValidColumn =
+    selectedOrder && columns.map(col => col.value).includes(selectedOrder)
+  const orderBy = isValidColumn
+    ? { [selectedOrder]: resolvedSearchParams.date || 'asc' }
+    : undefined
+  const journals = await prisma.journals.findMany({
+    orderBy,
+  })
 
   if (process.env.NODE_ENV === 'development') {
     console.log('dev')
@@ -40,12 +52,14 @@ const JournalsPage = async ({ searchParams }: { searchParams: JournalQuery }) =>
                     {/* <NextLink href={`/journals?orderBy=${col.value}`}> */}
                     <NextLink
                       href={{
-                        query: { ...searchParams, orderBy: col.value },
+                        query: { ...resolvedSearchParams, orderBy: col.value },
                       }}
                     >
                       {col.label}
                     </NextLink>
-                    {col.value === searchParams.orderBy && <ArrowUp className="inline" />}
+                    {col.value === resolvedSearchParams.orderBy && (
+                      <ArrowUp className="inline pl-[3px] text-lg" />
+                    )}
                   </Table.ColumnHeaderCell>
                 ))}
                 {/* <Table.ColumnHeaderCell>Topic</Table.ColumnHeaderCell>
