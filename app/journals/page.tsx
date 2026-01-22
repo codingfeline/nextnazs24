@@ -49,7 +49,9 @@ const JournalsPage = async ({
     <main className="grow bg_journals">
       <Container>
         <div className="p-4">
-          <ButtonWithComponent href="/journals/new">New Journal</ButtonWithComponent>
+          <ButtonWithComponent margin="mb-1" href="/journals/new">
+            New Journal
+          </ButtonWithComponent>
           <Table.Root variant="surface">
             <Table.Header>
               <Table.Row>
