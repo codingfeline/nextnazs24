@@ -70,13 +70,13 @@ const JournalsPage = async ({
                     >
                       {col.label}
                     </NextLink>
-                    {col.value === params.orderBy ? (
-                      params.date === 'desc' ? (
-                        <ArrowDown className="inline pl-[3px] text-lg" />
-                      ) : (
+                    {(params.orderBy === col.value ||
+                      (!params.orderBy && col.value === 'date')) &&
+                      (params.date === 'asc' ? (
                         <ArrowUp className="inline pl-[3px] text-lg" />
-                      )
-                    ) : null}
+                      ) : (
+                        <ArrowDown className="inline pl-[3px] text-lg" />
+                      ))}
                   </Table.ColumnHeaderCell>
                 ))}
               </Table.Row>
