@@ -52,7 +52,7 @@ const JournalsPage = async ({
           <ButtonWithComponent margin="mb-1" href="/journals/new">
             New Journal
           </ButtonWithComponent>
-          <Table.Root variant="surface">
+          <Table.Root variant="surface" className="mt-1">
             <Table.Header>
               <Table.Row>
                 {columns.map(col => (
