@@ -3,7 +3,7 @@ export { default as Link } from './Link';
 export { default as Skeleton } from './Skeleton';
 export { default as Spinner } from './Spinner';
 
-export { AiOutlineUp as ArrowUp } from 'react-icons/ai';
+export { AiOutlineDown as ArrowDown, AiOutlineUp as ArrowUp } from 'react-icons/ai';
 export { GiSittingDog as Dog } from 'react-icons/gi';
 export { PiNotePencil as Pencil } from "react-icons/pi";
 export { VscCopy as Copy } from 'react-icons/vsc';

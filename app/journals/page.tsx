@@ -1,7 +1,7 @@
 import prisma from '@/prisma/client'
 import { Box, Container, Table, Text } from '@radix-ui/themes'
 
-import { ArrowUp, dateOptions } from '@/app/components'
+import { ArrowDown, ArrowUp, dateOptions } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
@@ -25,13 +25,13 @@ const JournalsPage = async ({
     { label: 'Created', value: 'date', className: 'hidden md:float-right md:table-cell' },
   ]
 
-  const { orderBy: col, date } = await searchParams
+  const { orderBy: col, date } = params
 
-  const journals = await prisma.journals.findMany({
-    orderBy: columns.some(c => c.value === col)
-      ? { [col as string]: date || 'asc' }
-      : { date: 'desc' as const },
-  })
+  const orderBy = columns.some(c => c.value === col)
+    ? { [col as string]: date || 'asc' }
+    : { date: 'desc' as const }
+
+  const journals = await prisma.journals.findMany({ orderBy })
 
   // const selectedOrder = params.orderBy
   // const isValidColumn =
@@ -58,20 +58,27 @@ const JournalsPage = async ({
                     {/* <NextLink href={`/journals?orderBy=${col.value}`}> */}
                     <NextLink
                       href={{
-                        query: { ...params, orderBy: col.value },
+                        query: {
+                          ...params,
+                          orderBy: col.value,
+                          date:
+                            params.orderBy === col.value && params.date === 'asc'
+                              ? 'desc'
+                              : 'asc',
+                        },
                       }}
                     >
                       {col.label}
                     </NextLink>
-                    {col.value === params.orderBy && (
-                      <ArrowUp className="inline pl-[3px] text-lg" />
-                    )}
+                    {col.value === params.orderBy ? (
+                      params.date === 'desc' ? (
+                        <ArrowDown className="inline pl-[3px] text-lg" />
+                      ) : (
+                        <ArrowUp className="inline pl-[3px] text-lg" />
+                      )
+                    ) : null}
                   </Table.ColumnHeaderCell>
                 ))}
-                {/* <Table.ColumnHeaderCell>Topic</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="hidden md:float-right md:table-cell">
-                  Date
-                </Table.ColumnHeaderCell> */}
               </Table.Row>
             </Table.Header>
           </Table.Root>
