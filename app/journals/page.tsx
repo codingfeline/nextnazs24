@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUp, dateOptions } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
+// import Pagination from '../components/Pagination'
 
 interface JournalQuery {
   orderBy?: keyof Journals
@@ -49,6 +50,7 @@ const JournalsPage = async ({
     <main className="grow bg_journals">
       <Container>
         <div className="p-4">
+          {/* <Pagination itemCount={journals.length} pageSize={10} currentPage={1} /> */}
           <ButtonWithComponent margin="mb-1" href="/journals/new">
             New Journal
           </ButtonWithComponent>
