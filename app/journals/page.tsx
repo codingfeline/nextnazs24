@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUp, dateOptions } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
+import { redirect } from 'next/navigation'
 // import Pagination from '../components/Pagination'
 
 interface JournalQuery {
@@ -27,6 +28,13 @@ const JournalsPage = async ({
   ]
 
   const { orderBy: col, date: rawDate } = params
+
+  const isInvalideDate = rawDate && rawDate !== 'asc' && rawDate !== 'desc'
+  const isInvalideCol = col && !columns.some(c => c.value === col)
+
+  if (isInvalideCol || isInvalideDate) {
+    return redirect('/journals')
+  }
 
   // const orderBy = columns.some(c => c.value === col)
   //   ? { [col as string]: date || 'asc' }
