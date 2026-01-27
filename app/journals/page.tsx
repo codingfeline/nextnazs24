@@ -26,10 +26,14 @@ const JournalsPage = async ({
     { label: 'Created', value: 'date', className: 'hidden md:float-right md:table-cell' },
   ]
 
-  const { orderBy: col, date } = params
+  const { orderBy: col, date: rawDate } = params
+
+  // const orderBy = columns.some(c => c.value === col)
+  //   ? { [col as string]: date || 'asc' }
+  //   : { date: 'desc' as const }
 
   const orderBy = columns.some(c => c.value === col)
-    ? { [col as string]: date || 'asc' }
+    ? { [col as string]: rawDate === 'asc' || rawDate === 'desc' ? rawDate : 'asc' }
     : { date: 'desc' as const }
 
   const journals = await prisma.journals.findMany({ orderBy })
