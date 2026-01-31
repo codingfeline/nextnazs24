@@ -23,12 +23,14 @@ export default function FiveParagraphs() {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+          } else {
+            entry.target.classList.remove('visible')
           }
         })
       },
       {
         threshold: 0.2,
-      }
+      },
     )
 
     refs.current.forEach(el => el && observer.observe(el))
@@ -57,7 +59,9 @@ export default function FiveParagraphs() {
         .fly-in {
           opacity: 0;
           transform: translateY(40px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
+          transition:
+            opacity 0.6s ease-out,
+            transform 0.6s ease-out;
         }
 
         .fly-in.visible {
