@@ -18,9 +18,11 @@ export default function FiveParagraphs() {
       entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
+            entry.target.classList.add('opacity-100', 'translate-y-0')
+            entry.target.classList.remove('opacity-0', 'translate-y-10')
           } else {
-            entry.target.classList.remove('visible')
+            entry.target.classList.add('opacity-0', 'translate-y-10')
+            entry.target.classList.remove('opacity-100', 'translate-y-0')
           }
         })
       },
@@ -35,54 +37,27 @@ export default function FiveParagraphs() {
   }, [])
 
   return (
-    <main style={styles.page}>
-      <h1 style={styles.title}>Fly-In Paragraphs</h1>
+    <main className="max-w-2xl mx-auto px-6 py-12  text-slate-100 min-h-screen">
+      <h1 className="text-4xl font-bold text-center mb-12">Staggered Reveal</h1>
 
-      {paragraphs.map((text, index) => (
-        <p
-          key={index}
-          ref={el => {
-            refs.current[index] = el
-          }}
-          className="fly-in"
-          style={styles.paragraph}
-        >
-          {text}
-        </p>
-      ))}
-
-      <style jsx>{`
-        .fly-in {
-          opacity: 0;
-          transform: translateY(40px);
-          transition:
-            opacity 0.6s ease-out,
-            transform 0.6s ease-out;
-        }
-
-        .fly-in.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      `}</style>
+      <div className="flex flex-col gap-12">
+        {paragraphs.map((text, index) => (
+          <p
+            key={index}
+            ref={el => {
+              refs.current[index] = el
+            }}
+            className="text-lg leading-relaxed transition-all duration-700 ease-out opacity-0 translate-y-10"
+            style={{
+              // This creates a 150ms delay between each paragraph
+              // that scales with the index
+              transitionDelay: `${index * 150}ms`,
+            }}
+          >
+            {text}
+          </p>
+        ))}
+      </div>
     </main>
   )
-}
-
-const styles: Record<string, React.CSSProperties> = {
-  page: {
-    maxWidth: '720px',
-    margin: '0 auto',
-    padding: '3rem 1.5rem',
-  },
-  title: {
-    textAlign: 'center',
-    marginBottom: '3rem',
-  },
-  paragraph: {
-    fontSize: '1.1rem',
-    lineHeight: 1.7,
-    marginBottom: '4rem',
-    color: '#f5f8fa',
-  },
 }
