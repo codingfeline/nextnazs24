@@ -20,10 +20,11 @@ export default function FiveParagraphs() {
           if (entry.isIntersecting) {
             entry.target.classList.add('opacity-100', 'translate-y-0')
             entry.target.classList.remove('opacity-0', 'translate-y-10')
-          } else {
-            entry.target.classList.add('opacity-0', 'translate-y-10')
-            entry.target.classList.remove('opacity-100', 'translate-y-0')
           }
+          // else {
+          //   entry.target.classList.add('opacity-0', 'translate-y-10')
+          //   entry.target.classList.remove('opacity-100', 'translate-y-0')
+          // }
         })
       },
       {
@@ -51,7 +52,7 @@ export default function FiveParagraphs() {
             style={{
               // This creates a 150ms delay between each paragraph
               // that scales with the index
-              transitionDelay: `${index * 150}ms`,
+              transitionDelay: `${150}ms`,
             }}
           >
             {text}

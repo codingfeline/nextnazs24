@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
-import FiveParagraphs from '../components/fiveParagraphs'
+import Reveal from '../components/Reveal'
+// import FiveParagraphs from '../components/fiveParagraphs'
 
 function Contact() {
   return (
@@ -25,7 +26,74 @@ function Contact() {
         </div>
       </motion.form>
       {/* <Paginate /> */}
-      <FiveParagraphs />
+      {/* <FiveParagraphs /> */}
+
+      <Reveal delay="delay-100">
+        <p className="m-5 text-white">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
+          reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
+          numquam, repellat nostrum cumque porro rem provident cum consequuntur quam
+          corrupti! Architecto doloribus nisi eveniet molestiae quam error molestias eius,
+          quibusdam delectus? Incidunt sit molestias eos magni soluta unde quo beatae
+          pariatur. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque
+          tenetur, reprehenderit aliquid quidem architecto deserunt necessitatibus itaque
+          ipsam numquam, repellat nostrum cumque porro rem provident cum consequuntur quam
+          corrupti! Architecto doloribus nisi eveniet molestiae quam error molestias eius,
+          quibusdam delectus? Incidunt sit molestias eos magni soluta unde quo beatae
+          pariatur. ipsam numquam, repellat nostrum cumque porro rem provident cum
+          consequuntur quam corrupti! Architecto doloribus nisi eveniet molestiae quam
+          error molestias eius, quibusdam delectus? Incidunt sit molestias eos magni
+          soluta unde quo beatae pariatur.
+        </p>
+      </Reveal>
+      <Reveal delay="delay-300">
+        <p className="m-5 text-white ">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
+          reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
+          numquam, repellat nostrum cumque porro rem provident cum consequuntur quam
+          corrupti! Architecto doloribus nisi eveniet molestiae quam error molestias eius,
+          quibusdam delectus? Incidunt sit molestias eos magni soluta unde quo beatae
+          pariatur.
+        </p>
+      </Reveal>
+      <Reveal delay="delay-500">
+        <p className="m-5 text-white ">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
+          reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
+          numquam, repellat nostrum cumque porro rem provident cum consequuntur quam
+          corrupti! Architecto doloribus nisi eveniet molestiae quam error molestias eius,
+          quibusdam delectus? Incidunt sit molestias eos magni soluta unde quo beatae
+          pariatur.
+        </p>
+      </Reveal>
+      <Reveal delay="delay-700">
+        <p className="m-5 text-white">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
+          reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
+          numquam, repellat nostrum cumque porro rem provident cum consequuntur quam
+          corrupti! Architecto doloribus nisi eveniet molestiae quam error molestias eius,
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
+          reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
+          numquam, repellat nostrum cumque porro rem provident cum consequuntur quam
+          corrupti! Architecto doloribus nisi eveniet molestiae quam error molestias eius,
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
+          reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
+          numquam, repellat nostrum cumque porro rem provident cum consequuntur quam
+          corrupti! Architecto doloribus nisi eveniet molestiae quam error molestias eius,
+          quibusdam delectus? Incidunt sit molestias eos magni soluta unde quo beatae
+          pariatur.
+        </p>
+      </Reveal>
+      <Reveal delay="delay-100">
+        <p className="m-5 text-white ">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
+          reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
+          numquam, repellat nostrum cumque porro rem provident cum consequuntur quam
+          corrupti! Architecto doloribus nisi eveniet molestiae quam error molestias eius,
+          quibusdam delectus? Incidunt sit molestias eos magni soluta unde quo beatae
+          pariatur.
+        </p>
+      </Reveal>
     </main>
     // <div className="h-content-area flex items-center justify-center m-4">
     // </div>
