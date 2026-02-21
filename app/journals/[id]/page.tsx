@@ -1,6 +1,7 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Pencil } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
+import Reveal from '@/app/components/Reveal'
 import prisma from '@/prisma/client'
 import { Box, Container, Flex } from '@radix-ui/themes'
 import { getServerSession } from 'next-auth'
@@ -28,7 +29,9 @@ const IssueDetailPage = async ({ params }: Props) => {
       <Container>
         {/* <Grid columns={{ initial: '1', sm: '5' }} gap="5"> */}
         <Box className="md:col-span-4">
-          <JournalDetails journal={journal} />
+          <Reveal>
+            <JournalDetails journal={journal} />
+          </Reveal>
         </Box>
         {/* {!session && ( */}
         {session && session.user!.email === 'post@nazs.net' && (
