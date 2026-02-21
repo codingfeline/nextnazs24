@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Reveal from '../components/Reveal'
+import LeapYear from '../components/leapYear'
 // import FiveParagraphs from '../components/fiveParagraphs'
 
 function Contact() {
@@ -27,6 +28,8 @@ function Contact() {
       </motion.form>
       {/* <Paginate /> */}
       {/* <FiveParagraphs /> */}
+
+      <LeapYear />
 
       <Reveal delay="delay-100">
         <p className="m-5 text-white">
