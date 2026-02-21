@@ -6,6 +6,7 @@ import ButtonWithComponent from '@/app/components/ButtonLink'
 import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
+import RevealLoop from '../components/RevealLoop'
 // import Pagination from '../components/Pagination'
 
 interface JournalQuery {
@@ -99,22 +100,24 @@ const JournalsPage = async ({
             </Table.Header>
           </Table.Root>
           <Box mt="1">
-            {journals.map(j => {
+            {journals.map((j, index) => {
               return (
-                <NextLink href={`/journals/${j.id}`} key={j.id} legacyBehavior>
-                  <div
-                    key={j.id}
-                    className=" mb-1 bg-slate-200 p-1 rounded cursor-pointer hover:bg-blue-200"
-                  >
-                    <div className="flex justify-between flex-col md:p-1  md:flex-row">
-                      <span className="pl-2">{j.topic}</span>
-                      {/* <Link href={`/journals/${j.id}`}>{j.topic}</Link> */}
-                      <Text className="text-gray-500 pr-2 roboto-mono text-sm flex justify-end">
-                        {j.date.toLocaleString('en-gb', dateOptions)}
-                      </Text>
+                <RevealLoop delay={index * 80}>
+                  <NextLink href={`/journals/${j.id}`} key={j.id}>
+                    <div
+                      key={j.id}
+                      className=" mb-1 bg-slate-200 p-1 rounded cursor-pointer hover:bg-blue-200"
+                    >
+                      <div className="flex justify-between flex-col md:p-1  md:flex-row">
+                        <span className="pl-2">{j.topic}</span>
+                        {/* <Link href={`/journals/${j.id}`}>{j.topic}</Link> */}
+                        <Text className="text-gray-500 pr-2 roboto-mono text-sm flex justify-end">
+                          {j.date.toLocaleString('en-gb', dateOptions)}
+                        </Text>
+                      </div>
                     </div>
-                  </div>
-                </NextLink>
+                  </NextLink>
+                </RevealLoop>
               )
             })}
           </Box>
