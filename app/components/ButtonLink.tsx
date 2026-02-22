@@ -1,8 +1,10 @@
 import { Button, IconProps } from '@radix-ui/themes'
-import { getServerSession } from 'next-auth'
+import getServerSession  from 'next-auth'
 import Link from 'next/link'
 import { ComponentType, ReactNode } from 'react'
 import { authOptions } from '../api/auth/[...nextauth]/authOptions'
+import NextAuth from 'next-auth'
+import { auth } from '../api/auth/[...nextauth]/authOptions'
 
 interface Prop {
   href: string
@@ -13,7 +15,7 @@ interface Prop {
 }
 
 const ButtonWithComponent = async ({ href, Icon, children, full, margin }: Prop) => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   if (process.env.NODE_ENV !== 'development') {
     if (!session) return null
     if (session!.user!.email !== 'post@nazs.net') return null

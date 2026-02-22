@@ -1,12 +1,13 @@
-import prisma from "@/prisma/client";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
-import { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthConfig } from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
+const prisma = new PrismaClient()
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -18,12 +19,12 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials.password) return null
 
-        const user = await prisma.user.findUnique({ where: { email: credentials.email } })
+        const user = await prisma.user.findUnique({ where: { email: credentials.email as string } })
         console.log(user)
 
         if (!user) return null
 
-        const passwordsMatch = await bcrypt.compare(credentials.password, user.hashedPassword!)
+        const passwordsMatch = await bcrypt.compare(credentials.password as string, user.hashedPassword!)
 
         return passwordsMatch ? user : null
       }
@@ -38,5 +39,16 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt'
+  },
+  callbacks: {
+    //? Helpful in v5 to ensure the session picks up the user ID from the JWT
+    async session({ session, token }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub
+      }
+      return session
+    }
   }
 }
+
+export const { auth } = NextAuth(authOptions)

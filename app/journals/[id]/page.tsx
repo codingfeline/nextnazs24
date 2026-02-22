@@ -1,10 +1,9 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { auth } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Pencil } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import Reveal from '@/app/components/Reveal'
 import prisma from '@/prisma/client'
 import { Box, Container, Flex } from '@radix-ui/themes'
-import { getServerSession } from 'next-auth'
 import { notFound } from 'next/navigation'
 import DeleteJournalButton from './DeleteJournalButton'
 import JournalDetails from './JournalDetails'
@@ -14,7 +13,7 @@ interface Props {
 }
 
 const IssueDetailPage = async ({ params }: Props) => {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if ((await params).id.length !== 24) notFound()
 
