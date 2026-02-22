@@ -4,6 +4,22 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+  @apply text-4xl font-bold;
+}
+h2 {
+  @apply text-3xl font-bold;
+}
+h3 {
+  @apply text-2xl font-semibold;
+}
+h4 {
+  @apply text-xl font-semibold;
+}
+h5 {
+  @apply text-lg font-semibold;
+}
+
 .roboto-mono {
   font-family: 'Roboto Mono', monospace;
   font-optical-sizing: auto;
@@ -72,6 +88,14 @@ code {
   p {
     @apply mb-5;
   }
+}
+.bg_playground {
+  background: url('/earth_dark.webp');
+  @apply bg_cover;
+}
+.bg_nebula {
+  background: url('/nebula.webp');
+  @apply bg_cover;
 }
 
 #password {
