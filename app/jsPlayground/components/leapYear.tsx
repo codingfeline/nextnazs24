@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useState } from 'react'
+'use client'
+
+import { ChangeEvent, useState } from 'react'
 
 interface LeapYearProps {
   initialYear?: number
 }
 
-const LeapYearChecker: React.FC<LeapYearProps> = ({ initialYear = 2024 }) => {
+const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
   // Typing the state as number | string to handle empty input fields gracefully
   const [year, setYear] = useState<number | string>(initialYear)
 
@@ -31,27 +33,24 @@ const LeapYearChecker: React.FC<LeapYearProps> = ({ initialYear = 2024 }) => {
   }
 
   return (
-    <div
-      style={{
-        padding: '20px',
-        maxWidth: '300px',
-        border: '1px solid #ccc',
-        borderRadius: '8px',
-      }}
-    >
-      <h3 style={{ marginTop: 0 }}>TS Leap Year Checker</h3>
-      <label htmlFor="year-input" style={{ display: 'block', marginBottom: '8px' }}>
-        Enter Year:
-      </label>
-      <input
-        id="year-input"
-        type="number"
-        value={year}
-        onChange={handleInputChange}
-        style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
-      />
-      <div style={{ marginTop: '16px', color: '#007bff', fontWeight: 'bold' }}>
-        {checkLeapYear(year)}
+    <div className="flex_center">
+      <div className="p-2 border border-gray-600 rounded-md mt-2 bg-gray-200 w-full  text-gray-500">
+        <form>
+          <h3>Leap Year Checker</h3>
+          <label htmlFor="year-input" style={{ display: 'block', marginBottom: '8px' }}>
+            Enter Year:
+          </label>
+          <input
+            id="year-input"
+            type="number"
+            value={year}
+            onChange={handleInputChange}
+            className="p-2 rounded-md outline-none  border-gray-400 border"
+          />
+          <div style={{ marginTop: '16px', color: '#007bff', fontWeight: 'bold' }}>
+            {checkLeapYear(year)}
+          </div>
+        </form>
       </div>
     </div>
   )
