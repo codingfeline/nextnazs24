@@ -1,6 +1,7 @@
 import { auth } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Pencil } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
+import MainPage from '@/app/components/MainPage'
 import Reveal from '@/app/components/Reveal'
 import prisma from '@/prisma/client'
 import { Box, Container, Flex } from '@radix-ui/themes'
@@ -24,7 +25,7 @@ const IssueDetailPage = async ({ params }: Props) => {
   if (!journal) notFound()
 
   return (
-    <main className="grow bg_journals">
+    <MainPage bg="bg_journals">
       <Container>
         {/* <Grid columns={{ initial: '1', sm: '5' }} gap="5"> */}
         <Box className="md:col-span-4">
@@ -50,7 +51,7 @@ const IssueDetailPage = async ({ params }: Props) => {
         )}
         {/* </Grid> */}
       </Container>
-    </main>
+    </MainPage>
   )
 }
 

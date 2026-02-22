@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Copy } from '../components'
 import GoogleMapWithConsent from '../components/GoogleMapWithConsent'
+import MainPage from '../components/MainPage'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
 
@@ -122,7 +123,7 @@ const Password = () => {
   // if (error) return <div className="bg-white">Error occurred: {error.message}</div>
 
   return (
-    <main className="bg_password grow">
+    <MainPage bg="bg_password">
       <div className={` flex flex-col justify-center items-center rounded-md p-4 m-4`}>
         {/* <p className="bg-white ">{data}</p> */}
         <PasswordForm checks={checks} handlers={handlers} />
@@ -180,7 +181,7 @@ const Password = () => {
         )}
       </div>
       <GoogleMapWithConsent src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL" />
-    </main>
+    </MainPage>
   )
 }
 

@@ -6,6 +6,7 @@ import ButtonWithComponent from '@/app/components/ButtonLink'
 import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
+import MainPage from '../components/MainPage'
 import RevealLoop from '../components/RevealLoop'
 // import Pagination from '../components/Pagination'
 
@@ -60,7 +61,7 @@ const JournalsPage = async ({
   }
 
   return (
-    <main className="grow bg_journals">
+    <MainPage bg="bg_journals">
       <Container>
         <div className="p-4">
           {/* <Pagination itemCount={journals.length} pageSize={10} currentPage={1} /> */}
@@ -123,7 +124,7 @@ const JournalsPage = async ({
           </Box>
         </div>
       </Container>
-    </main>
+    </MainPage>
   )
 }
 
