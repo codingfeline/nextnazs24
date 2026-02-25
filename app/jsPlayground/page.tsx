@@ -21,20 +21,20 @@ const JsPlayground = async ({ searchParams }: Props) => {
 
   return (
     <MainPage bg="bg_nebula">
-      <div className="text-gray-300 gap-2">
+      <div className="text-gray-300 gap-2 ">
         <h2>JS Playground</h2>
         <div className=" gap-2">
           <nav className="w-64 gap-1 p-4 flex text-gray-200 ">
             <Link
               href="/jsPlayground?view=leap"
-              className={`p-2 rounded ${currentView === 'leap' ? 'bg-blue-500 font-bold' : 'hover:bg-gray-100'}`}
+              className={`p-2 rounded ${currentView === 'leap' ? 'bg-blue-500 ' : 'hover:bg-blue-400'}`}
             >
               Leap Year
             </Link>
 
             <Link
               href="/jsPlayground?view=case"
-              className={`p-2 rounded ${currentView === 'case' ? 'bg-blue-500 font-bold' : 'hover:bg-gray-100'}`}
+              className={`p-2 rounded ${currentView === 'case' ? 'bg-blue-500 ' : 'hover:bg-blue-400'}`}
             >
               Title Case
             </Link>
