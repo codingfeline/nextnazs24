@@ -5,18 +5,26 @@ import classnames from 'classnames'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 import { FaLaptopCode } from 'react-icons/fa6'
 
 const AppHeader = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <nav className="borber-b  px-5  bg-gray-200 justify-between py-3">
       <Container>
         <Flex justify="between">
-          <Flex justify="between" gapX="3" align="center">
-            <Link href="/">
+          <Flex
+            justify="between"
+            gapX="3"
+            align="center"
+            direction={{ initial: 'column', sm: 'row' }}
+          >
+            <Link href="#" onClick={() => setIsOpen(!isOpen)}>
               <FaLaptopCode size="24px" />
             </Link>
-            <NavLinks />
+            <NavLinks isOpen={isOpen} setIsOpen={setIsOpen} />
           </Flex>
           <AuthStatus />
         </Flex>
@@ -25,7 +33,12 @@ const AppHeader = () => {
   )
 }
 
-const NavLinks = () => {
+interface OpenProp {
+  isOpen: boolean
+  setIsOpen: (value: boolean) => void
+}
+
+const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
   const currentPath = usePathname()
 
   const colourLink = (link: string) =>
@@ -43,10 +56,22 @@ const NavLinks = () => {
     { label: 'JS Playground', url: '/jsPlayground' },
   ]
 
+  const isVertical = true
+
   return (
-    <Flex align="center" gap="3">
+    <Flex
+      align="center"
+      gap="3"
+      direction={{ initial: 'column', sm: 'row' }}
+      display={isVertical && isOpen ? 'flex' : 'none'}
+    >
       {links.map(link => (
-        <Link className={colourLink(link.url)} href={link.url} key={link.url}>
+        <Link
+          className={colourLink(link.url)}
+          href={link.url}
+          key={link.url}
+          onClick={() => setIsOpen(false)}
+        >
           {link.label}
         </Link>
       ))}
