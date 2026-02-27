@@ -95,7 +95,7 @@ const Password = () => {
     if (!p) return
 
     try {
-      await navigator.clipboard.writeText(p)
+      await navigator.clipboard.writeText(p.slice(0, -7)) // copy password minus the hex colours
       setChecks(prev => ({ ...prev, copied: true }))
       setShowSpan(prev => [...prev, i])
 
