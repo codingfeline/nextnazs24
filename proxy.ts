@@ -22,7 +22,7 @@ export function proxy(req: NextRequest) {
 
 // Apply to all routes or restrict to API routes
 export const config = {
-  matcher: ['/api/auth/:path*'],
+  matcher: ['/api/auth/'],
 }
 
 // *: zero or more
