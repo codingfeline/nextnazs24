@@ -9,6 +9,7 @@ const prisma = new PrismaClient()
 
 export const authOptions: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
+  trustHost: true,
   providers: [
     CredentialsProvider({
       name: 'Credentials',
