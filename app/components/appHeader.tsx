@@ -5,14 +5,33 @@ import classnames from 'classnames'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaLaptopCode } from 'react-icons/fa6'
 
 const AppHeader = () => {
   const [isOpen, setIsOpen] = useState(false)
 
+  useEffect(() => {
+    const handleResize = () => {
+      // We close the menu whenever the window is resized.
+      // This ensures that if they flip from mobile to desktop,
+      // the "open" state doesn't persist in the background.
+      setIsOpen(false)
+    }
+
+    // Listen for window resize and orientation changes
+    window.addEventListener('resize', handleResize)
+    window.addEventListener('orientationchange', handleResize)
+
+    // Cleanup the listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('orientationchange', handleResize)
+    }
+  }, [])
+
   return (
-    <nav className="borber-b  px-0  bg-gray-200 justify-between py-0">
+    <nav className="borber-b bg-gray-200 justify-between h-full relative z-50">
       <Container>
         <Flex justify="between">
           <Flex
@@ -23,18 +42,27 @@ const AppHeader = () => {
             display="flex"
             direction={{ initial: 'column', sm: 'row' }}
           >
-            <Link
-              href="#"
+            <div
               onClick={() => setIsOpen(!isOpen)}
-              className="w-full flex justify-center  p-2"
+              className="w-full flex justify-center p-2 cursor-pointer"
             >
               <FaLaptopCode size="24px" />
-            </Link>
+            </div>
             <NavLinks isOpen={isOpen} setIsOpen={setIsOpen} />
           </Flex>
           <AuthStatus />
         </Flex>
       </Container>
+      {isOpen && (
+        <div
+          onClick={() => setIsOpen(false)} // Close menu when clicking the dark area
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] sm:hidden"
+          // inset-0 makes it full screen
+          // bg-black/50 makes it 50% dark
+          // z-[-1] puts it behind the NavLinks but stays in front of page content
+          // sm:hidden ensures it doesn't show on desktop
+        />
+      )}
     </nav>
   )
 }
@@ -66,14 +94,18 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
 
   return (
     <Flex
+      // justify="center"
+      // gap="0"
+      // p="0"
       align="center"
-      justify="center"
-      gap="0"
-      p="0"
-      width="100%"
       direction={{ initial: 'column', sm: 'row' }}
       display={{ initial: isOpen ? 'flex' : 'none', sm: 'flex' }}
       // display={isVertical && isOpen ? 'flex' : 'none'}
+      position={{ initial: 'absolute', sm: 'static' }}
+      top="40px"
+      left="0"
+      width="100%"
+      className="bg-gray-200 z-50 shadow-lg sm:shadow-none"
     >
       {links.map(link => (
         <Link
