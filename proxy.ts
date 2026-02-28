@@ -22,7 +22,8 @@ export function proxy(req: NextRequest) {
 
 // Apply to all routes or restrict to API routes
 export const config = {
-  matcher: ['/api/auth/'],
+  // matcher: ['/api/auth/'],
+  matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico).*)"],
 }
 
 // *: zero or more
