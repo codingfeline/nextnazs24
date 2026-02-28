@@ -56,7 +56,7 @@ const AppHeader = () => {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)} // Close menu when clicking the dark area
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] sm:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] md:hidden"
           // inset-0 makes it full screen
           // bg-black/50 makes it 50% dark
           // z-[-1] puts it behind the NavLinks but stays in front of page content
@@ -104,7 +104,7 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
       position={{ initial: 'absolute', sm: 'static' }}
       top="40px"
       left="0"
-      width="100%"
+      width={{ initial: '100%', sm: 'auto' }}
       className="bg-gray-200 z-50 shadow-lg sm:shadow-none"
     >
       {links.map(link => (
