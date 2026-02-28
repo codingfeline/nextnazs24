@@ -12,16 +12,22 @@ const AppHeader = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="borber-b  px-5  bg-gray-200 justify-between py-3">
+    <nav className="borber-b  px-0  bg-gray-200 justify-between py-0">
       <Container>
         <Flex justify="between">
           <Flex
             justify="between"
-            gapX="3"
+            gapX="0"
             align="center"
+            width={{ initial: '100%', sm: 'auto' }}
+            display="flex"
             direction={{ initial: 'column', sm: 'row' }}
           >
-            <Link href="#" onClick={() => setIsOpen(!isOpen)}>
+            <Link
+              href="#"
+              onClick={() => setIsOpen(!isOpen)}
+              className="w-full flex justify-center  p-2"
+            >
               <FaLaptopCode size="24px" />
             </Link>
             <NavLinks isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -43,9 +49,9 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
 
   const colourLink = (link: string) =>
     classnames({
-      'text-zinc-900': link === currentPath,
-      'text-zinc-500': link !== currentPath,
-      'hover:text-zinc-800 transition-colors': true,
+      'text-zinc-900 bg-gray-300 ': link === currentPath,
+      'text-zinc-500 ': link !== currentPath,
+      'hover:text-zinc-800 transition-colors  p-2 w-full flex justify-center  md:w-max ': true,
     })
 
   const links = [
@@ -61,9 +67,13 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
   return (
     <Flex
       align="center"
-      gap="3"
+      justify="center"
+      gap="0"
+      p="0"
+      width="100%"
       direction={{ initial: 'column', sm: 'row' }}
-      display={isVertical && isOpen ? 'flex' : 'none'}
+      display={{ initial: isOpen ? 'flex' : 'none', sm: 'flex' }}
+      // display={isVertical && isOpen ? 'flex' : 'none'}
     >
       {links.map(link => (
         <Link
