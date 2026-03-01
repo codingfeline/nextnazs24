@@ -1,4 +1,5 @@
 'use client'
+import { Clear } from '@/app/components'
 import { ChangeEvent, useState } from 'react'
 
 // Helper for Title Case
@@ -33,15 +34,21 @@ export default function TextTransformer() {
 
       {/* Central Input Field */}
       <div className="mb-8">
-        <label className="block text-sm font-medium mb-2 text-gray-600">
-          Enter your text:
-        </label>
+        <div className="flex justify-between">
+          <label className="block text-sm font-medium mb-2 text-gray-600">
+            Enter your text:
+          </label>
+          <Clear
+            onClick={() => setInputText('')}
+            className={`transition-colors delay-75 cursor-pointer text-2xl text-gray-800 ${inputText && 'text-red-300'}`}
+          />
+        </div>
         <input
           type="text"
           value={inputText}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setInputText(e.target.value)}
           placeholder="Start typing..."
-          className="w-full p-3 border-2 border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 text-lg"
+          className="w-full p-3 border-2 border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 text-lg text-gray-500"
         />
       </div>
 
