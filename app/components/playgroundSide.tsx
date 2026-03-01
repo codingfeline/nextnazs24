@@ -1,5 +1,5 @@
+import TitleCase from '../jsPlayground/components/ChangeCase'
 import LeapYearChecker from '../jsPlayground/components/leapYear'
-import TitleCase from '../jsPlayground/components/TitleCase'
 
 const PlaygroundSide = () => {
   const compos = [

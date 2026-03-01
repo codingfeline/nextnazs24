@@ -4,7 +4,7 @@ import React from 'react'
 import MainPage from '../components/MainPage'
 
 const LeapYear = dynamic(() => import('./components/leapYear'))
-const TitleCase = dynamic(() => import('./components/TitleCase'))
+const TitleCase = dynamic(() => import('./components/ChangeCase'))
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
   case: TitleCase,
@@ -36,7 +36,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
               href="/jsPlayground?view=case"
               className={`p-2 rounded ${currentView === 'case' ? 'bg-blue-500 ' : 'hover:bg-blue-400'}`}
             >
-              Title Case
+              Change Cases
             </Link>
           </nav>
           <SelectedComponent />
