@@ -51,10 +51,15 @@ export const authOptions: NextAuthConfig = {
     },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
+      const { pathname } = nextUrl;
 
       // 1. Define your public routes
-      const publicRoutes = ["/", "/password", "/journals", '/contact', '/jsPlayground'];
-      const isPublicPage = publicRoutes.includes(nextUrl.pathname);
+      const staticPublicRoutes = ["/", "/password", "/journals", '/contact', '/jsPlayground'];
+      const dynamicPublicPrefixes = ["/journals"];
+
+      const isPublicPage =
+        staticPublicRoutes.includes(pathname) ||
+        dynamicPublicPrefixes.some(prefix => pathname.startsWith(prefix));
 
       // 2. If it's a public page, let anyone in
       if (isPublicPage) return true;
