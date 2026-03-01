@@ -6,6 +6,7 @@ export { default as Spinner } from './Spinner';
 export { AiOutlineDown as ArrowDown, AiOutlineArrowLeft as ArrowLeft, AiOutlineArrowRight as ArrowRight, AiOutlineUp as ArrowUp, AiOutlineDoubleLeft as DoubleArrowLeft, AiOutlineDoubleRight as DoubleArrowRight } from 'react-icons/ai';
 export { GiSittingDog as Dog } from 'react-icons/gi';
 export { PiNotePencil as Pencil } from "react-icons/pi";
+export { RiArrowGoBackFill as BackButton } from "react-icons/ri";
 export { VscCopy as Copy } from 'react-icons/vsc';
 
 export const dateOptions = {

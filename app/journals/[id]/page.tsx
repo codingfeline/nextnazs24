@@ -1,5 +1,5 @@
 import { auth } from '@/app/api/auth/[...nextauth]/authOptions'
-import { Pencil } from '@/app/components'
+import { BackButton, Pencil } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import MainPage from '@/app/components/MainPage'
 import Reveal from '@/app/components/Reveal'
@@ -32,6 +32,7 @@ const IssueDetailPage = async ({ params }: Props) => {
           <ButtonWithComponent
             href="/journals"
             classes="ml-3 bg-gray-600 hover:bg-gray-500"
+            Icon={BackButton}
           >
             Back to journals
           </ButtonWithComponent>
