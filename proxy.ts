@@ -1,24 +1,25 @@
 // middleware.ts
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
+// import type { NextRequest } from 'next/server'
+// import { NextResponse } from 'next/server'
 
-export function proxy(req: NextRequest) {
-  const url = new URL(req.url)
+// export function proxy(req: NextRequest) {
+//   const url = new URL(req.url)
 
-  // 1️⃣ Normalize trailing slash (remove it)
-  if (url.pathname.endsWith('/') && !url.pathname.includes('.')) {
-    const normalized = url.pathname.replace(/\/$/, '')
-    return NextResponse.redirect(`${url.origin}${normalized}`, 308)
-  }
+//   // 1️⃣ Normalize trailing slash (remove it)
+//   if (url.pathname.endsWith('/') && !url.pathname.includes('.')) {
+//     const normalized = url.pathname.replace(/\/$/, '')
+//     return NextResponse.redirect(`${url.origin}${normalized}`, 308)
+//   }
 
-  // 2️⃣ Force HTTPS (optional if you want to handle HTTP requests)
-  if (url.protocol === 'http:') {
-    return NextResponse.redirect(`https://${url.host}${url.pathname}${url.search}`, 308)
-  }
+//   // 2️⃣ Force HTTPS (optional if you want to handle HTTP requests)
+//   if (url.protocol === 'http:') {
+//     return NextResponse.redirect(`https://${url.host}${url.pathname}${url.search}`, 308)
+//   }
 
-  // 3️⃣ Continue to endpoint
-  return NextResponse.next()
-}
+//   // 3️⃣ Continue to endpoint
+//   return NextResponse.next()
+// }
+export { auth as proxy } from "./app/api/auth/[...nextauth]/authOptions"
 
 // Apply to all routes or restrict to API routes
 export const config = {
