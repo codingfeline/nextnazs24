@@ -29,6 +29,12 @@ const IssueDetailPage = async ({ params }: Props) => {
       <Container>
         {/* <Grid columns={{ initial: '1', sm: '5' }} gap="5"> */}
         <Box className="md:col-span-4">
+          <ButtonWithComponent
+            href="/journals"
+            classes="ml-3 bg-gray-600 hover:bg-gray-500"
+          >
+            Back to journals
+          </ButtonWithComponent>
           <Reveal>
             <JournalDetails journal={journal} />
           </Reveal>

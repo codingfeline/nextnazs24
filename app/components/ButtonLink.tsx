@@ -1,9 +1,6 @@
 import { Button, IconProps } from '@radix-ui/themes'
-import getServerSession  from 'next-auth'
 import Link from 'next/link'
 import { ComponentType, ReactNode } from 'react'
-import { authOptions } from '../api/auth/[...nextauth]/authOptions'
-import NextAuth from 'next-auth'
 import { auth } from '../api/auth/[...nextauth]/authOptions'
 
 interface Prop {
@@ -11,10 +8,10 @@ interface Prop {
   Icon?: ComponentType<IconProps>
   children: ReactNode
   full?: boolean
-  margin?: string
+  classes?: string
 }
 
-const ButtonWithComponent = async ({ href, Icon, children, full, margin }: Prop) => {
+const ButtonWithComponent = async ({ href, Icon, children, full, classes }: Prop) => {
   const session = await auth()
   if (process.env.NODE_ENV !== 'development') {
     if (!session) return null
@@ -24,7 +21,7 @@ const ButtonWithComponent = async ({ href, Icon, children, full, margin }: Prop)
   return (
     <div>
       <Link href={href}>
-        <Button className={`my-2 cursor-pointer mr-1 ${full ? 'w-full' : ''} ${margin}`}>
+        <Button className={`my-2 cursor-pointer mr-1 ${full ? 'w-full' : ''} ${classes}`}>
           <div className="flex items-center gap-2">
             {Icon && <Icon />} {children}
           </div>
