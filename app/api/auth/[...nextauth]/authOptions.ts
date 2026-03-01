@@ -51,18 +51,17 @@ export const authOptions: NextAuthConfig = {
     },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isAuthPage = nextUrl.pathname.startsWith('/api/auth');
-      const isPublicPage = nextUrl.pathname === '/'; // Add other public paths here
 
-      // 1. If they are on an auth route, don't interfere
-      if (isAuthPage) return true;
+      // 1. Define your public routes
+      const publicRoutes = ["/", "/password", "/journals", '/contact', '/jsPlayground'];
+      const isPublicPage = publicRoutes.includes(nextUrl.pathname);
 
-      // 2. If they are logged in, allow them to proceed
-      if (isLoggedIn) return true;
+      // 2. If it's a public page, let anyone in
+      if (isPublicPage) return true;
 
-      // 3. If they aren't logged in and it's not a public page, 
-      // returning 'false' will automatically redirect them to /api/auth/signin
-      return isPublicPage;
+      // 3. If it's not public, only allow if logged in
+      // Returning 'false' here automatically redirects to /api/auth/signin
+      return isLoggedIn;
     },
   }
 }
