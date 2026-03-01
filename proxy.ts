@@ -24,7 +24,8 @@ export { auth as proxy } from "./app/api/auth/[...nextauth]/authOptions"
 // Apply to all routes or restrict to API routes
 export const config = {
   // matcher: ['/api/auth/'],
-  matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico).*)"],
+  // matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
 }
 
 // *: zero or more
