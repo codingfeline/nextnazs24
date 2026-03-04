@@ -55,7 +55,7 @@ export default function TextTransformer() {
       {/* Conversion Results */}
       <div className="space-y-4">
         {transformations.map(item => {
-          const max = 25
+          const max = 35
           const displayFormattedText =
             item.value.length > max ? item.value.slice(0, max) + '...' : item.value
 
@@ -73,7 +73,9 @@ export default function TextTransformer() {
                     <span className="text-gray-400 italic">Waiting for input...</span>
                   )}
                 </span>
-
+                {/* <Copy 
+                onClick={() => handleCopy(item.id, item.value)}
+                /> */}
                 <button
                   onClick={() => handleCopy(item.id, item.value)}
                   disabled={!inputText}
