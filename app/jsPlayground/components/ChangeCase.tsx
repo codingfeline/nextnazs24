@@ -1,98 +1,119 @@
 'use client'
 import { Clear } from '@/app/components'
 import { ChangeEvent, useState } from 'react'
-
 // Helper for Title Case
 const toTitleCase = (str: string): string =>
   str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
 
+// Define the valid modes for better type safety
+type TransformationMode = 'title' | 'lower' | 'upper'
+
 export default function TextTransformer() {
-  const [inputText, setInputText] = useState<string>('')
-  const [copiedId, setCopiedId] = useState<string | null>(null)
+  const [text, setText] = useState<string>('')
+  const [mode, setMode] = useState<TransformationMode>('title')
+  const [isCopied, setIsCopied] = useState<boolean>(false)
 
-  // Define our transformations in an array for easy rendering
-  const transformations = [
-    { id: 'title', label: 'Title Case', value: toTitleCase(inputText) },
-    { id: 'lower', label: 'Lower Case', value: inputText.toLowerCase() },
-    { id: 'upper', label: 'Upper Case', value: inputText.toUpperCase() },
-  ]
+  // Determine the transformed text based on the active mode
+  const getTransformedText = (): string => {
+    switch (mode) {
+      case 'title':
+        return toTitleCase(text)
+      case 'lower':
+        return text.toLowerCase()
+      case 'upper':
+        return text.toUpperCase()
+      default:
+        return text
+    }
+  }
+  const max = 60
+  const transformedText =
+    getTransformedText().length < max
+      ? getTransformedText()
+      : getTransformedText().slice(0, max) + '...'
 
-  const handleCopy = async (id: string, textToCopy: string) => {
-    if (!textToCopy) return
+  const handleCopy = async () => {
+    if (!transformedText) return
     try {
-      await navigator.clipboard.writeText(textToCopy)
-      setCopiedId(id)
-      setTimeout(() => setCopiedId(null), 2000)
+      await navigator.clipboard.writeText(transformedText)
+      setIsCopied(true)
+      setTimeout(() => setIsCopied(false), 2000)
     } catch (err) {
       console.error('Failed to copy!', err)
     }
   }
 
   return (
-    <div className="max-w-xl mx-auto p-8 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200">
-      <h2 className="text-2xl font-bold mb-6 text-center">Text Converter</h2>
+    <div className="max-w-md mx-auto p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200">
+      <h2 className="text-xl font-bold mb-6">Text Converter</h2>
 
-      {/* Central Input Field */}
-      <div className="mb-8">
-        <div className="flex justify-between">
-          <label className="block text-sm font-medium mb-2 text-gray-600">
-            Enter your text:
-          </label>
-          <Clear
-            onClick={() => setInputText('')}
-            className={`transition-colors delay-75 cursor-pointer text-2xl text-gray-800 ${inputText && 'text-red-300'}`}
+      {/* 1. Main Input */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-500 mb-2">
+          Source Text
+        </label>
+        <div className="relative w-full">
+          <input
+            type="text"
+            value={text}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            placeholder="Type something..."
+            // Added pr-10 (padding-right) so text doesn't overlap the icon
+            className="w-full border-2 border-gray-200 rounded-lg p-3 pr-10 focus:border-blue-500 outline-none transition-all text-black"
           />
+
+          {/* Only show the button if there is text to clear */}
+          {text && (
+            <button
+              onClick={() => setText('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Clear text"
+            >
+              <Clear className="text-3xl cursor-pointer" />
+            </button>
+          )}
         </div>
-        <input
-          type="text"
-          value={inputText}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setInputText(e.target.value)}
-          placeholder="Start typing..."
-          className="w-full p-3 border-2 border-blue-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 text-lg text-gray-500"
-        />
       </div>
 
-      {/* Conversion Results */}
-      <div className="space-y-4">
-        {transformations.map(item => {
-          const max = 35
-          const displayFormattedText =
-            item.value.length > max ? item.value.slice(0, max) + '...' : item.value
+      {/* 2. Radio Selection */}
+      <div className="flex gap-4 mb-8">
+        {(['title', 'lower', 'upper'] as const).map(m => (
+          <label key={m} className="flex items-center gap-2 cursor-pointer group">
+            <input
+              type="radio"
+              name="mode"
+              checked={mode === m}
+              onChange={() => setMode(m)}
+              className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+            />
+            <span className="text-sm capitalize text-gray-600 group-hover:text-blue-600 transition-colors">
+              {m} Case
+            </span>
+          </label>
+        ))}
+      </div>
 
-          return (
-            <div
-              key={item.id}
-              className="flex flex-col p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-100"
-            >
-              <span className="text-xs font-semibold uppercase text-gray-500 mb-2">
-                {item.label}
-              </span>
-              <div className="flex items-center justify-between gap-4">
-                <span className="font-mono text-gray-800 dark:text-gray-200 break-all">
-                  {displayFormattedText || (
-                    <span className="text-gray-400 italic">Waiting for input...</span>
-                  )}
-                </span>
-                {/* <Copy 
-                onClick={() => handleCopy(item.id, item.value)}
-                /> */}
-                <button
-                  onClick={() => handleCopy(item.id, item.value)}
-                  disabled={!inputText}
-                  className={`flex-shrink-0 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                    !inputText
-                      ? 'bg-gray-300 cursor-not-allowed'
-                      : copiedId === item.id
-                        ? 'bg-green-500 text-white'
-                        : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
-                  }`}
-                >
-                  {copiedId === item.id ? 'Copied!' : 'Copy'}
-                </button>
-              </div>
-            </div>
-          )
-        })}
+      {/* 3. Output & Copy Action */}
+      <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-dashed border-gray-300">
+        <div className="flex items-center justify-between gap-4">
+          <span className="font-mono text-lg break-all">
+            {transformedText || <span className="text-gray-400 italic">...</span>}
+          </span>
+
+          <button
+            onClick={handleCopy}
+            disabled={!text}
+            className={`min-w-[100px] px-4 py-2 rounded-md font-semibold transition-all ${
+              !text
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : isCopied
+                  ? 'bg-green-500 text-white'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
+          >
+            {isCopied ? 'Copied!' : 'Copy'}
+          </button>
+        </div>
       </div>
     </div>
   )
