@@ -26,11 +26,14 @@ export default function TextTransformer() {
         return text
     }
   }
+
   const max = 60
   const transformedText =
-    getTransformedText().length < max
-      ? getTransformedText()
-      : getTransformedText().slice(0, max) + '...'
+    getTransformedText().length === 0
+      ? ''
+      : getTransformedText().length < max
+        ? getTransformedText()
+        : getTransformedText().slice(0, max) + '...'
 
   const handleCopy = async () => {
     if (!transformedText) return
@@ -96,9 +99,7 @@ export default function TextTransformer() {
       {/* 3. Output & Copy Action */}
       <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-dashed border-gray-300">
         <div className="flex items-center justify-between gap-4">
-          <span className="font-mono text-lg break-all">
-            {transformedText || <span className="text-gray-400 italic">...</span>}
-          </span>
+          <span className="font-mono text-lg break-all">{transformedText}</span>
 
           <button
             onClick={handleCopy}
