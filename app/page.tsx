@@ -4,7 +4,7 @@ import prisma from '@/prisma/client'
 import { redirect } from 'next/navigation'
 
 export default async function Home() {
-  redirect('/journals')
+  redirect('https://google.com')
   // const dataToParse = '<span>**</span>'
   // const chilli = '<GiChiliPepper />'
   const journals = await prisma.journals.findMany()
