@@ -103,7 +103,7 @@ const JournalsPage = async ({
           <Box mt="1">
             {journals.map((j, index) => {
               return (
-                <RevealLoop delay={index * 80}>
+                <RevealLoop delay={index * 80} key={index}>
                   <NextLink href={`/journals/${j.id}`} key={j.id}>
                     <div
                       key={j.id}
