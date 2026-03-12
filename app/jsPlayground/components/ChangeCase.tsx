@@ -38,7 +38,7 @@ export default function TextTransformer() {
   const handleCopy = async () => {
     if (!transformedText) return
     try {
-      await navigator.clipboard.writeText(transformedText)
+      await navigator.clipboard.writeText(getTransformedText())
       setIsCopied(true)
       setTimeout(() => setIsCopied(false), 2000)
     } catch (err) {
