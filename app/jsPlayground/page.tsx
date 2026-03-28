@@ -26,7 +26,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
       <div className="text-gray-300 gap-2 ">
         <h2>JS Playground</h2>
         <div className=" gap-2">
-          <nav className="w-64 gap-1 p-4 flex text-gray-200 ">
+          <nav className="w-full gap-1 p-4 flex text-gray-200 ">
             <Link
               href="/jsPlayground?view=leap"
               className={`p-2 rounded ${currentView === 'leap' ? 'bg-blue-500 ' : 'hover:bg-blue-400'}`}
