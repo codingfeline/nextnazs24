@@ -34,7 +34,7 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
 
   return (
     <div className="flex_center">
-      <div className="p-2 border border-gray-600 rounded-md mt-2 bg-gray-200 w-full  text-gray-500">
+      <div className="p-2 border border-gray-600 rounded-md mt-2 bg-gray-200 w-1/2  text-gray-500">
         <form>
           <h3>Leap Year Checker</h3>
           <label htmlFor="year-input" style={{ display: 'block', marginBottom: '8px' }}>
