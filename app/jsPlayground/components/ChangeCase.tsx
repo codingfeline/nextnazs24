@@ -47,8 +47,8 @@ export default function TextTransformer() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-8 bg-gray-300 rounded-xl shadow-lg border border-gray-200 text-gray-700">
-      <h2 className="text-xl font-bold mb-6">Case Converter</h2>
+    <div className="max-w-md mx-auto p-6 bg-gray-300 rounded-md shadow-lg border border-gray-200 text-gray-600">
+      <h4>Case Converter</h4>
 
       {/* 1. Main Input */}
       <div className="mb-6">

@@ -34,9 +34,9 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
 
   return (
     <div className="flex_center">
-      <div className="p-2 border border-gray-600 rounded-md mt-2 bg-gray-200 w-1/2  text-gray-500">
+      <div className="max-w-md mx-auto p-6 bg-gray-300 rounded-md shadow-lg border border-gray-200 text-gray-600">
         <form>
-          <h3>Leap Year Checker</h3>
+          <h4>Leap Year Checker</h4>
           <label htmlFor="year-input" style={{ display: 'block', marginBottom: '8px' }}>
             Enter Year:
           </label>
@@ -45,7 +45,7 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
             type="number"
             value={year}
             onChange={handleInputChange}
-            className="p-2 rounded-md outline-none  border-gray-400 border"
+            className="p-2 rounded-md outline-none  border-gray-400 border w-full"
           />
           <div style={{ marginTop: '16px', color: '#007bff', fontWeight: 'bold' }}>
             {checkLeapYear(year)}
