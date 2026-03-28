@@ -86,7 +86,7 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
     { label: 'home', url: '/' },
     { label: 'Journals', url: '/journals' },
     { label: 'Password', url: '/password' },
-    { label: 'Contact', url: '/contact' },
+    // { label: 'Contact', url: '/contact' },
     { label: 'JS Playground', url: '/jsPlayground' },
   ]
 
