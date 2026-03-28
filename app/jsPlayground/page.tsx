@@ -5,9 +5,11 @@ import MainPage from '../components/MainPage'
 
 const LeapYear = dynamic(() => import('./components/leapYear'))
 const TitleCase = dynamic(() => import('./components/ChangeCase'))
+const shoppingCart = dynamic(() => import('../components/shoppingCart')) // Example of another component
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
   case: TitleCase,
+  cart: shoppingCart,
 }
 
 interface Props {
@@ -37,6 +39,12 @@ const JsPlayground = async ({ searchParams }: Props) => {
               className={`p-2 rounded ${currentView === 'case' ? 'bg-blue-500 ' : 'hover:bg-blue-400'}`}
             >
               Change Cases
+            </Link>
+            <Link
+              href="/jsPlayground?view=cart"
+              className={`p-2 rounded ${currentView === 'cart' ? 'bg-blue-500 ' : 'hover:bg-blue-400'}`}
+            >
+              Shopping Cart
             </Link>
           </nav>
           <SelectedComponent />
