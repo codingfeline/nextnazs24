@@ -47,8 +47,8 @@ export default function TextTransformer() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200">
-      <h2 className="text-xl font-bold mb-6">Text Converter</h2>
+    <div className="max-w-md mx-auto p-8 bg-gray-300 rounded-xl shadow-lg border border-gray-200 text-gray-700">
+      <h2 className="text-xl font-bold mb-6">Case Converter</h2>
 
       {/* 1. Main Input */}
       <div className="mb-6">
@@ -97,7 +97,7 @@ export default function TextTransformer() {
       </div>
 
       {/* 3. Output & Copy Action */}
-      <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-dashed border-gray-300">
+      <div className="p-4 bg-gray-50  rounded-lg border border-dashed border-gray-300 ">
         <div className="flex items-center justify-between gap-4">
           <span className="font-mono text-lg break-all">{transformedText}</span>
 
