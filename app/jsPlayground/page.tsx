@@ -25,7 +25,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
   const SelectedComponent = viewMap[currentView] || LeapYear
   const links = [
     { href: '/jsPlayground?view=leap', label: 'Leap Year', view: 'leap' },
-    { href: '/jsPlayground?view=case', label: 'Change Cases', view: 'case' },
+    { href: '/jsPlayground?view=case', label: 'Case Converter', view: 'case' },
     { href: '/jsPlayground?view=cart', label: 'Shopping Cart', view: 'cart' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ]
