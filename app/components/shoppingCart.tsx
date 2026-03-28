@@ -1,5 +1,6 @@
 'use client'
 
+import { Flex } from '@radix-ui/themes'
 import { useMemo, useState } from 'react'
 
 type Product = {
@@ -81,9 +82,10 @@ export default function CartClient() {
   }, [cart])
 
   return (
-    <div className="flex gap-6 md:p-4 p-2 sm:w-full md:w-5/6 mx-auto">
+    <Flex direction={{ initial: 'column', sm: 'row' }} gap="2">
+      {/* <Flex className="flex gap-6 md:p-4 p-2 sm:w-full md:w-5/6 mx-auto"> */}
       {/* MENU (2/3) */}
-      <div className="w-2/3">
+      <div className="w-full rounded-md border border-gray-300 p-4 bg-gray-50 text-gray-600">
         <h1 className="text-2xl font-bold mb-4">Menu</h1>
 
         <table className="w-full border border-gray-300 bg-gray-100 text-gray-500">
@@ -121,11 +123,11 @@ export default function CartClient() {
       </div>
 
       {/* CART (1/3) */}
-      <div className="w-1/3 border-l pl-4">
+      <div className="w-full md:w-1/3 border-l pl-4 rounded-md border-gray-300 p-4 bg-gray-50 text-gray-600">
         <h2 className="text-xl font-bold mb-4">Cart</h2>
 
         {cart.length === 0 ? (
-          <p className="text-gray-100">Cart is empty</p>
+          <p className="text-gray-4500">Cart is empty</p>
         ) : (
           <table className="w-full border border-gray-300 bg-gray-300 text-gray-800">
             <thead className="bg-gray-100">
@@ -179,6 +181,6 @@ export default function CartClient() {
           <div className="mt-4 text-right font-bold">Total: £{total.toFixed(2)}</div>
         )}
       </div>
-    </div>
+    </Flex>
   )
 }
