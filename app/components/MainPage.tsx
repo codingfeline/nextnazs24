@@ -1,3 +1,4 @@
+import { Container } from '@radix-ui/themes'
 import { ReactNode } from 'react'
 
 interface Props {
@@ -6,7 +7,11 @@ interface Props {
 }
 
 const MainPage = ({ children, bg }: Props) => {
-  return <main className={`grow ${bg}`}>{children}</main>
+  return (
+    <main className={`grow ${bg}`}>
+      <Container>{children}</Container>
+    </main>
+  )
 }
 
 export default MainPage
