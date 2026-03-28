@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Copy } from '../components'
-import GoogleMapWithConsent from '../components/GoogleMapWithConsent'
 import MainPage from '../components/MainPage'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
@@ -180,7 +179,7 @@ const Password = () => {
           </div>
         )}
       </div>
-      <GoogleMapWithConsent src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL" />
+      {/* <GoogleMapWithConsent src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL" /> */}
     </MainPage>
   )
 }
