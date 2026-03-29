@@ -41,9 +41,9 @@ const JsPlayground = async ({ searchParams }: Props) => {
     <MainPage bg="bg_nebula">
       <div className="text-gray-300 p-4 ">
         {/* <h2 className="text-gray-100">JS Playground</h2> */}
-        <div className=" gap-2">
+        <div className=" gap-2 ">
           <Reveal direction="left">
-            <nav className="w-full gap-1 p-4 flex text-gray-200 ">
+            <nav className="w-full gap-1 p-2 flex flex-wrap text-gray-200 ">
               {links.map(link => (
                 <Link
                   key={link.href}
