@@ -12,11 +12,14 @@ interface Prop {
 }
 
 const ButtonWithComponent = async ({ href, Icon, children, full, classes }: Prop) => {
+  console.log(process.env.NODE_ENV)
   const session = await auth()
-  // if (process.env.NODE_ENV !== 'development') {
-  //   if (!session) return null
-  //   if (session!.user!.email !== 'post@nazs.net') return null
-  // }
+  // if (!session) return null
+  // if (session!.user!.email !== 'post@nazs.net') return null
+  if (process.env.NODE_ENV !== 'development') {
+    if (!session) return null
+    if (session!.user!.email !== 'post@nazs.net') return null
+  }
 
   return (
     <div>
