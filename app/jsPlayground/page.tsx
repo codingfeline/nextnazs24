@@ -8,11 +8,13 @@ const LeapYear = dynamic(() => import('./components/leapYear'))
 const TitleCase = dynamic(() => import('./components/ChangeCase'))
 const shoppingCart = dynamic(() => import('../components/shoppingCart')) // Example of another component
 // const Utilities = dynamic(() => import('../components/utilities')) // Example of another component
+const Pin = dynamic(() => import('../components/PinGenerator')) // Example of another component
 
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
   case: TitleCase,
   cart: shoppingCart,
+  pin: Pin,
   // utilities: Utilities,
 }
 
@@ -28,6 +30,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
     { href: '/jsPlayground?view=leap', label: 'Leap Year', view: 'leap' },
     { href: '/jsPlayground?view=case', label: 'Case Converter', view: 'case' },
     { href: '/jsPlayground?view=cart', label: 'Shopping Cart', view: 'cart' },
+    { href: '/jsPlayground?view=pin', label: 'PIN Generator', view: 'pin' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ]
 
