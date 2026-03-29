@@ -1,28 +1,32 @@
 'use client'
 
-import { useScrollReveal } from './useScrollReveal'
+import { useIntersectionObserver } from './useIntersectionObserver'
 
-export default function Reveal({
-  children,
-  delay = 'delay-400',
-}: {
+interface RevealProps {
   children: React.ReactNode
-  delay?: string
-}) {
-  const ref = useScrollReveal()
+  delay?: number
+  direction?: 'up' | 'left' | 'right'
+}
+
+export default function Reveal({ children, delay = 0, direction = 'up' }: RevealProps) {
+  const directionClasses = {
+    up: 'translate-y-10',
+    left: '-translate-x-10',
+    right: 'translate-x-10',
+  }
+
+  const startClass = directionClasses[direction]
+
+  // Use our custom hook!
+  const ref = useIntersectionObserver({ directionClass: startClass })
+
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 opacity-0 translate-y-10 ${delay}`}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={`transition-all duration-700 ease-out opacity-0 ${startClass}`}
     >
       {children}
     </div>
   )
-}
-
-// Usage:
-{
-  /* <Reveal delay="delay-150">
-  <div>Content here</div>
-</Reveal> */
 }
