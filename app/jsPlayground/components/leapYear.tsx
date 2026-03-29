@@ -1,5 +1,6 @@
 'use client'
 
+import Reveal from '@/app/components/Reveal'
 import { ChangeEvent, useState } from 'react'
 
 interface LeapYearProps {
@@ -33,26 +34,28 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
   }
 
   return (
-    <div className="flex_center">
-      <div className="max-w-md mx-auto p-6 bg-gray-300 rounded-md shadow-lg border border-gray-200 text-gray-600">
-        <form>
-          <h4>Leap Year Checker</h4>
-          <label htmlFor="year-input" style={{ display: 'block', marginBottom: '8px' }}>
-            Enter Year:
-          </label>
-          <input
-            id="year-input"
-            type="number"
-            value={year}
-            onChange={handleInputChange}
-            className="p-2 rounded-md outline-none  border-gray-400 border w-full"
-          />
-          <div style={{ marginTop: '16px', color: '#007bff', fontWeight: 'bold' }}>
-            {checkLeapYear(year)}
-          </div>
-        </form>
+    <Reveal>
+      <div className="flex_center">
+        <div className="max-w-md mx-auto p-6 bg-gray-300 rounded-md shadow-lg border border-gray-200 text-gray-600">
+          <form>
+            <h4>Leap Year Checker</h4>
+            <label htmlFor="year-input" style={{ display: 'block', marginBottom: '8px' }}>
+              Enter Year:
+            </label>
+            <input
+              id="year-input"
+              type="number"
+              value={year}
+              onChange={handleInputChange}
+              className="p-2 rounded-md outline-none  border-gray-400 border w-full"
+            />
+            <div style={{ marginTop: '16px', color: '#007bff', fontWeight: 'bold' }}>
+              {checkLeapYear(year)}
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </Reveal>
   )
 }
 

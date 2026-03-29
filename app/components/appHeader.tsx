@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { FaLaptopCode } from 'react-icons/fa6'
+import Reveal from './Reveal'
 
 const AppHeader = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -31,39 +32,41 @@ const AppHeader = () => {
   }, [])
 
   return (
-    <nav className="borber-b bg-gray-200 justify-between h-full relative z-50">
-      <Container>
-        <Flex justify="between">
-          <Flex
-            justify="between"
-            gapX="0"
-            align="center"
-            width={{ initial: '100%', sm: 'auto' }}
-            display="flex"
-            direction={{ initial: 'column', sm: 'row' }}
-          >
-            <div
-              onClick={() => setIsOpen(!isOpen)}
-              className="w-full flex justify-center p-2 cursor-pointer"
+    <Reveal direction="right">
+      <nav className="borber-b bg-gray-200 justify-between h-full relative z-50">
+        <Container>
+          <Flex justify="between">
+            <Flex
+              justify="between"
+              gapX="0"
+              align="center"
+              width={{ initial: '100%', sm: 'auto' }}
+              display="flex"
+              direction={{ initial: 'column', sm: 'row' }}
             >
-              <FaLaptopCode size="24px" />
-            </div>
-            <NavLinks isOpen={isOpen} setIsOpen={setIsOpen} />
+              <div
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex justify-center p-2 cursor-pointer"
+              >
+                <FaLaptopCode size="24px" />
+              </div>
+              <NavLinks isOpen={isOpen} setIsOpen={setIsOpen} />
+            </Flex>
+            <AuthStatus />
           </Flex>
-          <AuthStatus />
-        </Flex>
-      </Container>
-      {isOpen && (
-        <div
-          onClick={() => setIsOpen(false)} // Close menu when clicking the dark area
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] md:hidden"
-          // inset-0 makes it full screen
-          // bg-black/50 makes it 50% dark
-          // z-[-1] puts it behind the NavLinks but stays in front of page content
-          // sm:hidden ensures it doesn't show on desktop
-        />
-      )}
-    </nav>
+        </Container>
+        {isOpen && (
+          <div
+            onClick={() => setIsOpen(false)} // Close menu when clicking the dark area
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] md:hidden"
+            // inset-0 makes it full screen
+            // bg-black/50 makes it 50% dark
+            // z-[-1] puts it behind the NavLinks but stays in front of page content
+            // sm:hidden ensures it doesn't show on desktop
+          />
+        )}
+      </nav>
+    </Reveal>
   )
 }
 
@@ -89,8 +92,6 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
     // { label: 'Contact', url: '/contact' },
     { label: 'JS Playground', url: '/jsPlayground' },
   ]
-
-  const isVertical = true
 
   return (
     <Flex

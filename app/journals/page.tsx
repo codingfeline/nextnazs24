@@ -7,7 +7,7 @@ import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
 import MainPage from '../components/MainPage'
-import RevealLoop from '../components/RevealLoop'
+import Reveal from '../components/Reveal'
 // import Pagination from '../components/Pagination'
 
 interface JournalQuery {
@@ -103,7 +103,7 @@ const JournalsPage = async ({
           <Box mt="1">
             {journals.map((j, index) => {
               return (
-                <RevealLoop delay={index * 80} key={index}>
+                <Reveal delay={index * 80} key={index}>
                   <NextLink href={`/journals/${j.id}`} key={j.id}>
                     <div
                       key={j.id}
@@ -118,7 +118,7 @@ const JournalsPage = async ({
                       </div>
                     </div>
                   </NextLink>
-                </RevealLoop>
+                </Reveal>
               )
             })}
           </Box>

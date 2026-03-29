@@ -2,6 +2,7 @@
 
 import { Flex } from '@radix-ui/themes'
 import { useMemo, useState } from 'react'
+import Reveal from './Reveal'
 
 type Product = {
   id: string
@@ -82,105 +83,109 @@ export default function CartClient() {
   }, [cart])
 
   return (
-    <Flex direction={{ initial: 'column', sm: 'row' }} gap="2">
-      {/* <Flex className="flex gap-6 md:p-4 p-2 sm:w-full md:w-5/6 mx-auto"> */}
-      {/* MENU (2/3) */}
-      <div className="w-full rounded-md border border-gray-300 p-4 bg-gray-50 text-gray-600">
-        <h1 className="text-2xl font-bold mb-4">Menu</h1>
+    <Reveal>
+      <Flex direction={{ initial: 'column', sm: 'row' }} gap="2">
+        {/* <Flex className="flex gap-6 md:p-4 p-2 sm:w-full md:w-5/6 mx-auto"> */}
+        {/* MENU (2/3) */}
+        <div className="w-full rounded-md border border-gray-300 p-4 bg-gray-50 text-gray-600">
+          <h1 className="text-2xl font-bold mb-4">Menu</h1>
 
-        <table className="w-full border border-gray-300 bg-gray-100 text-gray-500">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border p-2 text-left">Item & Price</th>
-              <th className="border p-2 text-left">Description</th>
-              <th className="border p-2">Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {products.map(product => (
-              <tr key={product.id} className="border-t">
-                {/* Combined column */}
-                <td className="p-2">
-                  <div className="font-medium">{product.item}</div>
-                  <div className="text-sm text-gray-500">£{product.price.toFixed(2)}</div>
-                </td>
-
-                <td className="p-2 text-sm text-gray-600">{product.description}</td>
-
-                <td className="p-2 text-center">
-                  <button
-                    onClick={() => addToCart(product)}
-                    className="bg-blue-500 text-white px-3 py-1 rounded"
-                  >
-                    Add
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* CART (1/3) */}
-      <div className="w-full md:w-1/3 border-l pl-4 rounded-md border-gray-300 p-4 bg-gray-50 text-gray-600">
-        <h2 className="text-xl font-bold mb-4">Cart</h2>
-
-        {cart.length === 0 ? (
-          <p className="text-gray-4500">Cart is empty</p>
-        ) : (
-          <table className="w-full border border-gray-300 bg-gray-300 text-gray-800">
+          <table className="w-full border border-gray-300 bg-gray-100 text-gray-500">
             <thead className="bg-gray-100">
               <tr>
                 <th className="border p-2 text-left">Item & Price</th>
-                <th className="border p-2">Qty</th>
-                <th className="border p-2">Actions</th>
+                <th className="border p-2 text-left">Description</th>
+                <th className="border p-2">Action</th>
               </tr>
             </thead>
 
             <tbody>
-              {cart.map(item => (
-                <tr key={item.product.id} className="border-t">
+              {products.map(product => (
+                <tr key={product.id} className="border-t">
                   {/* Combined column */}
                   <td className="p-2">
-                    <div className="font-medium">{item.product.item}</div>
+                    <div className="font-medium">{product.item}</div>
                     <div className="text-sm text-gray-500">
-                      £{item.product.price.toFixed(2)}
+                      £{product.price.toFixed(2)}
                     </div>
                   </td>
 
-                  {/* Quantity */}
-                  <td className="p-2 text-center">{item.quantity}</td>
+                  <td className="p-2 text-sm text-gray-600">{product.description}</td>
 
-                  {/* Actions */}
-                  <td className="p-2">
-                    <div className="flex justify-center gap-2">
-                      <button
-                        onClick={() => decreaseQuantity(item.product.id)}
-                        className="bg-gray-200 px-2 rounded"
-                      >
-                        -
-                      </button>
-
-                      <button
-                        onClick={() => increaseQuantity(item.product.id)}
-                        className="bg-gray-200 px-2 rounded"
-                      >
-                        +
-                      </button>
-                    </div>
+                  <td className="p-2 text-center">
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="bg-blue-500 text-white px-3 py-1 rounded"
+                    >
+                      Add
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        )}
+        </div>
 
-        {/* Total */}
-        {cart.length > 0 && (
-          <div className="mt-4 text-right font-bold">Total: £{total.toFixed(2)}</div>
-        )}
-      </div>
-    </Flex>
+        {/* CART (1/3) */}
+        <div className="w-full md:w-1/3 border-l pl-4 rounded-md border-gray-300 p-4 bg-gray-50 text-gray-600">
+          <h2 className="text-xl font-bold mb-4">Cart</h2>
+
+          {cart.length === 0 ? (
+            <p className="text-gray-4500">Cart is empty</p>
+          ) : (
+            <table className="w-full border border-gray-300 bg-gray-300 text-gray-800">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="border p-2 text-left">Item & Price</th>
+                  <th className="border p-2">Qty</th>
+                  <th className="border p-2">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {cart.map(item => (
+                  <tr key={item.product.id} className="border-t">
+                    {/* Combined column */}
+                    <td className="p-2">
+                      <div className="font-medium">{item.product.item}</div>
+                      <div className="text-sm text-gray-500">
+                        £{item.product.price.toFixed(2)}
+                      </div>
+                    </td>
+
+                    {/* Quantity */}
+                    <td className="p-2 text-center">{item.quantity}</td>
+
+                    {/* Actions */}
+                    <td className="p-2">
+                      <div className="flex justify-center gap-2">
+                        <button
+                          onClick={() => decreaseQuantity(item.product.id)}
+                          className="bg-gray-200 px-2 rounded"
+                        >
+                          -
+                        </button>
+
+                        <button
+                          onClick={() => increaseQuantity(item.product.id)}
+                          className="bg-gray-200 px-2 rounded"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+
+          {/* Total */}
+          {cart.length > 0 && (
+            <div className="mt-4 text-right font-bold">Total: £{total.toFixed(2)}</div>
+          )}
+        </div>
+      </Flex>
+    </Reveal>
   )
 }
