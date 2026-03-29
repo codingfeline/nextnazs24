@@ -1,5 +1,6 @@
 'use client'
 import { Clear } from '@/app/components'
+import MyContainer from '@/app/components/MyContainer'
 import Reveal from '@/app/components/Reveal'
 import { ChangeEvent, useState } from 'react'
 // Helper for Title Case
@@ -49,9 +50,7 @@ export default function TextTransformer() {
 
   return (
     <Reveal>
-      <div className="max-w-md mx-auto p-6 bg-gray-300 rounded-md shadow-lg border border-gray-200 text-gray-600">
-        <h4>Case Converter</h4>
-
+      <MyContainer header="Case Converter">
         {/* 1. Main Input */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-500 mb-2">
@@ -118,7 +117,7 @@ export default function TextTransformer() {
             </button>
           </div>
         </div>
-      </div>
+      </MyContainer>
     </Reveal>
   )
 }

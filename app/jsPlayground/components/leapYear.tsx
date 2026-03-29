@@ -1,5 +1,6 @@
 'use client'
 
+import MyContainer from '@/app/components/MyContainer'
 import Reveal from '@/app/components/Reveal'
 import { ChangeEvent, useState } from 'react'
 
@@ -35,10 +36,9 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
 
   return (
     <Reveal>
-      <div className="flex_center">
-        <div className="max-w-md mx-auto p-6 bg-gray-300 rounded-md shadow-lg border border-gray-200 text-gray-600">
+      <MyContainer header="Leap Year">
+        <div className="flex_center">
           <form>
-            <h4>Leap Year Checker</h4>
             <label htmlFor="year-input" style={{ display: 'block', marginBottom: '8px' }}>
               Enter Year:
             </label>
@@ -54,7 +54,7 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
             </div>
           </form>
         </div>
-      </div>
+      </MyContainer>
     </Reveal>
   )
 }
