@@ -32,8 +32,8 @@ const AppHeader = () => {
   }, [])
 
   return (
-    <Reveal direction="right">
-      <nav className="borber-b bg-gray-200 justify-between h-full relative z-50">
+    <nav className="borber-b bg-gray-200 justify-between h-full relative z-50 border-black">
+      <Reveal direction="right">
         <Container>
           <Flex justify="between">
             <Flex
@@ -65,8 +65,8 @@ const AppHeader = () => {
             // sm:hidden ensures it doesn't show on desktop
           />
         )}
-      </nav>
-    </Reveal>
+      </Reveal>
+    </nav>
   )
 }
 
@@ -82,7 +82,7 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
     classnames({
       'text-zinc-900 bg-gray-300 ': link === currentPath,
       'text-zinc-500 ': link !== currentPath,
-      'hover:text-zinc-800 transition-colors  p-2 w-full flex justify-center  md:w-max ': true,
+      'hover:text-zinc-900 transition-colors  p-2 w-full flex justify-center  md:w-max bg-gray-200 hover:bg-gray-500': true,
     })
 
   const links = [
