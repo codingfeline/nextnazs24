@@ -30,7 +30,7 @@ function Contact() {
         {/* <Paginate /> */}
         {/* <FiveParagraphs /> */}
 
-        <Reveal delay="delay-100">
+        <Reveal>
           <p className="m-5 text-white">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
             reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
@@ -48,7 +48,7 @@ function Contact() {
             delectus? Incidunt sit molestias eos magni soluta unde quo beatae pariatur.
           </p>
         </Reveal>
-        <Reveal delay="delay-300">
+        <Reveal delay={100}>
           <p className="m-5 text-white ">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
             reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
@@ -58,7 +58,7 @@ function Contact() {
             beatae pariatur.
           </p>
         </Reveal>
-        <Reveal delay="delay-500">
+        <Reveal delay={500}>
           <p className="m-5 text-white ">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
             reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
@@ -68,7 +68,7 @@ function Contact() {
             beatae pariatur.
           </p>
         </Reveal>
-        <Reveal delay="delay-700">
+        <Reveal delay={700}>
           <p className="m-5 text-white">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
             reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
@@ -86,7 +86,7 @@ function Contact() {
             molestias eos magni soluta unde quo beatae pariatur.
           </p>
         </Reveal>
-        <Reveal delay="delay-100">
+        <Reveal delay={800}>
           <p className="m-5 text-white ">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque tenetur,
             reprehenderit aliquid quidem architecto deserunt necessitatibus itaque ipsam
