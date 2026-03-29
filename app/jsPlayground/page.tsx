@@ -9,12 +9,14 @@ const TitleCase = dynamic(() => import('./components/ChangeCase'))
 const shoppingCart = dynamic(() => import('../components/shoppingCart')) // Example of another component
 // const Utilities = dynamic(() => import('../components/utilities')) // Example of another component
 const Pin = dynamic(() => import('../components/PinGenerator')) // Example of another component
+const Temperature = dynamic(() => import('../components/Temperature')) // Example of another component
 
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
   case: TitleCase,
   cart: shoppingCart,
   pin: Pin,
+  temp: Temperature,
   // utilities: Utilities,
 }
 
@@ -31,6 +33,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
     { href: '/jsPlayground?view=case', label: 'Case Converter', view: 'case' },
     { href: '/jsPlayground?view=cart', label: 'Shopping Cart', view: 'cart' },
     { href: '/jsPlayground?view=pin', label: 'PIN Generator', view: 'pin' },
+    { href: '/jsPlayground?view=temp', label: 'Temperature Converter', view: 'temp' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ]
 
