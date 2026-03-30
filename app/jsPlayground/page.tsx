@@ -29,11 +29,11 @@ const JsPlayground = async ({ searchParams }: Props) => {
   const currentView = typeof params.view === 'string' ? params.view : 'leap'
   const SelectedComponent = viewMap[currentView] || LeapYear
   const links = [
-    { href: 'leap', label: 'Leap Year', view: 'leap' },
-    { href: 'case', label: 'Case Converter', view: 'case' },
-    { href: 'cart', label: 'Shopping Cart', view: 'cart' },
-    { href: 'pin', label: 'PIN Generator', view: 'pin' },
-    { href: 'temp', label: 'Temperature Converter', view: 'temp' },
+    { href: 'leap', label: 'Leap Year' },
+    { href: 'case', label: 'Case Converter' },
+    { href: 'cart', label: 'Shopping Cart' },
+    { href: 'pin', label: 'PIN Generator' },
+    { href: 'temp', label: 'Temperature Converter' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ]
 
@@ -48,7 +48,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
                 <Link
                   key={link.href}
                   href={`/jsPlayground?view=${link.href}`}
-                  className={`p-2 rounded ${currentView === link.view ? 'bg-blue-500 ' : 'hover:bg-blue-400 bg-gray-600'}`}
+                  className={`p-2 rounded ${currentView === link.href ? 'bg-blue-500 ' : 'hover:bg-blue-400 bg-gray-600'}`}
                 >
                   {link.label}
                 </Link>
