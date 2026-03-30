@@ -29,11 +29,11 @@ const JsPlayground = async ({ searchParams }: Props) => {
   const currentView = typeof params.view === 'string' ? params.view : 'leap'
   const SelectedComponent = viewMap[currentView] || LeapYear
   const links = [
-    { href: '/jsPlayground?view=leap', label: 'Leap Year', view: 'leap' },
-    { href: '/jsPlayground?view=case', label: 'Case Converter', view: 'case' },
-    { href: '/jsPlayground?view=cart', label: 'Shopping Cart', view: 'cart' },
-    { href: '/jsPlayground?view=pin', label: 'PIN Generator', view: 'pin' },
-    { href: '/jsPlayground?view=temp', label: 'Temperature Converter', view: 'temp' },
+    { href: 'leap', label: 'Leap Year', view: 'leap' },
+    { href: 'case', label: 'Case Converter', view: 'case' },
+    { href: 'cart', label: 'Shopping Cart', view: 'cart' },
+    { href: 'pin', label: 'PIN Generator', view: 'pin' },
+    { href: 'temp', label: 'Temperature Converter', view: 'temp' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ]
 
@@ -47,7 +47,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
               {links.map(link => (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={`/jsPlayground?view=${link.href}`}
                   className={`p-2 rounded ${currentView === link.view ? 'bg-blue-500 ' : 'hover:bg-blue-400 bg-gray-600'}`}
                 >
                   {link.label}
