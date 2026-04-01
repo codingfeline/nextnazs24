@@ -35,7 +35,7 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
   }
 
   return (
-    <Reveal>
+    <Reveal delay={300}>
       <MyContainer header="Leap Year">
         <div className="flex_center">
           <form>

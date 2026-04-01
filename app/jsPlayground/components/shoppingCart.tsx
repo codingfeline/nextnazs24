@@ -2,7 +2,7 @@
 
 import { Flex } from '@radix-ui/themes'
 import { useMemo, useState } from 'react'
-import Reveal from './Reveal'
+import Reveal from '../../components/Reveal'
 
 type Product = {
   id: string
@@ -83,7 +83,7 @@ export default function CartClient() {
   }, [cart])
 
   return (
-    <Reveal>
+    <Reveal delay={300}>
       <Flex direction={{ initial: 'column', sm: 'row' }} gap="2">
         {/* <Flex className="flex gap-6 md:p-4 p-2 sm:w-full md:w-5/6 mx-auto"> */}
         {/* MENU (2/3) */}

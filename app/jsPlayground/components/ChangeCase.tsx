@@ -49,7 +49,7 @@ export default function TextTransformer() {
   }
 
   return (
-    <Reveal>
+    <Reveal delay={300}>
       <MyContainer header="Case Converter">
         {/* 1. Main Input */}
         <div className="mb-6">

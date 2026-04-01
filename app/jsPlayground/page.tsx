@@ -6,10 +6,10 @@ import Reveal from '../components/Reveal'
 
 const LeapYear = dynamic(() => import('./components/leapYear'))
 const TitleCase = dynamic(() => import('./components/ChangeCase'))
-const shoppingCart = dynamic(() => import('../components/shoppingCart')) // Example of another component
+const shoppingCart = dynamic(() => import('./components/shoppingCart')) // Example of another component
 // const Utilities = dynamic(() => import('../components/utilities')) // Example of another component
-const Pin = dynamic(() => import('../components/PinGenerator')) // Example of another component
-const Temperature = dynamic(() => import('../components/Temperature')) // Example of another component
+const Pin = dynamic(() => import('./components/PinGenerator')) // Example of another component
+const Temperature = dynamic(() => import('./components/Temperature')) // Example of another component
 
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
@@ -42,7 +42,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
       <div className="text-gray-300 p-4 ">
         {/* <h2 className="text-gray-100">JS Playground</h2> */}
         <div className=" gap-2 ">
-          <Reveal direction="left">
+          <Reveal direction="left" delay={200}>
             <nav className="w-full gap-1 p-2 flex flex-wrap text-gray-200 ">
               {links.map(link => (
                 <Link

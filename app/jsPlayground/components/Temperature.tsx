@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import MyContainer from './MyContainer'
-import Reveal from './Reveal'
+import MyContainer from '../../components/MyContainer'
+import Reveal from '../../components/Reveal'
 
 const TempConverter = () => {
   const [celsius, setCelsius] = useState<string>('')
@@ -29,7 +29,7 @@ const TempConverter = () => {
   }
 
   return (
-    <Reveal direction="up">
+    <Reveal delay={300}>
       <MyContainer header="Temperature Converter">
         <div className="flex flex-col space-y-4">
           {/* Celsius Input */}

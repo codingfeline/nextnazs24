@@ -2,9 +2,9 @@
 
 // import { Check, Copy, RefreshCw } from 'lucide-react' // Optional: for nice icons
 import { useState } from 'react'
-import { Check, Copy, Refresh } from '.'
-import MyContainer from './MyContainer'
-import Reveal from './Reveal'
+import { Check, Copy, Refresh } from '../../components'
+import MyContainer from '../../components/MyContainer'
+import Reveal from '../../components/Reveal'
 
 const PinGenerator = () => {
   const [pin, setPin] = useState<string>('------')
@@ -29,7 +29,7 @@ const PinGenerator = () => {
   }
 
   return (
-    <Reveal>
+    <Reveal delay={300}>
       <MyContainer header="PIN Generator">
         <div className="flex items-center gap-4 mb-8">
           <div className="flex gap-2">

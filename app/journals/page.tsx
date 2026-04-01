@@ -111,7 +111,6 @@ const JournalsPage = async ({
                     >
                       <div className="flex justify-between flex-col md:p-1  md:flex-row">
                         <span className="pl-2">{j.topic}</span>
-                        {/* <Link href={`/journals/${j.id}`}>{j.topic}</Link> */}
                         <Text className="text-gray-500 pr-2 roboto-mono text-sm flex justify-end">
                           {j.date.toLocaleString('en-gb', dateOptions)}
                         </Text>

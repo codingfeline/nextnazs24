@@ -33,7 +33,7 @@ const AppHeader = () => {
 
   return (
     <nav className="borber bg-gray-200 justify-between h-full relative z-50 border-black">
-      <Reveal direction="right">
+      <Reveal direction="left">
         <Container>
           <Flex justify="between">
             <Flex

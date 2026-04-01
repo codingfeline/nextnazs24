@@ -24,10 +24,11 @@ export function useIntersectionObserver({
         if (entry.isIntersecting) {
           node.classList.add('opacity-100', 'translate-x-0', 'translate-y-0')
           node.classList.remove('opacity-0', directionClass)
-        } else {
-          node.classList.add('opacity-0', directionClass)
-          node.classList.remove('opacity-100', 'translate-x-0', 'translate-y-0')
         }
+        // else {
+        //   node.classList.add('opacity-0', directionClass)
+        //   node.classList.remove('opacity-100', 'translate-x-0', 'translate-y-0')
+        // }
       },
       { threshold, rootMargin }
     )
