@@ -146,11 +146,11 @@ const banner = {
 }
 
 const manageBtn = {
-  position: 'fixed' as const,
-  bottom: 16,
-  right: 16,
+  // position: 'fixed' as const,
+  // bottom: 16,
+  // right: 16,
   background: '#e5e7eb',
-  padding: '0.5rem 0.75rem',
+  // padding: '0.2rem 0.35rem',
   borderRadius: 6,
   border: 'none',
   cursor: 'pointer',
