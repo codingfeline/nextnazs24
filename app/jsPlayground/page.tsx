@@ -8,9 +8,12 @@ const LeapYear = dynamic(() => import('./components/leapYear'))
 const TitleCase = dynamic(() => import('./components/ChangeCase'))
 const shoppingCart = dynamic(() => import('./components/shoppingCart')) // Example of another component
 // const Utilities = dynamic(() => import('../components/utilities')) // Example of another component
-const Pin = dynamic(() => import('./components/PinGenerator')) // Example of another component
-const Temperature = dynamic(() => import('./components/Temperature')) // Example of another component
-const Prime = dynamic(() => import('./components/PrimeNumber')) // Example of another component
+const Pin = dynamic(() => import('./components/PinGenerator'))
+const Temperature = dynamic(() => import('./components/Temperature'))
+const Prime = dynamic(() => import('./components/PrimeNumber'))
+const FibonacciPage = dynamic(() => import('./components/Fibonacci'))
+const DateFormatter = dynamic(() => import('./components/DateFormatter'))
+
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
   case: TitleCase,
@@ -18,6 +21,8 @@ const viewMap: Record<string, React.ComponentType> = {
   pin: Pin,
   temp: Temperature,
   prime: Prime,
+  FibonacciPage,
+  DateFormatter,
   // utilities: Utilities,
 }
 
@@ -36,8 +41,10 @@ const JsPlayground = async ({ searchParams }: Props) => {
     { href: 'pin', label: 'PIN Generator' },
     { href: 'temp', label: 'Temperature Converter' },
     { href: 'prime', label: 'Prime Checker' },
+    { href: 'FibonacciPage', label: 'Fibonacci' },
+    { href: 'DateFormatter', label: 'Date Formatter' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
-  ]
+  ].sort((a, b) => a.label.localeCompare(b.label))
 
   return (
     <MainPage bg="bg_nebula">

@@ -43,6 +43,39 @@ export default function ViewSwitcher({ links, currentView }: Props) {
     router.push(`/jsPlayground?${params.toString()}`)
   }
 
+  useEffect(() => {
+    const savedMode = localStorage.getItem('viewMode') as 'links' | 'dropdown' | null
+
+    if (savedMode) {
+      setMode(savedMode)
+    }
+  }, [])
+
+  useEffect(() => {
+    const mq = window.matchMedia('(orientation: portrait)')
+
+    const handleChange = () => {
+      // Portrait → dropdown (better for narrow screens)
+      // Landscape → links (more space available)
+      const isPortrait = mq.matches
+
+      const newMode = isPortrait ? 'dropdown' : 'links'
+
+      setMode(newMode)
+      localStorage.setItem('viewMode', newMode)
+    }
+
+    // Initial check
+    handleChange()
+
+    // Listen for orientation changes
+    mq.addEventListener('change', handleChange)
+
+    return () => {
+      mq.removeEventListener('change', handleChange)
+    }
+  }, [])
+
   return (
     <div className="w-full p-2">
       {/* Toggle Buttons */}
