@@ -56,8 +56,17 @@ body {
 code {
   white-space: pre-wrap !important;
 }
+
 .prose {
   /* @apply whitespace-pre-wrap; */
+}
+.MyContainer {
+  code {
+    @apply text-green-600;
+  }
+  li {
+    @apply list-disc list-inside;
+  }
 }
 .bg_cover {
   @apply bg-center bg-cover bg-fixed;
