@@ -11,7 +11,7 @@ const BrainsContainer = ({ children, header = 'the main logic' }: Props) => {
   return (
     <Reveal delay={400} direction="right">
       <div
-        className={`relative  p-4 mt-8 rounded-md border border-dashed ${show ? 'border-gray-400 bg-[#121316]' : 'border-gray-100'} transition-colors  `}
+        className={`relative  p-4 mt-8 rounded-md border border-dashed ${show ? 'border-gray-400 ]' : 'border-gray-100'} transition-colors  `}
       >
         {/* Title styled like a legend */}
         <span
