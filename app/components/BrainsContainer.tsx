@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode
   header?: string
 }
-const BrainsContainer = ({ children, header = 'the logic' }: Props) => {
+const BrainsContainer = ({ children, header = 'the main logic' }: Props) => {
   const [show, setShow] = useState(false)
   return (
     <Reveal delay={400} direction="right">
