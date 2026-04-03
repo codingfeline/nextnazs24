@@ -1,5 +1,7 @@
 'use client'
 
+import BrainsContainer from '@/app/components/BrainsContainer'
+import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import { useState } from 'react'
 import MyContainer from '../../components/MyContainer'
 import Reveal from '../../components/Reveal'
@@ -27,6 +29,8 @@ const TempConverter = () => {
     const converted = ((parseFloat(value) - 32) * 5) / 9
     setCelsius(converted.toFixed(2))
   }
+
+  const snippet = `const celsius = (parseFloat(fahrenheit) * 9) / 5 + 32 \nconst fahrenheit = ((parseFloat(celsius) - 32) * 5) / 9`
 
   return (
     <Reveal delay={300}>
@@ -64,10 +68,13 @@ const TempConverter = () => {
             setCelsius('')
             setFahrenheit('')
           }}
-          className="w-full py-2 text-sm text-blue-600 hover:text-blue-800 font-semibold"
+          className="w-full py-2 text-sm text-blue-600 hover:text-blue-800 font-semibold bg-gray-300 rounded-md mt-3 transition-colors"
         >
           Reset Fields
         </button>
+        <BrainsContainer>
+          <MyCodeHighlighter item={snippet} />
+        </BrainsContainer>
       </MyContainer>
     </Reveal>
   )

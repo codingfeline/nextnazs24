@@ -1,8 +1,8 @@
 'use client'
 import { Clear } from '@/app/components'
 import BrainsContainer from '@/app/components/BrainsContainer'
+import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
-import PreCode from '@/app/components/PreCode'
 import Reveal from '@/app/components/Reveal'
 import { ChangeEvent, useState } from 'react'
 // Helper for Title Case
@@ -53,7 +53,7 @@ export default function TextTransformer() {
   const codeSnippet = `
   const toTitleCase = (str: string): string =>
   str.toLowerCase().replace(/\\b\\w/g, char => char.toUpperCase())
-  
+
   str.toLowerCase()
   str.toUpperCase()
   `
@@ -128,7 +128,7 @@ export default function TextTransformer() {
           </div>
         </div>
         <BrainsContainer>
-          <PreCode>{codeSnippet}</PreCode>
+          <MyCodeHighlighter item={codeSnippet} />
         </BrainsContainer>
       </MyContainer>
     </Reveal>

@@ -1,6 +1,8 @@
 'use client'
 
 // import { Check, Copy, RefreshCw } from 'lucide-react' // Optional: for nice icons
+import BrainsContainer from '@/app/components/BrainsContainer'
+import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import { useState } from 'react'
 import { Check, Copy, Refresh } from '../../components'
 import MyContainer from '../../components/MyContainer'
@@ -27,7 +29,8 @@ const PinGenerator = () => {
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
-
+  const snippet = `const pin = Math.floor(Math.random() * 1000000) .toString() .padStart(6, '0')
+`
   return (
     <Reveal delay={300}>
       <MyContainer header="PIN Generator">
@@ -61,6 +64,9 @@ const PinGenerator = () => {
             {copied ? <Check size={20} className="text-green-600" /> : <Copy size={20} />}
           </button>
         </div>
+        <BrainsContainer>
+          <MyCodeHighlighter item={snippet} />
+        </BrainsContainer>
       </MyContainer>
     </Reveal>
   )
