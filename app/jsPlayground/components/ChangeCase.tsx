@@ -1,6 +1,8 @@
 'use client'
 import { Clear } from '@/app/components'
+import BrainsContainer from '@/app/components/BrainsContainer'
 import MyContainer from '@/app/components/MyContainer'
+import PreCode from '@/app/components/PreCode'
 import Reveal from '@/app/components/Reveal'
 import { ChangeEvent, useState } from 'react'
 // Helper for Title Case
@@ -47,6 +49,14 @@ export default function TextTransformer() {
       console.error('Failed to copy!', err)
     }
   }
+
+  const codeSnippet = `
+  const toTitleCase = (str: string): string =>
+  str.toLowerCase().replace(/\\b\\w/g, char => char.toUpperCase())
+  
+  str.toLowerCase()
+  str.toUpperCase()
+  `
 
   return (
     <Reveal delay={300}>
@@ -117,6 +127,9 @@ export default function TextTransformer() {
             </button>
           </div>
         </div>
+        <BrainsContainer>
+          <PreCode>{codeSnippet}</PreCode>
+        </BrainsContainer>
       </MyContainer>
     </Reveal>
   )

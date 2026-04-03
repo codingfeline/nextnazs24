@@ -1,6 +1,8 @@
 'use client'
 
+import BrainsContainer from '@/app/components/BrainsContainer'
 import MyContainer from '@/app/components/MyContainer'
+import PreCode from '@/app/components/PreCode'
 import Reveal from '@/app/components/Reveal'
 import { ChangeEvent, useState } from 'react'
 
@@ -34,6 +36,16 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
     setYear(value === '' ? '' : Number(value))
   }
 
+  const codeSnippet = `
+  if (numericYear % 4 === 0) {
+    if (numericYear % 100 === 0 && numericYear % 400 !== 0) {
+      return \`\${numericYear} is not a leap year.\`
+    }
+    return \`\${numericYear} is a leap year.\`
+  }
+  return \`\${numericYear} is not a leap year.\`
+`
+
   return (
     <Reveal delay={300}>
       <MyContainer header="Leap Year">
@@ -54,6 +66,9 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
             </div>
           </form>
         </div>
+        <BrainsContainer>
+          <PreCode>{codeSnippet}</PreCode>
+        </BrainsContainer>
       </MyContainer>
     </Reveal>
   )
