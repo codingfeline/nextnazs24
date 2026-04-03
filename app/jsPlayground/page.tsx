@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import React from 'react'
 import MainPage from '../components/MainPage'
 import Reveal from '../components/Reveal'
+import ViewSwitcher from '../components/ViewSwitcher'
 
 const LeapYear = dynamic(() => import('./components/leapYear'))
 const TitleCase = dynamic(() => import('./components/ChangeCase'))
@@ -43,17 +43,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
         {/* <h2 className="text-gray-100">JS Playground</h2> */}
         <div className=" gap-2 ">
           <Reveal direction="left" delay={200}>
-            <nav className="w-full gap-1 p-2 flex flex-wrap text-gray-200 ">
-              {links.map(link => (
-                <Link
-                  key={link.href}
-                  href={`/jsPlayground?view=${link.href}`}
-                  className={`p-2 rounded ${currentView === link.href ? 'bg-blue-500 ' : 'hover:bg-blue-400 bg-gray-600'}`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            <ViewSwitcher links={links} currentView={currentView} />
           </Reveal>
           <SelectedComponent />
         </div>
