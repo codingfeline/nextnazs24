@@ -1,11 +1,14 @@
 interface Props {
   header: string
   children: React.ReactNode
+  size?: string
 }
 
-const MyContainer = ({ header, children }: Props) => {
+const MyContainer = ({ header, children, size = 'max-w-md' }: Props) => {
   return (
-    <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-md shadow-lg border border-gray-200 text-gray-600 mt-3">
+    <div
+      className={`mx-auto p-6 bg-gray-100 rounded-md shadow-lg border border-gray-200 text-gray-600 mt-3 ${size} select-none`}
+    >
       <h4 className="mb-3">{header}</h4>
       {children}
     </div>
