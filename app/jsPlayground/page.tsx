@@ -10,13 +10,14 @@ const shoppingCart = dynamic(() => import('./components/shoppingCart')) // Examp
 // const Utilities = dynamic(() => import('../components/utilities')) // Example of another component
 const Pin = dynamic(() => import('./components/PinGenerator')) // Example of another component
 const Temperature = dynamic(() => import('./components/Temperature')) // Example of another component
-
+const Prime = dynamic(() => import('./components/PrimeNumber')) // Example of another component
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
   case: TitleCase,
   cart: shoppingCart,
   pin: Pin,
   temp: Temperature,
+  prime: Prime,
   // utilities: Utilities,
 }
 
@@ -34,6 +35,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
     { href: 'cart', label: 'Shopping Cart' },
     { href: 'pin', label: 'PIN Generator' },
     { href: 'temp', label: 'Temperature Converter' },
+    { href: 'prime', label: 'Prime Checker' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ]
 
