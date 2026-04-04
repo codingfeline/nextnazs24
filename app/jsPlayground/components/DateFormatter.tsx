@@ -13,8 +13,7 @@ export default function DateFormatter() {
   const currentDateFormat = `Current Date and Time: ${date}`
 
   function formatDateMMDDYYYY(date: Date) {
-    const formattedDate = date.toLocaleDateString('en-GB')
-    return `Formatted Date (MM/DD/YYYY): ${formattedDate}`
+    return date.toLocaleDateString('en-GB')
   }
 
   function formatDateLong(date: Date) {
@@ -24,9 +23,7 @@ export default function DateFormatter() {
       day: 'numeric',
     }
 
-    const formattedDate = date.toLocaleDateString('en-GB', options)
-
-    return `Formatted Date (Month Day, Year): ${formattedDate}`
+    return date.toLocaleDateString('en-GB', options)
   }
 
   const snippet = `function formatDateMMDDYYYY(date: Date) {
@@ -48,7 +45,7 @@ export default function DateFormatter() {
 
   return (
     <MyContainer header="Date Formatter">
-      <div className="p-6 space-y-4 font-mono">
+      <div className="p-6 space-y-4 font-mono bg-gray-200 rounded-md">
         <div>
           <label className="block mb-2 font-semibold">Choose a date:</label>
           <input
@@ -61,8 +58,14 @@ export default function DateFormatter() {
 
         <div className="space-y-2">
           <p>{currentDateFormat}</p>
-          <p>{formatDateMMDDYYYY(date)}</p>
-          <p>{formatDateLong(date)}</p>
+          <p>
+            <span className="font-sans">Formatted Date (MM/DD/YYYY): </span>
+            {formatDateMMDDYYYY(date)}
+          </p>
+          <p>
+            <span className="font-sans">Formatted Date (Day, Month, Year): </span>
+            {formatDateLong(date)}
+          </p>
         </div>
       </div>
       <BrainsContainer>
