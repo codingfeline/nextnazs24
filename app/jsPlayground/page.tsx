@@ -3,6 +3,7 @@ import React from 'react'
 import MainPage from '../components/MainPage'
 import Reveal from '../components/Reveal'
 import ViewSwitcher from '../components/ViewSwitcher'
+import FizzBuzz from './components/FizzBuzz'
 
 const LeapYear = dynamic(() => import('./components/leapYear'))
 const TitleCase = dynamic(() => import('./components/ChangeCase'))
@@ -23,6 +24,7 @@ const viewMap: Record<string, React.ComponentType> = {
   prime: Prime,
   FibonacciPage,
   DateFormatter,
+  FizzBuzz,
   // utilities: Utilities,
 }
 
@@ -43,6 +45,7 @@ const JsPlayground = async ({ searchParams }: Props) => {
     { href: 'prime', label: 'Prime Checker' },
     { href: 'FibonacciPage', label: 'Fibonacci' },
     { href: 'DateFormatter', label: 'Date Formatter' },
+    { href: 'FizzBuzz', label: 'FizzBuzz' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ].sort((a, b) => a.label.localeCompare(b.label))
 
