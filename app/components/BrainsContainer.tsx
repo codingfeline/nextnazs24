@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode
   header?: string
 }
-const BrainsContainer = ({ children, header = 'the main logic' }: Props) => {
+const BrainsContainer = ({ children, header = 'the logic' }: Props) => {
   const [show, setShow] = useState(false)
   return (
     <Reveal delay={400} direction="right">
@@ -16,7 +16,7 @@ const BrainsContainer = ({ children, header = 'the main logic' }: Props) => {
         {/* Clickable centered title */}
         <button
           onClick={() => setShow(!show)}
-          className={`absolute -top-3 left-1/2 -translate-x-1/2 bg-gray-200 px-4 text-sm font-medium text-gray-700 cursor-pointer hover:text-black transition flex gap-2 items-center rounded-md border border-gray-400 p-1 w-[180] ${show ? '' : 'border-dashed'}`}
+          className={`absolute -top-3 left-1/2 -translate-x-1/2 bg-gray-200 px-4 text-sm font-medium text-gray-700 cursor-pointer hover:text-black transition flex gap-2 items-center rounded-md border border-gray-400 p-1  ${show ? '' : 'border-dashed'}`}
         >
           <Cpu size={20} title="CPU" />
           {header} {show ? <Minus size={16} /> : <Plus size={16} />}
