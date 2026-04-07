@@ -44,14 +44,6 @@ export default function ViewSwitcher({ links, currentView }: Props) {
   }
 
   useEffect(() => {
-    const savedMode = localStorage.getItem('viewMode') as 'links' | 'dropdown' | null
-
-    if (savedMode) {
-      setMode(savedMode)
-    }
-  }, [])
-
-  useEffect(() => {
     const mq = window.matchMedia('(orientation: portrait)')
 
     const handleChange = () => {
