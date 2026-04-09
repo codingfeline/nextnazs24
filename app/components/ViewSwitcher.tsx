@@ -69,9 +69,9 @@ export default function ViewSwitcher({ links, currentView }: Props) {
   }, [])
 
   return (
-    <div className="w-full p-2">
+    <div className="w-full p-1 gap-2 flex justify-between items">
       {/* Toggle Buttons */}
-      <div className="flex gap-2 mb-3">
+      <div className="flex gap-2 mb-3 items-start">
         <button
           onClick={() => handleModeChange('links')}
           className={`px-3 py-1 rounded transition-all duration-300 ${
@@ -93,11 +93,11 @@ export default function ViewSwitcher({ links, currentView }: Props) {
 
       {/* LINKS MODE */}
       <div
-        className={`transition-all duration-500 ease-in-out ${
-          mode === 'links' ? 'opacity-100 max-h-40' : 'opacity-0 max-h-0 overflow-hidden'
+        className={`transition-all duration-500 ease-in-out  ${
+          mode === 'links' ? 'opacity-100 max-h-40 ' : 'opacity-0 max-h-0 overflow-hidden'
         }`}
       >
-        <nav className="flex flex-wrap gap-2 text-gray-200">
+        <nav className="flex flex-wrap gap-2 text-gray-200 justify-center">
           {links.map(link => (
             <Link
               key={link.href}
