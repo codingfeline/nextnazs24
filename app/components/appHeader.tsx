@@ -81,8 +81,8 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
   const colourLink = (link: string) =>
     classnames({
       'text-zinc-900 bg-gray-300 ': link === currentPath,
-      'text-zinc-500 ': link !== currentPath,
-      'hover:text-zinc-900 transition-colors  p-2 w-full flex justify-center  md:w-max bg-gray-200 hover:bg-gray-500 border-black': true,
+      'text-zinc-900 ': link !== currentPath,
+      'hover:text-white transition-colors  p-2 w-full flex justify-center  md:w-max bg-gray-200 hover:bg-gray-500 border-black': true,
     })
 
   const links = [
