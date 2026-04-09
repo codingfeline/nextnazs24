@@ -3,6 +3,7 @@
 import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
+import Reveal from '@/app/components/Reveal'
 import { useState } from 'react'
 
 export default function DateFormatter() {
@@ -44,33 +45,35 @@ export default function DateFormatter() {
   `
 
   return (
-    <MyContainer header="Date Formatter">
-      <div className="p-6 space-y-4 font-mono bg-gray-200 rounded-md">
-        <div>
-          <label className="block mb-2 font-semibold">Choose a date:</label>
-          <input
-            type="date"
-            value={selectedDate}
-            onChange={e => setSelectedDate(e.target.value)}
-            className="border p-2 rounded"
-          />
-        </div>
+    <Reveal delay={300}>
+      <MyContainer header="Date Formatter">
+        <div className="p-6 space-y-4 font-mono bg-gray-200 rounded-md">
+          <div>
+            <label className="block mb-2 font-semibold">Choose a date:</label>
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={e => setSelectedDate(e.target.value)}
+              className="border p-2 rounded"
+            />
+          </div>
 
-        <div className="space-y-2">
-          <p>{currentDateFormat}</p>
-          <p>
-            <span className="font-sans">Formatted Date (MM/DD/YYYY): </span>
-            {formatDateMMDDYYYY(date)}
-          </p>
-          <p>
-            <span className="font-sans">Formatted Date (Day, Month, Year): </span>
-            {formatDateLong(date)}
-          </p>
+          <div className="space-y-2">
+            <p>{currentDateFormat}</p>
+            <p>
+              <span className="font-sans">Formatted Date (MM/DD/YYYY): </span>
+              {formatDateMMDDYYYY(date)}
+            </p>
+            <p>
+              <span className="font-sans">Formatted Date (Day, Month, Year): </span>
+              {formatDateLong(date)}
+            </p>
+          </div>
         </div>
-      </div>
-      <BrainsContainer>
-        <MyCodeHighlighter item={snippet} />
-      </BrainsContainer>
-    </MyContainer>
+        <BrainsContainer>
+          <MyCodeHighlighter item={snippet} />
+        </BrainsContainer>
+      </MyContainer>
+    </Reveal>
   )
 }
