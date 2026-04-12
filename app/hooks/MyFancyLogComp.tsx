@@ -6,11 +6,10 @@ interface Props {
   txt: string
   back: string
   colour: string
-  now?: string
 }
 
-const MyFancyLogComp = ({ txt, back, colour, now = undefined }: Props) => {
-  fancyLog(txt, back, colour, now)
+const MyFancyLogComp = ({ txt, back, colour }: Props) => {
+  fancyLog(txt, back, colour)
   return <></>
 }
 
