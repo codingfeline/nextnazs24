@@ -8,6 +8,7 @@ import AppHeader from './components/appHeader'
 import BottomLogo from './components/bottomLogo'
 import ClientProviders from './components/ClientProviders'
 import './globals.css'
+import MyFancyLogComp from './hooks/MyFancyLogComp'
 import QueryClientProvider from './QueryClientProvider'
 import './theme-config.css'
 
@@ -58,6 +59,11 @@ export default function RootLayout({
                 {children}
                 {/* <AnalyticsConsent /> */}
                 <BottomLogo />
+                <MyFancyLogComp
+                  txt="NazsNet aka CodingPaws"
+                  back="#531bad"
+                  colour="#fff"
+                />
                 <AppFooter />
               </Theme>
             </CookieConsentProvider>
