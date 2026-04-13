@@ -1,5 +1,5 @@
-import TitleCase from '@/app/jsPlayground/components/ChangeCase'
-import LeapYear from '@/app/jsPlayground/components/leapYear'
+import TitleCase from '@/app/jsPlayground/_components/ChangeCase'
+import LeapYear from '@/app/jsPlayground/_components/leapYear'
 import { Flex } from '@radix-ui/themes'
 
 const Utilities = () => {
