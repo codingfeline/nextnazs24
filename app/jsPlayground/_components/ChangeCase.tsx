@@ -3,8 +3,8 @@ import { Clear } from '@/app/components'
 import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
-import Reveal from '@/app/components/Reveal'
 import { ChangeEvent, useState } from 'react'
+import RevealPlayGround from './RevealPlayGround'
 // Helper for Title Case
 const toTitleCase = (str: string): string =>
   str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
@@ -59,7 +59,7 @@ export default function TextTransformer() {
   `
 
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="Case Converter">
         {/* 1. Main Input */}
         <div className="mb-6">
@@ -131,6 +131,6 @@ export default function TextTransformer() {
           <MyCodeHighlighter item={codeSnippet} />
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }

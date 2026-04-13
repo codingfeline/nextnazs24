@@ -3,7 +3,7 @@
 import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
-import Reveal from '@/app/components/Reveal'
+import RevealPlayGround from './RevealPlayGround'
 
 const FizzBuzz = () => {
   // Generate numbers 1 to 100
@@ -22,7 +22,7 @@ const FizzBuzz = () => {
   `
 
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="FizzBuzz Fun">
         <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -48,7 +48,7 @@ const FizzBuzz = () => {
           <MyCodeHighlighter item={snippet} />
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }
 

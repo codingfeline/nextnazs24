@@ -6,13 +6,19 @@ interface RevealProps {
   children: React.ReactNode
   delay?: number
   direction?: 'up' | 'left' | 'right'
+  distance?: 3 | 5 | 10
 }
 
-export default function Reveal({ children, delay = 0, direction = 'up' }: RevealProps) {
+export default function Reveal({
+  children,
+  delay = 0,
+  direction = 'up',
+  distance = 10,
+}: RevealProps) {
   const directionClasses = {
-    up: 'translate-y-10',
-    left: '-translate-x-10',
-    right: 'translate-x-10',
+    up: `translate-y-${distance}`,
+    left: `-translate-x-${distance}`,
+    right: `translate-x-${distance}`,
   }
 
   const startClass = directionClasses[direction]

@@ -3,8 +3,8 @@
 import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
-import Reveal from '@/app/components/Reveal'
 import { ChangeEvent, useState } from 'react'
+import RevealPlayGround from './RevealPlayGround'
 
 interface LeapYearProps {
   initialYear?: number
@@ -46,7 +46,7 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
 `
 
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="Leap Year">
         <div className="flex_center">
           <form>
@@ -69,7 +69,7 @@ const LeapYearChecker = ({ initialYear = 2024 }: LeapYearProps) => {
           <MyCodeHighlighter item={codeSnippet} />
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }
 

@@ -3,8 +3,8 @@
 import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
-import Reveal from '@/app/components/Reveal'
 import { useState } from 'react'
+import RevealPlayGround from './RevealPlayGround'
 
 export default function DateFormatter() {
   const [selectedDate, setSelectedDate] = useState<string>('')
@@ -45,7 +45,7 @@ export default function DateFormatter() {
   `
 
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="Date Formatter">
         <div className="p-6 space-y-4 font-mono bg-gray-200 rounded-md">
           <div>
@@ -74,6 +74,6 @@ export default function DateFormatter() {
           <MyCodeHighlighter item={snippet} />
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }

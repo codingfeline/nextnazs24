@@ -4,7 +4,7 @@ import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import { useState } from 'react'
 import MyContainer from '../../components/MyContainer'
-import Reveal from '../../components/Reveal'
+import RevealPlayGround from './RevealPlayGround'
 
 const TempConverter = () => {
   const [celsius, setCelsius] = useState<string>('')
@@ -33,7 +33,7 @@ const TempConverter = () => {
   const snippet = `const celsius = (parseFloat(fahrenheit) * 9) / 5 + 32 \nconst fahrenheit = ((parseFloat(celsius) - 32) * 5) / 9`
 
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="Temperature Converter">
         <div className="flex flex-col space-y-4">
           {/* Celsius Input */}
@@ -76,7 +76,7 @@ const TempConverter = () => {
           <MyCodeHighlighter item={snippet} />
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }
 

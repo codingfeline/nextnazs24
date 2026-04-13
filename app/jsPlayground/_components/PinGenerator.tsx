@@ -6,7 +6,7 @@ import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import { useState } from 'react'
 import { Check, Copy, Refresh } from '../../components'
 import MyContainer from '../../components/MyContainer'
-import Reveal from '../../components/Reveal'
+import RevealPlayGround from './RevealPlayGround'
 
 const PinGenerator = () => {
   const [pin, setPin] = useState<string>('------')
@@ -32,7 +32,7 @@ const PinGenerator = () => {
   const snippet = `const pin = Math.floor(Math.random() * 1000000) .toString() .padStart(6, '0')
 `
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="PIN Generator">
         <div className="flex items-center gap-4 mb-8">
           <div className="flex gap-2">
@@ -68,7 +68,7 @@ const PinGenerator = () => {
           <MyCodeHighlighter item={snippet} />
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }
 

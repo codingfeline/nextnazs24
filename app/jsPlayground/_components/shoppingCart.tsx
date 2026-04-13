@@ -5,7 +5,7 @@ import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
 import { Flex } from '@radix-ui/themes'
 import { useMemo, useState } from 'react'
-import Reveal from '../../components/Reveal'
+import RevealPlayGround from './RevealPlayGround'
 
 type Product = {
   id: string
@@ -96,7 +96,7 @@ export default function CartClient() {
   }, [cart])
 
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="Shopping Cart" size="max-w-xxl">
         <Flex direction={{ initial: 'column', sm: 'row' }} gap="2">
           {/* <Flex className="flex gap-6 md:p-4 p-2 sm:w-full md:w-5/6 mx-auto"> */}
@@ -204,6 +204,6 @@ export default function CartClient() {
           <MyCodeHighlighter item={snippet1} />
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }

@@ -3,17 +3,17 @@ import React from 'react'
 import MainPage from '../components/MainPage'
 import Reveal from '../components/Reveal'
 import ViewSwitcher from '../components/ViewSwitcher'
-import FizzBuzz from './components/FizzBuzz'
+import FizzBuzz from './_components/FizzBuzz'
 
-const LeapYear = dynamic(() => import('./components/leapYear'))
-const TitleCase = dynamic(() => import('./components/ChangeCase'))
-const shoppingCart = dynamic(() => import('./components/shoppingCart')) // Example of another component
-// const Utilities = dynamic(() => import('../components/utilities')) // Example of another component
-const Pin = dynamic(() => import('./components/PinGenerator'))
-const Temperature = dynamic(() => import('./components/Temperature'))
-const Prime = dynamic(() => import('./components/PrimeNumber'))
-const FibonacciPage = dynamic(() => import('./components/Fibonacci'))
-const DateFormatter = dynamic(() => import('./components/DateFormatter'))
+const LeapYear = dynamic(() => import('./_components/leapYear'))
+const TitleCase = dynamic(() => import('./_components/ChangeCase'))
+const shoppingCart = dynamic(() => import('./_components/shoppingCart')) // Example of another component
+// const Utilities = dynamic(() => import('../_components/utilities')) // Example of another component
+const Pin = dynamic(() => import('./_components/PinGenerator'))
+const Temperature = dynamic(() => import('./_components/Temperature'))
+const Prime = dynamic(() => import('./_components/PrimeNumber'))
+const FibonacciPage = dynamic(() => import('./_components/Fibonacci'))
+const DateFormatter = dynamic(() => import('./_components/DateFormatter'))
 
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,

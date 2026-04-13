@@ -3,8 +3,8 @@
 import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
-import Reveal from '@/app/components/Reveal'
 import { useState } from 'react'
+import RevealPlayGround from './RevealPlayGround'
 
 export default function PrimeChecker() {
   const [number, setNumber] = useState<string>('')
@@ -67,7 +67,7 @@ export default function PrimeChecker() {
   return true`
 
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="Prime Number Checker" size="max-w-lg">
         <div className=" flex items-center justify-center bg-gray-100 flex-col">
           <input
@@ -99,11 +99,11 @@ export default function PrimeChecker() {
         <ul>
         <li>
         <code>try and catch</code> is still needed despite{' '}
-        <code>input type='number'</code>, to overcome copy/paste and decimals
+        <code>input type='number'</code>, to overcome co  py/paste and decimals
         </li>
         </ul> */}
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }

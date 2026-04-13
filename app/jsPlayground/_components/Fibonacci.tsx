@@ -3,8 +3,8 @@
 import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
-import Reveal from '@/app/components/Reveal'
 import { useEffect, useState } from 'react'
+import RevealPlayGround from './RevealPlayGround'
 
 export default function FibonacciPage() {
   const [count, setCount] = useState<number>(10)
@@ -40,7 +40,7 @@ export default function FibonacciPage() {
   }`
 
   return (
-    <Reveal delay={300}>
+    <RevealPlayGround>
       <MyContainer header="Fibonacci Sequence">
         <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md">
           <input
@@ -69,6 +69,6 @@ export default function FibonacciPage() {
           <MyCodeHighlighter item={snippet} />
         </BrainsContainer>
       </MyContainer>
-    </Reveal>
+    </RevealPlayGround>
   )
 }
