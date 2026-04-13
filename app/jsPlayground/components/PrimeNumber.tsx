@@ -3,6 +3,7 @@
 import BrainsContainer from '@/app/components/BrainsContainer'
 import MyCodeHighlighter from '@/app/components/MyCodeHighlighter'
 import MyContainer from '@/app/components/MyContainer'
+import Reveal from '@/app/components/Reveal'
 import { useState } from 'react'
 
 export default function PrimeChecker() {
@@ -66,41 +67,43 @@ export default function PrimeChecker() {
   return true`
 
   return (
-    <MyContainer header="Prime Number Checker" size="max-w-lg">
-      <div className=" flex items-center justify-center bg-gray-100 flex-col">
-        <input
-          type="number"
-          value={number}
-          onChange={e => handleCheck(e.target.value)}
-          placeholder="Enter a number"
-          className="w-full p-2 border rounded-lg mb-4"
-        />
+    <Reveal delay={300}>
+      <MyContainer header="Prime Number Checker" size="max-w-lg">
+        <div className=" flex items-center justify-center bg-gray-100 flex-col">
+          <input
+            type="number"
+            value={number}
+            onChange={e => handleCheck(e.target.value)}
+            placeholder="Enter a number"
+            className="w-full p-2 border rounded-lg mb-4"
+          />
 
-        {result && <p className="mt-2 text-center font-medium">{result}</p>}
+          {result && <p className="mt-2 text-center font-medium">{result}</p>}
 
-        {factors.length > 0 && (
-          <div className="mt-4">
-            <p className="font-semibold mb-2 text-center">Factors:</p>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {factors.map(factor => (
-                <span key={factor} className="px-2 py-1 bg-gray-200 rounded-lg text-sm">
-                  {factor}
-                </span>
-              ))}
+          {factors.length > 0 && (
+            <div className="mt-4">
+              <p className="font-semibold mb-2 text-center">Factors:</p>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {factors.map(factor => (
+                  <span key={factor} className="px-2 py-1 bg-gray-200 rounded-lg text-sm">
+                    {factor}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-      <BrainsContainer>
-        <MyCodeHighlighter item={snippet} />
-        {/* <div className="mt-5">Take aways</div>
+          )}
+        </div>
+        <BrainsContainer>
+          <MyCodeHighlighter item={snippet} />
+          {/* <div className="mt-5">Take aways</div>
         <ul>
-          <li>
-            <code>try and catch</code> is still needed despite{' '}
-            <code>input type='number'</code>, to overcome copy/paste and decimals
-          </li>
+        <li>
+        <code>try and catch</code> is still needed despite{' '}
+        <code>input type='number'</code>, to overcome copy/paste and decimals
+        </li>
         </ul> */}
-      </BrainsContainer>
-    </MyContainer>
+        </BrainsContainer>
+      </MyContainer>
+    </Reveal>
   )
 }
