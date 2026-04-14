@@ -6,7 +6,7 @@ interface Props {
 }
 const RevealPlayGround = ({ children }: Props) => {
   return (
-    <Reveal delay={300} distance={3}>
+    <Reveal delay={400} distance={5}>
       {children}
     </Reveal>
   )
