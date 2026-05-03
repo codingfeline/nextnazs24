@@ -37,19 +37,25 @@ export default function CookieConsentManager() {
 
       {/* --- Initial Banner --- */}
       {!hasDecided && (
-        <div style={banner.container}>
+        <div className="fixed bottom-0 left-0 w-full bg-gray-100 p-4 text-center shadow-[0_-2px_10px_rgba(0,0,0,0.1)] z-[1000]">
           <p>
             We use cookies for analytics and to embed external content such as Google
             Maps.
           </p>
-          <div style={banner.buttons}>
-            <button onClick={acceptAll} style={banner.accept}>
+          <div className="flex justify-center gap-2 mt-2">
+            <button onClick={acceptAll} className="bg-green-400 px-4 py-2 cursor-pointer">
               Accept all
             </button>
-            <button onClick={rejectAll} style={banner.reject}>
+            <button
+              onClick={rejectAll}
+              className="bg-red-500 text-white px-4 py-2 cursor-pointer"
+            >
               Reject optional
             </button>
-            <button onClick={() => setShowModal(true)} style={banner.settings}>
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-gray-200 px-4 py-2 cursor-pointer"
+            >
               Settings
             </button>
           </div>
@@ -58,22 +64,31 @@ export default function CookieConsentManager() {
 
       {/* --- Manage Cookies Button (footer / settings) --- */}
       {hasDecided && (
-        <button onClick={() => setShowModal(true)} style={manageBtn}>
+        <button
+          onClick={() => setShowModal(true)}
+          className="bg-gray-200 rounded-md cursor-pointer z-[999]"
+        >
           Cookie settings
         </button>
       )}
 
       {/* --- Modal --- */}
       {showModal && (
-        <div style={modal.overlay}>
-          <div style={modal.box}>
+        <div
+          onClick={() => setShowModal(false)}
+          className="fixed inset-0 bg-black/70 z-[1001] flex items-center justify-center"
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            className="bg-white p-8 max-w-[420px] w-full rounded-lg flex flex-col gap-2"
+          >
             <h2>Cookie Preferences</h2>
 
-            <label>
+            <label className="flex items-center gap-2">
               <input type="checkbox" checked disabled /> Necessary (always)
             </label>
 
-            <label>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={consent.analytics}
@@ -82,7 +97,7 @@ export default function CookieConsentManager() {
               Analytics
             </label>
 
-            <label>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={consent.externalMedia}
@@ -91,11 +106,17 @@ export default function CookieConsentManager() {
               External media (Google Maps, YouTube)
             </label>
 
-            <div style={modal.actions}>
-              <button onClick={rejectAll} style={modal.revoke}>
+            <div className="flex gap-2 mt-4">
+              <button
+                onClick={rejectAll}
+                className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded-md"
+              >
                 Revoke all optional cookies
               </button>
-              <button onClick={() => setShowModal(false)} style={modal.close}>
+              <button
+                onClick={() => setShowModal(false)}
+                className="bg-green-400 text-white px-4 py-2 cursor-pointer rounded-md"
+              >
                 Close
               </button>
             </div>
@@ -104,90 +125,4 @@ export default function CookieConsentManager() {
       )}
     </>
   )
-}
-
-const banner = {
-  container: {
-    position: 'fixed' as const,
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    background: '#f3f4f6',
-    padding: '1rem',
-    textAlign: 'center' as const,
-    boxShadow: '0 -2px 10px rgba(0,0,0,0.1)',
-    zIndex: 1000,
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '0.5rem',
-    marginTop: '0.5rem',
-  },
-  accept: {
-    background: '#4ade80',
-    padding: '0.5rem 1rem',
-    border: 'none',
-    cursor: 'pointer',
-  },
-  reject: {
-    background: '#ef4444',
-    color: '#fff',
-    padding: '0.5rem 1rem',
-    border: 'none',
-    cursor: 'pointer',
-  },
-  settings: {
-    background: '#e5e7eb',
-    padding: '0.5rem 1rem',
-    border: 'none',
-    cursor: 'pointer',
-  },
-}
-
-const manageBtn = {
-  // position: 'fixed' as const,
-  // bottom: 16,
-  // right: 16,
-  background: '#e5e7eb',
-  // padding: '0.2rem 0.35rem',
-  borderRadius: 6,
-  border: 'none',
-  cursor: 'pointer',
-  zIndex: 999,
-}
-
-const modal = {
-  overlay: {
-    position: 'fixed' as const,
-    inset: 0,
-    background: 'rgba(0,0,0,0.4)',
-    zIndex: 1001,
-  },
-  box: {
-    background: '#fff',
-    padding: '2rem',
-    maxWidth: 420,
-    margin: '10% auto',
-    borderRadius: 8,
-  },
-  actions: {
-    display: 'flex',
-    gap: '0.5rem',
-    marginTop: '1rem',
-  },
-  revoke: {
-    background: '#ef4444',
-    color: '#fff',
-    padding: '0.5rem 1rem',
-    border: 'none',
-    cursor: 'pointer',
-  },
-  close: {
-    background: '#4ade80',
-    color: '#fff',
-    padding: '0.5rem 1rem',
-    border: 'none',
-    cursor: 'pointer',
-  },
 }

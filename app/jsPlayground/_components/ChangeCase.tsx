@@ -53,6 +53,9 @@ export default function TextTransformer() {
   const codeSnippet = `
   const toTitleCase = (str: string): string =>
   str.toLowerCase().replace(/\\b\\w/g, char => char.toUpperCase())
+  OR without regex:
+  str.split(' ').map(word => word.charAt(0).toUpperCase() +
+  word.slice(1).toLowerCase()).join(' ')
 
   str.toLowerCase()
   str.toUpperCase()
@@ -88,7 +91,6 @@ export default function TextTransformer() {
             )}
           </div>
         </div>
-
         {/* 2. Radio Selection */}
         <div className="flex gap-4 mb-8">
           {(['title', 'lower', 'upper'] as const).map(m => (
@@ -106,12 +108,10 @@ export default function TextTransformer() {
             </label>
           ))}
         </div>
-
         {/* 3. Output & Copy Action */}
         <div className="p-4 bg-gray-50  rounded-lg border border-dashed border-gray-300 ">
           <div className="flex items-center justify-between gap-4">
             <span className="font-mono text-lg break-all">{transformedText}</span>
-
             <button
               onClick={handleCopy}
               disabled={!text}
@@ -127,6 +127,7 @@ export default function TextTransformer() {
             </button>
           </div>
         </div>
+
         <BrainsContainer>
           <MyCodeHighlighter item={codeSnippet} />
         </BrainsContainer>
