@@ -15,6 +15,7 @@ const AppFooter = () => {
           {/* <div>Terms and conditions</div> */}
           {/* <ManageCookiesButton /> */}
           <CookieConsentManager />
+          <Link href="/contact">Contact</Link>
         </div>
       </Container>
     </footer>
