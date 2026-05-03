@@ -5,12 +5,24 @@ import classnames from 'classnames'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FaLaptopCode } from 'react-icons/fa6'
 import Reveal from './Reveal'
 
 const AppHeader = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const navRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    if (!isOpen) return
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isOpen])
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,7 +44,7 @@ const AppHeader = () => {
   }, [])
 
   return (
-    <nav className="borber bg-gray-200 justify-between h-full relative z-50 border-black">
+    <nav ref={navRef} className="borber bg-gray-200 justify-between h-full relative z-50 border-black">
       <Reveal direction="left">
         <Container>
           <Flex justify="between">
@@ -55,16 +67,6 @@ const AppHeader = () => {
             <AuthStatus />
           </Flex>
         </Container>
-        {isOpen && (
-          <div
-            onClick={() => setIsOpen(false)} // Close menu when clicking the dark area
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] md:hidden"
-            // inset-0 makes it full screen
-            // bg-black/50 makes it 50% dark
-            // z-[-1] puts it behind the NavLinks but stays in front of page content
-            // sm:hidden ensures it doesn't show on desktop
-          />
-        )}
       </Reveal>
     </nav>
   )
