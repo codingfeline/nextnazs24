@@ -1,15 +1,28 @@
-import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import React from 'react'
+import MainPage from '../components/MainPage'
+import Reveal from '../components/Reveal'
+import ViewSwitcher from '../components/ViewSwitcher'
+import FizzBuzz from './_components/FizzBuzz'
 
 export const metadata: Metadata = {
   title: 'JS Playground — Interactive JavaScript Demos & Tools',
   description:
     'A collection of interactive JavaScript demos: leap year checker, case converter, shopping cart, PIN generator, temperature converter, prime checker, Fibonacci, date formatter, FizzBuzz, word unscrambler, Tic Tac Toe, and QR code generator.',
   keywords: [
-    'javascript playground', 'leap year', 'case converter', 'PIN generator',
-    'temperature converter', 'prime number', 'fibonacci', 'fizzbuzz',
-    'word unscrambler', 'tic tac toe', 'QR code generator', 'js demos',
+    'javascript playground',
+    'leap year',
+    'case converter',
+    'PIN generator',
+    'temperature converter',
+    'prime number',
+    'fibonacci',
+    'fizzbuzz',
+    'word unscrambler',
+    'tic tac toe',
+    'QR code generator',
+    'js demos',
     'interactive tools',
   ],
   openGraph: {
@@ -19,23 +32,18 @@ export const metadata: Metadata = {
     type: 'website',
   },
 }
-import MainPage from '../components/MainPage'
-import Reveal from '../components/Reveal'
-import ViewSwitcher from '../components/ViewSwitcher'
-import FizzBuzz from './_components/FizzBuzz'
 
 const LeapYear = dynamic(() => import('./_components/leapYear'))
-const TitleCase = dynamic(() => import('./_components/ChangeCase'))
+const TitleCase = dynamic(() => import('./_containers/ChangeCaseContainer'))
 const shoppingCart = dynamic(() => import('./_components/shoppingCart')) // Example of another component
-// const Utilities = dynamic(() => import('../_components/utilities')) // Example of another component
 const Pin = dynamic(() => import('./_components/PinGenerator'))
 const Temperature = dynamic(() => import('./_components/Temperature'))
 const Prime = dynamic(() => import('./_components/PrimeNumber'))
 const FibonacciPage = dynamic(() => import('./_components/Fibonacci'))
 const DateFormatter = dynamic(() => import('./_components/DateFormatter'))
-const WordUnscrambler = dynamic(() => import('./_components/WordUnscrambler'))
-const TicTacToe = dynamic(() => import('./_components/TicTacToe'))
-const QrGenerator = dynamic(() => import('./_components/QrGenerator'))
+const WordContainer = dynamic(() => import('./_containers/WordContainer'))
+const TicTacToe = dynamic(() => import('./_containers/TicTacToeContainer'))
+const QrGenerator = dynamic(() => import('./_containers/QrGeneratorContainer'))
 
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
@@ -47,10 +55,9 @@ const viewMap: Record<string, React.ComponentType> = {
   FibonacciPage,
   DateFormatter,
   FizzBuzz,
-  WordUnscrambler,
+  WordContainer,
   TicTacToe,
   QrGenerator,
-  // utilities: Utilities,
 }
 
 interface Props {
@@ -71,16 +78,14 @@ const JsPlayground = async ({ searchParams }: Props) => {
     { href: 'FibonacciPage', label: 'Fibonacci' },
     { href: 'DateFormatter', label: 'Date Formatter' },
     { href: 'FizzBuzz', label: 'FizzBuzz' },
-    { href: 'WordUnscrambler', label: 'Word Unscrambler' },
+    { href: 'WordContainer', label: 'Word Unscrambler' },
     { href: 'TicTacToe', label: 'Tic Tac Toe' },
     { href: 'QrGenerator', label: 'QR Code Generator' },
-    // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ].sort((a, b) => a.label.localeCompare(b.label))
 
   return (
     <MainPage bg="bg_nebula">
       <div className="text-gray-300 p-4 ">
-        {/* <h2 className="text-gray-100">JS Playground</h2> */}
         <div className=" gap-2 ">
           <Reveal direction="left" delay={200}>
             <ViewSwitcher links={links} currentView={currentView} />

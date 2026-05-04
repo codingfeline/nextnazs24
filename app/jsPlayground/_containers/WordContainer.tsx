@@ -1,9 +1,9 @@
 import Reveal from '@/app/components/Reveal'
 import WordUnscrambler from '../_components/WordUnscrambler'
 
-const WordContainer = () => {
+const WordContainer = ({ delay = 300 }: { delay?: number }) => {
   return (
-    <Reveal delay={300}>
+    <Reveal delay={delay}>
       <WordUnscrambler hideBrains />
     </Reveal>
   )

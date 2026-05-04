@@ -9,9 +9,14 @@ export const metadata: Metadata = {
   description:
     'Free browser-based utilities: unscramble words from a set of letters, convert text between Title, Upper and Lower case, and generate secure passwords with custom options.',
   keywords: [
-    'word unscrambler', 'anagram solver', 'case converter',
-    'title case', 'password generator', 'secure password',
-    'online tools', 'text utilities',
+    'word unscrambler',
+    'anagram solver',
+    'case converter',
+    'title case',
+    'password generator',
+    'secure password',
+    'online tools',
+    'text utilities',
   ],
   openGraph: {
     title: 'Those Utilities',
@@ -21,7 +26,7 @@ export const metadata: Metadata = {
   },
 }
 
-import ChangeCaseContainer from './jsPlayground/_containers/ChangeCase'
+import ChangeCaseContainer from './jsPlayground/_containers/ChangeCaseContainer'
 import PasswordContainer from './jsPlayground/_containers/PasswordContainer'
 import WordContainer from './jsPlayground/_containers/WordContainer'
 export default async function Home() {
