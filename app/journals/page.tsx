@@ -1,4 +1,20 @@
 import prisma from '@/prisma/client'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Those Journals — Personal Dev Notes & Thoughts',
+  description:
+    'A collection of personal journal entries covering development notes, thoughts, and observations — sortable by topic and date.',
+  keywords: [
+    'journals', 'dev notes', 'personal blog', 'development diary',
+    'coding notes', 'thoughts',
+  ],
+  openGraph: {
+    title: 'Those Journals',
+    description: 'Personal journal entries covering development notes and thoughts.',
+    type: 'website',
+  },
+}
 import { Box, Container, Table, Text } from '@radix-ui/themes'
 
 import { ArrowDown, ArrowUp, dateOptions } from '@/app/components'

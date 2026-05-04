@@ -1,5 +1,24 @@
 import dynamic from 'next/dynamic'
+import type { Metadata } from 'next'
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: 'JS Playground — Interactive JavaScript Demos & Tools',
+  description:
+    'A collection of interactive JavaScript demos: leap year checker, case converter, shopping cart, PIN generator, temperature converter, prime checker, Fibonacci, date formatter, FizzBuzz, word unscrambler, Tic Tac Toe, and QR code generator.',
+  keywords: [
+    'javascript playground', 'leap year', 'case converter', 'PIN generator',
+    'temperature converter', 'prime number', 'fibonacci', 'fizzbuzz',
+    'word unscrambler', 'tic tac toe', 'QR code generator', 'js demos',
+    'interactive tools',
+  ],
+  openGraph: {
+    title: 'JS Playground',
+    description:
+      'Interactive JavaScript demos and tools — from FizzBuzz to QR code generation, all running in the browser.',
+    type: 'website',
+  },
+}
 import MainPage from '../components/MainPage'
 import Reveal from '../components/Reveal'
 import ViewSwitcher from '../components/ViewSwitcher'

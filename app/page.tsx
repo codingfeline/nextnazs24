@@ -2,6 +2,25 @@
 // import parse from 'html-react-parser'
 
 import { Container } from '@radix-ui/themes'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Those Utilities — Word Unscrambler, Case Converter & Password Generator',
+  description:
+    'Free browser-based utilities: unscramble words from a set of letters, convert text between Title, Upper and Lower case, and generate secure passwords with custom options.',
+  keywords: [
+    'word unscrambler', 'anagram solver', 'case converter',
+    'title case', 'password generator', 'secure password',
+    'online tools', 'text utilities',
+  ],
+  openGraph: {
+    title: 'Those Utilities',
+    description:
+      'Unscramble words, convert text case, and generate secure passwords — all in the browser.',
+    type: 'website',
+  },
+}
+
 import ChangeCaseContainer from './jsPlayground/_containers/ChangeCase'
 import PasswordContainer from './jsPlayground/_containers/PasswordContainer'
 import WordContainer from './jsPlayground/_containers/WordContainer'
