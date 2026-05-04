@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Clear, Copy } from '../components'
-// import RevealPlayGround from '../jsPlayground/_components/RevealPlayGround'
 import MyContainer from '../components/MyContainer'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
@@ -112,7 +111,6 @@ const PasswordGenerator = () => {
   const handlers = { handleChecks, handleClick, handleLength }
 
   return (
-    // <Reveal delay={600}>
     <MyContainer header="Password Generator">
       <div className="flex flex-col justify-center items-center p-0 m-0">
         <PasswordForm checks={checks} handlers={handlers} />
@@ -158,7 +156,6 @@ const PasswordGenerator = () => {
         )}
       </div>
     </MyContainer>
-    // </Reveal>
   )
 }
 
