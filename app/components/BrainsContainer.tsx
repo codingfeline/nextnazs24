@@ -5,8 +5,10 @@ import Reveal from './Reveal'
 interface Props {
   children: React.ReactNode
   header?: string
+  hidden?: boolean
 }
-const BrainsContainer = ({ children, header = 'the logic' }: Props) => {
+const BrainsContainer = ({ children, header = 'the logic', hidden }: Props) => {
+  if (hidden) return null
   const [show, setShow] = useState(false)
   return (
     <Reveal delay={400} direction="right">
@@ -26,8 +28,8 @@ const BrainsContainer = ({ children, header = 'the logic' }: Props) => {
           />
         </button>
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            show ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0'
+          className={`transition-all duration-300 ease-in-out ${
+            show ? 'max-h-[600px] overflow-y-auto opacity-100 mt-2' : 'max-h-0 overflow-hidden opacity-0'
           }`}
         >
           {children}
