@@ -51,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon-32x32.png" sizes="any" />
+      <meta name="google-adsense-account" content="ca-pub-8140259375048003" />
       <body className={geistSans.className}>
         <QueryClientProvider>
           <ClientProviders>
