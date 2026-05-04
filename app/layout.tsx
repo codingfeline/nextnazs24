@@ -39,8 +39,22 @@ const geistSans = localFont({
 // })
 
 export const metadata: Metadata = {
-  title: 'NextNazs',
-  description: 'Web Journals',
+  title: {
+    default: 'NazsNet',
+    template: '%s | NazsNet',
+  },
+  description:
+    'NazsNet — a personal site with browser-based utilities (word unscrambler, case converter, password generator), an interactive JavaScript playground, and dev journals.',
+  keywords: [
+    'NazsNet', 'javascript tools', 'word unscrambler', 'password generator',
+    'case converter', 'js playground', 'dev journals', 'web utilities',
+  ],
+  openGraph: {
+    siteName: 'NazsNet',
+    type: 'website',
+  },
+  icons: { icon: '/favicon-32x32.png' },
+  other: { 'google-adsense-account': 'ca-pub-8140259375048003' },
 }
 
 export default function RootLayout({
@@ -50,8 +64,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="/favicon-32x32.png" sizes="any" />
-      <meta name="google-adsense-account" content="ca-pub-8140259375048003" />
       <body className={geistSans.className}>
         <QueryClientProvider>
           <ClientProviders>
