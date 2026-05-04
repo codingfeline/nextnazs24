@@ -66,7 +66,7 @@ export default function CookieConsentManager() {
       {hasDecided && (
         <button
           onClick={() => setShowModal(true)}
-          className="bg-gray-200 rounded-md cursor-pointer z-[999]"
+          className="bg-gray-300 rounded-md cursor-pointer px-3 py-1 text-gray-600 hover:text-gray-800"
         >
           Cookie settings
         </button>
