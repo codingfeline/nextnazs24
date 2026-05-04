@@ -11,7 +11,7 @@ const AppFooter = () => {
       <Container>
         <div className="flex justify-between">
           {/* <div> */}
-          <Link href="/">{year} Nazsnet </Link>
+          <Link href="/">{year} Utilities and such... </Link>
           {/* </div> */}
           {/* <div>Terms and conditions</div> */}
           {/* <ManageCookiesButton /> */}
