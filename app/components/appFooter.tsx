@@ -1,4 +1,5 @@
 import { Container } from '@radix-ui/themes'
+import BalloonToggle from './BalloonToggle'
 import Link from './Link'
 // import ManageCookiesButton from './ManageCookiesButton'
 import CookieConsentManager from './CookieConsentManager'
@@ -14,10 +15,11 @@ const AppFooter = () => {
           {/* </div> */}
           {/* <div>Terms and conditions</div> */}
           {/* <ManageCookiesButton /> */}
-          <div className="flex sm:gap-4 flex-col sm:flex-row">
+          <div className="flex sm:gap-4 flex-col sm:flex-row items-center">
             <Link href="/contact">Contact</Link>
             <Link href="/journals">Those Journals</Link>
             <CookieConsentManager />
+            <BalloonToggle />
           </div>
         </div>
       </Container>

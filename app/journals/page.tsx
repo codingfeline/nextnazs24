@@ -6,6 +6,7 @@ import ButtonWithComponent from '@/app/components/ButtonLink'
 import { Journals } from '@prisma/client'
 import NextLink from 'next/link'
 import { redirect } from 'next/navigation'
+import BackToTop from '../components/BackToTop'
 import MainPage from '../components/MainPage'
 import Reveal from '../components/Reveal'
 // import Pagination from '../components/Pagination'
@@ -123,6 +124,7 @@ const JournalsPage = async ({
           </Box>
         </div>
       </Container>
+      <BackToTop />
     </MainPage>
   )
 }

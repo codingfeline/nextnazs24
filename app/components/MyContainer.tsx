@@ -7,10 +7,12 @@ interface Props {
 const MyContainer = ({ header, children, size = 'max-w-lg' }: Props) => {
   return (
     <div
-      className={`MyContainer mx-auto p-6 bg-gray-100 rounded-md shadow-lg border border-gray-200 text-gray-600 mt-3 ${size} select-none`}
+      className={`MyContainer mx-auto  bg-gray-100 rounded-md shadow-lg border border-gray-200 text-gray-600  ${size} select-none mt-3`}
     >
-      <h4 className="mb-3">{header}</h4>
-      {children}
+      <div className="bg-gray-200 border border-b-4 border-gray-300 rounded-t-md mb-3">
+        <h4 className="mb-0 p-2">{header}</h4>
+      </div>
+      <div className="p-2">{children}</div>
     </div>
   )
 }

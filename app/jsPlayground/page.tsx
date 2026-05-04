@@ -14,6 +14,9 @@ const Temperature = dynamic(() => import('./_components/Temperature'))
 const Prime = dynamic(() => import('./_components/PrimeNumber'))
 const FibonacciPage = dynamic(() => import('./_components/Fibonacci'))
 const DateFormatter = dynamic(() => import('./_components/DateFormatter'))
+const WordUnscrambler = dynamic(() => import('./_components/WordUnscrambler'))
+const TicTacToe = dynamic(() => import('./_components/TicTacToe'))
+const QrGenerator = dynamic(() => import('./_components/QrGenerator'))
 
 const viewMap: Record<string, React.ComponentType> = {
   leap: LeapYear,
@@ -25,6 +28,9 @@ const viewMap: Record<string, React.ComponentType> = {
   FibonacciPage,
   DateFormatter,
   FizzBuzz,
+  WordUnscrambler,
+  TicTacToe,
+  QrGenerator,
   // utilities: Utilities,
 }
 
@@ -46,6 +52,9 @@ const JsPlayground = async ({ searchParams }: Props) => {
     { href: 'FibonacciPage', label: 'Fibonacci' },
     { href: 'DateFormatter', label: 'Date Formatter' },
     { href: 'FizzBuzz', label: 'FizzBuzz' },
+    { href: 'WordUnscrambler', label: 'Word Unscrambler' },
+    { href: 'TicTacToe', label: 'Tic Tac Toe' },
+    { href: 'QrGenerator', label: 'QR Code Generator' },
     // { href: '/jsPlayground?view=utilities', label: 'Utilities', view: 'utilities' },
   ].sort((a, b) => a.label.localeCompare(b.label))
 

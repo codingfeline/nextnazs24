@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import AppFooter from './components/appFooter'
 import AppHeader from './components/appHeader'
+import Balloons from './components/Balloons'
 import BottomLogo from './components/bottomLogo'
 import ClientProviders from './components/ClientProviders'
 import './globals.css'
@@ -64,6 +65,7 @@ export default function RootLayout({
                   back="#531bad"
                   colour="#fff"
                 />
+                <Balloons />
                 <AppFooter />
               </Theme>
             </CookieConsentProvider>
