@@ -1,5 +1,5 @@
 import { Container } from '@radix-ui/themes'
-import Link from 'next/link'
+import Link from './Link'
 // import ManageCookiesButton from './ManageCookiesButton'
 import CookieConsentManager from './CookieConsentManager'
 
@@ -10,12 +10,15 @@ const AppFooter = () => {
       <Container>
         <div className="flex justify-between">
           {/* <div> */}
-          <Link href="/"> {year} Nazsnet </Link>
+          <Link href="/">{year} Nazsnet </Link>
           {/* </div> */}
           {/* <div>Terms and conditions</div> */}
           {/* <ManageCookiesButton /> */}
-          <CookieConsentManager />
-          <Link href="/contact">Contact</Link>
+          <div className="flex sm:gap-4 flex-col sm:flex-row">
+            <Link href="/contact">Contact</Link>
+            <Link href="/journals">Those Journals</Link>
+            <CookieConsentManager />
+          </div>
         </div>
       </Container>
     </footer>

@@ -44,7 +44,10 @@ const AppHeader = () => {
   }, [])
 
   return (
-    <nav ref={navRef} className="borber bg-gray-200 justify-between h-full relative z-50 border-black">
+    <nav
+      ref={navRef}
+      className="borber bg-gray-200 justify-between h-full relative z-50 border-black"
+    >
       <Reveal direction="left">
         <Container>
           <Flex justify="between">
@@ -89,8 +92,8 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
 
   const links = [
     { label: 'home', url: '/' },
-    { label: 'Journals', url: '/journals' },
-    { label: 'Password', url: '/password' },
+    // { label: 'Journals', url: '/journals' },
+    // { label: 'Password', url: '/password' },
     // { label: 'Contact', url: '/contact' },
     { label: 'JS Playground', url: '/jsPlayground' },
   ]

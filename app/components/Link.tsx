@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 
 interface Props {
   href: string
-  children: string
+  children: React.ReactNode
 }
 
 const Link = ({ href, children }: Props) => {
