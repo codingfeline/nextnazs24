@@ -1,112 +1,74 @@
-import { motion } from 'framer-motion'
 import { Props } from './Props'
 
 const PasswordForm = ({ checks, handlers }: Props) => {
   const { handleChecks, handleClick, handleLength } = handlers
 
+  const checkboxes = [
+    { id: 'lowercase', label: 'Lowercase' },
+    { id: 'uppercase', label: 'Uppercase' },
+    { id: 'numbers', label: 'Numbers' },
+    { id: 'symbols', label: 'Symbols' },
+    { id: 'pronounceable', label: 'Pronounceable' },
+  ] as const
+
   return (
-    <motion.form
+    <div id="password" className="rounded-lg  flex flex-col">
+      {/* <motion.form
       id="password"
-      className="flex flex-col"
+      className="flex flex-col w-[305px]"
       initial={{ x: 40 }}
       animate={{ x: 0 }}
-    >
-      <div className="bg-[#d7eef8] border border-[#999898] mb-2 p-5 rounded-xl">
-        <legend className="text-xl text-center">Password Generator</legend>
-        <label htmlFor="lowercase">
-          <input
-            type="checkbox"
-            id="lowercase"
-            name="lowercase"
-            checked={checks.lowercase}
-            onChange={handleChecks}
-          />
-          Lowercase
-        </label>
-        <label htmlFor="uppercase">
-          <input
-            type="checkbox"
-            id="uppercase"
-            name="uppercase"
-            checked={checks.uppercase}
-            onChange={handleChecks}
-          />{' '}
-          Uppercase
-        </label>
-        <label htmlFor="numbers">
-          <input
-            type="checkbox"
-            id="numbers"
-            name="numbers"
-            checked={checks.numbers}
-            onChange={handleChecks}
-          />{' '}
-          Numbers
-        </label>
-        <label htmlFor="symbols">
-          <input
-            type="checkbox"
-            id="symbols"
-            name="symbols"
-            checked={checks.symbols}
-            onChange={handleChecks}
-          />{' '}
-          Symbols
-        </label>
-        <label htmlFor="">
-          Length
-          <input
-            type="range"
-            min="10"
-            max="20"
-            onChange={handleLength}
-            value={checks.length}
-          />{' '}
-          {checks.length}
-        </label>
+    > */}
+      {/* <div className="bg-gray-50  border-gray-200 rounded-lg mb-2 p-4"> */}
+      {/* <legend className="text-lg font-medium text-center text-gray-700 mb-4"></legend> */}
+
+      <div className="flex flex-wrap gap-x-4 gap-y-2 mb-4">
+        {checkboxes.map(({ id, label }) => (
+          <label
+            key={id}
+            htmlFor={id}
+            className="flex items-center gap-1 text-sm text-gray-600 cursor-pointer"
+          >
+            <input
+              type="checkbox"
+              id={id}
+              name={id}
+              checked={checks[id]}
+              onChange={handleChecks}
+            />
+            {label}
+          </label>
+        ))}
       </div>
+
+      <div className="flex items-center gap-1">
+        <label className="text-sm text-gray-500 shrink-0">Length</label>
+        <input
+          type="range"
+          min="8"
+          max="32"
+          onChange={handleLength}
+          value={checks.length}
+          className="flex-1 accent-blue-500"
+        />
+        <span className="text-sm font-medium text-gray-700 w-6 text-right">
+          {checks.length}
+        </span>
+      </div>
+      {/* </div> */}
       <button
         onClick={handleClick}
-        className="bg-[#a1d3eb] p-2 rounded-md border-[#1a6368] border hover:bg-[#c0e2f1]"
+        className="bg-gray-200 text-gray-800 p-2 rounded-lg border border-gray-200 hover:bg-gray-300 transition-colors font-medium text-sm mt-3 "
       >
         Generate
       </button>
-
-      {/* <div
-        className={`mt-2 flex justify-between rounded-md ${
-          !checks.noChecks && 'bg-[#f3f3f3]'
-        }`}
-      >
-        {checks.password && (
-          <>
-            <p className="font-['Consolas'] text-lg pl-2 w-[200px] flex flex-col justify-center ">
-              {checks.password}
-            </p>
-            <div className="bg-[white] p-1 flex flex-col items-center rounded-r-md">
-              <Copy
-                size={25}
-                fill={`${checks.copied ? 'green' : '#666'}`}
-                className="cursor-pointer"
-                title="Copy password"
-              />{' '}
-              <span className={`${checks.copied ? 'text-[green]' : 'text-[#fff]'}`}>
-                ✓
-              </span>
-            </div>
-          </>
-        )}
-        {checks.noChecks && (
-          <p
-            className={`text-sm mt-1 text-center w-full ${
-              checks.noChecks ? 'text-[#a10325] ' : 'text-[#cecdcd]'
-            }`}
-          >
-            Please select at least one option
-          </p>
-        )}
-      </div> */}
-      {/* </div> */}
-    </motion.form>
+      {checks.noChecks && (
+        <p className="text-sm mt-2 text-center text-red-500">
+          Please select at least one option
+        </p>
+      )}
+      {/* </motion.form> */}
+    </div>
   )
 }
 
