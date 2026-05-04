@@ -18,7 +18,12 @@ function newChallenge() {
 }
 
 export default function ContactMe() {
-  const [form, setForm] = useState<FormState>({ name: '', email: '', phone: '', message: '' })
+  const [form, setForm] = useState<FormState>({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -71,7 +76,7 @@ export default function ContactMe() {
     return (
       <RevealPlayGround>
         <MyContainer header="Contact Me">
-          <div className="text-center py-6">
+          <div className="text-center py-6 mt-3">
             <Send size={40} className="mx-auto mb-3 text-blue-500" />
             <p className="text-gray-600 font-medium">Message sent!</p>
             <p className="text-sm text-gray-400 mt-1">
@@ -92,7 +97,7 @@ export default function ContactMe() {
   return (
     <RevealPlayGround>
       <MyContainer header="Contact Me">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 ">
           <div>
             <label className={labelClass} htmlFor="name">
               Name
@@ -183,7 +188,14 @@ export default function ContactMe() {
             disabled={loading}
             className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold py-3 rounded-lg transition-colors"
           >
-            {loading ? 'Sending…' : <><span>Send</span><Send size={16} /></>}
+            {loading ? (
+              'Sending…'
+            ) : (
+              <>
+                <span>Send</span>
+                <Send size={16} />
+              </>
+            )}
           </button>
         </form>
       </MyContainer>
