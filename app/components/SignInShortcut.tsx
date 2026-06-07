@@ -4,13 +4,14 @@ import { Button, Dialog, Flex } from '@radix-ui/themes'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-// Press Ctrl+Alt+L anywhere to open a quick sign-in modal.
+// Press Ctrl+Alt+Shift+L anywhere to open a quick sign-in modal.
 const SignInShortcut = () => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.altKey && (e.key === 'l' || e.key === 'L')) {
+      // e.code is layout-independent, so it stays "KeyL" even with Shift held.
+      if (e.ctrlKey && e.altKey && e.shiftKey && e.code === 'KeyL') {
         e.preventDefault()
         setOpen(prev => !prev)
       }
