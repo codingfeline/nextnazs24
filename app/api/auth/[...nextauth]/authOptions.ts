@@ -50,6 +50,13 @@ export const authOptions: NextAuthConfig = {
       return session
     },
     authorized({ auth, request: { nextUrl } }) {
+      // Local-only: skip all auth checks when the dev bypass is on.
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        process.env.NEXT_PUBLIC_DEV_NO_AUTH === 'true'
+      )
+        return true;
+
       const isLoggedIn = !!auth?.user;
       const { pathname } = nextUrl;
 

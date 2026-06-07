@@ -1,4 +1,4 @@
-import { auth } from '@/app/api/auth/[...nextauth]/authOptions'
+import { ADMIN_EMAIL, getSession } from '@/app/lib/authGuard'
 import { BackButton, Pencil } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import MainPage from '@/app/components/MainPage'
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const IssueDetailPage = async ({ params }: Props) => {
-  const session = await auth()
+  const session = await getSession()
 
   if ((await params).id.length !== 24) notFound()
 
@@ -41,7 +41,7 @@ const IssueDetailPage = async ({ params }: Props) => {
           </Reveal>
         </Box>
         {/* {!session && ( */}
-        {session && session.user!.email === 'post@nazs.net' && (
+        {session && session.user!.email === ADMIN_EMAIL && (
           <Box mt="3">
             <Flex direction="column" gap="2">
               <ButtonWithComponent

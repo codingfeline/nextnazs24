@@ -1,8 +1,12 @@
+import { requireAdmin } from "@/app/lib/authGuard";
 import { JournalSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   const body = await request.json()
   const validation = JournalSchema.safeParse(body)
   if (!validation.success)

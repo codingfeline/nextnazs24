@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/app/lib/authGuard"
 import { JournalSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/client"
 import { NextRequest, NextResponse } from "next/server"
@@ -5,6 +6,9 @@ import { NextRequest, NextResponse } from "next/server"
 export async function PATCH(request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   const body = await request.json()
   const validation = JournalSchema.safeParse(body)
 
@@ -33,6 +37,9 @@ export async function PATCH(request: NextRequest,
 export async function DELETE(request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const denied = await requireAdmin()
+  if (denied) return denied
+
   const journal = await prisma.journals.findUnique({
     where: { id: (await params).id }
   })
