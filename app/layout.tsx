@@ -11,6 +11,7 @@ import ClientProviders from './components/ClientProviders'
 import './globals.css'
 import MyFancyLogComp from './hooks/MyFancyLogComp'
 import QueryClientProvider from './QueryClientProvider'
+import SignInShortcut from './components/SignInShortcut'
 import './theme-config.css'
 
 const geistSans = localFont({
@@ -70,6 +71,7 @@ export default function RootLayout({
             <CookieConsentProvider>
               <Theme accentColor="blue" className="mb-auto flex flex-col ">
                 <AppHeader />
+                <SignInShortcut />
                 {children}
                 {/* <AnalyticsConsent /> */}
                 <BottomLogo />
