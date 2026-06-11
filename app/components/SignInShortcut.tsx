@@ -11,7 +11,7 @@ const SignInShortcut = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // e.code is layout-independent, so it stays "KeyL" even with Shift held.
-      if (e.ctrlKey && e.altKey && e.shiftKey && e.code === 'KeyL') {
+      if (e.ctrlKey && e.altKey && e.code === 'KeyL') {
         e.preventDefault()
         setOpen(prev => !prev)
       }
