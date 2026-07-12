@@ -78,6 +78,14 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
+model FeatureToggle {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  key     String  @unique
+  visible Boolean
+
+  @@map("feature_toggles")
+}
+
 // prisma/schema.prisma
 model CookieConsent {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId

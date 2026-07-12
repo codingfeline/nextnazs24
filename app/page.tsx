@@ -1,4 +1,4 @@
-// import prisma from '@/prisma/client'
+import prisma from '@/prisma/client'
 // import parse from 'html-react-parser'
 
 import { Container } from '@radix-ui/themes'
@@ -41,12 +41,15 @@ export default async function Home() {
   //   <GiChiliPepper key={i} />
   // ))
 
+  const featureToggles = await prisma.featureToggle.findMany()
+  const globalToggles = Object.fromEntries(featureToggles.map(t => [t.key, t.visible]))
+
   return (
     <main className="grow bg_home bg-gray-200">
       <h2 className="text-center text-gray-300 mt-2">Those Utilities</h2>
       <Container>
         {/* <FilterJournals topics={topics} /> */}
-        <HomeFeatureGrid />
+        <HomeFeatureGrid initialGlobalToggles={globalToggles} />
       </Container>
     </main>
     // <div className="flex  items-center  w-full   ">
