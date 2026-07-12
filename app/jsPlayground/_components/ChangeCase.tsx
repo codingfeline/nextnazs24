@@ -9,7 +9,7 @@ const toTitleCase = (str: string): string =>
   str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
 
 // Define the valid modes for better type safety
-type TransformationMode = 'title' | 'lower' | 'upper'
+type TransformationMode = 'title' | 'lower' | 'upper' | 'invert'
 
 export default function TextTransformer({ hideBrains }: { hideBrains?: boolean }) {
   const [text, setText] = useState<string>('')
@@ -25,6 +25,11 @@ export default function TextTransformer({ hideBrains }: { hideBrains?: boolean }
         return text.toLowerCase()
       case 'upper':
         return text.toUpperCase()
+      case 'invert':
+        return text
+          .split('')
+          .map(char => (char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase()))
+          .join('')
       default:
         return text
     }
@@ -58,6 +63,9 @@ export default function TextTransformer({ hideBrains }: { hideBrains?: boolean }
 
   str.toLowerCase()
   str.toUpperCase()
+
+  // Invert case
+  str.split('').map(char => char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase()).join('')
   `
 
   return (
@@ -91,7 +99,7 @@ export default function TextTransformer({ hideBrains }: { hideBrains?: boolean }
       </div>
       {/* 2. Radio Selection */}
       <div className="flex gap-3 mb-8 ">
-        {(['title', 'lower', 'upper'] as const).map(m => (
+        {(['title', 'lower', 'upper', 'invert'] as const).map(m => (
           <label key={m} className="flex items-center gap-2 cursor-pointer group">
             <input
               type="radio"
