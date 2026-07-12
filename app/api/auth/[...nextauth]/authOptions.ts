@@ -1,5 +1,5 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Role } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import NextAuth, { NextAuthConfig } from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -42,10 +42,27 @@ export const authOptions: NextAuthConfig = {
     strategy: 'jwt'
   },
   callbacks: {
+    //? Persist the user's role on the JWT. `user` is only present on sign-in,
+    //? so on later requests we look the role up by the user id (token.sub).
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role
+      } else if (token.sub && !token.role) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.sub },
+          select: { role: true },
+        })
+        if (dbUser) token.role = dbUser.role
+      }
+      return token
+    },
     //? Helpful in v5 to ensure the session picks up the user ID from the JWT
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
+        // `token.role` is typed `unknown` (JWT index signature) — see note in
+        // next-auth.d.ts on why the JWT type can't be augmented here.
+        session.user.role = token.role as Role | undefined
       }
       return session
     },

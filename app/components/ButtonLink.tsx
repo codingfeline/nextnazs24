@@ -1,7 +1,8 @@
 import { Button, IconProps } from '@radix-ui/themes'
+import { Role } from '@prisma/client'
 import Link from 'next/link'
 import { ComponentType, ReactNode } from 'react'
-import { auth } from '../api/auth/[...nextauth]/authOptions'
+import { getSession } from '../lib/authGuard'
 
 interface Prop {
   href: string
@@ -12,13 +13,10 @@ interface Prop {
 }
 
 const ButtonWithComponent = async ({ href, Icon, children, full, classes }: Prop) => {
-  console.log(process.env.NODE_ENV)
-  const session = await auth()
-  // if (!session) return null
-  // if (session!.user!.email !== 'post@nazs.net') return null
+  const session = await getSession()
   if (process.env.NODE_ENV !== 'development') {
     if (!session) return null
-    if (session!.user!.email !== 'post@nazs.net') return null
+    if (session.user?.role !== Role.ADMIN) return null
   }
 
   return (

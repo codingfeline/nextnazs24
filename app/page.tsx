@@ -26,9 +26,7 @@ export const metadata: Metadata = {
   },
 }
 
-import ChangeCaseContainer from './jsPlayground/_containers/ChangeCaseContainer'
-import PasswordContainer from './jsPlayground/_containers/PasswordContainer'
-import WordContainer from './jsPlayground/_containers/WordContainer'
+import HomeFeatureGrid from './_components/HomeFeatureGrid'
 export default async function Home() {
   // redirect('https://google.com')
   // const dataToParse = '<span>**</span>'
@@ -48,17 +46,7 @@ export default async function Home() {
       <h2 className="text-center text-gray-300 mt-2">Those Utilities</h2>
       <Container>
         {/* <FilterJournals topics={topics} /> */}
-        <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 mt-3 p-2 items-start [&>*:last-child]:sm:col-span-2 [&>*:last-child]:sm:justify-self-center [&>*:last-child]:lg:col-span-1 [&>*:last-child]:lg:justify-self-auto">
-          <div>
-            <WordContainer />
-          </div>
-          <div>
-            <ChangeCaseContainer />
-          </div>
-          <div>
-            <PasswordContainer />
-          </div>
-        </div>
+        <HomeFeatureGrid />
       </Container>
     </main>
     // <div className="flex  items-center  w-full   ">

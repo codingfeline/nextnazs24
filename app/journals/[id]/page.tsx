@@ -1,4 +1,5 @@
-import { ADMIN_EMAIL, getSession } from '@/app/lib/authGuard'
+import { getSession } from '@/app/lib/authGuard'
+import { Role } from '@prisma/client'
 import { BackButton, Pencil } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import MainPage from '@/app/components/MainPage'
@@ -41,7 +42,7 @@ const IssueDetailPage = async ({ params }: Props) => {
           </Reveal>
         </Box>
         {/* {!session && ( */}
-        {session && session.user!.email === ADMIN_EMAIL && (
+        {session && session.user?.role === Role.ADMIN && (
           <Box mt="3">
             <Flex direction="column" gap="2">
               <ButtonWithComponent

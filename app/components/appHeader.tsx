@@ -123,7 +123,7 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
           {link.label}
         </Link>
       ))}
-      {/* {status === 'authenticated' && session.user!.email! === 'post@nazs.net' && (
+      {/* {status === 'authenticated' && session.user?.role === 'ADMIN' && (
         <Link href="/Enquiries" className={colourLink('/Enquiries')}>
           Enquiries
         </Link>
