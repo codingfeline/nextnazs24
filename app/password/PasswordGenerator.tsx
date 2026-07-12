@@ -1,10 +1,74 @@
 'use client'
 
-import { useState } from 'react'
-import { Clear, Copy } from '../components'
+import { useEffect, useState } from 'react'
+import { Check, Copy } from '../components'
 import MyContainer from '../components/MyContainer'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
+
+const SETS = {
+  uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  lowercase: 'abcdefghijklmnopqrstuvwxyz',
+  numbers: '0123456789',
+  symbols: '!@#$%^&*()-_=+[]{};:,.<>?',
+} as const
+const CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
+const VOWELS = 'aeiou'
+
+// Cryptographically secure random int in [0, n).
+const randInt = (n: number) => {
+  const a = new Uint32Array(1)
+  crypto.getRandomValues(a)
+  return a[0] % n
+}
+
+const pick = (str: string) => str[randInt(str.length)]
+
+const shuffle = <T,>(arr: T[]): T[] => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = randInt(i + 1)
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
+
+// One guaranteed character from each selected set, then fill the rest.
+const generateRandom = (len: number, checks: CheckState): string | null => {
+  const active = (Object.keys(SETS) as (keyof typeof SETS)[]).filter(k => checks[k])
+  if (active.length === 0) return null
+  const pool = active.map(k => SETS[k]).join('')
+  const chars = active.map(k => pick(SETS[k]))
+  while (chars.length < len) chars.push(pick(pool))
+  return shuffle(chars).join('')
+}
+
+// Reserves trailing slots for digits/symbols when selected, then alternates
+// consonants and vowels so the result reads as syllables.
+const generatePronounceable = (len: number, checks: CheckState): string | null => {
+  if (!checks.uppercase && !checks.lowercase && !checks.numbers && !checks.symbols) return null
+
+  let extra = ''
+  if (checks.numbers) extra += pick(SETS.numbers) + pick(SETS.numbers)
+  if (checks.symbols) extra += pick(SETS.symbols)
+  const letterCount = Math.max(1, len - extra.length)
+
+  let word = ''
+  let consonant = randInt(2) === 0
+  for (let i = 0; i < letterCount; i++) {
+    word += pick(consonant ? CONSONANTS : VOWELS)
+    consonant = !consonant
+  }
+
+  const up = checks.uppercase
+  const low = checks.lowercase
+  let cased = ''
+  for (const ch of word) {
+    if (up && !low) cased += ch.toUpperCase()
+    else if (up && low) cased += randInt(100) < 30 ? ch.toUpperCase() : ch
+    else cased += ch // lowercase only, or no case selected
+  }
+  return cased + extra
+}
 
 const PasswordGenerator = () => {
   const [checks, setChecks] = useState<CheckState>({
@@ -18,68 +82,31 @@ const PasswordGenerator = () => {
   })
   const [password, setPassword] = useState('')
   const [copied, setCopied] = useState(false)
-  const [history, setHistory] = useState<string[]>([])
-  const [showSpan, setShowSpan] = useState<number[]>([])
 
   const generatePassword = () => {
     const length = parseInt(checks.length)
-    let pass = ''
+    const pw = checks.pronounceable
+      ? generatePronounceable(length, checks)
+      : generateRandom(length, checks)
 
-    if (checks.pronounceable) {
-      const vowels = 'aeiou'
-      const consonants = 'bcdfghjklmnprstvwz'
-      const extras = [
-        ...(checks.numbers ? '0123456789'.split('') : []),
-        ...(checks.symbols ? '!@#$%^&*'.split('') : []),
-      ]
-      for (let i = 0; i < length; i++) {
-        const isConsonantSlot = i % 2 === 0
-        if (isConsonantSlot && extras.length && Math.random() < 0.25) {
-          pass += extras[Math.floor(Math.random() * extras.length)]
-        } else {
-          const pool = isConsonantSlot ? consonants : vowels
-          const c = pool[Math.floor(Math.random() * pool.length)]
-          pass +=
-            checks.uppercase && isConsonantSlot && Math.random() < 0.3
-              ? c.toUpperCase()
-              : c
-        }
-      }
-    } else {
-      const CHARS = {
-        uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-        lowercase: 'abcdefghijklmnopqrstuvwxyz',
-        numbers: '0123456789',
-        symbols: '!@#$%^&*()_+[]{}|;:,.<>/?',
-      }
-      let characters = ''
-      if (checks.lowercase) characters += CHARS.lowercase
-      if (checks.uppercase) characters += CHARS.uppercase
-      if (checks.numbers) characters += CHARS.numbers
-      if (checks.symbols) characters += CHARS.symbols
-
-      for (let i = 0; i < length; i++) {
-        pass += characters[Math.floor(Math.random() * characters.length)]
-      }
+    if (pw === null) {
+      setPassword('')
+      setChecks(prev => (prev.noChecks ? prev : { ...prev, noChecks: true }))
+      return
     }
-
-    setHistory(prev => [pass, ...prev].slice(0, 10))
-    setPassword(pass)
+    setChecks(prev => (prev.noChecks ? { ...prev, noChecks: false } : prev))
+    setPassword(pw)
   }
+
+  // Regenerate live whenever a character-set toggle or the length changes,
+  // matching the source tool's auto-update behaviour.
+  useEffect(() => {
+    generatePassword()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checks.uppercase, checks.lowercase, checks.numbers, checks.symbols, checks.pronounceable, checks.length])
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    if (
-      !checks.pronounceable &&
-      !checks.lowercase &&
-      !checks.uppercase &&
-      !checks.numbers &&
-      !checks.symbols
-    ) {
-      setChecks(prev => ({ ...prev, noChecks: true }))
-      setPassword('')
-      return
-    }
     generatePassword()
   }
 
@@ -88,16 +115,12 @@ const PasswordGenerator = () => {
     setChecks(prev => ({ ...prev, noChecks: false, [name]: checked }))
   }
 
-  const handleCopy = async (p: string, i: number) => {
-    if (!p) return
+  const handleCopy = async () => {
+    if (!password) return
     try {
-      await navigator.clipboard.writeText(p)
+      await navigator.clipboard.writeText(password)
       setCopied(true)
-      setShowSpan(prev => [...prev, i])
-      setTimeout(() => {
-        setCopied(false)
-        setShowSpan([])
-      }, 500)
+      setTimeout(() => setCopied(false), 2000)
     } catch (err) {
       console.error('Failed to copy text: ', err)
       alert('Failed to copy. Please copy the password manually.')
@@ -115,45 +138,29 @@ const PasswordGenerator = () => {
       <div className="flex flex-col justify-center items-center p-0 m-0">
         <PasswordForm checks={checks} handlers={handlers} />
 
-        {history.length > 0 && (
-          <div className="mt-1 bg-gray-50 rounded-lg border border-dashed border-gray-300 w-[305px] select-none">
-            <div className="flex justify-center px-1 pt-1">
-              <button
-                onClick={() => setHistory([])}
-                className="text-gray-400 hover:text-red-400 transition-colors  p-1"
-                title="Clear history"
-              >
-                <Clear size={20} />
-              </button>
-            </div>
-            <ol className="list-decimal list-inside marker:text-gray-400 pb-2">
-              {history.map((item, index) => (
-                <div
-                  key={index}
-                  className={`px-3 py-1 flex items-center gap-2 border-b border-gray-200 last:border-0 ${
-                    index % 2 === 0 ? 'bg-white' : 'bg-blue-50'
-                  }`}
-                >
-                  <span className="text-xs text-gray-400 w-5 shrink-0">{index + 1}</span>
-                  <span
-                    className={`${
-                      showSpan.includes(index) ? 'text-orange-500' : 'text-gray-700'
-                    } transition-colors flex-1 font-mono text-sm truncate`}
-                  >
-                    {item}
-                  </span>
-                  <span
-                    className={`${
-                      showSpan.includes(index) ? 'text-green-500' : 'text-gray-400'
-                    } cursor-pointer transition-colors hover:text-gray-600 shrink-0`}
-                  >
-                    <Copy onClick={() => handleCopy(item, index)} title="Click to copy" />
-                  </span>
-                </div>
-              ))}
-            </ol>
-          </div>
-        )}
+        <div className="mt-3 w-full flex items-center gap-2">
+          <input
+            type="text"
+            value={password}
+            readOnly
+            placeholder="Your password appears here…"
+            className="flex-1 min-w-0 border-2 border-gray-200 rounded-lg p-2 outline-none text-black font-mono text-sm truncate"
+          />
+          <button
+            onClick={handleCopy}
+            disabled={!password}
+            className={`transition-colors shrink-0 ${
+              !password
+                ? 'text-gray-300 cursor-not-allowed'
+                : copied
+                  ? 'text-green-500'
+                  : 'text-gray-400 hover:text-gray-600'
+            }`}
+            aria-label="Copy"
+          >
+            {copied ? <Check size={22} /> : <Copy size={20} />}
+          </button>
+        </div>
       </div>
     </MyContainer>
   )
