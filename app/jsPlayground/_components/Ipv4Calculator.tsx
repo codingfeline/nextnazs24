@@ -40,8 +40,10 @@ const parseMask = (str: string): number | null => {
   return prefix
 }
 
-const maskFor = (prefix: number) => (prefix === 0 ? 0 : (0xffffffff << (32 - prefix)) >>> 0)
-const toDotted = (n: number) => [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255].join('.')
+const maskFor = (prefix: number) =>
+  prefix === 0 ? 0 : (0xffffffff << (32 - prefix)) >>> 0
+const toDotted = (n: number) =>
+  [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255].join('.')
 
 const classify = (ip: number): { label: string; className: string } => {
   const inCidr = (baseStr: string, prefix: number) =>
@@ -49,9 +51,12 @@ const classify = (ip: number): { label: string; className: string } => {
   if (inCidr('10.0.0.0', 8) || inCidr('172.16.0.0', 12) || inCidr('192.168.0.0', 16))
     return { label: 'Private (RFC 1918)', className: 'text-blue-600' }
   if (inCidr('127.0.0.0', 8)) return { label: 'Loopback', className: 'text-gray-500' }
-  if (inCidr('169.254.0.0', 16)) return { label: 'Link-local (APIPA)', className: 'text-gray-500' }
-  if (inCidr('100.64.0.0', 10)) return { label: 'Carrier-grade NAT', className: 'text-gray-500' }
-  if (inCidr('0.0.0.0', 8)) return { label: 'Reserved ("this network")', className: 'text-gray-500' }
+  if (inCidr('169.254.0.0', 16))
+    return { label: 'Link-local (APIPA)', className: 'text-gray-500' }
+  if (inCidr('100.64.0.0', 10))
+    return { label: 'Carrier-grade NAT', className: 'text-gray-500' }
+  if (inCidr('0.0.0.0', 8))
+    return { label: 'Reserved ("this network")', className: 'text-gray-500' }
   if (inCidr('224.0.0.0', 4)) return { label: 'Multicast', className: 'text-gray-500' }
   if (inCidr('240.0.0.0', 4)) return { label: 'Reserved', className: 'text-gray-500' }
   return { label: 'Public', className: 'text-green-600' }
@@ -69,7 +74,7 @@ interface Result {
 
 export default function Ipv4Calculator({ hideBrains }: { hideBrains?: boolean }) {
   const [ip, setIp] = useState('')
-  const [mask, setMask] = useState('/')
+  const [mask, setMask] = useState('')
 
   const result = useMemo<Result | { error: string } | null>(() => {
     const ipRaw = ip.trim()
@@ -79,7 +84,8 @@ export default function Ipv4Calculator({ hideBrains }: { hideBrains?: boolean })
     const ipNum = parseIp(ipRaw)
     if (ipNum === null) return { error: 'Enter a valid IPv4 address.' }
     const prefix = parseMask(maskRaw)
-    if (prefix === null) return { error: 'Enter a valid mask, e.g. 255.255.255.0 or /24.' }
+    if (prefix === null)
+      return { error: 'Enter a valid mask, e.g. 255.255.255.0 or /24.' }
 
     const m = maskFor(prefix)
     const network = (ipNum & m) >>> 0
@@ -120,7 +126,9 @@ const usableHosts = 2 ** (32 - prefix) - 2`
         <input
           type="text"
           value={ip}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setIp(e.target.value.replace(/[^0-9.]/g, ''))}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setIp(e.target.value.replace(/[^0-9.]/g, ''))
+          }
           placeholder="IP address — e.g. 192.168.1.10"
           maxLength={15}
           className="flex-1 border-2 border-gray-200 rounded-lg p-2 focus:border-blue-500 outline-none transition-all text-black text-sm"
@@ -128,7 +136,9 @@ const usableHosts = 2 ** (32 - prefix) - 2`
         <input
           type="text"
           value={mask}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setMask(e.target.value.replace(/[^0-9./]/g, ''))}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setMask(e.target.value.replace(/[^0-9./]/g, ''))
+          }
           placeholder="Mask or CIDR — e.g. 255.255.255.0 or 24"
           maxLength={15}
           className="flex-1 border-2 border-gray-200 rounded-lg p-2 focus:border-blue-500 outline-none transition-all text-black text-sm"
@@ -154,13 +164,17 @@ const usableHosts = 2 ** (32 - prefix) - 2`
               <dt className="text-gray-500">Usable hosts</dt>
               <dd className="font-mono">{result.usable}</dd>
               <dt className="text-gray-500">Type</dt>
-              <dd className={`font-semibold ${result.type.className}`}>{result.type.label}</dd>
+              <dd className={`font-semibold ${result.type.className}`}>
+                {result.type.label}
+              </dd>
             </dl>
           )}
         </div>
       )}
 
-      <h4 className="text-xs font-semibold text-gray-500 mt-2 mb-1">Private (RFC 1918)</h4>
+      <h4 className="text-xs font-semibold text-gray-500 mt-2 mb-1">
+        Private (RFC 1918)
+      </h4>
       <table className="w-full text-xs mb-2">
         <thead>
           <tr className="text-left text-gray-400">
@@ -190,9 +204,9 @@ const usableHosts = 2 ** (32 - prefix) - 2`
 
       <h4 className="text-xs font-semibold text-gray-500 mt-2 mb-1">Public</h4>
       <p className="text-xs text-gray-500 mb-2">
-        Any address outside the private and reserved blocks is publicly routable on the internet — for
-        example <span className="font-mono">1.0.0.0 – 9.255.255.255</span> or{' '}
-        <span className="font-mono">11.0.0.0 – 100.63.255.255</span>.
+        Any address outside the private and reserved blocks is publicly routable on the
+        internet — for example <span className="font-mono">1.0.0.0 – 9.255.255.255</span>{' '}
+        or <span className="font-mono">11.0.0.0 – 100.63.255.255</span>.
       </p>
 
       <h4 className="text-xs font-semibold text-gray-500 mt-2 mb-1">Other reserved</h4>

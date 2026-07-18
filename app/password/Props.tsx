@@ -1,7 +1,6 @@
 import { CheckState, HandleInput } from './interface'
 
 interface Handlers {
-  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void
   handleChecks: HandleInput
   handleLength: HandleInput
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Check, Copy } from '../components'
+import { Check, Copy, Refresh } from '../components'
 import MyContainer from '../components/MyContainer'
 import PasswordForm from './PasswordForm'
 import { CheckState } from './interface'
@@ -131,7 +131,7 @@ const PasswordGenerator = () => {
     setChecks(prev => ({ ...prev, length: e.target.value }))
   }
 
-  const handlers = { handleChecks, handleClick, handleLength }
+  const handlers = { handleChecks, handleLength }
 
   return (
     <MyContainer header="Password Generator">
@@ -146,6 +146,13 @@ const PasswordGenerator = () => {
             placeholder="Your password appears here…"
             className="flex-1 min-w-0 border-2 border-gray-200 rounded-lg p-2 outline-none text-black font-mono text-sm truncate"
           />
+          <button
+            onClick={handleClick}
+            className="shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Generate"
+          >
+            <Refresh size={20} />
+          </button>
           <button
             onClick={handleCopy}
             disabled={!password}

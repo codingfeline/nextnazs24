@@ -1,7 +1,7 @@
 import { Props } from './Props'
 
 const PasswordForm = ({ checks, handlers }: Props) => {
-  const { handleChecks, handleClick, handleLength } = handlers
+  const { handleChecks, handleLength } = handlers
 
   const checkboxes = [
     { id: 'lowercase', label: 'Lowercase' },
@@ -46,12 +46,6 @@ const PasswordForm = ({ checks, handlers }: Props) => {
           {checks.length}
         </span>
       </div>
-      <button
-        onClick={handleClick}
-        className="bg-gray-200 text-gray-800 p-2 rounded-lg border border-gray-200 hover:bg-gray-300 transition-colors font-medium text-sm mt-3 "
-      >
-        Generate
-      </button>
       {checks.noChecks && (
         <p className="text-sm mt-2 text-center text-red-500">
           Please select at least one option

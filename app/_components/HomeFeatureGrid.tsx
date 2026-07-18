@@ -4,6 +4,7 @@ import { Dialog, Flex, SegmentedControl, Switch, Text } from '@radix-ui/themes'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import ChangeCaseContainer from '../jsPlayground/_containers/ChangeCaseContainer'
+import CrossMultiplicationContainer from '../jsPlayground/_containers/CrossMultiplicationContainer'
 import DaysBetweenContainer from '../jsPlayground/_containers/DaysBetweenContainer'
 import Ipv4Container from '../jsPlayground/_containers/Ipv4Container'
 import PasswordContainer from '../jsPlayground/_containers/PasswordContainer'
@@ -21,6 +22,7 @@ const FEATURES: { key: FeatureKey; label: string; Component: React.ComponentType
   { key: 'daysBetween', label: 'Days Between Dates', Component: DaysBetweenContainer },
   { key: 'time', label: 'Time', Component: TimeConverterContainer },
   { key: 'quickBudget', label: 'Quick Budget', Component: QuickBudgetContainer },
+  { key: 'crossMultiplication', label: 'Cross-Multiplication', Component: CrossMultiplicationContainer },
 ]
 
 type ToggleMap = Partial<Record<FeatureKey, boolean>>
@@ -124,9 +126,9 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
 
   return (
     <>
-      <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 mt-3 p-2 items-start [&>*:last-child]:sm:col-span-2 [&>*:last-child]:sm:justify-self-center [&>*:last-child]:lg:col-span-1 [&>*:last-child]:lg:justify-self-auto">
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 lg:gap-6 mt-3 p-2">
         {visibleFeatures.map(({ key, Component }) => (
-          <div key={key}>
+          <div key={key} className="break-inside-avoid mb-3 lg:mb-6">
             <Component />
           </div>
         ))}
