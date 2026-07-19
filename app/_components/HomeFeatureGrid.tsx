@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react'
 import { RxDragHandleDots2 } from 'react-icons/rx'
 import ChangeCaseContainer from '../jsPlayground/_containers/ChangeCaseContainer'
 import CrossMultiplicationContainer from '../jsPlayground/_containers/CrossMultiplicationContainer'
+import DatePlusMinusContainer from '../jsPlayground/_containers/DatePlusMinusContainer'
 import DaysBetweenContainer from '../jsPlayground/_containers/DaysBetweenContainer'
 import Ipv4Container from '../jsPlayground/_containers/Ipv4Container'
 import PasswordContainer from '../jsPlayground/_containers/PasswordContainer'
@@ -31,6 +32,7 @@ const FEATURES: { key: FeatureKey; label: string; Component: React.ComponentType
   { key: 'password', label: 'Password Generator', Component: PasswordContainer },
   { key: 'ipv4', label: 'IPv4', Component: Ipv4Container },
   { key: 'daysBetween', label: 'Days Between Dates', Component: DaysBetweenContainer },
+  { key: 'datePlusMinus', label: 'Date +/- Days', Component: DatePlusMinusContainer },
   { key: 'time', label: 'Time', Component: TimeConverterContainer },
   { key: 'quickBudget', label: 'Quick Budget', Component: QuickBudgetContainer },
   { key: 'crossMultiplication', label: 'Cross-Multiplication', Component: CrossMultiplicationContainer },
@@ -188,7 +190,7 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
     <>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={visibleFeatures.map(f => f.key)} strategy={rectSortingStrategy}>
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 lg:gap-6 mt-3 p-2">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 lg:gap-6 mt-3 p-2 [&_.MyContainer]:mt-0">
             {visibleFeatures.map(({ key, Component }) => (
               <SortableFeature key={key} id={key}>
                 <Component />
