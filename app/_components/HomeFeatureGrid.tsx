@@ -13,6 +13,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { Dialog, Flex, SegmentedControl, Switch, Text } from '@radix-ui/themes'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import { FaGear } from 'react-icons/fa6'
 import { RxDragHandleDots2 } from 'react-icons/rx'
 import ChangeCaseContainer from '../jsPlayground/_containers/ChangeCaseContainer'
 import CrossMultiplicationContainer from '../jsPlayground/_containers/CrossMultiplicationContainer'
@@ -162,6 +163,8 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
 
   // Admin-only shortcut: press "?" then "f" (within 1s) to open the feature
   // picker. Ignored while typing in a field so it never hijacks a literal "?".
+  // The gear button below is the touch/mobile equivalent, since there's no
+  // keyboard to type the shortcut on.
   useEffect(() => {
     if (!isAdmin) return
 
@@ -188,6 +191,20 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
 
   return (
     <>
+      {isAdmin && (
+        <div className="flex justify-end px-2">
+          <button
+            type="button"
+            onClick={() => setOpen(prev => !prev)}
+            aria-label="Feature settings"
+            title="Feature settings"
+            className="theme-surface rounded-full p-2 shadow-md cursor-pointer"
+          >
+            <FaGear size={16} />
+          </button>
+        </div>
+      )}
+
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={visibleFeatures.map(f => f.key)} strategy={rectSortingStrategy}>
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 lg:gap-6 mt-3 p-2 [&_.MyContainer]:mt-0">
