@@ -4,6 +4,7 @@ export const FEATURE_KEYS = [
   'password',
   'ipv4',
   'daysBetween',
+  'datePlusMinus',
   'time',
   'quickBudget',
   'crossMultiplication',
