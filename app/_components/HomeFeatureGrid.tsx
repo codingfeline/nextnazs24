@@ -1,8 +1,19 @@
 'use client'
 
+import {
+  DndContext,
+  DragEndEvent,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core'
+import { SortableContext, arrayMove, rectSortingStrategy, useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 import { Dialog, Flex, SegmentedControl, Switch, Text } from '@radix-ui/themes'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import { RxDragHandleDots2 } from 'react-icons/rx'
 import ChangeCaseContainer from '../jsPlayground/_containers/ChangeCaseContainer'
 import CrossMultiplicationContainer from '../jsPlayground/_containers/CrossMultiplicationContainer'
 import DaysBetweenContainer from '../jsPlayground/_containers/DaysBetweenContainer'
@@ -29,6 +40,24 @@ type ToggleMap = Partial<Record<FeatureKey, boolean>>
 type Scope = 'me' | 'everyone'
 
 const STORAGE_KEY = 'homeFeatureToggles'
+const ORDER_STORAGE_KEY = 'homeFeatureOrder'
+const DEFAULT_ORDER = FEATURES.map(f => f.key)
+
+// Reorders only the currently-visible keys within the full order, so hidden
+// features keep their relative slot instead of being dragged along.
+const reorderVisible = (
+  fullOrder: FeatureKey[],
+  visibleKeys: FeatureKey[],
+  activeId: FeatureKey,
+  overId: FeatureKey
+) => {
+  const oldIndex = visibleKeys.indexOf(activeId)
+  const newIndex = visibleKeys.indexOf(overId)
+  if (oldIndex === -1 || newIndex === -1) return fullOrder
+  const reordered = arrayMove(visibleKeys, oldIndex, newIndex)
+  let i = 0
+  return fullOrder.map(key => (visibleKeys.includes(key) ? reordered[i++] : key))
+}
 
 const isTyping = (el: EventTarget | null) => {
   const target = el as HTMLElement | null
@@ -47,6 +76,7 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
     () => Object.fromEntries(FEATURES.map(f => [f.key, 'me'])) as Record<FeatureKey, Scope>
   )
   const [open, setOpen] = useState(false)
+  const [order, setOrder] = useState<FeatureKey[]>(DEFAULT_ORDER)
 
   // Load this admin's personal (this-browser-only) overrides once the client mounts.
   useEffect(() => {
@@ -56,7 +86,39 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
     } catch {}
   }, [])
 
+  // Load this browser's saved card order. Unknown keys are dropped and any
+  // features missing from a stale save are appended at the end.
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(ORDER_STORAGE_KEY) || '[]') as FeatureKey[]
+      const known = saved.filter(key => DEFAULT_ORDER.includes(key))
+      const missing = DEFAULT_ORDER.filter(key => !known.includes(key))
+      if (known.length) setOrder([...known, ...missing])
+    } catch {}
+  }, [])
+
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 4 } }))
+
   const isVisible = (key: FeatureKey) => personalOverrides[key] ?? globalToggles[key] ?? true
+
+  const featuresByKey = Object.fromEntries(FEATURES.map(f => [f.key, f])) as Record<
+    FeatureKey,
+    (typeof FEATURES)[number]
+  >
+  const visibleFeatures = order.map(key => featuresByKey[key]).filter(f => isVisible(f.key))
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event
+    if (!over || active.id === over.id) return
+    const visibleKeys = visibleFeatures.map(f => f.key)
+    setOrder(prev => {
+      const next = reorderVisible(prev, visibleKeys, active.id as FeatureKey, over.id as FeatureKey)
+      try {
+        localStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(next))
+      } catch {}
+      return next
+    })
+  }
 
   const setToggle = async (key: FeatureKey, value: boolean) => {
     if (scopeByKey[key] === 'everyone') {
@@ -122,17 +184,19 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isAdmin, open])
 
-  const visibleFeatures = FEATURES.filter(f => isVisible(f.key))
-
   return (
     <>
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 lg:gap-6 mt-3 p-2">
-        {visibleFeatures.map(({ key, Component }) => (
-          <div key={key} className="break-inside-avoid mb-3 lg:mb-6">
-            <Component />
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={visibleFeatures.map(f => f.key)} strategy={rectSortingStrategy}>
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 lg:gap-6 mt-3 p-2">
+            {visibleFeatures.map(({ key, Component }) => (
+              <SortableFeature key={key} id={key}>
+                <Component />
+              </SortableFeature>
+            ))}
           </div>
-        ))}
-      </div>
+        </SortableContext>
+      </DndContext>
 
       {isAdmin && (
         <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -165,5 +229,34 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
         </Dialog.Root>
       )}
     </>
+  )
+}
+
+function SortableFeature({ id, children }: { id: FeatureKey; children: React.ReactNode }) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1,
+        zIndex: isDragging ? 10 : undefined,
+      }}
+      className="break-inside-avoid mb-3 lg:mb-6 relative"
+    >
+      <button
+        {...attributes}
+        {...listeners}
+        type="button"
+        aria-label="Drag to reorder"
+        className="absolute top-2 right-2 z-10 cursor-grab active:cursor-grabbing touch-none rounded opacity-70 hover:opacity-100"
+        style={{ color: 'var(--theme-primary-contrast)' }}
+      >
+        <RxDragHandleDots2 size={18} />
+      </button>
+      {children}
+    </div>
   )
 }
