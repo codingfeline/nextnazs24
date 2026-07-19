@@ -7,7 +7,7 @@ import CookieConsentManager from './CookieConsentManager'
 const AppFooter = () => {
   const year = new Date().getFullYear().toString()
   return (
-    <footer className=" bg-gray-200 footer">
+    <footer className="theme-surface footer">
       <Container>
         <div className="flex justify-between">
           {/* <div> */}

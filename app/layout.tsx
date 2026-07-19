@@ -1,5 +1,4 @@
 import { CookieConsentProvider } from '@/providers/CookieConsentProvider'
-import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
@@ -8,6 +7,7 @@ import AppHeader from './components/appHeader'
 import Balloons from './components/Balloons'
 import BottomLogo from './components/bottomLogo'
 import ClientProviders from './components/ClientProviders'
+import ThemedRoot from './components/ThemedRoot'
 import './globals.css'
 import MyFancyLogComp from './hooks/MyFancyLogComp'
 import QueryClientProvider from './QueryClientProvider'
@@ -69,7 +69,7 @@ export default function RootLayout({
         <QueryClientProvider>
           <ClientProviders>
             <CookieConsentProvider>
-              <Theme accentColor="blue" className="mb-auto flex flex-col ">
+              <ThemedRoot className="mb-auto flex flex-col ">
                 <AppHeader />
                 <SignInShortcut />
                 {children}
@@ -82,7 +82,7 @@ export default function RootLayout({
                 />
                 <Balloons />
                 <AppFooter />
-              </Theme>
+              </ThemedRoot>
             </CookieConsentProvider>
           </ClientProviders>
         </QueryClientProvider>

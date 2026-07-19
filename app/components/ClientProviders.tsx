@@ -2,11 +2,14 @@
 
 import AuthProvider from '@/app/auth/Provider'
 import { BalloonsProvider } from '@/providers/BalloonsProvider'
+import { ThemeColorProvider } from '@/providers/ThemeColorProvider'
 
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
     <AuthProvider>
-      <BalloonsProvider>{children}</BalloonsProvider>
+      <ThemeColorProvider>
+        <BalloonsProvider>{children}</BalloonsProvider>
+      </ThemeColorProvider>
     </AuthProvider>
   )
 }

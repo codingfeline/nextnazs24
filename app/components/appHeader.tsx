@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { FaLaptopCode } from 'react-icons/fa6'
 import Reveal from './Reveal'
+import ThemeColorPicker from './ThemeColorPicker'
 
 const AppHeader = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -46,7 +47,7 @@ const AppHeader = () => {
   return (
     <nav
       ref={navRef}
-      className="borber bg-gray-200 justify-between h-full relative z-50 border-black"
+      className="borber theme-surface justify-between h-full relative z-50 border-black"
     >
       <Reveal direction="left">
         <Container>
@@ -67,7 +68,10 @@ const AppHeader = () => {
               </div>
               <NavLinks isOpen={isOpen} setIsOpen={setIsOpen} />
             </Flex>
-            <AuthStatus />
+            <Flex align="center" gap="3">
+              <ThemeColorPicker />
+              <AuthStatus />
+            </Flex>
           </Flex>
         </Container>
       </Reveal>
@@ -85,9 +89,8 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
 
   const colourLink = (link: string) =>
     classnames({
-      'text-zinc-900 bg-gray-300 ': link === currentPath,
-      'text-zinc-900 ': link !== currentPath,
-      'hover:text-white transition-colors  p-2 w-full flex justify-center  md:w-max bg-gray-200 hover:bg-gray-500 border-black': true,
+      'bg-black/20': link === currentPath,
+      'transition-colors p-2 w-full flex justify-center md:w-max hover:bg-black/10': true,
     })
 
   const links = [
@@ -111,7 +114,7 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
       top="40px"
       left="0"
       width={{ initial: '100%', sm: 'auto' }}
-      className="bg-gray-200 z-50 shadow-lg sm:shadow-none"
+      className="theme-surface z-50 shadow-lg sm:shadow-none"
     >
       {links.map(link => (
         <Link

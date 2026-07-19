@@ -45,6 +45,14 @@ body {
   /* font-family: var(--font-inter); */
 }
 
+.theme-surface {
+  background-color: var(--theme-primary);
+  color: var(--theme-primary-contrast);
+}
+.theme-surface .rt-Link {
+  color: var(--theme-primary-contrast);
+}
+
 .flex_center {
   @apply flex justify-center items-center;
 }
