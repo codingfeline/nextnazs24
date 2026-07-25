@@ -98,9 +98,9 @@ export default function TextTransformer({ hideBrains }: { hideBrains?: boolean }
         </div>
       </div>
       {/* 2. Radio Selection */}
-      <div className="flex gap-3 mb-8 ">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-3 mb-8 ">
         {(['title', 'lower', 'upper', 'invert'] as const).map(m => (
-          <label key={m} className="flex items-center gap-2 cursor-pointer group">
+          <label key={m} className="flex items-center gap-2 cursor-pointer group whitespace-nowrap">
             <input
               type="radio"
               name="mode"

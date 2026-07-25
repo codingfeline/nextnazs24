@@ -47,7 +47,7 @@ export default async function Home() {
   return (
     <main className="grow bg_home bg-gray-200">
       <h2 className="text-center text-gray-300 mt-2">Those Utilities</h2>
-      <Container>
+      <Container className="[--container-4:1800px]">
         {/* <FilterJournals topics={topics} /> */}
         <HomeFeatureGrid initialGlobalToggles={globalToggles} />
       </Container>

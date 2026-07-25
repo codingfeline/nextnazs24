@@ -207,7 +207,7 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
 
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={visibleFeatures.map(f => f.key)} strategy={rectSortingStrategy}>
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 lg:gap-6 mt-3 p-2 [&_.MyContainer]:mt-0">
+          <div className="columns-1 sm:columns-2 lg:columns-3 min-[1400px]:columns-4 gap-3 lg:gap-6 mt-3 p-2 [&_.MyContainer]:mt-0">
             {visibleFeatures.map(({ key, Component }) => (
               <SortableFeature key={key} id={key}>
                 <Component />
