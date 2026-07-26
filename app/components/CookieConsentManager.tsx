@@ -80,7 +80,8 @@ export default function CookieConsentManager() {
         >
           <div
             onClick={e => e.stopPropagation()}
-            className="theme-surface p-8 max-w-[420px] w-full rounded-lg flex flex-col gap-2"
+            className="theme-surface p-8 max-w-[420px] w-full rounded-lg flex flex-col gap-2 border-2"
+            style={{ borderColor: 'var(--theme-primary-contrast)' }}
           >
             <h2>Cookie Preferences</h2>
 
