@@ -125,6 +125,7 @@ const usableHosts = 2 ** (32 - prefix) - 2`
       <div className="flex flex-col gap-2 mb-3">
         <input
           type="text"
+          inputMode="decimal"
           value={ip}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setIp(e.target.value.replace(/[^0-9.]/g, ''))
@@ -135,6 +136,7 @@ const usableHosts = 2 ** (32 - prefix) - 2`
         />
         <input
           type="text"
+          inputMode="decimal"
           value={mask}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setMask(e.target.value.replace(/[^0-9./]/g, ''))
