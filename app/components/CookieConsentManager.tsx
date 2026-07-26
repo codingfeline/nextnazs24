@@ -80,7 +80,7 @@ export default function CookieConsentManager() {
         >
           <div
             onClick={e => e.stopPropagation()}
-            className="bg-white p-8 max-w-[420px] w-full rounded-lg flex flex-col gap-2"
+            className="theme-surface p-8 max-w-[420px] w-full rounded-lg flex flex-col gap-2"
           >
             <h2>Cookie Preferences</h2>
 
@@ -115,7 +115,7 @@ export default function CookieConsentManager() {
               </button>
               <button
                 onClick={() => setShowModal(false)}
-                className="bg-green-400 text-white px-4 py-2 cursor-pointer rounded-md"
+                className="bg-green-500 text-white px-4 py-2 cursor-pointer rounded-md"
               >
                 Close
               </button>
