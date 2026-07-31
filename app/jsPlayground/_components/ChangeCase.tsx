@@ -72,9 +72,12 @@ export default function TextTransformer({ hideBrains }: { hideBrains?: boolean }
     <MyContainer header="Case Converter">
       {/* 1. Main Input */}
       <div className="mb-6 w-full">
-        <label className="block text-sm font-medium text-gray-500 mb-2">
-          Source Text
-        </label>
+        <div className="flex items-center justify-between mb-2">
+          <label className="block text-sm font-medium text-gray-500">
+            Source Text
+          </label>
+          <span className="text-xs text-gray-400">{text.length} characters</span>
+        </div>
         <div className="relative w-full ">
           <input
             type="text"

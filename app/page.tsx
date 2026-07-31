@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   keywords: [
     'word unscrambler',
     'anagram solver',
-    'case converter',
+    'case converter', 
     'title case',
     'password generator',
     'secure password',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 }
 
 import HomeFeatureGrid from './_components/HomeFeatureGrid'
-export default async function Home() {
+export default async function Home() { 
   // redirect('https://google.com')
   // const dataToParse = '<span>**</span>'
   // const chilli = '<GiChiliPepper />'
