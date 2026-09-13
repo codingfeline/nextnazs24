@@ -5,6 +5,7 @@ import MainPage from '../components/MainPage'
 import Reveal from '../components/Reveal'
 import ViewSwitcher from '../components/ViewSwitcher'
 import FizzBuzz from './_components/FizzBuzz'
+import CssGrid from '../components/cssGrid';
 
 export const metadata: Metadata = {
   title: 'JS Playground — Interactive JavaScript Demos & Tools',
@@ -92,7 +93,8 @@ const JsPlayground = async ({ searchParams }: Props) => {
           </Reveal>
           <SelectedComponent />
         </div>
-      </div>
+      </div> 
+      {/* <CssGrid /> */}
     </MainPage>
   )
 }

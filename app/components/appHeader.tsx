@@ -86,6 +86,7 @@ interface OpenProp {
 
 const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
   const currentPath = usePathname()
+  const [isCssMenuOpen, setIsCssMenuOpen] = useState(false)
 
   const colourLink = (link: string) =>
     classnames({
@@ -99,6 +100,11 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
     // { label: 'Password', url: '/password' },
     // { label: 'Contact', url: '/contact' },
     { label: 'JS Playground', url: '/jsPlayground' },
+  ]
+
+  const cssLinks = [
+    { label: 'Grid', url: '/css/grid' },
+    { label: 'Flex', url: '/css/flex' },
   ]
 
   return (
@@ -126,6 +132,36 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
           {link.label}
         </Link>
       ))}
+      <div
+        onMouseEnter={() => setIsCssMenuOpen(true)}
+        onMouseLeave={() => setIsCssMenuOpen(false)}
+      >
+        {/* <DropdownMenu.Root open={isCssMenuOpen} onOpenChange={setIsCssMenuOpen}>
+          <DropdownMenu.Trigger>
+            <button
+              className={classnames(
+                'transition-colors p-2 w-full flex justify-center md:w-max hover:bg-black/10 cursor-pointer',
+                { 'bg-black/20': cssLinks.some(link => link.url === currentPath) }
+              )}
+            >
+              Buzzing CSS
+            </button>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content style={{ width: 'var(--radix-dropdown-menu-trigger-width)' }}>
+            {cssLinks.map(link => (
+              <DropdownMenu.Item key={link.url} asChild className="cursor-pointer">
+                <Link
+                  href={link.url}
+                  onClick={() => setIsOpen(false)}
+                  className="w-full cursor-pointer"
+                >
+                  {link.label}
+                </Link>
+              </DropdownMenu.Item>
+            ))}
+          </DropdownMenu.Content>
+        </DropdownMenu.Root> */}
+      </div>
       {/* {status === 'authenticated' && session.user?.role === 'ADMIN' && (
         <Link href="/Enquiries" className={colourLink('/Enquiries')}>
           Enquiries
