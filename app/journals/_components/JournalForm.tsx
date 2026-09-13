@@ -70,7 +70,7 @@ const JournalForm = ({ journal }: { journal?: Journals }) => {
           <ErrorMessage>{errors.comment?.message}</ErrorMessage>
         </div>
 
-        <Button disabled={submitting} onClick={onSubmit}>
+        <Button className="theme-surface" disabled={submitting} onClick={onSubmit}>
           <a href="#">
             {journal ? 'Update Journal' : 'Add Journal'} {submitting && <Spinner />}
           </a>

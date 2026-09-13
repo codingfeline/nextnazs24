@@ -82,7 +82,7 @@ const JournalsPage = async ({
       <Container>
         <div className="p-4">
           {/* <Pagination itemCount={journals.length} pageSize={10} currentPage={1} /> */}
-          <ButtonWithComponent classes="mb-1" href="/journals/new">
+          <ButtonWithComponent classes="mb-1 theme-surface" href="/journals/new">
             New Journal
           </ButtonWithComponent>
           <Table.Root variant="surface" className="mt-1">
