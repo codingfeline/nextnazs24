@@ -10,9 +10,9 @@ interface Props {
 const Link = ({ href, children, onClick }: Props) => {
   if (href) {
     return (
-      <NextLink href={href} passHref legacyBehavior>
-        <RadixLink>{children}</RadixLink>
-      </NextLink>
+      <RadixLink asChild onClick={onClick}>
+        <NextLink href={href}>{children}</NextLink>
+      </RadixLink>
     )
   }
   return <RadixLink onClick={onClick} style={{ cursor: 'pointer' }}>{children}</RadixLink>
