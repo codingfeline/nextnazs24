@@ -1,0 +1,29 @@
+.gridContainer {
+    h1 {
+        background: linear-gradient(to right, yellow, blue);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        width: fit-content;
+        -webkit-text-stroke: 1px black;
+        // https://www.youtube.com/watch?v=PL3Odw-k8W4
+    }
+    div:first-of-type {
+        color: red;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: .5em;
+        
+        .item {
+            border-radius: 5px;
+            padding: .5em;
+            color: blue;
+            text-transform: uppercase;
+            background: yellow;
+        }
+    }
+    div {
+        color: white;
+    }
+}

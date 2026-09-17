@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import MainPage from '../../components/MainPage'
-import CssGrid from '../../components/cssGrid'
+import CssGrid from '../../components/cssGrid/cssGrid'
 
 export const metadata: Metadata = {
   title: 'CSS Grid Playground',
