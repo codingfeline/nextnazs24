@@ -1,11 +1,10 @@
-import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
-import React from 'react'
-import MainPage from '../components/MainPage'
-import Reveal from '../components/Reveal'
-import ViewSwitcher from '../components/ViewSwitcher'
-import FizzBuzz from './_components/FizzBuzz'
-import CssGrid from '../components/cssGrid/cssGrid';
+import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+import React from 'react';
+import MainPage from '../components/MainPage';
+import Reveal from '../components/Reveal';
+import ViewSwitcher from '../components/ViewSwitcher';
+import FizzBuzz from './_components/FizzBuzz';
 
 export const metadata: Metadata = {
   title: 'JS Playground — Interactive JavaScript Demos & Tools',
@@ -86,15 +85,12 @@ const JsPlayground = async ({ searchParams }: Props) => {
 
   return (
     <MainPage bg="bg_nebula">
-      <div className="text-gray-300 p-4 ">
-        <div className=" gap-2 ">
+      <div className="text-gray-300 ">
           <Reveal direction="left" delay={200}>
             <ViewSwitcher links={links} currentView={currentView} />
           </Reveal>
           <SelectedComponent />
         </div>
-      </div> 
-      <CssGrid />
     </MainPage>
   )
 }
