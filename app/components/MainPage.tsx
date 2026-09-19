@@ -8,7 +8,7 @@ interface Props {
 
 const MainPage = ({ children, bg }: Props) => {
   return (
-    <main className={`grow ${bg}`}>
+    <main className={`grow ${bg} p-4`}>
       <Container>{children}</Container>
     </main>
   )

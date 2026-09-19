@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 }
 
 import HomeFeatureGrid from './_components/HomeFeatureGrid'
+import MainPage from './components/MainPage';
 export default async function Home() { 
   // redirect('https://google.com')
   // const dataToParse = '<span>**</span>'
@@ -45,13 +46,13 @@ export default async function Home() {
   const globalToggles = Object.fromEntries(featureToggles.map(t => [t.key, t.visible]))
 
   return (
-    <main className="grow bg_home bg-gray-200">
+    <MainPage bg="bg_home">
       <h2 className="text-center text-gray-300 mt-2">Those Utilities</h2>
       <Container className="[--container-4:1800px]">
         {/* <FilterJournals topics={topics} /> */}
         <HomeFeatureGrid initialGlobalToggles={globalToggles} />
       </Container>
-    </main>
+    </MainPage>
     // <div className="flex  items-center  w-full   ">
     //   <Container>
     //   </Container>
