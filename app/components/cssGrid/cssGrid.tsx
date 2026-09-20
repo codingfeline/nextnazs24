@@ -1,5 +1,23 @@
 import styles from "./cssGrid.module.scss";
 
+// Wraps every /* comment */ in a span so it can be styled apart from the code.
+// split() with a capture group puts the comments at the odd indexes.
+function CssComments({ children }: { children: string }) {
+  return (
+    <>
+      {children.split(/(\/\*[\s\S]*?\*\/)/).map((part, i) =>
+        i % 2 ? (
+          <span key={i} className={styles.comment}>
+            {part}
+          </span>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
+
 export default function CssGrid() {
   const { gridContainer, item } = styles;
 
@@ -39,7 +57,14 @@ export default function CssGrid() {
         <input type="checkbox" id={styles.menuActive} />
         <label htmlFor={styles.menuActive} id={styles.overlay}></label>
         <label htmlFor={styles.menuActive} className={styles.openMenu}>
-          <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" ><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="32px"
+            viewBox="0 -960 960 960"
+            width="32px"
+          >
+            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+          </svg>
         </label>
 
         <nav>
@@ -54,20 +79,36 @@ export default function CssGrid() {
             <li>products</li>
           </ul>
         </nav>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse labore
-          ipsa nisi reiciendis, eum dolorem qui, eligendi fugiat architecto
-          alias dolore! Consequuntur possimus eaque et dolores laudantium
-          quaerat natus quisquam dolore vel nisi perspiciatis officia esse,
-          commodi doloribus delectus neque enim dolorem! Delectus architecto
-          consequatur asperiores perferendis, quia rem doloremque esse
-          exercitationem autem corporis dignissimos, nulla veniam fuga velit
-          repellat error natus labore neque distinctio aperiam. Earum aspernatur
-          illum, possimus odit, ad placeat ipsa aliquam natus numquam obcaecati
-          asperiores quasi voluptate iste sint beatae vitae quidem aliquid fuga
-          doloribus. Consectetur atque beatae at corporis rem numquam adipisci
-          cupiditate nam dolore?
-        </p>
+        {/* <h3>key properties</h3> */}
+        <pre className={styles.code}>
+          <code><CssComments>{`/* 1. The hidden checkbox stores open/closed. Labels toggle it. */
+#menuActive { display: none; }
+
+/* 2. The MENU button is hidden on desktop */
+.openMenu { display: none; }
+
+@media (max-width: 700px) {            /* 3. breakpoint */
+  .openMenu { display: block; }        /* show the button */
+
+  ul {
+    flex-direction: column;            /* stack the links */
+    position: absolute;                /* real app would use fixed property */
+    right: 200%;                       /* park the panel off-screen */
+    transition: right 200ms ease-in-out;
+    z-index: 10;                       /* above the overlay */
+  }
+
+  /* 4. checked = open */
+  #menuActive:checked ~ nav ul { right: 0; }             /* slide in */
+  #menuActive:checked ~ #overlay {
+    display: block;
+    position: absolute;
+    inset: 0;                          /* shorthand for top/right/bottom/left: 0 */
+    background: rgba(0, 0, 0, 0.5);    /* dim the page */
+    z-index: 9;
+  }
+}`}</CssComments></code>
+        </pre>
       </section>
       <section style={{ height: "400px" }}></section>
     </div>
