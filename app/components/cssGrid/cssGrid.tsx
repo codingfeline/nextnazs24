@@ -21,15 +21,55 @@ export default function CssGrid() {
         </div>
       </section>
       <section>
-        <h2>textarea</h2>
+        <h2>auto-resize textarea</h2>
         <textarea name="" id=""></textarea>
       </section>
       <section>
         <h2>relative padding</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi corrupti obcaecati perferendis quaerat culpa odio voluptatum expedita tempora quam, in id, velit neque? Necessitatibus nisi dolores totam fugit adipisci voluptate, consequatur beatae asperiores quis, nihil quibusdam ullam nemo sequi natus?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+          corrupti obcaecati perferendis quaerat culpa odio voluptatum expedita
+          tempora quam, in id, velit neque? Necessitatibus nisi dolores totam
+          fugit adipisci voluptate, consequatur beatae asperiores quis, nihil
+          quibusdam ullam nemo sequi natus?
         </p>
-        </section>
+      </section>
+      <section>
+        <h2>CSS-only responsive menu</h2>
+        <input type="checkbox" id={styles.menuActive} />
+        <label htmlFor={styles.menuActive} id={styles.overlay}></label>
+        <label htmlFor={styles.menuActive} className={styles.openMenu}>
+          MENU
+        </label>
+
+        <nav>
+          <ul>
+            <li>
+              <a href="#">home</a>
+            </li>
+            <li>
+              <a href="#">about</a>
+            </li>
+            <li>contact</li>
+            <li>products</li>
+          </ul>
+        </nav>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse labore
+          ipsa nisi reiciendis, eum dolorem qui, eligendi fugiat architecto
+          alias dolore! Consequuntur possimus eaque et dolores laudantium
+          quaerat natus quisquam dolore vel nisi perspiciatis officia esse,
+          commodi doloribus delectus neque enim dolorem! Delectus architecto
+          consequatur asperiores perferendis, quia rem doloremque esse
+          exercitationem autem corporis dignissimos, nulla veniam fuga velit
+          repellat error natus labore neque distinctio aperiam. Earum aspernatur
+          illum, possimus odit, ad placeat ipsa aliquam natus numquam obcaecati
+          asperiores quasi voluptate iste sint beatae vitae quidem aliquid fuga
+          doloribus. Consectetur atque beatae at corporis rem numquam adipisci
+          cupiditate nam dolore?
+        </p>
+      </section>
+      <section style={{ height: "400px" }}></section>
     </div>
   );
 }
