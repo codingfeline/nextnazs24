@@ -2,7 +2,7 @@ import styles from "./cssGrid.module.scss";
 
 // Wraps every /* comment */ in a span so it can be styled apart from the code.
 // split() with a capture group puts the comments at the odd indexes.
-function CssComments({ children }: { children: string }) {
+export function CssComments({ children }: { children: string }) {
   return (
     <>
       {children.split(/(\/\*[\s\S]*?\*\/)/).map((part, i) =>
@@ -37,10 +37,18 @@ export default function CssGrid() {
           <div>Item 8</div>
           <div>Item 9</div>
         </div>
+        <pre className={styles.code}>
+          <code><CssComments>{`.container { 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+}`}</CssComments></code>
+        </pre>
       </section>
       <section>
         <h2>auto-resize textarea</h2>
         <textarea name="" id=""></textarea>
+        <pre className={styles.code}>
+          <code><CssComments>{`textarea  { field-sizing: content; }`}</CssComments></code>
+        </pre>
       </section>
       <section>
         <h2>responsive padding w/o media query</h2>
@@ -51,6 +59,9 @@ export default function CssGrid() {
           fugit adipisci voluptate, consequatur beatae asperiores quis, nihil
           quibusdam ullam nemo sequi natus?
         </p>
+        <pre className={styles.code}>
+          <code><CssComments>{`p  { padding: min(3em, 9%); }`}</CssComments></code>
+        </pre>
       </section>
       <section>
         <h2>CSS-only responsive menu</h2>
