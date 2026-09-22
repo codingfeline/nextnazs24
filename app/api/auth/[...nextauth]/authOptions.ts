@@ -78,7 +78,7 @@ export const authOptions: NextAuthConfig = {
       const { pathname } = nextUrl;
 
       // 1. Define your public routes
-      const staticPublicRoutes = ["/", "/password", "/journals", '/contact', '/jsPlayground'];
+      const staticPublicRoutes = ["/", "/password", "/journals", '/contact', '/jsPlayground', '/CSS-Impress'];
       const dynamicPublicPrefixes = ["/journals"];
 
       const isPublicPage =
