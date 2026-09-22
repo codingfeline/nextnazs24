@@ -81,10 +81,10 @@ export default function CssGrid() {
         <nav>
           <ul>
             <li>
-              <a href="#">home</a>
+              home
             </li>
             <li>
-              <a href="#">about</a>
+              about
             </li>
             <li>contact</li>
             <li>products</li>

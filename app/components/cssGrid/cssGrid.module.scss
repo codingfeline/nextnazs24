@@ -47,7 +47,7 @@
       border-radius: 3px;
       padding: 0.4em;
       field-sizing: content;
-      width: 22rem;
+      width: min(32rem, 95%);
       min-height: 1lh;
       resize: none;
       user-select: none;
@@ -59,7 +59,7 @@
     }
   }
   section:nth-of-type(3) {
-    // responsive padding
+    // relative padding
     h2 {
       @include mixins.underlineHover((green, red), (#993b4b, yellow));
     }
