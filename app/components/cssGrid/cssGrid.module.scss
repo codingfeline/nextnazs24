@@ -59,7 +59,7 @@
     }
   }
   section:nth-of-type(3) {
-    // relative padding
+    // responsive padding
     h2 {
       @include mixins.underlineHover((green, red), (#993b4b, yellow));
     }
@@ -91,7 +91,7 @@
         background: white;
         border-radius: 20px;
         li {
-          padding: min(3em, 10%);
+          padding: min(1em, 10%);
         }
 
         li:first-child {

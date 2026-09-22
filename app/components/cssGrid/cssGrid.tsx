@@ -43,7 +43,7 @@ export default function CssGrid() {
         <textarea name="" id=""></textarea>
       </section>
       <section>
-        <h2>relative padding</h2>
+        <h2>responsive padding w/o media query</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
           corrupti obcaecati perferendis quaerat culpa odio voluptatum expedita
