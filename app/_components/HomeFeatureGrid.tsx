@@ -192,7 +192,7 @@ export default function HomeFeatureGrid({ initialGlobalToggles }: { initialGloba
   return (
     <>
       {isAdmin && (
-        <div className="flex justify-end px-2">
+        <div className="flex justify-end px-2 md:hidden">
           <button
             type="button"
             onClick={() => setOpen(prev => !prev)}
