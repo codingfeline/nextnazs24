@@ -1,5 +1,6 @@
 import CssColumns from "./cssColumns";
 import { CssComments } from "./cssComments";
+import CssCornerShape from "./cssCornerShape";
 import CssCounterHeadings from "./cssCounterHeadings";
 import CssRelativePadding from "./cssRelativePadding";
 import CssResponsiveFont from "./cssResponsiveFont";
@@ -120,6 +121,9 @@ export default function CssGrid() {
       </section>
       <section>
         <CssCounterHeadings />
+      </section>
+      <section>
+        <CssCornerShape />
       </section>
     </div>
   );

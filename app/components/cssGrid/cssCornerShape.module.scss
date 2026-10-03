@@ -1,0 +1,45 @@
+@use "mixins";
+
+.box {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    @include mixins.underlineHover((blue), (yellow));
+  }
+}
+
+.shape {
+  width: 100px;
+  height: 100px;
+  background: red;
+  border-radius: 50px; // corner-shape reshapes the curve border-radius draws
+  corner-shape: superellipse(5) notch; // alternates: tl/br, tr/bl
+  transition: all 400ms;
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    corner-shape: notch superellipse(5);
+  }
+  &:hover::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: transparent;
+  }
+}
+
+pre.code {
+  margin: 10px 0;
+  overflow-x: auto; // long lines scroll instead of overflowing
+  border-radius: 10px;
+  background-color: black;
+  padding: 25px;
+  color: rgb(194, 190, 190);
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+}
