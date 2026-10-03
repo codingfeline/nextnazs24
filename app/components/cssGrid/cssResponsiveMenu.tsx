@@ -1,3 +1,4 @@
+import BrainsContainer from "../BrainsContainer";
 import { CssComments } from "./cssComments";
 import styles from "./cssResponsiveMenu.module.scss";
 
@@ -26,8 +27,9 @@ export default function CssResponsiveMenu() {
           <li>products</li>
         </ul>
       </nav>
-      <pre className={styles.code}>
-        <code><CssComments commentClassName={styles.comment}>{`/* 1. The hidden checkbox stores open/closed. Labels toggle it. */
+      <BrainsContainer header="the key css">
+        <pre className={styles.code}>
+          <code><CssComments commentClassName={styles.comment}>{`/* 1. The hidden checkbox stores open/closed. Labels toggle it. */
 #menuActive { display: none; }
 
 /* 2. The MENU button is hidden on desktop */
@@ -54,7 +56,8 @@ export default function CssResponsiveMenu() {
     z-index: 9;
   }
 }`}</CssComments></code>
-      </pre>
+        </pre>
+      </BrainsContainer>
     </div>
   );
 }

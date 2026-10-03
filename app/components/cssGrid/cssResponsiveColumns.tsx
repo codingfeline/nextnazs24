@@ -1,3 +1,4 @@
+import BrainsContainer from "../BrainsContainer";
 import { CssComments } from "./cssComments";
 import styles from "./cssResponsiveColumns.module.scss";
 
@@ -12,11 +13,13 @@ export default function CssResponsiveColumns() {
           <div key={item}>{item}</div>
         ))}
       </div>
-      <pre className={styles.code}>
-        <code><CssComments commentClassName={styles.comment}>{`.container {
+      <BrainsContainer header="the key css">
+        <pre className={styles.code}>
+          <code><CssComments commentClassName={styles.comment}>{`.container {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }`}</CssComments></code>
-      </pre>
+        </pre>
+      </BrainsContainer>
     </div>
   );
 }

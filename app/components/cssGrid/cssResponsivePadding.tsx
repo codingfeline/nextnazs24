@@ -1,3 +1,4 @@
+import BrainsContainer from "../BrainsContainer";
 import { CssComments } from "./cssComments";
 import styles from "./cssResponsivePadding.module.scss";
 
@@ -12,9 +13,11 @@ export default function CssResponsivePadding() {
         fugit adipisci voluptate, consequatur beatae asperiores quis, nihil
         quibusdam ullam nemo sequi natus?
       </p>
-      <pre className={styles.code}>
-        <code><CssComments commentClassName={styles.comment}>{`p  { padding: min(3em, 9%); }`}</CssComments></code>
-      </pre>
+      <BrainsContainer header="the key css">
+        <pre className={styles.code}>
+          <code><CssComments commentClassName={styles.comment}>{`p  { padding: min(3em, 9%); }`}</CssComments></code>
+        </pre>
+      </BrainsContainer>
     </div>
   );
 }

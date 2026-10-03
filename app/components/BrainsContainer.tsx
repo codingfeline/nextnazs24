@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { ChevronRight, Cpu } from '.'
 import Reveal from './Reveal'

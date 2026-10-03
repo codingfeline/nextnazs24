@@ -1,3 +1,4 @@
+import BrainsContainer from "../BrainsContainer";
 import { CssComments } from "./cssComments";
 import styles from "./cssResponsiveFont.module.scss";
 
@@ -11,13 +12,15 @@ export default function CssResponsiveFont() {
         officiis velit reprehenderit, omnis sequi cum voluptates dolore laborum
         qui.
       </p>
-      <pre className={styles.code}>
-        <code><CssComments commentClassName={styles.comment}>{`h1 {
+      <BrainsContainer header="the key css">
+        <pre className={styles.code}>
+          <code><CssComments commentClassName={styles.comment}>{`h1 {
   /* clamp(min, preferred, max): grows with the viewport width,
      but never below 1.8rem or above 5rem */
   font-size: clamp(1.8rem, calc(7vw + 1rem), 5rem);
 }`}</CssComments></code>
-      </pre>
+        </pre>
+      </BrainsContainer>
     </div>
   );
 }

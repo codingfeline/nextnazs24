@@ -1,3 +1,4 @@
+import BrainsContainer from "../BrainsContainer";
 import { CssComments } from "./cssComments";
 import styles from "./cssColumns.module.scss";
 
@@ -24,8 +25,9 @@ export default function CssColumns() {
           <img key={src} src={`https://picsum.photos/id/${src}`} alt="" />
         ))}
       </div>
-      <pre className={styles.code}>
-        <code><CssComments commentClassName={styles.comment}>{`.images {
+      <BrainsContainer header="the key css">
+        <pre className={styles.code}>
+          <code><CssComments commentClassName={styles.comment}>{`.images {
   width: min(1000px, 100%);
   columns: 4 200px;     /* up to 4 columns, each at least 200px wide */
   column-gap: 0.5em;
@@ -36,7 +38,8 @@ export default function CssColumns() {
     margin-bottom: 0.5em;
   }
 }`}</CssComments></code>
-      </pre>
+        </pre>
+      </BrainsContainer>
     </div>
   );
 }

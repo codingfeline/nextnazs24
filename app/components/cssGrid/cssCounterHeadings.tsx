@@ -1,3 +1,4 @@
+import BrainsContainer from "../BrainsContainer";
 import { CssComments } from "./cssComments";
 import styles from "./cssCounterHeadings.module.scss";
 
@@ -12,8 +13,9 @@ export default function CssCounterHeadings() {
           <h3 key={heading}>{heading}</h3>
         ))}
       </div>
-      <pre className={styles.code}>
-        <code><CssComments commentClassName={styles.comment}>{`.counted {
+      <BrainsContainer header="the key css">
+        <pre className={styles.code}>
+          <code><CssComments commentClassName={styles.comment}>{`.counted {
   counter-reset: headings;             /* start a counter named "headings" at 0 */
 
   h3 {
@@ -30,7 +32,8 @@ export default function CssCounterHeadings() {
     }
   }
 }`}</CssComments></code>
-      </pre>
+        </pre>
+      </BrainsContainer>
     </div>
   );
 }

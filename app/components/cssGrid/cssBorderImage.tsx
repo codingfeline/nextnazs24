@@ -1,3 +1,4 @@
+import BrainsContainer from "../BrainsContainer";
 import { CssComments } from "./cssComments";
 import styles from "./cssBorderImage.module.scss";
 
@@ -6,8 +7,9 @@ export default function CssBorderImage() {
     <div className={styles.box}>
       <h2>border image</h2>
       <div className={styles.spinner}></div>
-      <pre className={styles.code}>
-        <code><CssComments commentClassName={styles.comment}>{`/* register --angle as a real <angle> so it can be animated */
+      <BrainsContainer header="the key css">
+        <pre className={styles.code}>
+          <code><CssComments commentClassName={styles.comment}>{`/* register --angle as a real <angle> so it can be animated */
 @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -25,7 +27,8 @@ export default function CssBorderImage() {
   to   { --angle: 360deg; }    /* rotates the gradient start point */
 }
 /* note: border-image ignores border-radius, so the corners stay square */`}</CssComments></code>
-      </pre>
+        </pre>
+      </BrainsContainer>
     </div>
   );
 }
