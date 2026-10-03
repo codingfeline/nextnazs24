@@ -1,5 +1,6 @@
 import BackToTop from "../BackToTop";
 import CssAutoTextarea from "./cssAutoTextarea";
+import CssBorderImage from "./cssBorderImage";
 import CssColumns from "./cssColumns";
 import CssCornerShape from "./cssCornerShape";
 import CssCounterHeadings from "./cssCounterHeadings";
@@ -24,6 +25,7 @@ export default function CssGrid() {
         <li><a href="#responsive-font">Responsive Font</a></li>
         <li><a href="#counter-headings">Counter Headings</a></li>
         <li><a href="#corner-shape">Corner Shape</a></li>
+        <li><a href="#border-image">Border Image</a></li>
       </ul>
       <section id="responsive-columns">
         <CssResponsiveColumns />
@@ -51,6 +53,9 @@ export default function CssGrid() {
       </section>
       <section id="corner-shape">
         <CssCornerShape />
+      </section>
+      <section id="border-image">
+        <CssBorderImage />
       </section>
       <BackToTop />
     </div>

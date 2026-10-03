@@ -1,0 +1,50 @@
+@use "mixins";
+
+// registering --angle as an <angle> lets it animate; an unregistered custom property would just jump
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    @include mixins.underlineHover((blue), (yellow));
+  }
+}
+
+// a div, not a section: .gridContainer section styles would hit it
+.spinner {
+  width: 100px;
+  height: 100px;
+  background: green;
+  border: 8px solid black; // border-image needs a border width to draw into
+  border-image: conic-gradient(from var(--angle), blue, red, yellow, blue) 1;
+  animation: 2s spin linear infinite;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+pre.code {
+  margin: 10px 0;
+  overflow-x: auto; // long lines scroll instead of overflowing
+  border-radius: 10px;
+  background-color: black;
+  padding: 25px;
+  color: rgb(194, 190, 190);
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+}
