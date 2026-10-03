@@ -4,7 +4,7 @@
   section {
     margin: 0.2em 0;
     background: rgb(204, 204, 204);
-    opacity: .7;
+    opacity: .8;
     padding: min(2em, 8%);
     h2 {
       margin-bottom: 0.3em;
@@ -16,7 +16,7 @@
     // https://www.youtube.com/watch?v=PL3Odw-k8W4
     @include mixins.underlineHover;
   }
-  div:first-of-type {
+  section:first-of-type > div {
     // color: red;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

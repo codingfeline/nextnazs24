@@ -1,22 +1,7 @@
+import CssColumns from "./cssColumns";
+import { CssComments } from "./cssComments";
+import CssRelativePadding from "./cssRelativePadding";
 import styles from "./cssGrid.module.scss";
-
-// Wraps every /* comment */ in a span so it can be styled apart from the code.
-// split() with a capture group puts the comments at the odd indexes.
-export function CssComments({ children }: { children: string }) {
-  return (
-    <>
-      {children.split(/(\/\*[\s\S]*?\*\/)/).map((part, i) =>
-        i % 2 ? (
-          <span key={i} className={styles.comment}>
-            {part}
-          </span>
-        ) : (
-          part
-        ),
-      )}
-    </>
-  );
-}
 
 export default function CssGrid() {
   const { gridContainer, item } = styles;
@@ -38,7 +23,7 @@ export default function CssGrid() {
           <div>Item 9</div>
         </div>
         <pre className={styles.code}>
-          <code><CssComments>{`.container { 
+          <code><CssComments commentClassName={styles.comment}>{`.container { 
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
 }`}</CssComments></code>
         </pre>
@@ -47,7 +32,7 @@ export default function CssGrid() {
         <h2>auto-resize textarea</h2>
         <textarea name="" id=""></textarea>
         <pre className={styles.code}>
-          <code><CssComments>{`textarea  { field-sizing: content; }`}</CssComments></code>
+          <code><CssComments commentClassName={styles.comment}>{`textarea  { field-sizing: content; }`}</CssComments></code>
         </pre>
       </section>
       <section>
@@ -60,7 +45,7 @@ export default function CssGrid() {
           quibusdam ullam nemo sequi natus?
         </p>
         <pre className={styles.code}>
-          <code><CssComments>{`p  { padding: min(3em, 9%); }`}</CssComments></code>
+          <code><CssComments commentClassName={styles.comment}>{`p  { padding: min(3em, 9%); }`}</CssComments></code>
         </pre>
       </section>
       <section>
@@ -92,7 +77,7 @@ export default function CssGrid() {
         </nav>
         {/* <h3>key properties</h3> */}
         <pre className={styles.code}>
-          <code><CssComments>{`/* 1. The hidden checkbox stores open/closed. Labels toggle it. */
+          <code><CssComments commentClassName={styles.comment}>{`/* 1. The hidden checkbox stores open/closed. Labels toggle it. */
 #menuActive { display: none; }
 
 /* 2. The MENU button is hidden on desktop */
@@ -121,7 +106,13 @@ export default function CssGrid() {
 }`}</CssComments></code>
         </pre>
       </section>
-      <section style={{ height: "400px" }}></section>
+
+      <section>
+        <CssColumns />
+      </section>
+      <section>
+        <CssRelativePadding />
+      </section>
     </div>
   );
 }

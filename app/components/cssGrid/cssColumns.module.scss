@@ -1,0 +1,47 @@
+@use "mixins";
+
+.box {
+  margin: 0.3em;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em 0.5em;
+
+  h2 {
+    @include mixins.underlineHover((blue), (yellow));
+  }
+
+  p {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4em;
+  }
+}
+
+.images {
+  width: min(1000px, 100%);
+  margin: 0 auto;
+  columns: 4 200px; // up to 4 columns, each at least 200px wide
+  column-gap: 0.5em;
+
+  img {
+    width: 100%;
+    display: block;
+    margin-bottom: 0.5em;
+    border-radius: 0.5em;
+    border: 1px solid gray;
+  }
+}
+
+pre.code {
+  margin: 10px 0;
+  overflow-x: auto; // long lines scroll instead of overflowing
+  border-radius: 10px;
+  background-color: black;
+  padding: 25px;
+  color: rgb(194, 190, 190);
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+}

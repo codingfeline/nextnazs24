@@ -1,5 +1,3 @@
-import React from 'react'
-import CssImpress from '../components/cssImpress';
 import MainPage from '../components/MainPage';
 import CssGrid from '../components/cssGrid/cssGrid';
 import { Metadata } from 'next';
@@ -14,6 +12,7 @@ export default function page() {
     <MainPage bg={styles.bg_css}>
       {/* <CssImpress /> */}
       <CssGrid />
+      {/* <CssColumns /> */}
     </MainPage>
   )
 }
