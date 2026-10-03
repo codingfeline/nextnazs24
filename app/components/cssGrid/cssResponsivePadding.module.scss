@@ -1,0 +1,31 @@
+@use "mixins";
+
+.box {
+  h2 {
+    @include mixins.underlineHover((green, red), (#993b4b, yellow));
+  }
+
+  p {
+    background: white;
+    padding: min(3em, 9%);
+    border-radius: 1em;
+
+    &::first-letter {
+      font-size: 3em;
+    }
+  }
+}
+
+pre.code {
+  margin: 10px 0;
+  overflow-x: auto; // long lines scroll instead of overflowing
+  border-radius: 10px;
+  background-color: black;
+  padding: 25px;
+  color: rgb(194, 190, 190);
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+}

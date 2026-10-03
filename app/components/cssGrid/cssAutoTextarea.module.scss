@@ -1,0 +1,36 @@
+@use "mixins";
+
+.box {
+  h2 {
+    @include mixins.underlineHover((yellow, red, blue));
+  }
+
+  textarea {
+    border-radius: 3px;
+    padding: 0.4em;
+    field-sizing: content;
+    width: min(32rem, 95%);
+    min-height: 1lh;
+    resize: none;
+    user-select: none;
+    outline: none;
+    background: rgb(226, 253, 226);
+    &:focus {
+      background: white;
+    }
+  }
+}
+
+pre.code {
+  margin: 10px 0;
+  overflow-x: auto; // long lines scroll instead of overflowing
+  border-radius: 10px;
+  background-color: black;
+  padding: 25px;
+  color: rgb(194, 190, 190);
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+}

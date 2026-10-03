@@ -1,0 +1,81 @@
+@use "mixins";
+
+.box {
+  position: relative; // anchors the overlay and the sliding panel
+
+  h2 {
+    @include mixins.underlineHover((blue), (red));
+  }
+
+  #menuActive,
+  .openMenu {
+    display: none;
+    cursor: pointer;
+  }
+
+  nav {
+    ul {
+      display: flex;
+      z-index: 10;
+      background: white;
+      border-radius: 20px;
+      li {
+        padding: min(1em, 10%);
+      }
+
+      li:first-child {
+        margin-right: auto;
+      }
+    }
+  }
+
+  @media (max-width: 700px) {
+    .openMenu {
+      display: block;
+    }
+
+    #menuActive:checked ~ #overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(22, 22, 22, 0.5);
+      display: block;
+      z-index: 9;
+    }
+    #menuActive:checked ~ nav ul {
+      right: 0;
+      transition: right 500ms ease-in-out;
+      border-radius: 20px 0 0 20px;
+    }
+    nav {
+      ul {
+        flex-direction: column;
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        top: 0;
+        right: 200%;
+        transition: right 200ms ease-in-out;
+        li {
+          padding: min(1em, 5%);
+        }
+      }
+    }
+  }
+}
+
+pre.code {
+  margin: 10px 0;
+  overflow-x: auto; // long lines scroll instead of overflowing
+  border-radius: 10px;
+  background-color: black;
+  padding: 25px;
+  color: rgb(194, 190, 190);
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+}

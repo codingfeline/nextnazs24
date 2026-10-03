@@ -1,0 +1,37 @@
+@use "mixins";
+
+.box {
+  h2 {
+    @include mixins.underlineHover;
+    @include mixins.gradientText(to right, (green, purple, green));
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5em;
+  padding: min(2em, 8%);
+
+  > div {
+    border-radius: 5px;
+    padding: 0.5em;
+    color: blue;
+    text-transform: uppercase;
+    background: orange;
+  }
+}
+
+pre.code {
+  margin: 10px 0;
+  overflow-x: auto; // long lines scroll instead of overflowing
+  border-radius: 10px;
+  background-color: black;
+  padding: 25px;
+  color: rgb(194, 190, 190);
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+}
