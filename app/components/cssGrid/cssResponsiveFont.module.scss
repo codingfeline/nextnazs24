@@ -1,0 +1,44 @@
+@use "mixins";
+
+.box {
+  margin: 0.3em;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em 0.5em;
+
+  h2 {
+    @include mixins.underlineHover((blue), (yellow));
+  }
+
+  // .box + class beats .gridContainer h1 from cssGrid.module.scss
+  .bigHeading {
+    font-size: clamp(1.8rem, calc(7vw + 1rem), 5rem); // min, preferred, max
+    // unitless so it scales with the font; globals.css text-4xl fixes it at 2.5rem,
+    // and the gradient (background-clip: text) only paints inside the line box
+    line-height: 1.2;
+    width: fit-content;
+    @include mixins.gradientText(to right, (red, blue));
+
+    &:hover {
+      @include mixins.gradientText(to right, (blue, green));
+    }
+  }
+
+  p {
+    color: #197099;
+  }
+}
+
+pre.code {
+  margin: 10px 0;
+  overflow-x: auto; // long lines scroll instead of overflowing
+  border-radius: 10px;
+  background-color: black;
+  padding: 25px;
+  color: rgb(194, 190, 190);
+
+  .comment {
+    color: #6a9955;
+    font-style: italic;
+  }
+}

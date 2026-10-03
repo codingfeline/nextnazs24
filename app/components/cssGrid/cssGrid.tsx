@@ -1,6 +1,7 @@
 import CssColumns from "./cssColumns";
 import { CssComments } from "./cssComments";
 import CssRelativePadding from "./cssRelativePadding";
+import CssResponsiveFont from "./cssResponsiveFont";
 import styles from "./cssGrid.module.scss";
 
 export default function CssGrid() {
@@ -112,6 +113,9 @@ export default function CssGrid() {
       </section>
       <section>
         <CssRelativePadding />
+      </section>
+      <section>
+        <CssResponsiveFont />
       </section>
     </div>
   );
