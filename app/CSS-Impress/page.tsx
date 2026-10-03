@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <MainPage bg={styles.bg_css}>
-      {/* <CssImpress /> */}
       <CssGrid />
-      {/* <CssColumns /> */}
     </MainPage>
   )
 }

@@ -43,3 +43,19 @@
     filter: blur(5px);
   }
 }
+
+.anchors {
+  background: rgb(197, 196, 196);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin: 1.5em 0;
+  padding: 0.5em 1.5em;
+  border-radius: 0.5em;
+  
+  li {
+    &:hover {
+      color: black;
+    }
+    color: rgb(75, 74, 74);
+  }
+}

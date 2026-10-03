@@ -14,31 +14,42 @@ export default function CssGrid() {
   return (
     <div className={styles.gridContainer}>
       <h1>CSS Madness</h1>
-      <section>
+      <ul className={styles.anchors}>
+        <li><a href="#responsive-columns">Responsive Columns</a></li>
+        <li><a href="#auto-textarea">Auto Textarea</a></li>
+        <li><a href="#responsive-padding">Responsive Padding</a></li>
+        <li><a href="#responsive-menu">Responsive Menu</a></li>
+        <li><a href="#columns">Columns</a></li>
+        <li><a href="#relative-padding">Relative Padding</a></li>
+        <li><a href="#responsive-font">Responsive Font</a></li>
+        <li><a href="#counter-headings">Counter Headings</a></li>
+        <li><a href="#corner-shape">Corner Shape</a></li>
+      </ul>
+      <section id="responsive-columns">
         <CssResponsiveColumns />
       </section>
-      <section className={styles.green}>
+      <section id="auto-textarea" className={styles.green}>
         <CssAutoTextarea />
       </section>
-      <section>
+      <section id="responsive-padding">
         <CssResponsivePadding />
       </section>
-      <section>
+      <section id="responsive-menu">
         <CssResponsiveMenu />
       </section>
-      <section>
+      <section id="columns">
         <CssColumns />
       </section>
-      <section>
+      <section id="relative-padding">
         <CssRelativePadding />
       </section>
-      <section>
+      <section id="responsive-font">
         <CssResponsiveFont />
       </section>
-      <section>
+      <section id="counter-headings">
         <CssCounterHeadings />
       </section>
-      <section>
+      <section id="corner-shape">
         <CssCornerShape />
       </section>
       <BackToTop />
