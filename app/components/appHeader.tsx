@@ -173,11 +173,11 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
         <ThemeColorPicker className="" />
       </Flex>
       {status === 'authenticated' && (
-        <Flex direction="column" align="center" width="100%" display={{ initial: 'flex', sm: 'none' }}>
-          <Text size="2" className="opacity-70">{session.user?.email}</Text>
+        <Flex align="center" justify="center" gap="2" width="100%" display={{ initial: 'flex', sm: 'none' }}>
+          <Text size="2" className="opacity-70 truncate">{session.user?.email}</Text>
           <Link
             href="/api/auth/signout"
-            className={colourLink('/api/auth/signout')}
+            className="transition-colors p-2 shrink-0 hover:bg-black/10"
             onClick={() => setIsOpen(false)}
           >
             Sign Out
