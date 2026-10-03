@@ -14,7 +14,7 @@ import styles from "./cssGrid.module.scss";
 export default function CssGrid() {
   return (
     <div className={styles.gridContainer}>
-      <h1>CSS Madness</h1>
+      <h1>Hot CSS</h1>
       <ul className={styles.anchors}>
         <li><a href="#responsive-columns">Responsive Columns</a></li>
         <li><a href="#auto-textarea">Auto Textarea</a></li>
