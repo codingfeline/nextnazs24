@@ -1,14 +1,14 @@
 'use client'
 
-import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes'
-import classnames from 'classnames'
-import { useSession } from 'next-auth/react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
-import { FaLaptopCode } from 'react-icons/fa6'
-import Reveal from './Reveal'
-import ThemeColorPicker from './ThemeColorPicker'
+import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
+import classnames from 'classnames';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { FaLaptopCode } from 'react-icons/fa6';
+import Reveal from './Reveal';
+import ThemeColorPicker from './ThemeColorPicker';
 
 const AppHeader = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -54,11 +54,12 @@ const AppHeader = () => {
           <Flex justify="between">
             <Flex
               justify="between"
-              gapX="0"
+              gapX=""
               align="center"
               width={{ initial: '100%', sm: 'auto' }}
               display="flex"
               direction={{ initial: 'column', sm: 'row' }}
+              position="relative"
             >
               <div
                 onClick={() => setIsOpen(!isOpen)}
@@ -69,8 +70,12 @@ const AppHeader = () => {
               <NavLinks isOpen={isOpen} setIsOpen={setIsOpen} />
             </Flex>
             <Flex align="center" gap="3">
-              <ThemeColorPicker />
-              <AuthStatus />
+              <Box display={{ initial: 'none', sm: 'block' }}>
+                <ThemeColorPicker />
+              </Box>
+              <Box display={{ initial: 'none', sm: 'block' }}>
+                <AuthStatus />
+              </Box>
             </Flex>
           </Flex>
         </Container>
@@ -86,6 +91,7 @@ interface OpenProp {
 
 const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
   const currentPath = usePathname()
+  const { status, data: session } = useSession()
   const [isCssMenuOpen, setIsCssMenuOpen] = useState(false)
 
   const colourLink = (link: string) =>
@@ -163,6 +169,21 @@ const NavLinks = ({ isOpen, setIsOpen }: OpenProp) => {
           </DropdownMenu.Content>
         </DropdownMenu.Root> */}
       </div>
+      <Flex display={{ initial: 'flex', sm: 'none' }} justify="center" p="2" width="100%">
+        <ThemeColorPicker className="" />
+      </Flex>
+      {status === 'authenticated' && (
+        <Flex direction="column" align="center" width="100%" display={{ initial: 'flex', sm: 'none' }}>
+          <Text size="2" className="opacity-70">{session.user?.email}</Text>
+          <Link
+            href="/api/auth/signout"
+            className={colourLink('/api/auth/signout')}
+            onClick={() => setIsOpen(false)}
+          >
+            Sign Out
+          </Link>
+        </Flex>
+      )}
       {/* {status === 'authenticated' && session.user?.role === 'ADMIN' && (
         <Link href="/Enquiries" className={colourLink('/Enquiries')}>
           Enquiries

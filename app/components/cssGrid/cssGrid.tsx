@@ -23,7 +23,7 @@ export default function CssGrid() {
 
   return (
     <div className={gridContainer}>
-      <h1>CSS Madness, onboarding Mixins</h1>
+      <h1>CSS Madness</h1>
       <section>
         <h2>responsive columns</h2>
         <div>

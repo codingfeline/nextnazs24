@@ -6,11 +6,11 @@ import { FaShuffle } from 'react-icons/fa6';
 const randomHexColor = () =>
   '#' + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')
 
-const ThemeColorPicker = () => {
+const ThemeColorPicker = ({ className = 'mr-4' }: { className?: string }) => {
   const { color, setColor } = useThemeColor()
 
   return (
-    <div className="flex items-center gap-2 mr-4">
+    <div className={`flex items-center gap-2 ${className}`}>
       <input
         type="color"
         value={color}
