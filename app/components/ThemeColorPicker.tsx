@@ -1,7 +1,7 @@
 'use client'
 
-import { useThemeColor } from '@/providers/ThemeColorProvider'
-import { FaShuffle } from 'react-icons/fa6'
+import { useThemeColor } from '@/providers/ThemeColorProvider';
+import { FaShuffle } from 'react-icons/fa6';
 
 const randomHexColor = () =>
   '#' + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')
@@ -10,7 +10,7 @@ const ThemeColorPicker = () => {
   const { color, setColor } = useThemeColor()
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 mr-4">
       <input
         type="color"
         value={color}
