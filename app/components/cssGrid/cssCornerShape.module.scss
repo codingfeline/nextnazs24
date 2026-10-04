@@ -43,3 +43,91 @@ pre.code {
     font-style: italic;
   }
 }
+
+.hr{
+  @include mixins.hr(gray, 2px);
+}
+
+/*
+  Using plain CSS
+
+  .corner hr {
+    margin: 1em 0;
+    border: none;
+    border-top: var(--hr-thickness, 1px) solid var(--hr-colour, black);
+  }
+
+  .corner hr {
+    --hr-colour: red;
+    --hr-thickness: 2px;
+  }
+
+*/
+
+.corners {  
+    height: 150px;
+    width: 200px;
+    background: rgb(39, 116, 39);
+    corner-shape: square scoop square square;
+    border-radius: 55px;
+    transition: all 100ms;
+    
+    &:hover {
+      border-radius: 60px;
+    }
+    &:hover::after {
+      clip-path: circle(55px at right top);
+    }
+    &::after {
+      transition: all 100ms;
+      content: '';
+      height: 150px;
+      width: 200px;
+      background: red; 
+      position: absolute;
+      clip-path: circle(50px at right top);
+    }
+}
+
+// The blue is ::before, not .custom itself: a clip-path on .custom would clip the red ::after too.
+.custom {
+  position: relative;
+  height: 200px;
+  width: 400px;
+  transition: all 100ms;
+  
+  &::before,
+  &::after {
+    transition: all 100ms;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+  }
+
+  // blue, with the red's 200x100 rectangle (+10px gap) cut out of the top-left corner
+  &::before {
+    width: 400px;
+    height: 200px;
+    background: blue;
+    // trace the outline clockwise: along the top from the notch, down the right,
+    // along the bottom, up the left to the notch, then round the notch back to the start
+    clip-path: path("M 205 0 H 400 V 200 H 0 V 105 H 180 A 25 25 0 0 0 205 80 Z");
+  }
+  
+  &::after {
+    width: 200px;
+    height: 100px;
+    background: red;
+    corner-shape: superellipse(1) square superellipse(1) square;
+    border-radius: 20px;
+  }
+  &:hover::before {
+    clip-path: path("M 210 0 H 400 V 200 H 0 V 110 H 185 A 25 25 0 0 0 210 85 Z");
+  }
+  &:hover::after {
+    width: 205px;
+    height: 105px;
+  }
+}

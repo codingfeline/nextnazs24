@@ -34,3 +34,9 @@
         transition: 300ms all;
     }
 }
+
+@mixin hr ($colour: black, $thickness: 1px) {
+    margin: 1em 0; 
+    border: none;
+    border-top: $thickness solid $colour;
+}

@@ -5,7 +5,8 @@ import styles from "./cssCornerShape.module.scss";
 export default function CssCornerShape() {
   return (
     <div className={styles.box}>
-      <h2>corner shape</h2>
+      <h2>corner shapes</h2>
+      <h3>notch and superellipse</h3>
       <div className={styles.shape}></div>
       <BrainsContainer header="the key css">
         <pre className={styles.code}>
@@ -22,6 +23,15 @@ export default function CssCornerShape() {
 /* Chromium only for now; elsewhere it falls back to plain rounded corners */`}</CssComments></code>
         </pre>
       </BrainsContainer>
+
+        <hr className={styles.hr} />
+        <h3>clip-path circle</h3>
+        <div className={styles.corners}>
+        </div>
+        <hr className={styles.hr} />
+        <h3>clip-path path</h3>
+        <div className={styles.custom}>
+        </div>
     </div>
   );
 }
