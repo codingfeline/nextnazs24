@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import BackToTop from '../../components/BackToTop'
 import MainPage from '../../components/MainPage'
 import CssGrid from '../../components/cssGrid/cssGrid'
 
@@ -9,9 +10,12 @@ export const metadata: Metadata = {
 
 const CssGridPage = () => {
   return (
-    <MainPage>
-      <CssGrid />
-    </MainPage>
+    <>
+      <MainPage>
+        <CssGrid />
+      </MainPage>
+      <BackToTop />
+    </>
   )
 }
 

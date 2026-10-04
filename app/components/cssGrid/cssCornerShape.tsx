@@ -25,7 +25,7 @@ export default function CssCornerShape() {
       </BrainsContainer>
 
         <hr className={styles.hr} />
-        <h3>clip-path circle</h3>
+        <h3 id="clip-path-circle">clip-path circle</h3>
         <div className={styles.corners}>
         </div>
         <BrainsContainer header="the key css">
@@ -46,7 +46,7 @@ export default function CssCornerShape() {
           </pre>
         </BrainsContainer>
         <hr className={styles.hr} />
-        <h3>clip-path path</h3>
+        <h3 id="clip-path-path">clip-path path</h3>
         <div className={styles.custom}>
         </div>
         <BrainsContainer header="the key css">

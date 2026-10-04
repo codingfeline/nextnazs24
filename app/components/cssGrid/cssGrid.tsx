@@ -1,4 +1,3 @@
-import BackToTop from "../BackToTop";
 import CssAutoTextarea from "./cssAutoTextarea";
 import CssBorderImage from "./cssBorderImage";
 import CssColumns from "./cssColumns";
@@ -25,6 +24,8 @@ export default function CssGrid() {
         <li><a href="#responsive-font">Responsive Font</a></li>
         <li><a href="#counter-headings">Counter Headings</a></li>
         <li><a href="#corner-shape">Corner Shape</a></li>
+        <li><a href="#clip-path-circle">Clip-path Circle</a></li>
+        <li><a href="#clip-path-path">Clip-path Path</a></li>
         <li><a href="#border-image">Border Image</a></li>
       </ul>
       <section id="responsive-columns">
@@ -57,7 +58,6 @@ export default function CssGrid() {
       <section id="border-image">
         <CssBorderImage />
       </section>
-      <BackToTop />
     </div>
   );
 }
