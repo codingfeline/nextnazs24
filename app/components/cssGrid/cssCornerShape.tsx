@@ -75,6 +75,30 @@ export default function CssCornerShape() {
 }`}</CssComments></code>
           </pre>
         </BrainsContainer>
+
+        <hr className={styles.hr} />
+        <h3 id="clip-path-freestyle">clip-path freestyle</h3>
+        <div className={styles.freestyle}>
+        </div>
+
+        <hr className={styles.hr} />
+        <h3 id="clip-path-heart">clip-path heart</h3>
+        <div className={styles.heart}></div>
+        <BrainsContainer header="the key css">
+          <pre className={styles.code}>
+            <code><CssComments commentClassName={styles.comment}>{`.heart {
+  width: 100px;                /* path() is in px, so the box must match the drawing */
+  height: 90px;
+  background: red;
+  /* C c1x c1y c2x c2y x y: cubic curve, two control points.
+     Clockwise from the bottom tip; the right half mirrors the left (x -> 100 - x) */
+  clip-path: path("M 50 90 C 25 70 0 50 0 28 C 0 10 14 0 28 0 C 40 0 50 10 50 20 C 50 10 60 0 72 0 C 86 0 100 10 100 28 C 100 50 75 70 50 90 Z");
+  transition: scale 200ms;
+
+  &:hover { scale: 1.2; }      /* scale enlarges the clipped heart too */
+}`}</CssComments></code>
+          </pre>
+        </BrainsContainer>
     </div>
   );
 }

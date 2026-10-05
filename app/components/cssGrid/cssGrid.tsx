@@ -26,6 +26,7 @@ export default function CssGrid() {
         <li><a href="#corner-shape">Corner Shape</a></li>
         <li><a href="#clip-path-circle">Clip-path Circle</a></li>
         <li><a href="#clip-path-path">Clip-path Path</a></li>
+        <li><a href="#clip-path-heart">Clip-path Heart</a></li>
         <li><a href="#border-image">Border Image</a></li>
       </ul>
       <section id="responsive-columns">
