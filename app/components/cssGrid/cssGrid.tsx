@@ -9,6 +9,7 @@ import CssResponsiveFont from "./cssResponsiveFont";
 import CssResponsiveMenu from "./cssResponsiveMenu";
 import CssResponsivePadding from "./cssResponsivePadding";
 import styles from "./cssGrid.module.scss";
+import RawSvg from "./cssRawSvg";
 
 export default function CssGrid() {
   return (
@@ -58,6 +59,9 @@ export default function CssGrid() {
       </section>
       <section id="border-image">
         <CssBorderImage />
+      </section>
+      <section id="raw-svg">
+        <RawSvg />
       </section>
     </div>
   );

@@ -1,0 +1,72 @@
+@use 'mixins';
+
+.svg {
+
+    svg {
+        border: 1px solid #000;
+        &:hover {
+            > circle {
+                cy: 300;
+                cx: 0;
+            }
+            .c1 {
+                cx: 300;
+                cy: 0
+            }
+        }
+        
+        circle {
+            // animation: 1.5s moveCircle linear infinite;
+            
+            
+        }
+        .c1 {
+            fill: pink;
+            // animation: 1.5s moveCircle2 linear infinite;
+        }
+    }
+
+    h2 {
+        @include mixins.underlineHover((blue), (yellow));
+    }
+}
+
+@keyframes moveCircle {
+    0%, 100% {
+            cx: 0px;
+            cy: 300;
+
+    }
+    25% {
+            cx: 300;
+            cy: 300;
+    }
+    50% {
+            cx: 300;
+            cy: 0px;
+    }
+    75% {
+            cx: 0px;
+            cy: 0px;
+    }
+}   
+
+@keyframes moveCircle2 {
+    0%, 100% {
+            cx: 300px;
+            cy: 0px;
+
+    }
+    25% {
+            cx: 0;
+            cy: 0;
+    }
+    50% {
+            cx: 0;
+            cy: 300px;
+    }
+    75% {
+            cx: 300px;
+            cy: 300px;
+    }
+}   
