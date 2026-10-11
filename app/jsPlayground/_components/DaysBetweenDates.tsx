@@ -62,7 +62,9 @@ export default function DaysBetweenDates({ hideBrains }: { hideBrains?: boolean 
         <p className="font-semibold text-lg">{result}</p>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 mb-2">
+      {/* Container query: stack the dates whenever the card itself is narrow (e.g. the 4-column grid), not just on small screens */}
+      <div className="[container-type:inline-size] mb-2">
+      <div className="flex flex-col [@container(min-width:22rem)]:flex-row gap-3">
         <div className="flex-1">
           <label className="block text-sm font-medium text-gray-500 mb-1">Start date</label>
           <input
@@ -81,6 +83,7 @@ export default function DaysBetweenDates({ hideBrains }: { hideBrains?: boolean 
             className="w-full border-2 border-gray-200 rounded-lg p-2 focus:border-blue-500 outline-none transition-all text-black text-sm"
           />
         </div>
+      </div>
       </div>
 
       {breakdown && <p className="text-sm text-gray-500">{breakdown}</p>}
