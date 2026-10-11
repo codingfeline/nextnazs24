@@ -98,3 +98,18 @@ model CookieConsent {
 
   @@index([userId])
 }
+
+// Security request log. Rows expire after 30 days via a MongoDB TTL index
+// on createdAt (created at runtime in lib/accessLog.ts — Prisma can't declare TTL).
+model AccessLog {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  ip        String
+  method    String
+  path      String
+  status    Int
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([ip])
+  @@map("access_logs")
+}

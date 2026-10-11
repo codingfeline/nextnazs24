@@ -19,7 +19,20 @@
 //   // 3️⃣ Continue to endpoint
 //   return NextResponse.next()
 // }
-export { auth as proxy } from "./app/api/auth/[...nextauth]/authOptions"
+import type { NextFetchEvent, NextRequest } from 'next/server'
+import { auth } from "./app/api/auth/[...nextauth]/authOptions"
+import { logRequest } from "./lib/accessLog"
+
+//? Call auth() directly rather than auth((req) => ...): the wrapper form skips
+//? the sign-in redirect when the `authorized` callback returns false.
+export async function proxy(req: NextRequest, event: NextFetchEvent) {
+  // auth's types have no overload for (req, event), but at runtime it returns a Response
+  const authProxy = auth as unknown as (req: NextRequest, event: NextFetchEvent) => Promise<Response>
+  const res = await authProxy(req, event)
+  // waitUntil: write the log after responding instead of delaying the page
+  event.waitUntil(logRequest(req, res.status))
+  return res
+}
 
 // Apply to all routes or restrict to API routes
 export const config = {

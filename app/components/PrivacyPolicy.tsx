@@ -55,6 +55,31 @@ const PrivacyPolicy = () => {
         </li>
 
         <li>
+          <h2>Server Logs</h2>
+          <p>
+            To protect the website against abuse and attacks, our server records each
+            page request.
+          </p>
+          <p>
+            <strong>Data processed:</strong>
+          </p>
+          <ul>
+            <li>IP address</li>
+            <li>Requested page and request method</li>
+            <li>Response status</li>
+            <li>Browser user agent</li>
+            <li>Date and time of the request</li>
+          </ul>
+          <p>
+            These logs are used only for security purposes and are deleted automatically
+            after 30 days.
+            <br />
+            Legal basis: Article 6(1)(f) GDPR (legitimate interest in keeping the website
+            secure)
+          </p>
+        </li>
+
+        <li>
           <h2>Analytics (Google Analytics)</h2>
           <p>
             If you consent, we use Google Analytics (GA4), a web analytics service
