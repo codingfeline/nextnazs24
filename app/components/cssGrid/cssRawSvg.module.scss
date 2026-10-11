@@ -6,6 +6,7 @@
         border: 1px solid #000;
         &:hover {
             > circle {
+                transition: all 500ms;
                 cy: 300;
                 cx: 0;
             }
@@ -16,13 +17,14 @@
         }
         
         circle {
-            // animation: 1.5s moveCircle linear infinite;
+            transition: all 500ms;
+            // animation: 2.5s moveCircle linear infinite;
             
             
         }
         .c1 {
             fill: pink;
-            // animation: 1.5s moveCircle2 linear infinite;
+            // animation: 2.5s moveCircle2 linear infinite;
         }
     }
 
