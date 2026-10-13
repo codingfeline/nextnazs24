@@ -35,7 +35,7 @@ export default function TailwindBalance() {
 
 <p>
   That realisation prompted me to rethink my workflow. Instead of relying
-  entirely on Tailwind CSS, I have started incorporating
+  entirely on Tailwind CSS, I have started incorporating 
   <code>*.module.scss</code> into my Next.js projects.
 </p>
 
@@ -43,7 +43,7 @@ export default function TailwindBalance() {
   This gives me the best of both worlds. I can continue practising vanilla CSS
   while exploring the benefits of Sass, particularly mixins, variables, and
   reusable styles. Although modern CSS now supports nesting, Sass still offers
-  features that I find valuable in keeping my code organised and maintainable.
+  features that I find valuable in keeping my code organised and easily maintainable.
 </p>
 
 <p>
@@ -62,6 +62,7 @@ export default function TailwindBalance() {
   After all, tools will come and go, but a solid understanding of the
   fundamentals will always be worth investing in.
 </p>
+  <i>NS <span>12/10/2026 06:19:32</span> </i>
 
       </div>
     </MainPage>
