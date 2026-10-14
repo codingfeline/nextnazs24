@@ -1,3 +1,4 @@
+import { requireAdminPage } from '@/app/lib/authGuard'
 import prisma from '@/prisma/client'
 import { notFound } from 'next/navigation'
 import JournalForm from '../../_components/JournalForm'
@@ -12,10 +13,13 @@ interface Props {
 }
 
 const EditJournal = async ({ params }: Props) => {
-  if ((await params).id.length !== 24) notFound()
+  const { id } = await params
+  await requireAdminPage(`/journals/${id}/edit`)
+
+  if (id.length !== 24) notFound()
 
   const journal = await prisma.journals.findUnique({
-    where: { id: (await params).id },
+    where: { id: id },
   })
 
   if (!journal) notFound()
