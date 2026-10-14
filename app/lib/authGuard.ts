@@ -1,5 +1,6 @@
 import { auth } from '@/app/api/auth/[...nextauth]/authOptions'
 import { Role } from '@prisma/client'
+import { notFound, redirect } from 'next/navigation'
 import { NextResponse } from 'next/server'
 import { DEV_NO_AUTH, DEV_SESSION } from './devSession'
 
@@ -20,4 +21,17 @@ export async function requireAdmin() {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   return null
+}
+
+// Guard for admin pages. Sends signed-out visitors to sign in and hides the
+// page (404) from signed-in non-admins so its existence isn't revealed.
+export async function requireAdminPage(callbackUrl: string) {
+  const session = await getSession()
+
+  if (!session?.user)
+    redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`)
+
+  if (session.user.role !== Role.ADMIN) notFound()
+
+  return session
 }

@@ -3,6 +3,7 @@ import { PrismaClient, Role } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import NextAuth, { NextAuthConfig } from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials";
+import { isAdminEmail } from "@/app/lib/adminEmail";
 import GoogleProvider from "next-auth/providers/google";
 
 const prisma = new PrismaClient()
@@ -54,6 +55,9 @@ export const authOptions: NextAuthConfig = {
         })
         if (dbUser) token.role = dbUser.role
       }
+      //? Admin is capped to one account: whatever the DB says, anyone else is a USER.
+      //? Runs on every session check, so already-issued tokens are downgraded too.
+      if (token.role === Role.ADMIN && !isAdminEmail(token.email)) token.role = Role.USER
       return token
     },
     //? Helpful in v5 to ensure the session picks up the user ID from the JWT

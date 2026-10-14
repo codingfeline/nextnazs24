@@ -1,6 +1,10 @@
+import { requireAdmin } from '@/app/lib/authGuard'
 import os from 'os'
 
 export async function GET() {
+  // Exposes server details, so admins only
+  const denied = await requireAdmin()
+  if (denied) return denied
 
   // const searchParams = request.nextUrl.searchParams
   // const lengthString = searchParams.get('length')

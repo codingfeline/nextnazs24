@@ -1,5 +1,6 @@
 import { Role } from '@prisma/client'
 import type { Session } from 'next-auth'
+import { ADMIN_EMAIL } from './adminEmail'
 
 // Local-only auth bypass for editing journals without signing in.
 // Enable by setting NEXT_PUBLIC_DEV_NO_AUTH=true in .env (dev only).
@@ -13,7 +14,7 @@ export const DEV_SESSION: Session = {
   user: {
     id: 'dev-admin',
     name: 'Local Dev',
-    email: 'post@nazs.net',
+    email: ADMIN_EMAIL,
     role: Role.ADMIN,
   },
   expires: '2999-01-01T00:00:00.000Z',
