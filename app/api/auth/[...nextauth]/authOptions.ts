@@ -82,12 +82,15 @@ export const authOptions: NextAuthConfig = {
       const { pathname } = nextUrl;
 
       // 1. Define your public routes
-      const staticPublicRoutes = ["/", "/password", "/journals", '/contact', '/jsPlayground', '/CSS-Impress', '/balance'];
+      const staticPublicRoutes = ["/", "/password", "/journals", '/contact', '/jsPlayground', '/CSS-Impress', '/balance', '/blog'];
       const dynamicPublicPrefixes = ["/journals"];
+      // Article pages only (24-char ObjectId), so /blog/new still requires sign-in
+      const publicPatterns = [/^\/blog\/[0-9a-f]{24}$/i];
 
       const isPublicPage =
         staticPublicRoutes.includes(pathname) ||
-        dynamicPublicPrefixes.some(prefix => pathname.startsWith(prefix));
+        dynamicPublicPrefixes.some(prefix => pathname.startsWith(prefix)) ||
+        publicPatterns.some(pattern => pattern.test(pathname));
 
       // 2. If it's a public page, let anyone in
       if (isPublicPage) return true;

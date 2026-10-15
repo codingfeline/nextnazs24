@@ -1,37 +1,9 @@
+@use "panel";
 
 .bg_css {
-    position: relative;
-    isolation: isolate;
-    // clips the fixed, blurred layer to this element so it doesn't cover the header/footer
-    clip-path: inset(0);
-    
-    &::before {
-        content: "";
-        position: fixed;
-        // extend past the edges so the blur doesn't fade to transparent at the borders
-        inset: -20px;
-        z-index: -1;
-        background: url("/balance.webp") left / cover;
-        filter: blur(9px);
-    }
-    // readable surface over the busy background image
+    @include panel.blurredBg(url("/balance.webp") left / cover);
+
     .panel {
-        max-width: 70ch;
-        margin-inline: auto;
-        padding: 1.5rem 2rem;
-        border-radius: var(--radius-4);
-        background: var(--color-panel-translucent);
-        backdrop-filter: blur(12px);
-        box-shadow: var(--shadow-3);
-        color: var(--gray-12);
-        line-height: 1.7;
-    }
-
-    h1 {
-        margin-bottom: 1rem;
-    }
-
-    p {
-        margin-bottom: 1rem;
+        @include panel.readablePanel;
     }
 }

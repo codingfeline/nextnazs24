@@ -1,0 +1,9 @@
+@use "panel";
+
+.bg_css {
+    @include panel.blurredBg(url("/balance.webp") left / cover);
+
+    .panel {
+        @include panel.readablePanel;
+    }
+}
