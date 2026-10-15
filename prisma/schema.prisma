@@ -113,3 +113,14 @@ model AccessLog {
   @@index([ip])
   @@map("access_logs")
 }
+
+model Article {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@map("articles")
+}
