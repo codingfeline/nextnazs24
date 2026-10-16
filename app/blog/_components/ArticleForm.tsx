@@ -1,11 +1,12 @@
 'use client'
 
+import { AUTHORS, DEFAULT_AUTHOR } from '@/app/blog/authors'
 import ErrorMessage from '@/app/components/ErrorMessage'
 import Spinner from '@/app/components/Spinner'
 import { ArticleSchema } from '@/app/validationSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Article } from '@prisma/client'
-import { Button, Callout, Container, Heading, TextField } from '@radix-ui/themes'
+import { Button, Callout, Container, Flex, Heading, Select, Text, TextField } from '@radix-ui/themes'
 import axios from 'axios'
 import 'easymde/dist/easymde.min.css'
 import { useRouter } from 'next/navigation'
@@ -28,7 +29,13 @@ const ArticleForm = ({ article }: { article?: Article }) => {
     formState: { errors },
   } = useForm<ArticleFormData>({
     resolver: zodResolver(ArticleSchema),
-    defaultValues: { title: article?.title, content: article?.content },
+    defaultValues: {
+      title: article?.title,
+      content: article?.content,
+      author: (AUTHORS as readonly string[]).includes(article?.author ?? '')
+        ? (article!.author as ArticleFormData['author'])
+        : DEFAULT_AUTHOR,
+    },
   })
 
   const onSubmit = handleSubmit(async data => {
@@ -57,6 +64,28 @@ const ArticleForm = ({ article }: { article?: Article }) => {
         <Heading>{article ? 'Edit' : 'New'} Article</Heading>
         <TextField.Root placeholder="Title" {...register('title')} />
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
+        <Flex align="center" gap="2">
+          <Text as="label" size="2" htmlFor="article-author">
+            Author
+          </Text>
+          <Controller
+            name="author"
+            control={control}
+            render={({ field }) => (
+              <Select.Root value={field.value} onValueChange={field.onChange}>
+                <Select.Trigger id="article-author" />
+                <Select.Content>
+                  {AUTHORS.map(name => (
+                    <Select.Item key={name} value={name}>
+                      {name}
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select.Root>
+            )}
+          />
+        </Flex>
+        <ErrorMessage>{errors.author?.message}</ErrorMessage>
         <div className="bg-gray-50">
           <Controller
             name="content"

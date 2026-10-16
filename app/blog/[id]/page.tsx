@@ -4,12 +4,13 @@ import MainPage from '@/app/components/MainPage'
 import { getSession } from '@/app/lib/authGuard'
 import prisma from '@/prisma/client'
 import { Role } from '@prisma/client'
-import { Card, Flex, Heading } from '@radix-ui/themes'
+import { Card, Flex, Heading, Text } from '@radix-ui/themes'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 import ReactMarkDown from 'react-markdown'
 import ArticleTime from '../_components/ArticleTime'
+import ShareArticle from '../_components/ShareArticle'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -22,7 +23,29 @@ const getArticle = cache(async (id: string) =>
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await getArticle((await params).id)
-  return { title: article ? `${article.title} — Blog` : 'Blog' }
+  if (!article) return { title: 'Blog' }
+
+  // Plain-text excerpt for link previews when the article is shared
+  const description = article.content
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[#>*_`~|-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 160)
+
+  return {
+    title: `${article.title} — Blog`,
+    description,
+    openGraph: {
+      title: article.title,
+      description,
+      type: 'article',
+      publishedTime: article.createdAt.toISOString(),
+      authors: [article.author],
+    },
+    twitter: { card: 'summary', title: article.title, description },
+  }
 }
 
 const ArticlePage = async ({ params }: Props) => {
@@ -49,7 +72,13 @@ const ArticlePage = async ({ params }: Props) => {
         <Heading size="8" mt="3">
           {article.title}
         </Heading>
-        <ArticleTime date={article.createdAt} className="block mt-1" />
+        <Flex align="center" justify="between" gap="3" wrap="wrap" mt="1">
+          <Text size="2" className="opacity-80">
+            By <span className="font-semibold">{article.author}</span> ·{' '}
+            <ArticleTime date={article.createdAt} />
+          </Text>
+          <ShareArticle title={article.title} />
+        </Flex>
         {/* prose wraps inline `code` in literal backticks via ::before/::after; hide them */}
         <Card
           className="prose max-w-none bg-gray-100 prose-code:before:content-none prose-code:after:content-none"
