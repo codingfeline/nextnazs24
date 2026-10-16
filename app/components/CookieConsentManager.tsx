@@ -37,13 +37,13 @@ export default function CookieConsentManager() {
 
       {/* --- Initial Banner --- */}
       {!hasDecided && (
-        <div className="fixed bottom-0 left-0 w-full bg-gray-100 p-4 text-center shadow-[0_-2px_10px_rgba(0,0,0,0.1)] z-[1000]">
+        <div className="theme-surface fixed bottom-0 left-0 w-full p-4 text-center shadow-[0_-2px_10px_rgba(0,0,0,0.1)] z-[1000]">
           <p>
             We use cookies for analytics and to embed external content such as Google
             Maps.
           </p>
           <div className="flex justify-center gap-2 mt-2">
-            <button onClick={acceptAll} className="bg-green-400 px-4 py-2 cursor-pointer">
+            <button onClick={acceptAll} className="bg-green-400 text-gray-900 px-4 py-2 cursor-pointer">
               Accept all
             </button>
             <button
@@ -54,7 +54,7 @@ export default function CookieConsentManager() {
             </button>
             <button
               onClick={() => setShowModal(true)}
-              className="bg-gray-200 px-4 py-2 cursor-pointer"
+              className="bg-gray-200 text-gray-900 px-4 py-2 cursor-pointer"
             >
               Settings
             </button>
