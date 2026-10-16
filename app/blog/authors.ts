@@ -3,5 +3,5 @@ export const AUTHORS = ['Coding Paws', 'Coding Feline', 'Next Feline', 'Next Paw
 
 export type Author = (typeof AUTHORS)[number]
 
-// Keep in sync with the @default on Article.author in prisma/schema.prisma
+// Shown for articles saved before author existed
 export const DEFAULT_AUTHOR: Author = 'Coding Paws'

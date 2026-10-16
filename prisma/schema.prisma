@@ -118,7 +118,7 @@ model Article {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   content   String
-  author    String   @default("Coding Paws")
+  author    String? // pseudonym from app/blog/authors.ts; null on older articles → DEFAULT_AUTHOR
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

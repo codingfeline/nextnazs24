@@ -9,6 +9,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 import ReactMarkDown from 'react-markdown'
+import { DEFAULT_AUTHOR } from '../authors'
 import ArticleTime from '../_components/ArticleTime'
 import ShareArticle from '../_components/ShareArticle'
 
@@ -24,6 +25,7 @@ const getArticle = cache(async (id: string) =>
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await getArticle((await params).id)
   if (!article) return { title: 'Blog' }
+  const author = article.author ?? DEFAULT_AUTHOR
 
   // Plain-text excerpt for link previews when the article is shared
   const description = article.content
@@ -42,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       type: 'article',
       publishedTime: article.createdAt.toISOString(),
-      authors: [article.author],
+      authors: [author],
     },
     twitter: { card: 'summary', title: article.title, description },
   }
@@ -55,6 +57,7 @@ const ArticlePage = async ({ params }: Props) => {
   // getSession returns the fake admin session when the local dev bypass is on
   const session = await getSession()
   const canEdit = session?.user?.role === Role.ADMIN
+  const author = article.author ?? DEFAULT_AUTHOR
 
   return (
     <MainPage>
@@ -74,7 +77,7 @@ const ArticlePage = async ({ params }: Props) => {
         </Heading>
         <Flex align="center" justify="between" gap="3" wrap="wrap" mt="1">
           <Text size="2" className="opacity-80">
-            By <span className="font-semibold">{article.author}</span> ·{' '}
+            By <span className="font-semibold">{author}</span> ·{' '}
             <ArticleTime date={article.createdAt} />
           </Text>
           <ShareArticle title={article.title} />
