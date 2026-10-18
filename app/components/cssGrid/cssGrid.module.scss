@@ -3,6 +3,7 @@
 // Each section's demo lives in its own component + module (cssColumns, cssResponsiveMenu, ...).
 // Only the shared section frame and page heading are styled here.
 .gridContainer {
+  overflow-x: clip; // sideways fly-ins mustn't add a horizontal scrollbar on phones
   section {
     margin: 0.2em 0;
     background: rgb(204, 204, 204);
@@ -12,6 +13,19 @@
       margin-bottom: 0.3em;
     }
     // font-size: clamp(.8rem, calc(7vw + 1rem), 1.9rem); // calc(min, preferred, max)
+
+    // Scroll-driven fly-in, no JS: progress is tied to the section scrolling into view.
+    // Unsupported browsers and reduced-motion users just see the section as normal.
+    @supports (animation-timeline: view()) {
+      @media (prefers-reduced-motion: no-preference) {
+        animation: flyIn linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 60%; // done once ~60% of it has entered
+        &:nth-of-type(even) {
+          animation-name: flyInRight;
+        }
+      }
+    }
   }
   section.green {
     // textarea section
@@ -24,6 +38,20 @@
   }
   p {
     margin: 10px 0;
+  }
+}
+
+// Only `from` is given so each section animates to its own styles (e.g. its .8 opacity)
+@keyframes flyIn {
+  from {
+    opacity: 0;
+    transform: translateX(-3rem) scale(0.97);
+  }
+}
+@keyframes flyInRight {
+  from {
+    opacity: 0;
+    transform: translateX(3rem) scale(0.97);
   }
 }
 
