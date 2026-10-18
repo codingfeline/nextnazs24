@@ -22,19 +22,31 @@ const getArticle = cache(async (id: string) =>
   /^[0-9a-f]{24}$/i.test(id) ? prisma.article.findUnique({ where: { id } }) : null
 )
 
+// Trim to max chars: end on the last full sentence if one fits past halfway,
+// otherwise on the last whole word plus an ellipsis
+const excerpt = (text: string, max: number) => {
+  if (text.length <= max) return text
+  const cut = text.slice(0, max)
+  const sentenceEnd = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '), cut.lastIndexOf('? '))
+  if (sentenceEnd > max / 2) return cut.slice(0, sentenceEnd + 1)
+  const wordEnd = cut.lastIndexOf(' ')
+  return `${(wordEnd > 0 ? cut.slice(0, wordEnd) : cut.slice(0, max - 1)).replace(/[\s,;:.]+$/, '')}…`
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await getArticle((await params).id)
   if (!article) return { title: 'Blog' }
   const author = article.author ?? DEFAULT_AUTHOR
 
   // Plain-text excerpt for link previews when the article is shared
-  const description = article.content
+  const text = article.content
     .replace(/```[\s\S]*?```/g, ' ')
     .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/[#>*_`~|-]/g, ' ')
+    .replace(/^\s*(?:#+|>|[-*+]|\d+\.)\s+/gm, '') // line-start markers only, so in-word hyphens survive
+    .replace(/[*_`~|]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
-    .slice(0, 160)
+  const description = excerpt(text, 160)
 
   return {
     title: `${article.title} — Blog`,
