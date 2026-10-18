@@ -14,7 +14,8 @@ export async function PATCH(request: NextRequest,
     return NextResponse.json({ error: 'Invalid article' }, { status: 404 })
 
   const body = await request.json().catch(() => null)
-  const validation = ArticleSchema.safeParse(body)
+  // partial: the /blog list sends only { createdAt } when re-dating an article
+  const validation = ArticleSchema.partial().safeParse(body)
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 })
 

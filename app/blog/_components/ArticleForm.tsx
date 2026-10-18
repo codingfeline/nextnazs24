@@ -14,8 +14,11 @@ import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import SimpleMDE from 'react-simplemde-editor'
 import { z } from 'zod'
+import { toLocalInput } from './toLocalInput'
 
-type ArticleFormData = z.infer<typeof ArticleSchema>
+// the form keeps the date as the <input type="datetime-local"> string; converted on submit
+const ArticleFormSchema = ArticleSchema.extend({ createdAt: z.string().optional() })
+type ArticleFormData = z.infer<typeof ArticleFormSchema>
 
 const ArticleForm = ({ article }: { article?: Article }) => {
   const router = useRouter()
@@ -28,19 +31,21 @@ const ArticleForm = ({ article }: { article?: Article }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<ArticleFormData>({
-    resolver: zodResolver(ArticleSchema),
+    resolver: zodResolver(ArticleFormSchema),
     defaultValues: {
       title: article?.title,
       content: article?.content,
       author: (AUTHORS as readonly string[]).includes(article?.author ?? '')
         ? (article!.author as ArticleFormData['author'])
         : DEFAULT_AUTHOR,
+      createdAt: toLocalInput(article ? new Date(article.createdAt) : new Date()),
     },
   })
 
-  const onSubmit = handleSubmit(async data => {
+  const onSubmit = handleSubmit(async ({ createdAt, ...rest }) => {
     try {
       setSubmitting(true)
+      const data = { ...rest, createdAt: createdAt ? new Date(createdAt).toISOString() : undefined }
       const { data: saved } = article
         ? await axios.patch(`/api/articles/${article.id}`, data)
         : await axios.post('/api/articles', data)
@@ -86,6 +91,13 @@ const ArticleForm = ({ article }: { article?: Article }) => {
           />
         </Flex>
         <ErrorMessage>{errors.author?.message}</ErrorMessage>
+        <Flex align="center" gap="2">
+          <Text as="label" size="2" htmlFor="article-date">
+            Date
+          </Text>
+          <TextField.Root id="article-date" type="datetime-local" {...register('createdAt')} />
+        </Flex>
+        <ErrorMessage>{errors.createdAt?.message}</ErrorMessage>
         <div className="bg-gray-50">
           <Controller
             name="content"

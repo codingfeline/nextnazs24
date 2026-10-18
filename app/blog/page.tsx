@@ -2,11 +2,13 @@ import { Plus } from '@/app/components'
 import ButtonWithComponent from '@/app/components/ButtonLink'
 import MainPage from '@/app/components/MainPage'
 import Reveal from '@/app/components/Reveal'
+import { getSession } from '@/app/lib/authGuard'
 import prisma from '@/prisma/client'
+import { Role } from '@prisma/client'
 import { Flex, Heading, Text } from '@radix-ui/themes'
 import type { Metadata } from 'next'
 import NextLink from 'next/link'
-import ArticleTime from './_components/ArticleTime'
+import ArticleDateEditor from './_components/ArticleDateEditor'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -21,6 +23,9 @@ const BlogPage = async () => {
     orderBy: { createdAt: 'desc' },
     select: { id: true, title: true, createdAt: true },
   })
+  // getSession returns the fake admin session when the local dev bypass is on
+  const session = await getSession()
+  const canEdit = session?.user?.role === Role.ADMIN
 
   return (
     <MainPage>
@@ -36,13 +41,13 @@ const BlogPage = async () => {
       <Flex direction="column" gap="2">
         {articles.map((article, index) => (
           <Reveal delay={index * 80} key={article.id}>
-            <NextLink
-              href={`/blog/${article.id}`}
-              className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 p-3 rounded theme-surface hover:opacity-90"
-            >
-              <span className="text-lg">{article.title}</span>
-              <ArticleTime date={article.createdAt} />
-            </NextLink>
+            {/* date editor sits outside the link so its clicks don't navigate */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 p-3 rounded theme-surface hover:opacity-90">
+              <NextLink href={`/blog/${article.id}`} className="text-lg grow">
+                {article.title}
+              </NextLink>
+              <ArticleDateEditor id={article.id} date={article.createdAt} canEdit={canEdit} />
+            </div>
           </Reveal>
         ))}
       </Flex>

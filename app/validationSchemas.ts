@@ -14,4 +14,6 @@ export const ArticleSchema = z.object({
   title: z.string().trim().min(3, 'Title is required').max(200),
   content: z.string().trim().min(10, 'Content is required.'),
   author: z.enum(AUTHORS, { message: 'Choose an author' }),
+  // publish date shown on the article; omitted → keeps existing / defaults to now
+  createdAt: z.coerce.date({ message: 'Invalid date' }).optional(),
 })
