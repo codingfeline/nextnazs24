@@ -64,8 +64,9 @@ body {
 code {
   white-space: pre-wrap !important;
 }
-/* bordered inline code only in journal/blog content (both wrapped in .prose) */
-.prose code {
+/* bordered inline code only in journal/blog content (both wrapped in .prose);
+   code inside a fenced block (<pre>) stays unbordered */
+.prose :not(pre) > code {
   border: 1px solid rgb(146, 146, 146);
   padding: 0 0.4rem;
   margin: 0 0.2rem;
