@@ -1,15 +1,15 @@
-import { Plus } from '@/app/components'
-import ButtonWithComponent from '@/app/components/ButtonLink'
-import MainPage from '@/app/components/MainPage'
-import Reveal from '@/app/components/Reveal'
-import { getSession } from '@/app/lib/authGuard'
-import prisma from '@/prisma/client'
-import { Role } from '@prisma/client'
-import { Flex, Heading, Text } from '@radix-ui/themes'
-import type { Metadata } from 'next'
-import NextLink from 'next/link'
-import ArticleDateEditor from './_components/ArticleDateEditor'
-import ArticleVisibilityToggle from './_components/ArticleVisibilityToggle'
+import { Plus } from '@/app/components';
+import ButtonWithComponent from '@/app/components/ButtonLink';
+import MainPage from '@/app/components/MainPage';
+import Reveal from '@/app/components/Reveal';
+import { getSession } from '@/app/lib/authGuard';
+import prisma from '@/prisma/client';
+import { Role } from '@prisma/client';
+import { Flex, Heading, Text } from '@radix-ui/themes';
+import type { Metadata } from 'next';
+import NextLink from 'next/link';
+import ArticleDateEditor from './_components/ArticleDateEditor';
+import ArticleVisibilityToggle from './_components/ArticleVisibilityToggle';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -40,7 +40,7 @@ const BlogPage = async () => {
         </ButtonWithComponent>
       </Flex>
 
-      <div className="max-w-2xl mb-6 space-y-3 opacity-90">
+      <div className="max-w-5xl mb-6 space-y-3 opacity-90">
         <Text as="p" size="3">
           This blog is my record of the &lsquo;pulling my hair out&rsquo; moments: the errors that made no sense,
           the bugs that only appeared once I&rsquo;d deployed, and the hours of frustration that eventually ended
