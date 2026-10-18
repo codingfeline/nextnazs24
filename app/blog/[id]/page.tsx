@@ -4,7 +4,7 @@ import MainPage from '@/app/components/MainPage'
 import { getSession } from '@/app/lib/authGuard'
 import prisma from '@/prisma/client'
 import { Role } from '@prisma/client'
-import { Card, Flex, Heading, Text } from '@radix-ui/themes'
+import { Callout, Card, Flex, Heading, Text } from '@radix-ui/themes'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
@@ -17,10 +17,16 @@ interface Props {
   params: Promise<{ id: string }>
 }
 
-// Shared by generateMetadata and the page so the article is fetched once
-const getArticle = cache(async (id: string) =>
-  /^[0-9a-f]{24}$/i.test(id) ? prisma.article.findUnique({ where: { id } }) : null
-)
+// Shared by generateMetadata and the page so the article is fetched once.
+// Hidden articles resolve to null (→ 404, no preview metadata) unless the viewer is an admin.
+const getArticle = cache(async (id: string) => {
+  if (!/^[0-9a-f]{24}$/i.test(id)) return null
+  const article = await prisma.article.findUnique({ where: { id } })
+  if (!article?.hidden) return article
+  // getSession returns the fake admin session when the local dev bypass is on
+  const session = await getSession()
+  return session?.user?.role === Role.ADMIN ? article : null
+})
 
 // Trim to max chars: end on the last full sentence if one fits past halfway,
 // otherwise on the last whole word plus an ellipsis
@@ -83,6 +89,11 @@ const ArticlePage = async ({ params }: Props) => {
           </ButtonWithComponent>
         )}
       </Flex>
+      {article.hidden && (
+        <Callout.Root color="amber" mt="3">
+          <Callout.Text>This article is hidden — only admins can see it.</Callout.Text>
+        </Callout.Root>
+      )}
       <article className="p-3">
         <Heading size="8" mt="3">
           {article.title}

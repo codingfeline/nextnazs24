@@ -119,6 +119,7 @@ model Article {
   title     String
   content   String
   author    String? // pseudonym from app/blog/authors.ts; null on older articles → DEFAULT_AUTHOR
+  hidden    Boolean? // true → admins only; unset on older articles = visible (optional so existing docs still read)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

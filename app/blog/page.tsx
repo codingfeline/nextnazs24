@@ -9,6 +9,7 @@ import { Flex, Heading, Text } from '@radix-ui/themes'
 import type { Metadata } from 'next'
 import NextLink from 'next/link'
 import ArticleDateEditor from './_components/ArticleDateEditor'
+import ArticleVisibilityToggle from './_components/ArticleVisibilityToggle'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -19,13 +20,16 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 
 const BlogPage = async () => {
-  const articles = await prisma.article.findMany({
-    orderBy: { createdAt: 'desc' },
-    select: { id: true, title: true, createdAt: true },
-  })
   // getSession returns the fake admin session when the local dev bypass is on
   const session = await getSession()
   const canEdit = session?.user?.role === Role.ADMIN
+
+  const articles = await prisma.article.findMany({
+    // visitors only get visible articles; older docs have no `hidden` field at all
+    where: canEdit ? undefined : { OR: [{ hidden: { isSet: false } }, { hidden: null }, { hidden: false }] },
+    orderBy: { createdAt: 'desc' },
+    select: { id: true, title: true, createdAt: true, hidden: true },
+  })
 
   return (
     <MainPage>
@@ -42,11 +46,17 @@ const BlogPage = async () => {
         {articles.map((article, index) => (
           <Reveal delay={index * 80} key={article.id}>
             {/* date editor sits outside the link so its clicks don't navigate */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 p-3 rounded theme-surface hover:opacity-90">
+            <div
+              className={`flex flex-col md:flex-row md:items-center md:justify-between gap-1 p-3 rounded theme-surface hover:opacity-90 ${article.hidden ? 'opacity-50 border border-dashed' : ''}`}
+            >
               <NextLink href={`/blog/${article.id}`} className="text-lg grow">
                 {article.title}
+                {article.hidden && <span className="ml-2 text-xs uppercase tracking-wide">(hidden)</span>}
               </NextLink>
-              <ArticleDateEditor id={article.id} date={article.createdAt} canEdit={canEdit} />
+              <span className="flex items-center gap-3">
+                <ArticleDateEditor id={article.id} date={article.createdAt} canEdit={canEdit} />
+                {canEdit && <ArticleVisibilityToggle id={article.id} hidden={!!article.hidden} />}
+              </span>
             </div>
           </Reveal>
         ))}

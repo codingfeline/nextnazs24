@@ -16,4 +16,5 @@ export const ArticleSchema = z.object({
   author: z.enum(AUTHORS, { message: 'Choose an author' }),
   // publish date shown on the article; omitted → keeps existing / defaults to now
   createdAt: z.coerce.date({ message: 'Invalid date' }).optional(),
+  hidden: z.boolean().optional(),
 })

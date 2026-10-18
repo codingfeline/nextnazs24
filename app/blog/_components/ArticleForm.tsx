@@ -6,7 +6,7 @@ import Spinner from '@/app/components/Spinner'
 import { ArticleSchema } from '@/app/validationSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Article } from '@prisma/client'
-import { Button, Callout, Container, Flex, Heading, Select, Text, TextField } from '@radix-ui/themes'
+import { Button, Callout, Checkbox, Container, Flex, Heading, Select, Text, TextField } from '@radix-ui/themes'
 import axios from 'axios'
 import 'easymde/dist/easymde.min.css'
 import { useRouter } from 'next/navigation'
@@ -39,6 +39,7 @@ const ArticleForm = ({ article }: { article?: Article }) => {
         ? (article!.author as ArticleFormData['author'])
         : DEFAULT_AUTHOR,
       createdAt: toLocalInput(article ? new Date(article.createdAt) : new Date()),
+      hidden: !!article?.hidden,
     },
   })
 
@@ -98,6 +99,16 @@ const ArticleForm = ({ article }: { article?: Article }) => {
           <TextField.Root id="article-date" type="datetime-local" {...register('createdAt')} />
         </Flex>
         <ErrorMessage>{errors.createdAt?.message}</ErrorMessage>
+        <Text as="label" size="2" className="flex items-center gap-2 w-fit cursor-pointer">
+          <Controller
+            name="hidden"
+            control={control}
+            render={({ field }) => (
+              <Checkbox checked={!!field.value} onCheckedChange={checked => field.onChange(checked === true)} />
+            )}
+          />
+          Hidden (only admins can see it)
+        </Text>
         <div className="bg-gray-50">
           <Controller
             name="content"
