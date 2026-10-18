@@ -35,7 +35,7 @@ const BlogPage = async () => {
     <MainPage>
       <Flex justify="between" align="center" mb="3">
         <Heading size="7">Blog</Heading>
-        <ButtonWithComponent href="/blog/new" Icon={Plus} classes="theme-surface">
+        <ButtonWithComponent adminOnly href="/blog/new" Icon={Plus} classes="theme-surface">
           New Article
         </ButtonWithComponent>
       </Flex>

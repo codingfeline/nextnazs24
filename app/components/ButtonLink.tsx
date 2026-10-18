@@ -10,13 +10,14 @@ interface Prop {
   children: ReactNode
   full?: boolean
   classes?: string
+  adminOnly?: boolean // hide from everyone but admins (e.g. "New ..." buttons)
 }
 
-const ButtonWithComponent = async ({ href, Icon, children, full, classes }: Prop) => {
-  const session = await getSession()
-  if (process.env.NODE_ENV !== 'development') {
-    if (!session) return null
-    if (session.user?.role !== Role.ADMIN) return null
+const ButtonWithComponent = async ({ href, Icon, children, full, classes, adminOnly }: Prop) => {
+  if (adminOnly) {
+    // getSession returns the fake admin session when the local dev bypass is on
+    const session = await getSession()
+    if (session?.user?.role !== Role.ADMIN) return null
   }
 
   return (
