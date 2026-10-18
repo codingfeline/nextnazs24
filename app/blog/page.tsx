@@ -13,7 +13,7 @@ import ArticleVisibilityToggle from './_components/ArticleVisibilityToggle'
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Articles and write-ups.',
+  description: 'Write-ups of the frustrating coding moments I hit, and how I solved them.',
 }
 
 //? Render on every request so "an hour ago" stays current instead of freezing at build time
@@ -39,6 +39,19 @@ const BlogPage = async () => {
           New Article
         </ButtonWithComponent>
       </Flex>
+
+      <div className="max-w-2xl mb-6 space-y-3 opacity-90">
+        <Text as="p" size="3">
+          This blog is my record of the &lsquo;pulling my hair out&rsquo; moments: the errors that made no sense,
+          the bugs that only appeared once I&rsquo;d deployed, and the hours of frustration that eventually ended
+          with the right search on Google and a fix that worked.
+        </Text>
+        <Text as="p" size="3">
+          Writing each one up is how I learn. Explaining what went wrong, and why the fix works, turns a lucky
+          find into something I actually understand. And from experience, I know I&rsquo;m bound to forget, so
+          these posts are here to remind me the next time it happens. If they save you some time too, even better.
+        </Text>
+      </div>
 
       {articles.length === 0 && <Text className="opacity-70">No articles yet.</Text>}
 
