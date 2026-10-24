@@ -108,6 +108,7 @@ model AccessLog {
   path      String
   status    Int
   userAgent String?
+  country   String? // ISO code from Vercel's x-vercel-ip-country; null locally and on older rows
   createdAt DateTime @default(now())
 
   @@index([ip])

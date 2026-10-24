@@ -41,6 +41,8 @@ export const logRequest = async (req: NextRequest, status: number) => {
         path: req.nextUrl.pathname,
         status,
         userAgent: req.headers.get('user-agent')?.slice(0, 512),
+        // Vercel geolocates the IP for us; absent in local dev
+        country: req.headers.get('x-vercel-ip-country')?.slice(0, 2) || null,
       },
     })
   } catch (err) {

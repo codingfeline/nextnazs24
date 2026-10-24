@@ -18,6 +18,17 @@ export interface AccessLogRow {
   status: number
   statusHref: string
   userAgent: string | null
+  country: string | null
+}
+
+// "GB" → "United Kingdom" for the hover text (flag emoji don't render on Windows, so the code is shown)
+const countryNames = new Intl.DisplayNames(['en-GB'], { type: 'region' })
+const countryName = (code: string) => {
+  try {
+    return countryNames.of(code) ?? code
+  } catch {
+    return code
+  }
 }
 
 const statusColor = (status: number) =>
@@ -103,6 +114,7 @@ const AccessLogTable = ({ rows }: { rows: AccessLogRow[] }) => {
             </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Time</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>IP</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Country</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Method</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Path</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
@@ -125,6 +137,9 @@ const AccessLogTable = ({ rows }: { rows: AccessLogRow[] }) => {
                   {log.ip}
                 </Link>
               </Table.Cell>
+              <Table.Cell title={log.country ? countryName(log.country) : undefined}>
+                {log.country ?? <span className="opacity-40">—</span>}
+              </Table.Cell>
               <Table.Cell>{log.method}</Table.Cell>
               <Table.Cell className="break-all">
                 {log.path}
@@ -142,7 +157,7 @@ const AccessLogTable = ({ rows }: { rows: AccessLogRow[] }) => {
           ))}
           {rows.length === 0 && (
             <Table.Row>
-              <Table.Cell colSpan={7}>No requests logged.</Table.Cell>
+              <Table.Cell colSpan={8}>No requests logged.</Table.Cell>
             </Table.Row>
           )}
         </Table.Body>

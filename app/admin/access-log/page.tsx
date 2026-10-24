@@ -85,6 +85,7 @@ const AccessLogPage = async ({ searchParams }: { searchParams: Promise<Query> })
     status: log.status,
     statusHref: href({ status: String(log.status), page: '1' }),
     userAgent: log.userAgent,
+    country: log.country,
   }))
 
   // Greyed-out text instead of a link when the target is the current page

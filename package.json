@@ -6,6 +6,7 @@
     "dev": "set PORT=2025 && set browser=NONE&& next dev --turbopack -H 0.0.0.0",
     "devC": "PORT=2025 browser=NONE next dev --turbopack -H 0.0.0.0",
     "build": "next build",
+    "postinstall": "prisma generate",
     "start": "set PORT=2024 && next start",
     "lint": "next lint",
     "img:webp": "node scripts/toWebp.mjs",
