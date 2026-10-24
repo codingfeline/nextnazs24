@@ -25,12 +25,18 @@ const ensureTtlIndex = () => {
 export const getClientIp = (headers: Headers) =>
   headers.get('x-forwarded-for')?.split(',')[0].trim() || headers.get('x-real-ip') || 'unknown'
 
+// My own visits from this machine (IPv4, IPv6, and IPv4-mapped IPv6 loopback)
+const isLoopback = (ip: string) => ip === '::1' || /^(::ffff:)?127\./.test(ip)
+
 export const logRequest = async (req: NextRequest, status: number) => {
+  const ip = getClientIp(req.headers)
+  if (isLoopback(ip)) return
+
   try {
     await ensureTtlIndex()
     await prisma.accessLog.create({
       data: {
-        ip: getClientIp(req.headers),
+        ip,
         method: req.method,
         path: req.nextUrl.pathname,
         status,

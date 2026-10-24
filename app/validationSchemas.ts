@@ -6,9 +6,13 @@ export const JournalSchema = z.object({
   comment: z.string().min(5, 'Comment is required.')
 });
 
-export const DeleteAccessLogsSchema = z.object({
-  ids: z.array(z.string().regex(/^[0-9a-f]{24}$/i, 'Invalid id')).min(1).max(500),
-})
+// Either the ticked rows, or everything logged before a cut-off (ISO timestamp)
+export const DeleteAccessLogsSchema = z.union([
+  z.object({
+    ids: z.array(z.string().regex(/^[0-9a-f]{24}$/i, 'Invalid id')).min(1).max(500),
+  }),
+  z.object({ before: z.string().datetime({ offset: true }) }),
+])
 
 export const ArticleSchema = z.object({
   title: z.string().trim().min(3, 'Title is required').max(200),

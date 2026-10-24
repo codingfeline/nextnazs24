@@ -14,6 +14,7 @@ export interface AccessLogRow {
   ipHref: string
   method: string
   path: string
+  title?: string // article title when the path is a /blog article
   status: number
   statusHref: string
   userAgent: string | null
@@ -125,7 +126,10 @@ const AccessLogTable = ({ rows }: { rows: AccessLogRow[] }) => {
                 </Link>
               </Table.Cell>
               <Table.Cell>{log.method}</Table.Cell>
-              <Table.Cell className="break-all">{log.path}</Table.Cell>
+              <Table.Cell className="break-all">
+                {log.path}
+                {log.title && <Text as="div" size="1" className="opacity-70 break-normal">{log.title}</Text>}
+              </Table.Cell>
               <Table.Cell>
                 <Link href={log.statusHref}>
                   <Badge color={statusColor(log.status)}>{log.status}</Badge>
