@@ -4,20 +4,29 @@ import MyContainer from '@/app/components/MyContainer'
 import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react'
 import { useState } from 'react'
 
-type Mode = 'text' | 'contact' | 'phone'
+type Mode = 'text' | 'contact'
 
-// tel: link that phones open in the dialler. Keeps digits and a leading +, drops spaces, dashes, brackets
-function buildTel(phone: string) {
-  return 'tel:' + phone.replace(/[^\d+]/g, '').replace(/(?!^)\+/g, '')
-}
+// Which contact fields go into the vCard
+const CONTACT_OPTIONS = [
+  { value: 'number', label: 'Number only' },
+  { value: 'name-number', label: 'Name and number' },
+  { value: 'all', label: 'Name, number and email' },
+] as const
+type ContactFields = (typeof CONTACT_OPTIONS)[number]['value']
 
-function buildVCard(name: string, mobile: string, email: string) {
+// vCard text values escape \ , ; and turn line breaks into a literal \n
+const escapeVCard = (value: string) =>
+  value.replace(/\\/g, '\\\\').replace(/[,;]/g, m => `\\${m}`).replace(/\r?\n/g, '\\n')
+
+function buildVCard(name: string, mobile: string, email: string, note = '') {
   return [
     'BEGIN:VCARD',
     'VERSION:3.0',
-    name   && `FN:${name}`,
+    // FN is required in vCard 3.0, so a number-only card uses the number as its name
+    `FN:${name || mobile || email}`,
     mobile && `TEL;TYPE=CELL:${mobile}`,
     email  && `EMAIL:${email}`,
+    note   && `NOTE:${escapeVCard(note)}`,
     'END:VCARD',
   ].filter(Boolean).join('\n')
 }
@@ -61,28 +70,33 @@ export default function QrGenerator() {
   const [name, setName] = useState('')
   const [mobile, setMobile] = useState('')
   const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
+  const [note, setNote] = useState('')
+  const [contactFields, setContactFields] = useState<ContactFields>('all')
   const [qrValue, setQrValue] = useState('')
+
+  // Hidden fields keep what was typed (for switching back) but are left out of the QR
+  const showName = contactFields !== 'number'
+  const showEmail = contactFields === 'all'
+  const contactName = showName ? name.trim() : ''
+  const contactEmail = showEmail ? email.trim() : ''
+  const contactNote = showEmail ? note.trim() : '' // note sits with email, in the third option
 
   const canGenerate =
     mode === 'text' ? !!text.trim()
-    : mode === 'phone' ? phone.replace(/\D/g, '').length >= 3 // at least a short number like 999
-    : !!(name.trim() || mobile.trim() || email.trim())
+    : !!(contactName || mobile.trim() || contactEmail || contactNote)
 
   const handleGenerate = () => {
     if (!canGenerate) return
     setQrValue(
       mode === 'text' ? text.trim()
-      : mode === 'phone' ? buildTel(phone)
-      : buildVCard(name.trim(), mobile.trim(), email.trim())
+      : buildVCard(contactName, mobile.trim(), contactEmail, contactNote)
     )
   }
 
   const handleModeSwitch = (m: Mode) => setMode(m)
 
   const clearText = () => { setText(''); setQrValue('') }
-  const clearContact = () => { setName(''); setMobile(''); setEmail(''); setQrValue('') }
-  const clearPhone = () => { setPhone(''); setQrValue('') }
+  const clearContact = () => { setName(''); setMobile(''); setEmail(''); setNote(''); setQrValue('') }
 
   const downloadSvg = () => {
     const svg = document.querySelector('#qr-svg svg') as SVGElement
@@ -111,7 +125,7 @@ export default function QrGenerator() {
 
         {/* Mode tabs */}
         <div className="flex gap-1 bg-gray-100 rounded-lg p-1 w-fit">
-          {(['text', 'contact', 'phone'] as Mode[]).map(m => (
+          {(['text', 'contact'] as Mode[]).map(m => (
             <button
               key={m}
               onClick={() => handleModeSwitch(m)}
@@ -134,19 +148,50 @@ export default function QrGenerator() {
             onChange={v => { setText(v); setQrValue('') }}
             placeholder="https://example.com"
           />
-        ) : mode === 'phone' ? (
-          <Field
-            label="Phone number"
-            value={phone}
-            onChange={v => { setPhone(v); setQrValue('') }}
-            type="tel"
-            placeholder="+44 7700 900000"
-          />
         ) : (
           <div className="flex flex-col gap-3">
-            <Field label="Name"   value={name}   onChange={setName}   placeholder="Jane Smith" />
+            <fieldset className="flex flex-wrap gap-x-4 gap-y-1">
+              <legend className="sr-only">Fields to include</legend>
+              {CONTACT_OPTIONS.map(option => (
+                <label key={option.value} className="flex items-center gap-1.5 text-sm text-gray-600 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="contact-fields"
+                    value={option.value}
+                    checked={contactFields === option.value}
+                    onChange={() => { setContactFields(option.value); setQrValue('') }}
+                    className="accent-blue-600 cursor-pointer"
+                  />
+                  {option.label}
+                </label>
+              ))}
+            </fieldset>
+            {showName && <Field label="Name" value={name} onChange={setName} placeholder="Jane Smith" />}
             <Field label="Mobile" value={mobile} onChange={setMobile} type="tel" placeholder="+44 7700 900000" />
-            <Field label="Email"  value={email}  onChange={setEmail}  type="email" placeholder="jane@example.com" />
+            {showEmail && <Field label="Email" value={email} onChange={setEmail} type="email" placeholder="jane@example.com" />}
+            {showEmail && (
+              <div>
+                <label htmlFor="qr-note" className="block text-xs font-medium text-gray-500 mb-1">Note</label>
+                <div className="relative">
+                  <textarea
+                    id="qr-note"
+                    value={note}
+                    onChange={e => setNote(e.target.value)}
+                    placeholder="Met at the conference, follow up in May"
+                    rows={3}
+                    className="w-full border-2 border-gray-200 rounded-lg p-2.5 pr-8 focus:border-blue-500 outline-none transition-all text-black text-sm resize-y"
+                  />
+                  {note && (
+                    <button
+                      onClick={() => setNote('')}
+                      className="absolute right-2 top-2.5 text-gray-400 hover:text-gray-600 transition-colors"
+                    >
+                      <Clear className="text-xl cursor-pointer" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -159,8 +204,8 @@ export default function QrGenerator() {
             Generate
           </button>
           <button
-            onClick={mode === 'text' ? clearText : mode === 'phone' ? clearPhone : clearContact}
-            disabled={mode === 'text' ? !text : mode === 'phone' ? !phone : !name && !mobile && !email}
+            onClick={mode === 'text' ? clearText : clearContact}
+            disabled={mode === 'text' ? !text : !name && !mobile && !email && !note}
             className="flex-1 bg-gray-100 text-gray-600 p-2 rounded-lg border border-gray-200 hover:bg-gray-200 transition-colors font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Clear
