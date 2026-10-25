@@ -28,6 +28,19 @@ export const getClientIp = (headers: Headers) =>
 // My own visits from this machine (IPv4, IPv6, and IPv4-mapped IPv6 loopback)
 const isLoopback = (ip: string) => ip === '::1' || /^(::ffff:)?127\./.test(ip)
 
+// Where the visitor came from. Links within this site are kept as just the path ("/blog");
+// other sites keep the full URL. No header means the address was typed in or bookmarked.
+const getReferer = (req: NextRequest) => {
+  const referer = req.headers.get('referer')
+  if (!referer) return null
+  try {
+    const url = new URL(referer)
+    return (url.host === req.nextUrl.host ? url.pathname + url.search : url.href).slice(0, 512)
+  } catch {
+    return referer.slice(0, 512) // not a valid URL; keep what was sent
+  }
+}
+
 export const logRequest = async (req: NextRequest, status: number) => {
   const ip = getClientIp(req.headers)
   if (isLoopback(ip)) return
@@ -43,6 +56,7 @@ export const logRequest = async (req: NextRequest, status: number) => {
         userAgent: req.headers.get('user-agent')?.slice(0, 512),
         // Vercel geolocates the IP for us; absent in local dev
         country: req.headers.get('x-vercel-ip-country')?.slice(0, 2) || null,
+        referer: getReferer(req),
       },
     })
   } catch (err) {

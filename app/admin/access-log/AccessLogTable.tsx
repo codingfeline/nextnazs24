@@ -19,6 +19,7 @@ export interface AccessLogRow {
   statusHref: string
   userAgent: string | null
   country: string | null
+  referer: string | null // a path for this site's own pages, a full URL for other sites
 }
 
 // "GB" → "United Kingdom" for the hover text (flag emoji don't render on Windows, so the code is shown)
@@ -28,6 +29,16 @@ const countryName = (code: string) => {
     return countryNames.of(code) ?? code
   } catch {
     return code
+  }
+}
+
+// Other sites show as their host ("www.google.com"); the full URL is in the hover text
+const refererLabel = (referer: string) => {
+  if (referer.startsWith('/')) return referer
+  try {
+    return new URL(referer).host
+  } catch {
+    return referer
   }
 }
 
@@ -118,6 +129,7 @@ const AccessLogTable = ({ rows }: { rows: AccessLogRow[] }) => {
             <Table.ColumnHeaderCell>Method</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Path</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">Referer</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell className="hidden md:table-cell">User agent</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
@@ -150,6 +162,9 @@ const AccessLogTable = ({ rows }: { rows: AccessLogRow[] }) => {
                   <Badge color={statusColor(log.status)}>{log.status}</Badge>
                 </Link>
               </Table.Cell>
+              <Table.Cell className="hidden md:table-cell max-w-48 truncate" title={log.referer ?? undefined}>
+                {log.referer ? refererLabel(log.referer) : <span className="opacity-40">—</span>}
+              </Table.Cell>
               <Table.Cell className="hidden md:table-cell max-w-xs truncate" title={log.userAgent ?? ''}>
                 {log.userAgent}
               </Table.Cell>
@@ -157,7 +172,7 @@ const AccessLogTable = ({ rows }: { rows: AccessLogRow[] }) => {
           ))}
           {rows.length === 0 && (
             <Table.Row>
-              <Table.Cell colSpan={8}>No requests logged.</Table.Cell>
+              <Table.Cell colSpan={9}>No requests logged.</Table.Cell>
             </Table.Row>
           )}
         </Table.Body>

@@ -109,6 +109,7 @@ model AccessLog {
   status    Int
   userAgent String?
   country   String? // ISO code from Vercel's x-vercel-ip-country; null locally and on older rows
+  referer   String? // page the visitor came from; null when typed in or bookmarked. Own pages stored as a path
   createdAt DateTime @default(now())
 
   @@index([ip])
