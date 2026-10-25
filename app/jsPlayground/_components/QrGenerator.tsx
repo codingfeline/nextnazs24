@@ -4,7 +4,12 @@ import MyContainer from '@/app/components/MyContainer'
 import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react'
 import { useState } from 'react'
 
-type Mode = 'text' | 'contact'
+type Mode = 'text' | 'contact' | 'phone'
+
+// tel: link that phones open in the dialler. Keeps digits and a leading +, drops spaces, dashes, brackets
+function buildTel(phone: string) {
+  return 'tel:' + phone.replace(/[^\d+]/g, '').replace(/(?!^)\+/g, '')
+}
 
 function buildVCard(name: string, mobile: string, email: string) {
   return [
@@ -56,18 +61,20 @@ export default function QrGenerator() {
   const [name, setName] = useState('')
   const [mobile, setMobile] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [qrValue, setQrValue] = useState('')
 
-  const canGenerate = mode === 'text'
-    ? !!text.trim()
+  const canGenerate =
+    mode === 'text' ? !!text.trim()
+    : mode === 'phone' ? phone.replace(/\D/g, '').length >= 3 // at least a short number like 999
     : !!(name.trim() || mobile.trim() || email.trim())
 
   const handleGenerate = () => {
     if (!canGenerate) return
     setQrValue(
-      mode === 'text'
-        ? text.trim()
-        : buildVCard(name.trim(), mobile.trim(), email.trim())
+      mode === 'text' ? text.trim()
+      : mode === 'phone' ? buildTel(phone)
+      : buildVCard(name.trim(), mobile.trim(), email.trim())
     )
   }
 
@@ -75,6 +82,7 @@ export default function QrGenerator() {
 
   const clearText = () => { setText(''); setQrValue('') }
   const clearContact = () => { setName(''); setMobile(''); setEmail(''); setQrValue('') }
+  const clearPhone = () => { setPhone(''); setQrValue('') }
 
   const downloadSvg = () => {
     const svg = document.querySelector('#qr-svg svg') as SVGElement
@@ -103,7 +111,7 @@ export default function QrGenerator() {
 
         {/* Mode tabs */}
         <div className="flex gap-1 bg-gray-100 rounded-lg p-1 w-fit">
-          {(['text', 'contact'] as Mode[]).map(m => (
+          {(['text', 'contact', 'phone'] as Mode[]).map(m => (
             <button
               key={m}
               onClick={() => handleModeSwitch(m)}
@@ -126,6 +134,14 @@ export default function QrGenerator() {
             onChange={v => { setText(v); setQrValue('') }}
             placeholder="https://example.com"
           />
+        ) : mode === 'phone' ? (
+          <Field
+            label="Phone number"
+            value={phone}
+            onChange={v => { setPhone(v); setQrValue('') }}
+            type="tel"
+            placeholder="+44 7700 900000"
+          />
         ) : (
           <div className="flex flex-col gap-3">
             <Field label="Name"   value={name}   onChange={setName}   placeholder="Jane Smith" />
@@ -143,8 +159,8 @@ export default function QrGenerator() {
             Generate
           </button>
           <button
-            onClick={mode === 'text' ? clearText : clearContact}
-            disabled={mode === 'text' ? !text : !name && !mobile && !email}
+            onClick={mode === 'text' ? clearText : mode === 'phone' ? clearPhone : clearContact}
+            disabled={mode === 'text' ? !text : mode === 'phone' ? !phone : !name && !mobile && !email}
             className="flex-1 bg-gray-100 text-gray-600 p-2 rounded-lg border border-gray-200 hover:bg-gray-200 transition-colors font-medium text-sm disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Clear
