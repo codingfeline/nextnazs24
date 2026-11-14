@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import AccessLogTable, { AccessLogRow } from './AccessLogTable'
-import DeleteOlderLogs from './DeleteOlderLogs'
+import DeleteLogsByRange from './DeleteLogsByRange'
 
 export const metadata: Metadata = {
   title: 'Access log — Admin',
@@ -127,7 +127,7 @@ const AccessLogPage = async ({ searchParams }: { searchParams: Promise<Query> })
         )}
       </Flex>
 
-      <DeleteOlderLogs />
+      <DeleteLogsByRange />
 
       {pager}
 

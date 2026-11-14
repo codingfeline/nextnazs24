@@ -6,12 +6,21 @@ export const JournalSchema = z.object({
   comment: z.string().min(5, 'Comment is required.')
 });
 
-// Either the ticked rows, or everything logged before a cut-off (ISO timestamp)
+// A time range of ISO timestamps: from (inclusive) to (exclusive); either end may be open, not both
+export const AccessLogRangeSchema = z
+  .object({
+    from: z.string().datetime({ offset: true }).optional(),
+    to: z.string().datetime({ offset: true }).optional(),
+  })
+  .refine(r => r.from || r.to, 'Give a start or end date')
+  .refine(r => !r.from || !r.to || new Date(r.from) < new Date(r.to), 'Start must be before end')
+
+// Either the ticked rows, or everything logged within a date range
 export const DeleteAccessLogsSchema = z.union([
   z.object({
     ids: z.array(z.string().regex(/^[0-9a-f]{24}$/i, 'Invalid id')).min(1).max(500),
   }),
-  z.object({ before: z.string().datetime({ offset: true }) }),
+  AccessLogRangeSchema,
 ])
 
 export const ArticleSchema = z.object({
