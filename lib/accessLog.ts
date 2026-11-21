@@ -41,11 +41,29 @@ const getReferer = (req: NextRequest) => {
   }
 }
 
+//? The exclusion list is read at most once a minute per server instance rather than on
+//? every request. The instance that changes it reloads at once; others catch up within the minute.
+const EXCLUDED_TTL_MS = 60 * 1000
+let excluded: { ips: Set<string>; loadedAt: number } | null = null
+
+const getExcludedIps = async () => {
+  if (!excluded || Date.now() - excluded.loadedAt > EXCLUDED_TTL_MS) {
+    const rows = await prisma.excludedIp.findMany({ select: { ip: true } })
+    excluded = { ips: new Set(rows.map(r => r.ip)), loadedAt: Date.now() }
+  }
+  return excluded.ips
+}
+
+export const clearExcludedIpCache = () => {
+  excluded = null
+}
+
 export const logRequest = async (req: NextRequest, status: number) => {
   const ip = getClientIp(req.headers)
   if (isLoopback(ip)) return
 
   try {
+    if ((await getExcludedIps()).has(ip)) return
     await ensureTtlIndex()
     await prisma.accessLog.create({
       data: {

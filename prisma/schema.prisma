@@ -116,6 +116,15 @@ model AccessLog {
   @@map("access_logs")
 }
 
+// IPs whose requests are not written to the access log (e.g. my own connections)
+model ExcludedIp {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  ip        String   @unique
+  createdAt DateTime @default(now())
+
+  @@map("excluded_ips")
+}
+
 model Article {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String

@@ -1,14 +1,17 @@
 import { dateOptions } from '@/app/components'
 import { requireAdminPage } from '@/app/lib/authGuard'
+import { getClientIp } from '@/lib/accessLog'
 import prisma from '@/prisma/client'
 import { Prisma } from '@prisma/client'
 import { Badge, Flex, Text } from '@radix-ui/themes'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import AccessLogTable, { AccessLogRow } from './AccessLogTable'
 import DeleteLogsByIp from './DeleteLogsByIp'
 import DeleteLogsByRange from './DeleteLogsByRange'
+import ExcludedIps from './ExcludedIps'
 
 export const metadata: Metadata = {
   title: 'Access log — Admin',
@@ -40,7 +43,7 @@ const AccessLogPage = async ({ searchParams }: { searchParams: Promise<Query> })
     ...(status && { status }),
   }
 
-  const [logs, total] = await Promise.all([
+  const [logs, total, excludedIps, requestHeaders] = await Promise.all([
     prisma.accessLog.findMany({
       where,
       orderBy: { createdAt: 'desc' },
@@ -48,6 +51,8 @@ const AccessLogPage = async ({ searchParams }: { searchParams: Promise<Query> })
       take: pageSize,
     }),
     prisma.accessLog.count({ where }),
+    prisma.excludedIp.findMany({ orderBy: { createdAt: 'asc' } }),
+    headers(),
   ])
 
   const pageCount = Math.max(1, Math.ceil(total / pageSize))
@@ -132,6 +137,13 @@ const AccessLogPage = async ({ searchParams }: { searchParams: Promise<Query> })
 
       {/* keyed so the box refills when the IP filter changes */}
       <DeleteLogsByIp key={params.ip ?? ''} initialIp={params.ip ?? ''} />
+
+      <ExcludedIps
+        key={`exclude-${params.ip ?? ''}`}
+        initialIp={params.ip ?? ''}
+        myIp={getClientIp(requestHeaders)}
+        excluded={excludedIps.map(e => ({ ip: e.ip, since: e.createdAt.toLocaleString('en-GB', dateOptions) }))}
+      />
 
       {pager}
 

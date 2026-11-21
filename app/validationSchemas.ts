@@ -21,6 +21,9 @@ export const AccessLogIpSchema = z.object({
   ip: z.string().trim().min(1, 'IP is required').max(100),
 })
 
+// Adding or removing an IP on the don't-log list
+export const ExcludedIpSchema = AccessLogIpSchema
+
 // The ticked rows, everything from one IP, or everything logged within a date range
 export const DeleteAccessLogsSchema = z.union([
   z.object({
