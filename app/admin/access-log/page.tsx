@@ -7,6 +7,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import AccessLogTable, { AccessLogRow } from './AccessLogTable'
+import DeleteLogsByIp from './DeleteLogsByIp'
 import DeleteLogsByRange from './DeleteLogsByRange'
 
 export const metadata: Metadata = {
@@ -128,6 +129,9 @@ const AccessLogPage = async ({ searchParams }: { searchParams: Promise<Query> })
       </Flex>
 
       <DeleteLogsByRange />
+
+      {/* keyed so the box refills when the IP filter changes */}
+      <DeleteLogsByIp key={params.ip ?? ''} initialIp={params.ip ?? ''} />
 
       {pager}
 

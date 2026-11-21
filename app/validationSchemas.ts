@@ -15,11 +15,18 @@ export const AccessLogRangeSchema = z
   .refine(r => r.from || r.to, 'Give a start or end date')
   .refine(r => !r.from || !r.to || new Date(r.from) < new Date(r.to), 'Start must be before end')
 
-// Either the ticked rows, or everything logged within a date range
+// Every entry from one IP. Matched exactly as stored, which isn't always a valid address
+// (it's taken from request headers, or 'unknown'), so only the length is checked
+export const AccessLogIpSchema = z.object({
+  ip: z.string().trim().min(1, 'IP is required').max(100),
+})
+
+// The ticked rows, everything from one IP, or everything logged within a date range
 export const DeleteAccessLogsSchema = z.union([
   z.object({
     ids: z.array(z.string().regex(/^[0-9a-f]{24}$/i, 'Invalid id')).min(1).max(500),
   }),
+  AccessLogIpSchema,
   AccessLogRangeSchema,
 ])
 
